@@ -1,0 +1,49 @@
+CALCULO 1 - PRIMER PARCIAL (CDIV 2S2026) - VISUALIZACION DEL LIBRO
+3 videos Manim, 16:9, 4K 60fps, estilo 3Blue1Brown (fondo negro), subtitulos karaoke (sin audio).
+Ordenados por probabilidad, igual que el libro: si no te da el tiempo, corta desde abajo.
+
+  Video 1  C1_V1_Probabilidad_Muy_Alta   12 escenas  sup/inf, sumas de Darboux,
+                                                     integrabilidad (telescopica, existe P?),
+                                                     epsilon-delta (delta maximo)
+  Video 2  C1_V2_Probabilidad_Alta        8 escenas  continuidad con parametro,
+                                                     propiedades de la integral,
+                                                     Bolzano / valor medio / Weierstrass
+  Video 3  C1_V3_Probabilidad_Media       7 escenas  limites, Lipschitz, composicion,
+                                                     V/F relampago, formulario y checklist
+
+LO VISUAL (perillas en vivo, como parametros de Houdini)
+  - sup/inf: una cota k que bajas y deja de ser cota justo en el supremo; franja epsilon.
+  - Darboux: perilla n que refina las cajas, con S*, S_* y la integral en vivo.
+  - Telescopica: las cajitas se deslizan y apilan en una columna que se afina con n.
+  - epsilon-delta: perillas ε y δ; la curva se pinta de rojo si se sale de la banda.
+  - 1/x asimetrico: el intervalo se deforma con ε y siempre manda el lado corto.
+  - Continuidad: perilla a que cierra el salto; la composicion que "tapa" el salto de 6.
+  - Acotado x infinitesimo: un noise multiplicado por una mascara que se apaga.
+  - Absurdo con la integral: un techo que baja hasta que el area no entra.
+  - Bolzano: busqueda binaria animada; valor medio como agua que se nivela.
+  - Lipschitz: reloj de arena de pendiente K que se desliza por la curva.
+
+COMO CORRERLO
+  1. Descomprimi en una carpeta nueva (no mezclar con videos anteriores).
+  2. Doble clic en render_preview.bat para una prueba rapida en 480p (opcional).
+  3. Doble clic en render_4k.bat y dejalo toda la noche.
+     Las 27 escenas corren en paralelo (16 a la vez) y al final salen:
+       C1_V1_Probabilidad_Muy_Alta_4k.mp4
+       C1_V2_Probabilidad_Alta_4k.mp4
+       C1_V3_Probabilidad_Media_4k.mp4
+
+OPCIONES (desde PowerShell en la carpeta)
+  Un solo video:        powershell -File render_all.ps1 -Mode 4k -Video 2
+  Repetir las que fallaron (y re-unir):
+                        powershell -File render_all.ps1 -Mode 4k -Only V1_05_DarbouxParcial,V3_03_Lipschitz
+  Menos procesos:       powershell -File render_all.ps1 -Mode 4k -MaxParallel 12
+  Lectura mas lenta:    set C1_PACE=1.2   (antes de correr el .bat, en la misma consola)
+                        (M2_PACE tambien funciona, como en los videos de Matematica 2)
+
+SI ALGO FALLA
+  Mira logs\<escena>.err.txt y mandame las ultimas lineas.
+
+ARCHIVOS
+  calc_base.py     estilo, subtitulos karaoke, cajas del libro, Slider (perillas)
+  v1_muy_alta.py   video 1       v2_alta.py   video 2       v3_media.py   video 3
+  fonts/           IBM Plex Sans / Mono (OFL)

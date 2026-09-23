@@ -2,3 +2,9 @@
 __pycache__/
 *.pyc
 media/
+calculo1/media_*/
+calculo1/logs/
+calculo1/snaps/
+calculo1/concat_*.txt
+calculo1/*.mp4
+calculo1/render_all_linuxtest.ps1
