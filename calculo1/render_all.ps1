@@ -6,7 +6,7 @@
 #
 #  Uso:   render_4k.bat   /   render_preview.bat
 #         powershell -File render_all.ps1 -Mode 4k|1080|preview
-#                    [-Video all|1|2|3] [-MaxParallel 16] [-Only V1_05_DarbouxParcial,V2_03_ContPractico]
+#                    [-Video all|1|2|3] [-MaxParallel N] [-Only V1_05_DarbouxParcial,V2_03_ContPractico]
 #
 #  - La lista de escenas se lee del SCENE_ORDER de cada archivo .py
 #    (si agregas o sacas una escena, no hay que tocar este script).
@@ -20,11 +20,15 @@
 param(
     [ValidateSet("4k", "1080", "preview")][string]$Mode = "4k",
     [ValidateSet("all", "1", "2", "3")][string]$Video = "all",
-    [int]$MaxParallel = 16,
+    [int]$MaxParallel = 0,
     [string[]]$Only = @()
 )
 Set-Location $PSScriptRoot
 $ErrorActionPreference = "Continue"
+# MaxParallel 0 = automatico: una escena por hilo logico (5950X = 32, las 27 escenas a la vez).
+# Manim usa ~1 nucleo por escena, asi que esto aprovecha toda la CPU; en 4K cada escena
+# ocupa ~1.5-3 GB de RAM (27 escenas entran de sobra en 96 GB).
+if ($MaxParallel -le 0) { $MaxParallel = [Environment]::ProcessorCount }
 # Con "powershell -File", "-Only A,B" llega como un solo texto: lo separo a mano.
 $Only = @($Only | ForEach-Object { $_ -split ',' } | ForEach-Object { $_.Trim() } | Where-Object { $_ })
 
@@ -108,6 +112,8 @@ foreach ($j in $jobs) {
          -RedirectStandardOutput (Join-Path $logDir "$s.out.txt") `
          -RedirectStandardError  (Join-Path $logDir "$s.err.txt")
     $null = $p.Handle
+    # Prioridad baja: la PC sigue usable mientras renderiza toda la noche.
+    try { $p.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::BelowNormal } catch { }
     $procs[$s] = $p
     Write-Host "  lanzada  $s" -ForegroundColor DarkGray
 }

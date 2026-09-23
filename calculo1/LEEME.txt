@@ -23,11 +23,20 @@ LO VISUAL (perillas en vivo, como parametros de Houdini)
   - Bolzano: busqueda binaria animada; valor medio como agua que se nivela.
   - Lipschitz: reloj de arena de pendiente K que se desliza por la curva.
 
+INSTALAR UNA SOLA VEZ (Windows, en PowerShell)
+  winget install Python.Python.3.12
+  winget install Gyan.FFmpeg
+  winget install MiKTeX.MiKTeX      (al primer render instala paquetes solo: dejalo)
+  pip install manim
+  Cerra y abri la terminal para que tome el PATH.
+
 COMO CORRERLO
   1. Descomprimi en una carpeta nueva (no mezclar con videos anteriores).
   2. Doble clic en render_preview.bat para una prueba rapida en 480p (opcional).
   3. Doble clic en render_4k.bat y dejalo toda la noche.
-     Las 27 escenas corren en paralelo (16 a la vez) y al final salen:
+     Las escenas corren en paralelo, una por hilo de la CPU (en un 5950X: 32 hilos,
+     o sea las 27 escenas a la vez, con prioridad baja para que la PC siga usable).
+     Al final salen:
        C1_V1_Probabilidad_Muy_Alta_4k.mp4
        C1_V2_Probabilidad_Alta_4k.mp4
        C1_V3_Probabilidad_Media_4k.mp4
@@ -37,6 +46,7 @@ OPCIONES (desde PowerShell en la carpeta)
   Repetir las que fallaron (y re-unir):
                         powershell -File render_all.ps1 -Mode 4k -Only V1_05_DarbouxParcial,V3_03_Lipschitz
   Menos procesos:       powershell -File render_all.ps1 -Mode 4k -MaxParallel 12
+                        (por defecto: tantos como hilos tenga la CPU)
   Lectura mas lenta:    set C1_PACE=1.2   (antes de correr el .bat, en la misma consola)
                         (M2_PACE tambien funciona, como en los videos de Matematica 2)
 
