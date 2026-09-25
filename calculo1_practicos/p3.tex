@@ -1,1 +1,473 @@
+% ================= CAPÍTULO 3 =================
+\chapter{Integración}
+\prob{PRÁCTICO 3}{semanas 3 a 5 · el capítulo más largo y el que más pesa en el parcial}
 
+\begin{memo}{DOS NOTACIONES QUE SE CONFUNDEN}
+En la sección 3.1 del práctico, $[x]$ es la \textbf{distancia de $x$ al entero más próximo} (un «diente» de alto $\frac12$ en cada unidad). $\fl x$ es la \textbf{parte entera}. En 3.6.10 los corchetes se usan como parte entera: lo aclaro en cada caso.
+\end{memo}
+
+\section{Introducción a la definición de integral}
+
+\begin{enunciado}{PRÁCTICO 3.1 · EJ 1 · INTEGRALES POR GEOMETRÍA EN $[1,3]$}
+a) $2-x$ b) $x$ c) $2x$ d) $x$ en $[1,2]$, $x-2$ en $(2,3]$ e) $|x-2|$ f) $3\fl x$ g) $\fl x^2$ h) $\fl x/3$ i) $3[x]$ j) $x+[x]$ k) $x-[x]$
+\end{enunciado}
+\begin{uso}{\P{geom} ÁREAS CON SIGNO · \P{chasles} CHASLES}
+Dibujá, partí el intervalo donde cambia la fórmula, y sumá áreas de triángulos y rectángulos. Lo de abajo del eje resta.
+\end{uso}
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}l X r@{}}\toprule
+& Cuenta & Resultado\\\midrule
+a) $2-x$ & corta el eje en 2: triángulo $+\frac12$ en $[1,2]$, triángulo $-\frac12$ en $[2,3]$ & $0$\\
+b) $x$ & trapecio de alturas 1 y 3, base 2: $\frac{(1+3)2}2$ & $4$\\
+c) $2x$ & el doble de b) (\P{lineal}) & $8$\\
+d) & $[1,2]$: trapecio $\frac{(1+2)\cdot1}2=\frac32$; \ $(2,3]$: triángulo $\frac12$ & $2$\\
+e) $|x-2|$ & dos triángulos de base 1 y altura 1 & $1$\\
+f) $3\fl x$ & vale 3 en $[1,2)$ y 6 en $[2,3)$: $3+6$ & $9$\\
+g) $\fl x^2$ & $1+4$ & $5$\\
+h) $\fl x/3$ & $\frac13+\frac23$ & $1$\\
+i) $3[x]$ & $[x]$ tiene un diente de área $\frac14$ por unidad: $3\cdot2\cdot\frac14$ & $\frac32$\\
+j) $x+[x]$ & $4+\frac12$ & $\frac92$\\
+k) $x-[x]$ & $4-\frac12$ & $\frac72$\\\bottomrule
+\end{tabularx}
+\end{center}
+\begin{trampa}{EL PUNTO DEL SALTO NO IMPORTA}
+En f) no importa cuánto vale en $x=2$ exactamente: un punto no tiene área (\P{crit}).
+\end{trampa}
+
+\begin{enunciado}{PRÁCTICO 3.1 · EJ 2 · ORDENAR ÁREAS}
+Cuadrado de lado 2; rectángulo de lado menor 2; rombo de diagonales 2 y 1; círculo de radio $\frac2{\sqrt5}$; elipse de ejes 2 y 1.
+\end{enunciado}
+\begin{falta}
+La figura muestra cómo están encajadas; la idea del ejercicio es ordenar \emph{sin fórmulas}, usando «si $A\subset B$, Área$(A)\le$ Área$(B)$». Con las fórmulas, para chequear:
+\end{falta}
+Rombo $\frac{2\cdot1}2=1$; \ elipse (semiejes 1 y $\frac12$) $\frac\pi2\approx1{,}57$; \ círculo $\frac{4\pi}5\approx2{,}51$; \ cuadrado 4; \ rectángulo $\ge4$ (el otro lado mide al menos 2).
+\resp{rombo $<$ elipse $<$ círculo $<$ cuadrado $\le$ rectángulo.}
+
+\begin{enunciado}{PRÁCTICO 3.1 · EJ 3}
+$f,g$ afines y $f(a)-g(a)=-(f(b)-g(b))$ $\Rightarrow\int_a^bf=\int_a^bg$.
+\end{enunciado}
+\begin{uso}{\P{lineal} LINEALIDAD · ÁREA DE TRAPECIO}
+Una afín $h$ en $[a,b]$ encierra un trapecio con signo: $\int_a^bh=\frac{h(a)+h(b)}2(b-a)$.
+\end{uso}
+$h=f-g$ es afín con $h(a)=-h(b)$: $\int_a^bh=\frac{h(a)+h(b)}2(b-a)=0$. Por linealidad, $\int f-\int g=0$. $\blacksquare$\\
+Geométricamente: la recta $h$ cruza el eje en el punto medio y los dos triángulos se cancelan.
+
+\begin{enunciado}{PRÁCTICO 3.1 · EJ 4 · MAXIMIZAR UNA INTEGRAL}
+a) $a<b$ que maximizan $\int_a^b(x-x^2)\,dx$. \ b) $a<b$ que minimizan $\int_a^b(-2x^2+x^4)\,dx$.
+\end{enunciado}
+\begin{uso}{\P{chasles} CHASLES · \P{monoint} MONOTONÍA}
+Agregar un tramo donde el integrando es positivo suma; donde es negativo, resta.
+\end{uso}
+a) $x-x^2=x(1-x)>0$ solo en $(0,1)$. Conviene juntar todo lo positivo y nada de lo negativo: $a=0$, $b=1$. Valor: $\frac12-\frac13=\frac16$.\\
+b) $x^4-2x^2=x^2(x^2-2)<0$ en $(-\sqrt2,\sqrt2)$ (salvo 0). Para minimizar, junto todo lo negativo: $a=-\sqrt2$, $b=\sqrt2$. Valor: $-\frac{16\sqrt2}{15}$.
+
+\begin{enunciado}{PRÁCTICO 3.1 · EJ 5}
+Bosquejar $F_i(x)=\int_0^xf_i$ para funciones dadas por gráfico.
+\end{enunciado}
+\begin{falta}
+Los $f_i$ están en el EVA. Reglas para bosquejar $F$: donde $f>0$, $F$ sube; donde $f<0$, baja; donde $f=0$, está quieta; $F(0)=0$; donde $f$ es constante, $F$ es una recta con esa pendiente; y $F$ es continua aunque $f$ salte (\P{intindef}).
+\end{falta}
+
+\begin{enunciado}{PRÁCTICO 3.1 · EJ 6 · CALCULAR $F(x)=\int_0^xf$}
+a) $f_1=\max\{t,2-t\}$ \ b) $f_2=[t]$ \ c) $f_3=t-[t]$
+\end{enunciado}
+\paso{a}{$\max\{t,2-t\}$}
+Vale $2-t$ si $t\le1$ y $t$ si $t\ge1$. Si $x\le1$: $F(x)=\int_0^x(2-t)\,dt=2x-\frac{x^2}2$ (vale también para $x<0$, por \P{orient}). Si $x\ge1$: $F(x)=F(1)+\int_1^xt\,dt=\frac32+\frac{x^2-1}2=\frac{x^2}2+1$.
+\resp{$F(x)=2x-\frac{x^2}2$ si $x\le1$; \ $\frac{x^2}2+1$ si $x\ge1$.}
+\paso{b}{el diente $[t]$}
+Cada diente tiene área $\frac14$. Para $x\in[n,n+\frac12]$: $F(x)=\frac n4+\frac{(x-n)^2}2$. Para $x\in[n+\frac12,n+1]$: $F(x)=\frac{n+1}4-\frac{(n+1-x)^2}2$. Como $[t]$ es par, $F$ es impar: $F(-x)=-F(x)$.\\
+Forma: una escalera suavizada que sube $\frac14$ por unidad, con pendiente 0 en los enteros y $\frac12$ en los medios.
+\paso{c}{$t-[t]$}
+Por linealidad: $F_3(x)=\frac{x^2}2-F_2(x)$.
+
+\begin{enunciado}{PRÁCTICO 3.1 · EJ 7 · ÁREA ENTRE DOS CURVAS}
+a) $x$, $-x$ en $[-2,2]$ b) $\fl{2x}$, $2\fl x$ en $[0,2]$ c) $|x|$, $|x-1|$ en $[-1,1]$ d) $|x-1|$, $x$ en $[0,2]$ e) $x$, $1-2x$ en $[-1,2]$ f) $[x]-2x$, $\fl{2x}$ en $[0,2]$
+\end{enunciado}
+\begin{uso}{ÁREA ENTRE CURVAS $=\int|f-g|$}
+El área no tiene signo: es $\int_a^b|f-g|$. Partí donde $f-g$ cambia de signo.
+\end{uso}
+a) $\int_{-2}^2|2x|=2\cdot4=8$.\\
+b) $\fl{2x}-2\fl x$ vale $0,1,0,1$ en los cuatro medios intervalos: área $\frac12+\frac12=1$.\\
+c) En $[-1,0]$: $|x|-|x-1|=-x-(1-x)=-1$, área 1. En $[0,1]$: $2x-1$, dos triángulos de $\frac14$. Total $\frac32$.\\
+d) En $[0,1]$: $|2x-1|$, área $\frac12$. En $[1,2]$: diferencia constante 1, área 1. Total $\frac32$.\\
+e) $x-(1-2x)=3x-1$, cero en $\frac13$. Triángulos: $\frac12\cdot\frac43\cdot4=\frac83$ y $\frac12\cdot\frac53\cdot5=\frac{25}6$. Total $\frac{41}6$.\\
+f) $g-f=2x+\fl{2x}-[x]\ge0$ siempre. $\int_0^2 2x=4$, $\int_0^2\fl{2x}=\frac{0+1+2+3}2=3$, $\int_0^2[x]=\frac12$. Total $\frac{13}2$.
+
+\begin{enunciado}{PRÁCTICO 3.1 · EJ 8 · INTEGRALES CON PARTE ENTERA}
+Once integrales, de a) a k).
+\end{enunciado}
+\begin{metodo}{INTEGRAL DE UNA FUNCIÓN ESCALÓN}
+\begin{enumerate}
+\item Averiguá entre qué valores se mueve lo de adentro del $\fl{\cdot}$.
+\item Para cada entero $k$ intermedio, despejá el $x$ donde lo de adentro vale $k$: esos son los cortes.
+\item Suma de (valor constante) × (ancho del escalón).
+\end{enumerate}
+\end{metodo}
+a) $\int_0^4\sin(\pi\fl x)$: $\sin(k\pi)=0$ en cada escalón. \textbf{$0$.}\\[2pt]
+b) $\int_0^6\sin(\frac{\pi\fl x}6)=\sum_{k=0}^5\sin\frac{k\pi}6$ $=0+\frac12+\frac{\sqrt3}2+1+\frac{\sqrt3}2+\frac12$. \textbf{$2+\sqrt3$.}\\[2pt]
+c) $\int_0^42^{\fl x}=1+2+4+8$. \textbf{$15$.}\\[2pt]
+d) $\int_2^3\fl{x^2}$: $x^2\in[4,9]$, cortes en $\sqrt5,\sqrt6,\sqrt7,\sqrt8$. \\
+$4(\sqrt5-2)+5(\sqrt6-\sqrt5)+6(\sqrt7-\sqrt6)+7(\sqrt8-\sqrt7)+8(3-\sqrt8)$. \textbf{$16-\sqrt5-\sqrt6-\sqrt7-2\sqrt2\approx5{,}84$.}\\[2pt]
+e) $\int_1^2\fl{x^2+x}$: $x^2+x\in[2,6]$; cortes donde $x^2+x=3,4,5$: $x=\frac{-1+\sqrt{13}}2,\frac{-1+\sqrt{17}}2,\frac{-1+\sqrt{21}}2$.\\
+\textbf{$\frac{19}2-\frac{\sqrt{13}+\sqrt{17}+\sqrt{21}}2\approx3{,}34$.}\\[2pt]
+f) $\int_0^2\fl{x^2-x}$: en $(0,1)$, $x^2-x\in[-\frac14,0)$, vale $-1$; en $[1,\frac{1+\sqrt5}2)$ vale 0; en $[\frac{1+\sqrt5}2,2)$ vale 1. $-1+\big(2-\frac{1+\sqrt5}2\big)$. \textbf{$\frac{1-\sqrt5}2\approx-0{,}62$.}\\[2pt]
+g) $\int_1^9\fl{\sqrt x}$: 1 en $[1,4)$, 2 en $[4,9)$: $3+10$. \textbf{$13$.}\\[2pt]
+h) $\int_1^{16}\fl{\frac{\sqrt[4]x}2}$: $\sqrt[4]x\in[1,2]$, la mitad en $[\frac12,1]$; vale 0 salvo en $x=16$. \textbf{$0$.}\\[2pt]
+i) $\int_1^{100}\fl{\frac1x}$: $\frac1x\in(0,1]$; vale 0 salvo en $x=1$. \textbf{$0$.}\\[2pt]
+j) $\int_1^3\frac2{\fl{2x}^2}$: $\fl{2x}=2,3,4,5$ en tramos de ancho $\frac12$: $\sum_{k=2}^5\frac1{k^2}$. \textbf{$\frac{1669}{3600}\approx0{,}46$.}\\[2pt]
+k) $\int_1^2\frac2{\fl{x^2}}$: $\fl{x^2}=1,2,3$ en $[1,\sqrt2),[\sqrt2,\sqrt3),[\sqrt3,2)$: $2(\sqrt2-1)+(\sqrt3-\sqrt2)+\frac23(2-\sqrt3)$. \textbf{$\sqrt2+\frac{\sqrt3}3-\frac23\approx1{,}32$.}
+\begin{trampa}{LOS CORTES NO SON ENTEROS}
+En d), e), k) los escalones \textbf{no} cambian en los enteros de $x$: cambian donde \emph{lo de adentro} es entero. Siempre despejá.
+\end{trampa}
+
+% ============================================================
+\section{Primeras acotaciones}
+
+\begin{enunciado}{PRÁCTICO 3.2 · EJ 1}
+Probar $\frac{\sqrt3}4\le\int_0^{1/2}\sqrt{1-x^2}\,dx\le\frac12$.
+\end{enunciado}
+\begin{uso}{\P{acot} ACOTACIÓN}
+$m\le f\le M$ en $[a,b]\Rightarrow m(b-a)\le\int_a^bf\le M(b-a)$.
+\end{uso}
+$\sqrt{1-x^2}$ decrece en $[0,\frac12]$: $M=f(0)=1$, $m=f(\frac12)=\frac{\sqrt3}2$. Por ancho $\frac12$: $\frac{\sqrt3}4\le\int\le\frac12$. $\blacksquare$
+
+\begin{enunciado}{PRÁCTICO 3.2 · EJ 2}
+$f\ge2$ en $[-1,0]\cup[2,4]$, $f\ge4$ en $[0,2]$. a) $\int_{-1}^4f\ge14$. b) Si además $f\ge3$ en $[1,3]$, $\int\ge15$.
+\end{enunciado}
+\begin{uso}{\P{chasles} CHASLES · \P{acot} ACOTACIÓN}
+Partí en tramos donde tenés una cota, acotá cada uno y sumá.
+\end{uso}
+a) $\int_{-1}^0f+\int_0^2f+\int_2^4f\ge2\cdot1+4\cdot2+2\cdot2=14$.\\
+b) Con la mejor cota en cada tramo de ancho 1: $[-1,0]$: 2; $[0,1]$: 4; $[1,2]$: $\max\{4,3\}=4$; $[2,3]$: $\max\{2,3\}=3$; $[3,4]$: 2. Suma $15$. $\blacksquare$
+
+\begin{enunciado}{PRÁCTICO 3.2 · EJ 3 · APROXIMAR POR ARRIBA Y POR ABAJO}
+$\int_{-3}^3$ de $\frac4{1+x^2}$, $\sqrt{1-x^2}$ y $2^{x-1}$.
+\end{enunciado}
+\begin{uso}{\P{sumas} SUMAS DE DARBOUX}
+Cualquier partición da una cota: $\Si\le\int\le\Ss$. Con monotonía, techo y piso están en los extremos.
+\end{uso}
+\textbf{$\frac4{1+x^2}$:} es par y decrece en $[0,3]$. Con $P=\{0,1,2,3\}$: techos $4,2,\frac45$ y pisos $2,\frac45,\frac25$. Duplicando: $6{,}4\le\int_{-3}^3\le13{,}6$ (el valor real es $\approx9{,}99$).\\
+\textbf{$\sqrt{1-x^2}$:} solo existe en $[-1,1]$ (fuera de ahí la raíz no está definida). Ahí es medio disco de radio 1: $\frac\pi2$. Acotación simple: $0\le\int\le2$.\\
+\textbf{$2^{x-1}$:} creciente. Con los enteros de $-3$ a 3: $\Si=\frac1{16}+\dots+2=\frac{63}{16}\approx3{,}94$ y $\Ss=\frac18+\dots+4=\frac{63}8\approx7{,}88$ (real $\approx5{,}68$).
+\begin{falta}
+El práctico pide leer las aproximaciones de las gráficas del EVA; estas son las mismas cotas hechas con cuentas.
+\end{falta}
+
+\begin{enunciado}{PRÁCTICO 3.2 · EJ 4 · CONVEXAS}
+a) $\int_a^bf\le\int_a^b\Big[(t-a)\frac{f(b)-f(a)}{b-a}+f(a)\Big]dt$. \ b) $\int_a^{m}(f-f(a))\le\int_m^b(f-f(m))$ con $m=\frac{a+b}2$.
+\end{enunciado}
+\paso{a}{}
+Por 2.2.6 c), una convexa queda debajo de su cuerda. Integro (\P{monoint}). $\blacksquare$
+\paso{b}{}
+Sea $h=\frac{b-a}2$. Cambio de variable $t=s+h$ en el lado derecho (\P{cvl}): queda $\int_a^m\big(f(s+h)-f(a+h)\big)ds$. Alcanza con $f(s)-f(a)\le f(s+h)-f(a+h)$ para $s\in[a,m]$, es decir $f(a+h)-f(a)\le f(s+h)-f(s)$: en una convexa, el incremento en un tramo de largo $h$ crece si el tramo se corre a la derecha (las pendientes de las cuerdas crecen). $\blacksquare$
+
+% ============================================================
+\section{Particiones, sumas superiores e inferiores}
+
+\begin{enunciado}{PRÁCTICO 3.3 · EJ 1 · LA TABLA DE BLOQUES}
+$f(x)=3x-2$ y $f(x)=x^2$ con cinco particiones de $[-2,2]$.
+\end{enunciado}
+\begin{uso}{\P{sumas} SUMAS · MÉTODO DE LA TABLA}
+$3x-2$ es creciente: techo a la derecha, piso a la izquierda. $x^2$ \textbf{no}: en un bloque que contiene al 0, el piso es 0.
+\end{uso}
+\begin{center}\small
+\begin{tabular}{@{}lcccc@{}}\toprule
+Partición & $\Ss(3x-2)$ & $\Si(3x-2)$ & $\Ss(x^2)$ & $\Si(x^2)$\\\midrule
+$\{-2,0,1,2\}$ & $1$ & $-17$ & $13$ & $1$\\
+$\{-2,-1,\frac12,2\}$ & $\frac14$ & $-\frac{65}4$ & $\frac{23}2$ & $\frac{11}8$\\
+$\{-2,-\frac12,\frac12,2\}$ & $\frac14$ & $-\frac{65}4$ & $\frac{49}4$ & $\frac34$\\
+$\{-2,\frac34,1,2\}$ & $\frac{79}{16}$ & $-\frac{335}{16}$ & $\frac{61}4$ & $\frac{73}{64}$\\
+$\{-2,-\frac12,0,\frac34,2\}$ & $-\frac{17}{16}$ & $-\frac{239}{16}$ & $\frac{739}{64}$ & $\frac{69}{64}$\\\bottomrule
+\end{tabular}
+\end{center}
+Ejemplo de una fila, $x^2$ con $\{-2,-1,\frac12,2\}$: bloques $[-2,-1]$ (ancho 1, techo 4, piso 1), $[-1,\frac12]$ (ancho $\frac32$, techo 1, \textbf{piso 0} porque contiene al 0), $[\frac12,2]$ (ancho $\frac32$, techo 4, piso $\frac14$). $\Ss=4+\frac32+6=\frac{23}2$; \ $\Si=1+0+\frac38=\frac{11}8$.\\
+Chequeo: $\int_{-2}^2(3x-2)=0-8=-8$ y $\int_{-2}^2x^2=\frac{16}3$. En todas las filas la integral queda entre $\Si$ y $\Ss$.\ok
+\begin{tip}{QUÉ MIRAR EN LA TABLA}
+Cuanto más finos los bloques, más se acercan $\Ss$ y $\Si$. Y si una partición agrega puntos a otra, $\Ss$ baja y $\Si$ sube (\P{refin}).
+\end{tip}
+
+\begin{enunciado}{PRÁCTICO 3.3 · EJ 2}
+a) $2^x$, $P=\{0,1,2,3\}$. b) $\sqrt x$, $P=\{0,1,4,9\}$. c) a f) $\sin$, $\cos$, $\tan$, $\arctan$.
+\end{enunciado}
+a) Creciente: $\Ss=2+4+8=14$, \ $\Si=1+2+4=7$.\\
+b) Creciente, anchos $1,3,5$: $\Ss=1\cdot1+2\cdot3+3\cdot5=22$, \ $\Si=0+1\cdot3+2\cdot5=13$.
+\begin{falta}
+Las particiones de c)–f) no están en tu transcripción. Con $P=\{0,\frac\pi2,\pi\}$ para $\sin$: techo 1 en los dos bloques, $\Ss=\pi$; piso 0, $\Si=0$ (la integral, 2, queda en el medio). Para $\cos$ con la misma $P$: $\Ss=\frac\pi2$, $\Si=-\frac\pi2$. Regla: con monótonas (tramos de $\cos$ en $[0,\pi]$, $\arctan$, $\tan$ en cada rama) techo y piso están en los extremos; con $\sin$ ojo con el pico en $\frac\pi2$.
+\end{falta}
+
+\begin{enunciado}{PRÁCTICO 3.3 · EJ 3}
+$f(x)=2\cos(x+\frac\pi2)-1$ en $[0,9]$, $P=\{0,a_1,a_2,9\}$: elegir $a_1,a_2$ con $\Ss(f,P)<0$. Cota superior de $\int_0^9f$.
+\end{enunciado}
+\paso{1}{simplificar}
+$\cos(x+\frac\pi2)=-\sin x$: $f(x)=-2\sin x-1$. Vale $-1$ en $0,\pi,2\pi$; es positiva (hasta 1) cerca de $\frac{3\pi}2$.
+\paso{2}{aislar la parte positiva}
+Con $a_1=\pi$, $a_2=2\pi$: en $[0,\pi]$ el techo es $-1$ (ancho $\pi$); en $[\pi,2\pi]$ el techo es $1$ (ancho $\pi$); en $[2\pi,9]$ el techo es $-1$ (ancho $9-2\pi$).
+\[\Ss=-\pi+\pi-(9-2\pi)=2\pi-9\approx-2{,}72<0.\]
+\resp{$a_1=\pi$, $a_2=2\pi$. Entonces $\int_0^9f\le\Ss=2\pi-9$.}
+(El valor real es $\approx-12{,}8$.)
+
+\begin{enunciado}{PRÁCTICO 3.3 · EJ 4 · PARTE ENTERA Y UN PUNTO QUE CAMBIA TODO}
+$P=\{-1;0;1;1{,}5;3\}$: a) $\fl x$ b) $\fl{x/2}$ c) $\fl{2x}$ d) $-x$ ($x<0$), $x+2$ ($x\ge0$) e) $-x$ ($x\le0$), $x+2$ ($x>0$)
+\end{enunciado}
+\begin{uso}{\P{sumas} · BLOQUE CERRADO}
+El bloque incluye sus extremos: si la función salta en un extremo, el valor en ese punto cuenta.
+\end{uso}
+\begin{center}\small
+\begin{tabular}{@{}lcc@{}}\toprule
+Función & $\Ss$ & $\Si$\\\midrule
+a) $\fl x$ & $6$ & $1$\\
+b) $\fl{x/2}$ & $1{,}5$ & $-1$\\
+c) $\fl{2x}$ & $12{,}5$ & $3{,}5$\\
+d) & $14{,}25$ & $8{,}75$\\
+e) & $13{,}25$ & $6{,}75$\\\bottomrule
+\end{tabular}
+\end{center}
+a), d) y e) están resueltos bloque por bloque en el libro del parcial (cap.\ 3). Para b): $\fl{x/2}$ vale $-1$ en $[-1,0)$ y $0$ en $[0,2)$, 1 en $[2,3]$. Techos por bloque: $0,0,0,1$ (el último por $x\in[2,3]$); pisos: $-1,0,0,0$. $\Ss=1{,}5\cdot1=1{,}5$; $\Si=-1$.\\
+Para c): techos $0,2,3,6$ (en $x=0$, $x=1$, $x=1{,}5$, $x=3$); pisos $-2,0,2,3$. $\Ss=0+2+1{,}5+9=12{,}5$; $\Si=-2+0+1+4{,}5=3{,}5$.
+
+\begin{enunciado}{PRÁCTICO 3.3 · EJ 5 · INTEGRALES CON SUMAS}
+a) $\int_1^3x\,dx$ con particiones equiespaciadas. b) $\int_0^3x^2\,dx$.
+\end{enunciado}
+\begin{uso}{\P{integ} INTEGRABLE · SUMAS CONOCIDAS}
+$\sum_{i=1}^ni=\frac{n(n+1)}2$, \ $\sum_{i=1}^ni^2=\frac{n(n+1)(2n+1)}6$. Si $\Si$ y $\Ss$ tienden al mismo número, ese número es la integral.
+\end{uso}
+\paso{a}{$\int_1^3x$}
+$n$ bloques de ancho $h=\frac2n$, puntos $1+ih$. Creciente: techo a la derecha.
+\[\Ss=\sum_{i=1}^n(1+ih)h=2+h^2\frac{n(n+1)}2=4+\frac2n,\qquad \Si=\sum_{i=0}^{n-1}(1+ih)h=4-\frac2n.\]
+$4-\frac2n\le\int\le4+\frac2n$ para todo $n$: la integral es $4$.
+\paso{b}{$\int_0^3x^2$}
+$h=\frac3n$: $\Ss=\sum_{i=1}^n(ih)^2h=\frac{27}{n^3}\cdot\frac{n(n+1)(2n+1)}6=\frac{9(n+1)(2n+1)}{2n^2}$ y $\Si=\frac{9(n-1)(2n-1)}{2n^2}$. Los dos tienden a 9: la integral es $9$.
+
+\begin{enunciado}{PRÁCTICO 3.3 · EJ 6 · CALCULAR $F$}
+a) $\int_{-1}^{\sin x}1$ b) $\int_1^{\cos x}1$ c) $\int_{-2}^{x^2+1}1$ d) $\int_x^{2x+1}t$ e) $\int_x^{|2x|}t$ f) $\int_x^{\arctan x}t$
+\end{enunciado}
+\begin{uso}{\P{tabla} TABLA · \P{orient} ORIENTACIÓN}
+$\int_a^b1=b-a$ y $\int_a^bt=\frac{b^2-a^2}2$ valen con $a,b$ en cualquier orden.
+\end{uso}
+a) $\sin x+1$. \ b) $\cos x-1$. \ c) $x^2+3$. \ d) $\frac{(2x+1)^2-x^2}2=\frac{3x^2+4x+1}2$. \ e) $\frac{4x^2-x^2}2=\frac{3x^2}2$. \ f) $\frac{\arctan^2x-x^2}2$.
+
+% ============================================================
+\section{Integrabilidad de funciones}
+
+\begin{enunciado}{PRÁCTICO 3.4 · EJ 1 · VARIACIONES DE LA DEFINICIÓN}
+Cuatro versiones cambiando $\forall$/$\exists$; aplicar a $x$, $0$ y Dirichlet.
+\end{enunciado}
+Resuelto en el libro del parcial (cap.\ 4).
+\resp{$f_1=x$: a, c, d. \ $f_2=0$: todas. \ Dirichlet: c, d. \ Implicancias: (b)$\Rightarrow$(a)$\Rightarrow$(c), (b)$\Rightarrow$(d)$\Rightarrow$(c).}
+
+\begin{enunciado}{PRÁCTICO 3.4 · EJ 2}
+Monótona creciente y acotada $\Rightarrow$ integrable.
+\end{enunciado}
+\begin{uso}{\P{telesc} TELESCÓPICA · \P{integ} CRITERIO}
+Con la partición uniforme de $n$ bloques, $\Ss-\Si=\frac{b-a}n(f(b)-f(a))$.
+\end{uso}
+Dado $\eps>0$, elijo $n>\frac{(b-a)(f(b)-f(a))}\eps$: la diferencia queda $<\eps$. Por el criterio, integrable. $\blacksquare$
+
+\begin{enunciado}{PRÁCTICO 3.4 · EJ 3}
+Si $f,g$ integrables: a) $\alpha f$, b) $\max\{f,g\}$, c) $f+g$ son integrables.
+\end{enunciado}
+\begin{uso}{\P{integ} CRITERIO · \P{supsuma} SUP DE SUMA Y ESCALA}
+Todo se reduce a acotar la «oscilación» $M_i-m_i$ de cada bloque.
+\end{uso}
+\paso{a}{}
+Si $\alpha\ge0$: $\Ss(\alpha f)=\alpha\Ss(f)$ y $\Si(\alpha f)=\alpha\Si(f)$. Si $\alpha<0$ se intercambian (\P{supsuma}). En los dos casos $\Ss-\Si$ se multiplica por $|\alpha|$: tomo $P$ con diferencia para $f$ menor que $\frac\eps{|\alpha|}$. $\blacksquare$
+\paso{c}{(antes que b)}
+En cada bloque $\sup(f+g)\le\sup f+\sup g$ e $\inf(f+g)\ge\inf f+\inf g$. Entonces $\Ss(f+g)-\Si(f+g)\le[\Ss(f)-\Si(f)]+[\Ss(g)-\Si(g)]$. Tomo $P=P_f\cup P_g$ (refinar no empeora, \P{refin}) con cada diferencia $<\frac\eps2$. $\blacksquare$
+\paso{b}{}
+Si $h=\max\{f,g\}$ y $h(x)=f(x)$: $h(x)-h(y)\le f(x)-f(y)$ (porque $h(y)\ge f(y)$). Así la oscilación de $h$ en un bloque es $\le$ la de $f$ más la de $g$, y se termina igual que en c). $\blacksquare$
+
+\begin{enunciado}{PRÁCTICO 3.4 · EJ 4}
+a) $f=1$ en 0, $0$ fuera: integrable en $[-1,1]$. b) Cambiar $f$ en un punto. c) $f(x)=x$ en los enteros, $0$ fuera.
+\end{enunciado}
+a) En el libro del parcial: $P=\{-1,-\eta,\eta,1\}$ da $\Ss-\Si=2\eta<\eps$.\\
+b) $g_M$ difiere de $f$ en un solo punto: integrable y con la misma integral (\P{crit}).\\
+c) En $[a,b]$ hay finitos enteros: es acotada con finitas discontinuidades. Integrable, y como coincide con 0 salvo en finitos puntos, $\int_a^bf=0$.
+
+\begin{enunciado}{PRÁCTICO 3.4 · EJ 5 · NO INTEGRABLES}
+a) $0$ en $\Q$, $1$ fuera, en $[0,1]$. b) $0$ en $\Q$, $x$ fuera: $\Ss\ge\frac14$.
+\end{enunciado}
+\begin{uso}{\P{dens} DENSIDAD}
+Todo bloque, por chico que sea, tiene racionales e irracionales.
+\end{uso}
+a) En cada bloque hay racionales (valor 0) e irracionales (valor 1): $m_i=0$, $M_i=1$. Para toda $P$: $\Si=0$ y $\Ss=1$. $I_*=0\neq1=I^*$: \textbf{no integrable}.\\
+b) $\Si=0$ siempre. Y $\Ss(f,P)=\Ss(x,P)\ge\int_0^1x=\frac12\ge\frac14$ (los irracionales cerca del extremo derecho dan el techo $a_{i+1}$). $I^*\ge\frac14>0=I_*$: no integrable. $\blacksquare$
+
+\begin{enunciado}{PRÁCTICO 3.4 · EJ 6 · LIPSCHITZ}
+a) $F(x)=\int_a^xf$ es Lipschitz. b) Lipschitz $\Rightarrow$ integrable. c) Lipschitz, $\ge0$, integral 0 $\Rightarrow f\equiv0$; ejemplo sin Lipschitz.
+\end{enunciado}
+Resuelto completo en el libro del parcial (cap.\ 10). En una línea cada uno:\\
+a) $|F(x)-F(y)|=\left|\int_y^xf\right|\le M|x-y|$ con $M$ cota de $|f|$ (\P{acot}).\\
+b) En un bloque de ancho $h$, $M_i-m_i\le Kh$: $\Ss-\Si\le\frac{K(b-a)^2}n\to0$.\\
+c) Si $f(x_0)=c>0$, Lipschitz da $f\ge\frac c2$ en un intervalo alrededor de $x_0$, y entonces $\int>0$. Sin Lipschitz: $g(0)=1$, $g=0$ en el resto.
+
+\begin{enunciado}{PRÁCTICO 3.4 · EJ 7 · INTEGRAL DE LA INVERSA}
+$f$ estrictamente creciente de $[a,b]$ sobre $[f(a),f(b)]$. a) $\int_a^bf+\int_{f(a)}^{f(b)}f^{-1}=bf(b)-af(a)$. b) $\int_1^2\sqrt t\,dt$.
+\end{enunciado}
+\paso{a}{la imagen}
+El gráfico de $f^{-1}$ es el de $f$ reflejado en la diagonal. El área bajo $f$ (hasta el eje $x$) más el área «a la izquierda» de $f$ (hasta el eje $y$, que es $\int f^{-1}$) llenan el rectángulo grande $[0,b]\times[0,f(b)]$ menos el chico $[0,a]\times[0,f(a)]$.
+\begin{center}
+\begin{tikzpicture}[scale=1.1]
+\fill[teal!25] (0.6,0)--plot[domain=0.6:2,samples=30](\x,{0.5*\x*\x})--(2,0)--cycle;
+\fill[rojo!20] (0,0.18)--plot[domain=0.6:2,samples=30](\x,{0.5*\x*\x})--(0,2)--cycle;
+\draw[acero,very thick,domain=0:2.2,samples=40] plot (\x,{0.5*\x*\x});
+\draw[-{Stealth}] (-0.1,0)--(2.5,0); \draw[-{Stealth}] (0,-0.1)--(0,2.5);
+\draw[densely dotted] (2,0)--(2,2)--(0,2) (0.6,0)--(0.6,0.18)--(0,0.18);
+\node[font=\scriptsize,below] at (0.6,0) {$a$}; \node[font=\scriptsize,below] at (2,0) {$b$};
+\node[font=\scriptsize,left] at (0,0.18) {$f(a)$}; \node[font=\scriptsize,left] at (0,2) {$f(b)$};
+\node[teal,font=\ttfamily\scriptsize] at (1.55,0.45) {$\int f$}; \node[rojo,font=\ttfamily\scriptsize] at (0.55,1.3) {$\int f^{-1}$};
+\end{tikzpicture}
+\end{center}
+\paso{b}{}
+Uso $f(t)=t^2$ en $[1,\sqrt2]$, cuya inversa es $\sqrt t$ en $[1,2]$:
+\[\int_1^2\sqrt t\,dt=\sqrt2\cdot2-1\cdot1-\int_1^{\sqrt2}t^2\,dt=2\sqrt2-1-\frac{2\sqrt2-1}3=\frac23\big(2\sqrt2-1\big).\]
+Coincide con la tabla: $\frac23(2^{3/2}-1)$.\ok
+
+% ============================================================
+\section{Cambio de variable lineal}
+
+\begin{enunciado}{PRÁCTICO 3.5 · EJ 1}
+a) Traslación $\int_a^bf(t)\,dt=\int_{a+p}^{b+p}f(t-p)\,dt$. b) Escala $\int_a^bf=r\int_{a/r}^{b/r}f(rt)\,dt$. c) Las dos juntas. d) Reflexión $\int_a^bf(t)\,dt=\int_a^bf(b+a-t)\,dt$.
+\end{enunciado}
+\begin{uso}{\P{sumas} SUMAS DE DARBOUX · \P{integ}}
+Para probar que dos integrales son iguales, mostrá que a cada partición de un lado le corresponde una del otro con \textbf{las mismas} sumas.
+\end{uso}
+\paso{a}{traslación}
+Si $P=\{a_i\}$ parte $[a,b]$, entonces $P+p=\{a_i+p\}$ parte $[a+p,b+p]$. En el bloque $[a_i+p,a_{i+1}+p]$, $f(t-p)$ toma exactamente los valores de $f$ en $[a_i,a_{i+1}]$: mismos techos, mismos pisos, mismos anchos. Sumas iguales $\Rightarrow$ integrales iguales. $\blacksquare$
+\paso{b}{escala}
+Con $\frac Pr=\{\frac{a_i}r\}$: $f(rt)$ en $[\frac{a_i}r,\frac{a_{i+1}}r]$ toma los valores de $f$ en $[a_i,a_{i+1}]$, pero el ancho es $\frac1r$ del original. Las sumas de la derecha son $\frac1r$ de las de la izquierda: por eso aparece el factor $r$. $\blacksquare$
+\paso{c}{las dos}
+$\int_a^bf(t)\,dt=r\int_{(a-p)/r}^{(b-p)/r}f(rt+p)\,dt$.
+\paso{d}{reflexión}
+Con la partición reflejada $\{a+b-a_i\}$ los bloques se recorren al revés, pero cada uno tiene el mismo techo, piso y ancho. $\blacksquare$
+\begin{tip}{EN TU IDIOMA}
+Traslación = mover el objeto (no cambia el volumen). Escala en $x$ por $\frac1r$ = el volumen se divide por $r$. Reflexión = espejar (no cambia nada). Es la misma lógica que un transform en 3D.
+\end{tip}
+
+\begin{enunciado}{PRÁCTICO 3.5 · EJ 2}
+$\int_0^bx^n$ en función de $b$ y de $\int_0^1x^n$; fórmula para $\int_a^bx^n$.
+\end{enunciado}
+Escala con $r=b$: $\int_0^bx^n\,dx=b\int_0^1(bt)^n\,dt=b^{n+1}\int_0^1t^n\,dt$. Llamando $c_n=\int_0^1t^n$: \ $\int_a^bx^n=c_n\big(b^{n+1}-a^{n+1}\big)$ (Chasles).\\
+(Más adelante se ve que $c_n=\frac1{n+1}$, lo que da la fórmula conocida.)
+
+\begin{enunciado}{PRÁCTICO 3.5 · EJ 3 · EL LOGARITMO}
+$\log x=\int_1^x\frac{dt}t$. a) Creciente, única raíz 1. b) $\log(n(a-1)+1)\le n\log a$. c) $\log a=\int_x^{ax}\frac{dt}t$ y $\log(xy)=\log x+\log y$. d) Consecuencias. e) No acotado.
+\end{enunciado}
+\paso{a}{}
+Si $x<y$: $\log y-\log x=\int_x^y\frac1t>0$ (integrando positivo). Estrictamente creciente, así que inyectiva, y $\log1=0$ es la única raíz.
+\paso{c}{}
+Escala con $r=\frac1x$: $\int_1^a\frac{dt}t=\int_x^{ax}\frac{ds}s$ (la función $\frac1t$ «absorbe» el factor). Entonces $\log(xy)=\int_1^x+\int_x^{xy}=\log x+\log y$. $\blacksquare$
+\paso{d}{}
+$\log x^2=2\log x$ (c con $y=x$); $\log x=2\log\sqrt x$; $\log\frac1x=-\log x$ (porque $\log x+\log\frac1x=\log1=0$); $\log x^n=n\log x$ por inducción; y para racionales $\log x^{p/q}=\frac pq\log x$.
+\paso{b}{}
+Por Bernoulli, $a^n\ge1+n(a-1)$ si $a\ge1$. Como $\log$ crece: $\log(1+n(a-1))\le\log a^n=n\log a$. $\blacksquare$
+\paso{e}{}
+$\log2^n=n\log2\to\infty$ ($\log2>0$). $\blacksquare$
+
+\begin{enunciado}{PRÁCTICO 3.5 · EJ 4}
+Área del círculo de radio $r$ y de la elipse, en función del área del círculo unidad.
+\end{enunciado}
+Círculo: $A(r)=\int_{-r}^r2\sqrt{r^2-x^2}\,dx$. Escala $x=rt$: $=r\int_{-1}^12r\sqrt{1-t^2}\,dt=r^2A(1)=\pi r^2$.\\
+Elipse de semiejes $a,b$: $\int_{-a}^a2b\sqrt{1-\frac{x^2}{a^2}}dx=ab\,A(1)=\pi ab$.
+
+% ============================================================
+\section{Cálculo de integrales}
+
+\begin{enunciado}{PRÁCTICO 3.6 · EJ 1 y 2}
+1) a) $\int_{-1}^1h=0$, $\int_{-1}^3h=6$: $\int_1^3h$. b) $\int_2^8f=20$, $\int_4^8f=-12$: $\int_2^4f$. \ 2) $\int_1^2f=-4$, $\int_1^5f=6$, $\int_1^2g=8$: seis integrales.
+\end{enunciado}
+\begin{uso}{\P{chasles} · \P{orient} · \P{lineal}}
+Limpiar constantes, columna de integrales, Chasles, orientación.
+\end{uso}
+1a) $6-0=6$. \ 1b) $20-(-12)=32$.\\
+2) a) $\int_2^1g=-8$. \ b) $\int_1^2g=8$. \ c) $\int_2^5f=6-(-4)=10$. \ e) $\int_1^53f=18$.
+\begin{falta}
+d) $\int_1^5(f-g)$ y f) $\int_1^5(4f-g)$ necesitan $\int_1^5g$, que no figura en tu transcripción (solo está $\int_1^2g$). Con ese dato: d) $=6-\int_1^5g$; \ f) $=24-\int_1^5g$.
+\end{falta}
+
+\begin{enunciado}{PRÁCTICO 3.6 · EJ 3}
+$\int_2^8f=20$, $\int_8^4f=12$. a) $\int_2^4f$. b) Existen $c,d\in[2,4]$ con $f(c)\ge15$ y $f(d)\le17$.
+\end{enunciado}
+Resuelto en el libro del parcial (cap.\ 7): $\int_2^4f=20-(-12)=32$, y los dos absurdos con la monotonía de la integral.
+\begin{trampa}{OJO CON LA TRANSCRIPCIÓN}
+En tu transcripción figura $\int_4^8f=12$. Así el ejercicio no cierra: daría $\int_2^4f=8$, y con $f\equiv4$ la parte b) sería falsa. El dato correcto es $\int_8^4f=12$ (con los extremos al revés), que da 32 y hace funcionar b).
+\end{trampa}
+
+\begin{enunciado}{PRÁCTICO 3.6 · EJ 4 a 9 · INTEGRALES CON LA TABLA}
+Polinomios, potencias, $\frac1{ax+b}$, fracciones simples, raíces y valores absolutos.
+\end{enunciado}
+\begin{falta}
+Tu transcripción resume estos ejercicios («etc.») sin los intervalos. Te dejo las fórmulas que resuelven cualquiera, todas sacadas de \P{tabla} con el cambio de variable lineal \P{cvl}; reemplazá los extremos del EVA.
+\end{falta}
+\begin{metodo}{LA TABLA EXTENDIDA CON CAMBIO DE VARIABLE LINEAL}
+\begin{enumerate}
+\item \textbf{Potencias:} $\int_a^bx^n\,dx=\frac{b^{n+1}-a^{n+1}}{n+1}$. Ej.: $\int_a^bu^{101}=\frac{b^{102}-a^{102}}{102}$; \ $\int_a^b\frac{r^{71}}4=\frac{b^{72}-a^{72}}{288}$.
+\item \textbf{$\frac1{x+c}$:} traslación: $\int_a^b\frac{dx}{x+c}=\log\frac{b+c}{a+c}$ (con $a+c,b+c>0$).
+\item \textbf{$\frac1{kx+c}$:} escala: $\int_a^b\frac{dx}{kx+c}=\frac1k\log\frac{kb+c}{ka+c}$. Ej.: $\int_a^b\frac{dx}{2x+3}=\frac12\log\frac{2b+3}{2a+3}$.
+\item \textbf{Cociente de afines:} $\frac{x-1}{x+1}=1-\frac2{x+1}$, así que $\int_a^b\frac{x-1}{x+1}=(b-a)-2\log\frac{b+1}{a+1}$.
+\item \textbf{Raíces:} $\int_a^b\sqrt{kx+c}\,dx=\frac2{3k}\big[(kb+c)^{3/2}-(ka+c)^{3/2}\big]$. Ej.: $\sqrt{16-2x}$ da $\frac13\big[(16-2a)^{3/2}-(16-2b)^{3/2}\big]$.
+\item \textbf{Semicírculos:} $\sqrt{8x-x^2}=\sqrt{16-(x-4)^2}$ es media circunferencia de radio 4: $\int_0^8=8\pi$.
+\item \textbf{Valor absoluto:} partí donde lo de adentro vale 0 y sacá el $|\cdot|$ con el signo de cada tramo (\P{absdef}).
+\end{enumerate}
+\end{metodo}
+\paso{7a}{fracciones simples}
+$\int_2^5\frac{dx}{1-x^2}=\frac12\int_2^5\frac{dx}{1-x}+\frac12\int_2^5\frac{dx}{1+x}=\frac12(-\log4)+\frac12\log2=-\frac12\log2$.\\
+(En $[2,5]$, $1-x<0$: $\int_2^5\frac{dx}{1-x}=-\int_2^5\frac{dx}{x-1}=-\log\frac41$.)
+\paso{7b}{la general}
+$\frac1{(x-\mu_1)(x-\mu_2)}=\frac1{\mu_1-\mu_2}\Big(\frac1{x-\mu_1}-\frac1{x-\mu_2}\Big)$ si $\mu_1\neq\mu_2$. Cada parte se integra con el ítem 2.
+\begin{trampa}{EL LOGARITMO DE ALGO NEGATIVO}
+$\int\frac{dx}{x+c}=\log(\cdot)$ solo en tramos donde $x+c>0$. Si el tramo está a la izquierda de $-c$, sacá el signo afuera primero (como en 7a). Y el intervalo no puede cruzar $x=-c$: ahí la función no es acotada.
+\end{trampa}
+
+\begin{enunciado}{PRÁCTICO 3.6 · EJ 10}
+a) $\int_1^4\fl{\sqrt x}$ \ b) $\int_1^4\big[\frac{x^2}4\big]$ \ c) $\int_1^2\big[\frac2t\big]$ (corchete = parte entera)
+\end{enunciado}
+a) $\fl{\sqrt x}=1$ en $[1,4)$: \textbf{3}.\\
+b) $\frac{x^2}4\in[\frac14,4]$: vale 0 en $[1,2)$, 1 en $[2,2\sqrt2)$, 2 en $[2\sqrt2,2\sqrt3)$, 3 en $[2\sqrt3,4)$. $(2\sqrt2-2)+2(2\sqrt3-2\sqrt2)+3(4-2\sqrt3)=$ \textbf{$10-2\sqrt2-2\sqrt3\approx3{,}71$}.\\
+c) $\frac2t\in[1,2]$ y vale 2 solo en $t=1$: \textbf{1}.
+
+\begin{enunciado}{PRÁCTICO 3.6 · EJ 11 · ÁREA ENCERRADA}
+a) $x^2$ y $-2x+1$ \ b) $x^2+x$ y $-x^2$ \ c) $x^2$ y $\sqrt{|x|}$ \ d) $\frac1x$ y $5-x$
+\end{enunciado}
+\begin{metodo}{ÁREA ENCERRADA}
+\begin{enumerate}
+\item Igualá las dos funciones: los cortes son los extremos.
+\item Mirá cuál está arriba (evaluá en un punto del medio).
+\item $\int(\text{arriba}-\text{abajo})$ entre los cortes.
+\end{enumerate}
+\end{metodo}
+a) $x^2=-2x+1\iff x=-1\pm\sqrt2$. Arriba la recta. $\int(-2x+1-x^2)=$ \textbf{$\frac{8\sqrt2}3$}.\\
+b) $x^2+x=-x^2\iff x(2x+1)=0$: cortes $-\frac12$ y 0. Arriba $-x^2$. $\int_{-1/2}^0(-2x^2-x)=$ \textbf{$\frac1{24}$}.\\
+c) Cortes en $0,\pm1$; simetría par: $2\int_0^1(\sqrt x-x^2)=2(\frac23-\frac13)=$ \textbf{$\frac23$}.\\
+d) $\frac1x=5-x\iff x^2-5x+1=0$: $x=\frac{5\pm\sqrt{21}}2$. Arriba la recta. $\int(5-x-\frac1x)=$ \textbf{$\frac{5\sqrt{21}}2-2\log\frac{5+\sqrt{21}}2\approx8{,}32$}.
+
+\begin{enunciado}{PRÁCTICO 3.6 · EJ 12 · MONOTONÍA Y EXTREMOS DE $F$}
+a) $f\ge0\Rightarrow F(x)=\int_0^xf$ creciente. b) Si $\sgn f(x)=\sgn x$, $F_a$ tiene mínimo en 0. c) Con signo opuesto, máximo.
+\end{enunciado}
+a) $x<y$: $F(y)-F(x)=\int_x^yf\ge0$ (\P{chasles}, \P{monoint}). $\blacksquare$\\
+b) $F_a(x)-F_a(0)=\int_0^xf$. Si $x>0$, $f\ge0$ en $[0,x]$: $\ge0$. Si $x<0$: $\int_0^xf=-\int_x^0f$ con $f\le0$ en $[x,0]$: también $\ge0$. Así $F_a(x)\ge F_a(0)$. $\blacksquare$\\
+c) Igual con todos los signos al revés.
+\begin{tip}{LA IMAGEN}
+$F$ es la «altura acumulada»: baja mientras $f<0$ y sube mientras $f>0$. Si $f$ pasa de negativa a positiva en 0, $F$ hace un valle ahí.
+\end{tip}
+
+% ============================================================
+\section{Aplicaciones}
+
+\begin{enunciado}{PRÁCTICO 3.7 · EJ 1 · CAÍDA LIBRE}
+Desde 20 m, $g=9{,}8$ m/s²: tiempo de caída y velocidad al llegar.
+\end{enunciado}
+\begin{uso}{LA INTEGRAL ACUMULA}
+La velocidad es la integral de la aceleración; la distancia, la integral de la velocidad: $v(t)=\int_0^t9{,}8=9{,}8t$, \ $d(t)=\int_0^t9{,}8s\,ds=4{,}9t^2$.
+\end{uso}
+$4{,}9t^2=20\Rightarrow t=\sqrt{20/4{,}9}\approx2{,}02$ s. \ $v=9{,}8\cdot2{,}02\approx19{,}8$ m/s.
+\resp{$\approx2{,}02$ s; $\approx19{,}8$ m/s (unos 71 km/h).}
+
+\begin{enunciado}{PRÁCTICO 3.7 · EJ 2 a 6}
+Autos (gráficas), monumento a Batlle Berres, trabajo, convolución, interpretaciones.
+\end{enunciado}
+\begin{falta}
+2) y 3) dependen de gráficas y medidas del EVA. Método: en 2), el recorrido es el área bajo la gráfica velocidad-tiempo (\P{geom}); la velocidad máxima es el punto más alto; se detiene donde la gráfica toca 0. En 3), armá las parábolas con los puntos de la figura ($y=\alpha x^2+\beta$ por simetría), área frontal = área entre las dos, volumen = área × espesor, masa = volumen × densidad.
+\end{falta}
+\textbf{4) Trabajo.} Con fuerza variable, $W=\int_a^bF(x)\cos\theta(x)\,dx$: se parte el camino en bloques donde la fuerza es casi constante y se suma (es una suma de Darboux).\\[2pt]
+\textbf{5) Convolución: $f*g=g*f$.} En $(f*g)(t)=\int f(x)g(t-x)\,dx$ hago el cambio $x\mapsto t-x$ (reflexión + traslación, 3.5.1): queda $\int g(u)f(t-u)\,du=(g*f)(t)$. $\blacksquare$\\[2pt]
+\textbf{6) Interpretaciones.} $\int$ velocidad = desplazamiento. $\int$ potencia eléctrica = energía consumida. $\int$ costo por día = costo total de la estadía. $\int$ concentración = exposición total a la droga (el «área bajo la curva» de farmacología).
