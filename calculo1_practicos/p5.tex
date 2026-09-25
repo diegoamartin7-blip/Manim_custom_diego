@@ -1,1 +1,217 @@
+% ================= CAPÍTULO 5 =================
+\chapter{Funciones continuas}
+\prob{PRÁCTICO 5}{semana 7 · Bolzano, valor intermedio, Weierstrass, valor medio}
 
+\begin{memo}{LAS TRES HIPÓTESIS QUE SE REVISAN SIEMPRE}
+¿La función es \textbf{continua}? ¿El intervalo es \textbf{cerrado}? ¿Es \textbf{acotado}? Si falta una, el teorema no garantiza nada (aunque la conclusión pueda ser cierta igual).
+\end{memo}
+
+\section{Continuidad}
+
+\begin{enunciado}{PRÁCTICO 5.1 · EJ 1}
+$f,g$ continuas $\Rightarrow h=\max\{f,g\}$ continua.
+\end{enunciado}
+\begin{uso}{\P{algcont} ÁLGEBRA DE CONTINUAS}
+Escribí el máximo con operaciones que ya sabés que preservan continuidad.
+\end{uso}
+$\max\{u,v\}=\frac{u+v+|u-v|}2$ (si $u\ge v$ da $\frac{2u}2$; si no, $\frac{2v}2$). Entonces $h=\frac{f+g+|f-g|}2$: suma, resta y composición con $|\cdot|$ (continua) de continuas. $\blacksquare$
+
+\begin{enunciado}{PRÁCTICO 5.1 · EJ 2}
+Bosquejar (si se puede) continuas con dominio e imagen de distintos tipos.
+\end{enunciado}
+\begin{falta}
+Los doce pares dominio/imagen no están en tu transcripción. Con estas reglas se decide cada uno en segundos.
+\end{falta}
+\begin{sello}{QUÉ PUEDE Y QUÉ NO}
+\textbf{Dominio intervalo $\Rightarrow$ imagen intervalo} (\P{vi}). Imposible: imagen «partida en dos trozos».\\
+\textbf{Dominio $[a,b]$ cerrado y acotado $\Rightarrow$ imagen $[m,M]$ cerrada y acotada} (\P{weier} + \P{vi}). Imposible: imagen abierta, semiabierta o no acotada.\\
+\textbf{Dominio abierto:} la imagen puede ser de cualquier tipo de intervalo. $(0,1)\to[-1,1]$: $\sin(4\pi x)$. $(0,1)\to\R$: $\tan(\pi(x-\frac12))$. $(0,1)\to(0,1]$: $\sin(\pi x)$.
+\end{sello}
+
+% ============================================================
+\section{Teorema de Bolzano}
+
+\begin{enunciado}{PRÁCTICO 5.2 · EJ 1 · EXISTENCIA DE SOLUCIONES}
+a) $x+2\cos x=0$. b) Separar raíces de polinomios. c) Ecuaciones trascendentes. d) $\frac A{x-1}+\frac B{x-2}$ tiene raíz. e) Log y exponencial en $(1,2)$. f) $1-x^4=\cos x$.
+\end{enunciado}
+\begin{uso}{\P{bolzano} BOLZANO · MÉTODO DEL LIBRO}
+$h$ = todo de un lado; continuidad en una frase; evaluar hasta que cambie el signo; escribir la conclusión.
+\end{uso}
+\paso{a}{}
+$h(x)=x+2\cos x$, continua. $h(0)=2>0$; $h(-\frac\pi2)=-\frac\pi2<0$. Bolzano: raíz en $(-\frac\pi2,0)$. $\blacksquare$
+\paso{b}{separar raíces}
+Evaluá en enteros hasta ubicar cada cambio de signo. Ejemplos del libro del parcial: $x^5+x+1$: $n=-1$; $x^5+5x^4+2x+1$: $n=-5$ (buscar lejos).
+\begin{falta}
+Los polinomios de grado 5 con 4 raíces de b) y las ecuaciones de c) y e) no están en tu transcripción. Mismo método: tabla de valores en enteros; cada cambio de signo es una raíz. Para 4 raíces necesitás 4 cambios de signo.
+\end{falta}
+\paso{d}{$f(x)=\frac A{x-1}+\frac B{x-2}$, $A,B>0$}
+Miro $(1,2)$. Cerca de $1^+$: $\frac A{x-1}\to+\infty$ y $\frac B{x-2}\to-B$: $f\to+\infty$. Cerca de $2^-$: $f\to-\infty$. Elijo $p$ cerca de 1 con $f(p)>0$ y $q$ cerca de 2 con $f(q)<0$; $f$ es continua en $[p,q]$ (no se anulan los denominadores). Bolzano. $\blacksquare$
+\begin{trampa}{NO SE PUEDE USAR $[1,2]$}
+En $x=1$ y $x=2$ la función no existe. Hay que achicar el intervalo a uno cerrado donde sí sea continua.
+\end{trampa}
+\paso{f}{}
+Libro del parcial (cap.\ 8): $h=1-x^4-\cos x$, $h(0)=0$, cambio de signo en $(\frac12,1)$ y, por paridad, en $(-1,-\frac12)$. Tres soluciones.
+
+\begin{enunciado}{PRÁCTICO 5.2 · EJ 2}
+$g=\frac{x^2-4}{x-2}$ ($x\neq2$), $g(2)=-2$ en $[-3,4]$: no cumple Bolzano pero tiene una única raíz.
+\end{enunciado}
+Libro del parcial (cap.\ 8): no es continua en 2 ($\lim=4\neq-2$); igual, $g=x+2$ fuera del 2 y su única raíz es $-2$.
+\begin{tip}{MORALEJA}
+Hipótesis que fallan $\neq$ conclusión falsa. El teorema solo deja de \emph{garantizar}.
+\end{tip}
+
+\begin{enunciado}{PRÁCTICO 5.2 · EJ 3}
+$f(a)>g(a)$, $f(b)<g(b)$, continuas $\Rightarrow\exists c:f(c)=g(c)$.
+\end{enunciado}
+$h=f-g$ continua con $h(a)>0>h(b)$. Bolzano: $h(c)=0$. $\blacksquare$
+\begin{tip}{LA IMAGEN}
+Dos curvas que se «cruzan de lado» tienen que tocarse en algún punto.
+\end{tip}
+
+\begin{enunciado}{PRÁCTICO 5.2 · EJ 4 · LA PRUEBA DE BOLZANO}
+$f(a)<0<f(b)$ continua; $A=\{y>a:f<0\text{ en }[a,y]\}$. $A$ acotado, sin máximo, y $\sup A$ es raíz.
+\end{enunciado}
+\begin{uso}{\P{complet} COMPLETITUD · CONSERVACIÓN DEL SIGNO (4.2.4)}
+Si $f(p)<0$ y $f$ es continua, $f<0$ en todo un entorno de $p$.
+\end{uso}
+\paso{1}{no vacío y acotado}
+$f(a)<0$: por continuidad $f<0$ en $[a,a+\eta]$, así que $a+\eta\in A$. Todo $y\in A$ cumple $y<b$ (porque $f(b)>0$). Existe $s=\sup A$.
+\paso{2}{sin máximo}
+Si $y\in A$, $f(y)<0$ y por continuidad $f<0$ un poco más allá: $y+\eta\in A$. Ningún elemento es el mayor.
+\paso{3}{$f(s)=0$ por descarte}
+Si $f(s)<0$: $f<0$ en $(s-\eta,s+\eta)$; tomo $y\in A$ con $y>s-\eta$; entonces $f<0$ en todo $[a,s+\frac\eta2]$ y $s+\frac\eta2\in A$, mayor que el sup. Absurdo.\\
+Si $f(s)>0$: $f>0$ en $(s-\eta,s]$; pero hay $y\in A$ en ese tramo, con $f<0$ en $[a,y]$, que incluye puntos del tramo. Absurdo.\\
+Queda $f(s)=0$. $\blacksquare$
+\begin{tip}{ESTA ES LA DEMOSTRACIÓN DEL TEOREMA}
+Es la prueba de Bolzano: se busca «el último punto donde la función sigue siendo negativa». La completitud garantiza que ese punto exista.
+\end{tip}
+
+\begin{enunciado}{PRÁCTICO 5.2 · EJ 5 · PUNTOS FIJOS}
+a) $f:[0,1]\to[0,1]$ continua tiene punto fijo. b) $f:\R\to\R$ continua decreciente tiene exactamente uno. c) Continua sin puntos fijos.
+\end{enunciado}
+a) Libro del parcial (cap.\ 8): $h=f-x$, $h(0)\ge0\ge h(1)$.\\[2pt]
+b) $h(x)=f(x)-x$ es \textbf{estrictamente} decreciente (decreciente menos estrictamente creciente): a lo sumo una raíz. Existencia: si $f(0)=0$, listo. Si $f(0)>0$: $h(0)=f(0)>0$ y $h(f(0))=f(f(0))-f(0)\le0$ (porque $f(0)>0$ y $f$ decrece, $f(f(0))\le f(0)$). Bolzano en $[0,f(0)]$. Si $f(0)<0$, simétrico. $\blacksquare$\\[2pt]
+c) $f(x)=x+1$: $f(x)=x$ daría $1=0$.
+\begin{tip}{LA IMAGEN DE a)}
+El gráfico va del lado izquierdo al derecho del cuadrado $[0,1]^2$ sin levantar el lápiz: tiene que cruzar la diagonal $y=x$.
+\end{tip}
+
+\begin{enunciado}{PRÁCTICO 5.2 · EJ 6 · POLINOMIOS}
+Separar raíces; todo polinomio de grado impar tiene una raíz.
+\end{enunciado}
+\begin{uso}{\P{polinf} · \P{bolzano}}
+Para $|x|$ grande, $P(x)$ tiene el signo de su término principal $a_nx^n$.
+\end{uso}
+Si $n$ es impar y $a_n>0$: $\frac{P(x)}{x^n}\to a_n>0$, así que $P(x)<0$ para $x$ muy negativo y $P(x)>0$ para $x$ muy positivo. Bolzano. $\blacksquare$ (Si $a_n<0$, al revés.)\\
+Además, contando multiplicidades, la cantidad de raíces reales tiene la misma paridad que el grado (las complejas vienen de a pares).
+
+\begin{enunciado}{PRÁCTICO 5.2 · EJ 7 · INTEGRALES Y CONTINUIDAD}
+a) $f\ge0$ continua, $\int_a^bf=0\Rightarrow f\equiv0$. b) Valor medio; ¿único?; ¿sin continuidad? c) Múltiple opción. d) Máximo de $F$ en un punto interior $\Rightarrow f(c)=0$.
+\end{enunciado}
+\paso{a}{}
+Si $f(x_0)=c>0$, por continuidad $f>\frac c2$ en un intervalo de largo $\ell>0$: $\int_a^bf\ge\frac c2\ell>0$. Absurdo. $\blacksquare$ (Sin continuidad es falso: $f(0)=1$, 0 en el resto.)
+\paso{b}{}
+Weierstrass: $m\le f\le M$ con $m,M$ alcanzados. Acotación: $m\le\frac1{b-a}\int_a^bf\le M$. Valor intermedio: existe $c$ con $f(c)=\frac1{b-a}\int_a^bf$. $\blacksquare$\\
+\textbf{¿Único?} No: si $f$ es constante, sirve cualquier $c$. \textbf{¿Sin continuidad?} Falla: $f=0$ en $[0,1)$, $1$ en $[1,2]$ integra 1 en $[0,2]$, promedio $\frac12$, que nunca toma.
+\paso{c}{}
+Libro del parcial (cap.\ 8): $f(c)\cdot3=3$, opción D.
+\paso{d}{}
+Si $f(c)>0$: $f>0$ en $[c,c+\eta]$ y $F(c+\eta)=F(c)+\int_c^{c+\eta}f>F(c)$. Si $f(c)<0$: $F(c-\eta)>F(c)$. Las dos contradicen que $c$ sea máximo. $\blacksquare$
+
+\begin{enunciado}{PRÁCTICO 5.2 · EJ 8}
+$f$ continua con $x\le f(x)\le x+1$: calcular $f(\R)$.
+\end{enunciado}
+$f(x)\ge x$, así que $f$ no está acotada arriba; $f(x)\le x+1$, así que no está acotada abajo. Por valor intermedio, toma todos los valores entre dos cualesquiera de los suyos. \textbf{$f(\R)=\R$.}
+
+\begin{enunciado}{PRÁCTICO 5.2 · EJ 9}
+a) Continua con valores enteros en $[a,b]$ es constante. b) Con valores racionales. c) Continuas que coinciden en $\Q$ son iguales.
+\end{enunciado}
+\begin{uso}{\P{vi} VALOR INTERMEDIO · \P{dens} DENSIDAD}
+Entre dos valores distintos, una continua toma todos los intermedios, incluidos los que «no deberían».
+\end{uso}
+a) Si $f(x_1)\neq f(x_2)$, entre esos dos enteros hay un no entero, y $f$ lo tomaría. Absurdo. $\blacksquare$\\
+b) Igual: entre dos racionales distintos hay un irracional (\P{dens}). $\blacksquare$\\
+c) $h=f-g$ es continua y vale 0 en $\Q$. Dado $x$ irracional, hay racionales $q\to x$ (densidad) y $h(x)=\lim h(q)=0$. $\blacksquare$
+
+\begin{enunciado}{PRÁCTICO 5.2 · EJ 10}
+a) $x^2+f(x)^2=1$ continua en $[-1,1]$: es $\sqrt{1-x^2}$ o $-\sqrt{1-x^2}$, sin alternar. b) ¿Cuántas continuas cumplen $f(x)^2=x^2$?
+\end{enunciado}
+a) En cada $x$, $f(x)=\pm\sqrt{1-x^2}$. En $(-1,1)$ nunca vale 0. Si tomara un valor positivo y uno negativo, por Bolzano se anularía en el medio. Absurdo: el signo es el mismo en todo $(-1,1)$. $\blacksquare$\\
+b) $f(x)=\pm x$ en cada punto, y solo puede cambiar de rama donde las dos coinciden, en $x=0$. Hay \textbf{cuatro}: $x$, $-x$, $|x|$, $-|x|$.
+
+% ============================================================
+\section{Teorema de Weierstrass}
+
+\begin{enunciado}{PRÁCTICO 5.3 · EJ 1 · ¿MÁXIMO Y MÍNIMO?}
+Varias funciones en intervalos abiertos, cerrados y no acotados.
+\end{enunciado}
+\begin{uso}{\P{weier} WEIERSTRASS}
+Continua en $[a,b]$ cerrado y acotado $\Rightarrow$ hay máximo y mínimo. Si el intervalo es abierto o no acotado, puede faltar alguno.
+\end{uso}
+\begin{center}\small
+\begin{tabular}{@{}lll@{}}\toprule
+Función & Arriba & Abajo\\\midrule
+$x^2$ en $(-1,1)$ & sup 1, sin máx & mín 0\\
+$x^2$ en $[-1,1]$ & máx 1 & mín 0 (Weierstrass)\\
+$\frac1x$ en $(3,5)$ & sup $\frac13$, sin máx & ínf $\frac15$, sin mín\\
+$\frac1x$ en $(0,+\infty)$ & no acotada & ínf 0, sin mín\\
+$\sin x$ en $\R$ & máx 1 & mín $-1$\\
+$\sin x$ en $(0,\pi)$ & máx 1 (en $\frac\pi2$) & ínf 0, sin mín\\\bottomrule
+\end{tabular}
+\end{center}
+\begin{falta}
+Si el EVA tiene otras funciones en este ejercicio, se clasifican igual: mirá si el intervalo es cerrado y acotado; si no, fijate si el techo o el piso se alcanzan adentro.
+\end{falta}
+
+\begin{enunciado}{PRÁCTICO 5.3 · EJ 2}
+$f>0$ continua en $[0,2]$ con $\int_0^2f=10$: acotar $\int_0^2fg$.
+\end{enunciado}
+\begin{uso}{\P{weier} · \P{monoint}}
+$g$ continua en $[0,2]$ tiene mínimo $m$ y máximo $M$. Como $f>0$: $mf\le fg\le Mf$.
+\end{uso}
+Integrando: $10m\le\int_0^2fg\le10M$. Con $g(t)=e^t$ (el ejemplo del libro): $m=1$, $M=e^2$, y queda $10\le\int_0^2fe^t\le10e^2$.
+
+\begin{enunciado}{PRÁCTICO 5.3 · EJ 3 y 4}
+3) Periódica y continua tiene mínimo y máximo. 4) Si $f$ es polinomio, existe $y$ con $|f(y)|\le|f(x)|$ para todo $x$.
+\end{enunciado}
+\paso{3}{}
+Con período $T$: en $[0,T]$ Weierstrass da máximo y mínimo; como $f$ repite los valores de $[0,T]$, son máximo y mínimo en todo $\R$. $\blacksquare$
+\paso{4}{}
+Si $f$ es constante, trivial. Si no, $|f(x)|\to\infty$ cuando $|x|\to\infty$: existe $R$ con $|f(x)|>|f(0)|$ para $|x|>R$. En $[-R,R]$, Weierstrass da un mínimo de $|f|$ en algún $y$, con $|f(y)|\le|f(0)|$. Fuera de $[-R,R]$ todo es mayor que $|f(0)|$. Así $y$ es mínimo global. $\blacksquare$
+\begin{tip}{EL TRUCO QUE SIRVE PARA TODO $\R$}
+Weierstrass pide cerrado y acotado. En $\R$ se usa así: probás que «lejos» la función es grande, y aplicás el teorema en un intervalo acotado que contiene todo lo interesante.
+\end{tip}
+
+\begin{enunciado}{PRÁCTICO 5.3 · EJ 5}
+Extremos de continuas en $\R$ según su comportamiento en $\pm\infty$.
+\end{enunciado}
+Con el truco del ej.\ 4:
+\begin{itemize}
+\item Si $f\to+\infty$ en los dos extremos: \textbf{tiene mínimo} (no necesariamente máximo).
+\item Si $f\to L$ en los dos extremos y $f$ toma algún valor $>L$: \textbf{tiene máximo}. Si toma alguno $<L$: tiene mínimo.
+\item Si $f\to+\infty$ en uno y $-\infty$ en el otro: no tiene ni máximo ni mínimo.
+\end{itemize}
+\begin{falta}
+Los seis incisos textuales no están en tu transcripción: encajan en estos tres casos.
+\end{falta}
+
+\begin{enunciado}{PRÁCTICO 5.3 · EJ 6}
+$f$ continua, estrictamente creciente y sobreyectiva en $\R$ $\Rightarrow f^{-1}$ continua.
+\end{enunciado}
+Sea $y_0=f(x_0)$ y $\eps>0$. Como $f$ crece: $f(x_0-\eps)<y_0<f(x_0+\eps)$. Tomo $\delta=\min\{y_0-f(x_0-\eps),\ f(x_0+\eps)-y_0\}$. Si $|y-y_0|<\delta$, $y$ está entre $f(x_0-\eps)$ y $f(x_0+\eps)$, y como $f^{-1}$ también crece, $f^{-1}(y)\in(x_0-\eps,x_0+\eps)$. $\blacksquare$
+
+% ============================================================
+\section{Aplicaciones}
+
+\begin{enunciado}{PRÁCTICO 5.4 · EJ 1 a 4}
+Satélite, reloj averiado, resorte, distancia a una curva.
+\end{enunciado}
+\textbf{3) Resorte.} Si cada punto del resorte en posición $x\in[0,L]$ termina en $f(x)\in[0,L]$ con $f$ continua, es el ejercicio del punto fijo (5.2.5a): algún punto no se mueve.\\[2pt]
+\textbf{4) Distancia a una curva.} $d(x)=$ distancia de $P$ al punto $(x,f(x))$, continua. En $[a,b]$ cerrado, Weierstrass da el punto más cercano. En $(a,b)$ abierto puede fallar (el más cercano sería un extremo que no está). En $\R$ vale porque $d\to\infty$ lejos (truco del 5.3.4).
+\begin{falta}
+1) Satélite y 2) reloj dependen de datos y del enunciado completo del EVA. Para 2) la idea es una función continua $D(t)$ = hora marcada − hora real, y aplicar Bolzano (o valor intermedio) a $D$ en un período de 12 h.
+\end{falta}
+
+\begin{sello}{CIERRE}
+Con esto están todos los ejercicios de los prácticos que entran al primer parcial. Si te trabás en uno, volvé a la Parte 0 con el número de la cajita gris. Y para el día del parcial: el libro del parcial tiene el ranking de probabilidad y el formulario.
+\end{sello}

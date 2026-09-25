@@ -1,1 +1,307 @@
+% ================= CAPÍTULO 4 =================
+\chapter{Límites}
+\prob{PRÁCTICO 4}{semanas 5 y 6 · definición, cálculo, infinito, continuidad}
 
+\section{Interpretación geométrica}
+
+\begin{enunciado}{PRÁCTICO 4.1 · EJ 1 y 2}
+Leer límites de una gráfica: existencia en $-1,0,1,2$ y valores $g(-1),\dots$; explicar por qué un límite no es 0, 2 ni 3.
+\end{enunciado}
+\begin{falta}
+Las gráficas están en el EVA. Criterio para leerlas: el límite en $a$ es la altura a la que \textbf{se acercan} los dos lados de la curva (\P{lat}); el valor $g(a)$ es el \textbf{punto lleno}, que puede estar en otro lado o no existir. Para «¿por qué el límite no es $L$?»: mostrá una banda alrededor de $L$ tan angosta que, cerca de $a$, siempre hay puntos de la curva afuera. Eso es negar la definición (\P{limdef}).
+\end{falta}
+
+\begin{enunciado}{PRÁCTICO 4.1 · EJ 3}
+$f(x)=\fl x$: ¿en qué puntos existe $\lim_{x\to a}f$?
+\end{enunciado}
+\begin{uso}{\P{lat} LATERALES}
+El límite existe si y solo si los dos laterales existen y coinciden.
+\end{uso}
+Si $a\notin\Z$: cerca de $a$ la función es constante ($=\fl a$), así que el límite existe y vale $\fl a$.\\
+Si $a=n\in\Z$: por la izquierda vale $n-1$, por la derecha $n$. Distintos: \textbf{no existe}.
+\resp{Existe en todo $a\notin\Z$; no existe en los enteros.}
+
+\begin{enunciado}{PRÁCTICO 4.1 · EJ 4}
+$f(x)=e^x-\cos x$ cerca de 0: hallar $L$ y un $\delta$ para $\eps=10^c$, $c=0,\dots,-6$.
+\end{enunciado}
+$f(0)=1-1=0$ y $f$ es continua: $L=0$. Cerca de 0, $f(x)\approx x+x^2$ (así se ve en el gráfico: casi la recta $y=x$). Por eso $\delta$ es casi $\eps$, un poco menos. Los $\delta$ máximos, calculados numéricamente:
+\begin{center}\small
+\begin{tabular}{@{}lccccccc@{}}\toprule
+$\eps$ & $1$ & $10^{-1}$ & $10^{-2}$ & $10^{-3}$ & $10^{-4}$ & $10^{-5}$ & $10^{-6}$\\\midrule
+$\delta_{\max}\approx$ & $0{,}60$ & $0{,}0915$ & $0{,}0099$ & $0{,}000999$ & $\approx\eps$ & $\approx\eps$ & $\approx\eps$\\\bottomrule
+\end{tabular}
+\end{center}
+\begin{tip}{LA IMAGEN}
+De cerca toda curva suave se parece a una recta. Si esa recta tiene pendiente 1, el $\delta$ tiende a ser igual al $\eps$ (es el patrón lineal del cap.\ 5 del libro del parcial).
+\end{tip}
+
+% ============================================================
+\section{Definición y propiedades básicas}
+
+\begin{enunciado}{PRÁCTICO 4.2 · EJ 1 · EL $\delta$ PARA TRES $\varepsilon$}
+Hallar $L$ y $\delta$ con $\eps=10^{-2},10^{-5},10^{-10}$: a) $x^2$, $a=0$ \ b) $\frac1x$, $a=1$ \ c) $\sqrt{|x|}$, $a=0$ \ d) $x^2$, $a$ cualquiera \ e) $\frac1x$, $a>0$ \ f) $\sqrt{|x|}$, $a$ cualquiera
+\end{enunciado}
+\begin{uso}{\P{limdef} DEFINICIÓN · MÉTODO DEL $\delta$ MÁXIMO}
+Despejar $|f(x)-L|<\eps$ hasta el conjunto de $x$; si no queda centrado en $a$, manda la distancia al borde \textbf{más cercano}.
+\end{uso}
+a) $L=0$. $x^2<\eps\iff|x|<\sqrt\eps$: $\delta=\sqrt\eps$ $=0{,}1;\ 0{,}00316;\ 10^{-5}$.\\[2pt]
+b) $L=1$. Libro del parcial: $\delta=\frac\eps{1+\eps}$ $\approx0{,}0099;\ 9{,}9999\times10^{-6};\ \approx10^{-10}$.\\[2pt]
+c) $L=0$. $\sqrt{|x|}<\eps\iff|x|<\eps^2$: $\delta=\eps^2$ $=10^{-4};\ 10^{-10};\ 10^{-20}$.\\[2pt]
+d) $L=a^2$. $|x^2-a^2|<\eps\iff a^2-\eps<x^2<a^2+\eps$. El borde más cercano a $a$ está del lado de afuera (lejos del 0):
+\[\delta_{\max}=\sqrt{a^2+\eps}-|a|=\frac\eps{\sqrt{a^2+\eps}+|a|}.\]
+Con $a=0$ da $\sqrt\eps$ (el caso a). Cuanto más grande es $|a|$, más chico el $\delta$: la parábola es más empinada lejos del 0.\\[2pt]
+e) $L=\frac1a$. $\frac1a-\eps<\frac1x<\frac1a+\eps\iff\frac a{1+a\eps}<x<\frac a{1-a\eps}$ (si $a\eps<1$). Manda la izquierda:
+\[\delta_{\max}=a-\frac a{1+a\eps}=\frac{a^2\eps}{1+a\eps}.\]
+f) $L=\sqrt{|a|}$. Si $a\neq0$ y $\eps<\sqrt{|a|}$: $|x|\in\big((\sqrt{|a|}-\eps)^2,(\sqrt{|a|}+\eps)^2\big)$. Distancias desde $|a|$: $2\eps\sqrt{|a|}-\eps^2$ (hacia el 0) y $2\eps\sqrt{|a|}+\eps^2$. Manda la primera:
+\[\delta_{\max}=\eps\big(2\sqrt{|a|}-\eps\big).\]
+\begin{tip}{EL PATRÓN DE LOS TRES}
+Donde la curva es empinada, el $\delta$ es chico. $\frac1x$ se empina cerca de 0 (e: $\delta\sim a^2\eps$); $\sqrt{|x|}$ se empina cerca de 0 (c: $\delta=\eps^2$); $x^2$ se empina lejos del 0 (d: $\delta\sim\frac\eps{2|a|}$).
+\end{tip}
+
+\begin{enunciado}{PRÁCTICO 4.2 · EJ 2 · UN $\delta$ QUE SIRVA (NO HACE FALTA EL MÁXIMO)}
+$|f(x)-L|<10^{-5}$: a) $x^2+x$, $a=0$ b) $\frac1x+\sqrt x$, $a=1$ c) $x^2+\frac1x$, $a=1$ d) $x\cos(x^2)$ e) $\frac x{2-\sin^2x}$ f) $x\sin\frac1x$ g) $x\cos\frac1x$ (todas en $a=0$ salvo b, c)
+\end{enunciado}
+\begin{metodo}{ACOTAR EN VEZ DE DESPEJAR}
+\begin{enumerate}
+\item Escribí $|f(x)-L|\le C\,|x-a|$ para $x$ cerca de $a$ (autolimitándote, por ejemplo, a $|x-a|<\frac12$).
+\item Elegí $\delta=\min\{\frac12,\frac\eps C\}$.
+\end{enumerate}
+No da el $\delta$ máximo, pero da uno que \textbf{sirve}, que es lo que pide la definición.
+\end{metodo}
+a) $L=0$. Con $|x|<1$: $|x^2+x|=|x|\,|x+1|\le2|x|$. $\delta=\min\{1,\frac\eps2\}=5\times10^{-6}$.\\[2pt]
+b) $L=2$. Con $|x-1|<\frac12$: $\left|\frac1x-1\right|=\frac{|x-1|}x\le2|x-1|$ y $|\sqrt x-1|=\frac{|x-1|}{\sqrt x+1}\le|x-1|$. Total $\le3|x-1|$: $\delta=\frac\eps3\approx3{,}3\times10^{-6}$.\\[2pt]
+c) $L=2$. Con $|x-1|<\frac12$: $|x^2-1|=|x-1||x+1|\le\frac52|x-1|$ y $\left|\frac1x-1\right|\le2|x-1|$. Total $\le5|x-1|$: $\delta=\frac\eps5=2\times10^{-6}$.\\[2pt]
+d), e), f), g) $L=0$. En todas, $|f(x)|\le|x|$: el coseno y el seno están acotados por 1, y en e) el denominador es $\ge1$. Acotado por infinitésimo (\P{acotinf}): $\delta=\eps=10^{-5}$.
+\begin{trampa}{f) Y g) NO SE PUEDEN DESPEJAR}
+$x\sin\frac1x$ oscila infinitas veces: no hay forma de «despejar». La única vía es acotar: $|x\sin\frac1x|\le|x|$.
+\end{trampa}
+
+\begin{enunciado}{PRÁCTICO 4.2 · EJ 3 · VARIACIONES DE LA DEFINICIÓN}
+Cuatro versiones con los cuantificadores cambiados.
+\end{enunciado}
+\begin{falta}
+Tu transcripción no trae las cuatro versiones textuales. Te dejo el análisis de las permutaciones típicas (es el mismo razonamiento que 3.4.1 del libro del parcial).
+\end{falta}
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}l X@{}}\toprule
+Versión & Qué dice realmente\\\midrule
+$\forall\eps\ \exists\delta$ & la definición: el límite es $L$\\
+$\exists\delta\ \forall\eps$ & hay un entorno donde $|f(x)-L|<\eps$ para \emph{todo} $\eps$: $f\equiv L$ cerca de $a$ (salvo en $a$). Mucho más fuerte.\\
+$\exists\eps\ \forall\delta$ & para algún $\eps$, todo entorno sirve: $f$ está a distancia $<\eps$ de $L$ en todas partes. Solo dice «$f$ acotada»; no implica límite.\\
+$\exists\eps\ \exists\delta$ & $f$ acotada cerca de $a$. Casi no dice nada.\\\bottomrule
+\end{tabularx}
+\end{center}
+Implicancias: la segunda $\Rightarrow$ la definición $\Rightarrow$ la cuarta; la tercera $\Rightarrow$ la cuarta.
+
+\begin{enunciado}{PRÁCTICO 4.2 · EJ 4 · PROPIEDADES DEL LÍMITE}
+$f\to a$, $g\to b$ cuando $x\to p$: once incisos (suma, producto, cociente, acotación, comparación, composición).
+\end{enunciado}
+\begin{falta}
+Los once enunciados textuales no están en tu transcripción. Estas son las propiedades que cubren, con la prueba que se pide en cada una.
+\end{falta}
+\begin{uso}{\P{algebra} ÁLGEBRA · \P{triang} TRIANGULAR}
+El truco de todas: sumar y restar algo en el medio, y acotar con la triangular.
+\end{uso}
+\paso{1}{suma}
+$|f+g-(a+b)|\le|f-a|+|g-b|$. Pido cada una $<\frac\eps2$ y tomo el $\delta$ más chico de los dos. $\blacksquare$
+\paso{2}{acotación local}
+Con $\eps=1$: cerca de $p$, $|f(x)-a|<1$, así que $|f(x)|<|a|+1$. \textbf{Una función con límite está acotada cerca del punto.}
+\paso{3}{producto}
+$|fg-ab|=|fg-fb+fb-ab|\le|f|\,|g-b|+|b|\,|f-a|$. Por 2, $|f|\le|a|+1$; cada término se hace $<\frac\eps2$. $\blacksquare$
+\paso{4}{conservación del signo}
+Si $a>0$, con $\eps=\frac a2$: cerca de $p$, $f(x)>\frac a2>0$. \textbf{Si el límite es positivo, la función es positiva cerca.}
+\paso{5}{inverso y cociente}
+Si $b\neq0$: $\left|\frac1g-\frac1b\right|=\frac{|g-b|}{|g||b|}$, y por 4, $|g|>\frac{|b|}2$ cerca de $p$: queda $\le\frac2{b^2}|g-b|$. El cociente es producto por el inverso. $\blacksquare$
+\paso{6}{comparación}
+Si $f\le g$ cerca de $p$, entonces $a\le b$. (Si fuera $a>b$, por 4 aplicado a $f-g\to a-b>0$, sería $f>g$ cerca.)
+\paso{7}{composición}
+Si $g\to b$ y $f$ es continua en $b$: $f(g(x))\to f(b)$ (\P{limcomp}). Dado $\eps$, la continuidad de $f$ da un $\eta$ y el límite de $g$ da un $\delta$ para ese $\eta$.
+
+\begin{enunciado}{PRÁCTICO 4.2 · EJ 5 y 6}
+Deducir $\lim f$ a partir de límites de expresiones con $f$.
+\end{enunciado}
+\begin{falta}
+Las expresiones no están en tu transcripción. Método: si te dan, por ejemplo, $\lim\frac{f(x)-3}{x-2}=5$, escribí $f(x)=3+\frac{f(x)-3}{x-2}\cdot(x-2)$ y usá el álgebra de límites: $\lim f=3+5\cdot0=3$. Siempre: \textbf{despejá $f$ en función de lo que tiene límite conocido}.
+\end{falta}
+
+\begin{enunciado}{PRÁCTICO 4.2 · EJ 7 · MONÓTONAS}
+$f$ creciente: existen los límites laterales en todo $a$.
+\end{enunciado}
+\begin{uso}{\P{complet} COMPLETITUD · \P{supeps}}
+El candidato al límite por izquierda es $S=\sup\{f(x):x<a\}$, que existe porque $f(a)$ es cota.
+\end{uso}
+Dado $\eps$, por la caracterización existe $x_0<a$ con $f(x_0)>S-\eps$. Para $x\in(x_0,a)$: $S-\eps<f(x_0)\le f(x)\le S$ (creciente y $S$ cota). Con $\delta=a-x_0$: $|f(x)-S|<\eps$. $\blacksquare$ (Por derecha, espejo con el ínfimo.)
+
+% ============================================================
+\section{Cálculo de límites}
+
+\begin{enunciado}{PRÁCTICO 4.3 · EJ 1 · COCIENTES Y RAÍCES}
+$\frac{x^2-x+2}{x^2+4}$, $\sqrt{x-1}+1$, $\frac{x^2-1}{x^2-3x+2}$, $\frac{x-1}{\sqrt x-1}$, $\frac{\sqrt{1+x}-\sqrt{1-x}}x$, $\frac{\sqrt x-x}{x-1}$, $\frac{x^2-a^2}{x-a}$, $\frac{\sqrt x-\sqrt a}{x-a}$.
+\end{enunciado}
+\begin{falta}
+Tu transcripción no dice a qué punto tiende cada uno. Tomo el punto interesante: donde aparece $\frac00$ (o, si no hay, cualquier punto).
+\end{falta}
+\begin{uso}{MÉTODO: ¿QUÉ APARECE AL SUSTITUIR? · \P{conj} CONJUGADO}
+Nada raro: sustituir. $\frac00$ con polinomios: factorizar. $\frac00$ con raíces: conjugado.
+\end{uso}
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}l l X r@{}}\toprule
+Límite & Punto & Cómo & Resultado\\\midrule
+$\frac{x^2-x+2}{x^2+4}$ & cualquier $a$ & continua (denominador $\ge4$): sustituir & $\frac{a^2-a+2}{a^2+4}$\\
+$\sqrt{x-1}+1$ & $1^+$ & continua donde está definida & $1$\\
+$\frac{x^2-1}{x^2-3x+2}$ & $1$ & $\frac{(x-1)(x+1)}{(x-1)(x-2)}$ & $-2$\\
+$\frac{x-1}{\sqrt x-1}$ & $1$ & $x-1=(\sqrt x-1)(\sqrt x+1)$ & $2$\\
+$\frac{\sqrt{1+x}-\sqrt{1-x}}x$ & $0$ & conjugado: $\frac2{\sqrt{1+x}+\sqrt{1-x}}$ & $1$\\
+$\frac{\sqrt x-x}{x-1}$ & $1$ & $\frac{\sqrt x(1-\sqrt x)}{(\sqrt x-1)(\sqrt x+1)}=\frac{-\sqrt x}{\sqrt x+1}$ & $-\frac12$\\
+$\frac{x^2-a^2}{x-a}$ & $a$ & $x+a$ & $2a$\\
+$\frac{\sqrt x-\sqrt a}{x-a}$ & $a>0$ & $\frac1{\sqrt x+\sqrt a}$ & $\frac1{2\sqrt a}$\\\bottomrule
+\end{tabularx}
+\end{center}
+\begin{tip}{LOS DOS ÚLTIMOS SON DERIVADAS}
+$\frac{x^2-a^2}{x-a}\to2a$ y $\frac{\sqrt x-\sqrt a}{x-a}\to\frac1{2\sqrt a}$ son las pendientes de $x^2$ y $\sqrt x$ en $a$. Es el germen de la derivada, que viene después del parcial.
+\end{tip}
+
+\begin{enunciado}{PRÁCTICO 4.3 · EJ 2 · VALOR ABSOLUTO Y PARTE ENTERA}
+$\frac{|(x-1)^3|}{(x-1)^2}$ en 1, $\ce x-\fl x$ en 0, $\fl{1/x}$ en 0.
+\end{enunciado}
+\begin{uso}{\P{lat} LATERALES}
+Con $|\cdot|$ o $\fl\cdot$, separá izquierda y derecha.
+\end{uso}
+$\frac{|x-1|^3}{(x-1)^2}=|x-1|\to0$. \ $\ce x-\fl x\to1$ (por los dos lados vale 1; en 0 vale 0). \ $\fl{1/x}\to+\infty$ por derecha y $-\infty$ por izquierda: \textbf{no existe}.
+
+\begin{enunciado}{PRÁCTICO 4.3 · EJ 3}
+$F(x)=\int_0^x\fl t\,dt$: ¿para qué $a$ existe $\lim_{x\to a}\frac{F(x)-F(a)}{x-a}$?
+\end{enunciado}
+\begin{uso}{\P{chasles} · \P{acot}}
+$\frac{F(x)-F(a)}{x-a}=\frac1{x-a}\int_a^x\fl t\,dt$: es el \textbf{promedio} de $\fl t$ entre $a$ y $x$.
+\end{uso}
+Si $a\notin\Z$: cerca de $a$, $\fl t=\fl a$ constante, y el promedio vale $\fl a$. Existe.\\
+Si $a=n\in\Z$: por derecha el promedio es $n$; por izquierda, $n-1$. No existe.
+\resp{Existe exactamente para $a\notin\Z$ (y vale $\fl a$). $F$ es continua en todos lados pero tiene «quiebres» en los enteros.}
+
+\begin{enunciado}{PRÁCTICO 4.3 · EJ 4 · MULTIPLICIDAD DE RAÍCES}
+$\lim_{x\to a}\frac{P(x)}{Q(x)}$ cuando $a$ es raíz de los dos.
+\end{enunciado}
+\begin{uso}{\P{prodnulo} · FACTORIZAR}
+Si $a$ es raíz de $P$ con multiplicidad $m$: $P(x)=(x-a)^mP_1(x)$ con $P_1(a)\neq0$. Igual $Q=(x-a)^kQ_1$.
+\end{uso}
+$\frac PQ=(x-a)^{m-k}\frac{P_1}{Q_1}$, y $\frac{P_1}{Q_1}\to\frac{P_1(a)}{Q_1(a)}\neq0$. Entonces:
+\begin{itemize}
+\item $m>k$: límite $0$. \quad $m=k$: límite $\frac{P_1(a)}{Q_1(a)}$.
+\item $m<k$: no hay límite finito (tiende a $\pm\infty$; si $k-m$ es impar, los laterales tienen signos opuestos).
+\end{itemize}
+
+\begin{enunciado}{PRÁCTICO 4.3 · EJ 5, 6 y 7 · SENOS Y LOGARITMOS}
+$x\sin\frac1x$, $\frac{\sin^2x}x$, $\frac{\cos x-1}x$ en 0; $\frac{\log x}{x-1}$ en 1; $x^a\log x$ y $x\log x$ en $0^+$.
+\end{enunciado}
+\paso{1}{senos}
+$|x\sin\frac1x|\le|x|\to0$ (\P{acotinf}). \ $\frac{\sin^2x}x=\frac{\sin x}x\cdot\sin x\to1\cdot0=0$ (\P{seno}). \ $\frac{\cos x-1}x\to0$ (conjugado con $\cos x+1$, libro del parcial).
+\paso{2}{$\frac{\log x}{x-1}$}
+Con $\log x=\int_1^x\frac{dt}t$ y $x>1$: en $[1,x]$, $\frac1x\le\frac1t\le1$, así que por acotación (\P{acot}) $\frac{x-1}x\le\log x\le x-1$. Divido por $x-1>0$:
+\[\frac1x\le\frac{\log x}{x-1}\le1\ \xrightarrow{\ \text{sándwich}\ }\ 1.\]
+Para $x<1$ se hace igual (con los signos al revés). \textbf{Límite 1.}
+\paso{3}{$x^a\log x$ en $0^+$ ($a>0$)}
+Del paso 2, $\log y\le y-1<y$ para $y>1$. Con $y=x^{-a/2}$ ($0<x<1$): $\frac a2\log\frac1x<x^{-a/2}$. Entonces
+\[|x^a\log x|=x^a\log\tfrac1x<\tfrac2a\,x^{a/2}\to0.\]
+\textbf{Límite 0.} Con $a=1$: $x\log x\to0$ (ej.\ 7).
+\begin{tip}{LA IMAGEN}
+$\log$ se va a $-\infty$ en $0^+$, pero \emph{lentísimo}: cualquier potencia positiva de $x$ le gana. Es una carrera entre un caracol y una tortuga que frena.
+\end{tip}
+
+% ============================================================
+\section{Límites en el infinito}
+
+\begin{enunciado}{PRÁCTICO 4.4 · EJ 1, 2 y 3 · EJEMPLOS, POLINOMIOS Y ASÍNTOTAS}
+Ejemplos con distintos límites en $\pm\infty$; cocientes de polinomios; asíntotas en $+\infty$.
+\end{enunciado}
+\begin{uso}{\P{polinf} POLINOMIOS EN $\infty$}
+Dividí arriba y abajo por la mayor potencia del denominador. Mandan los grados.
+\end{uso}
+\textbf{Ejemplos (1).} $\arctan x$: $\frac\pi2$ en $+\infty$, $-\frac\pi2$ en $-\infty$. \ $e^x$: $+\infty$ y $0$. \ $\frac1x$: 0 en los dos. \ $\sin x$: no tiene límite en ninguno.\\[2pt]
+\textbf{Polinomios (2).} $\frac{x^3-10x-1}{10x^2+1}\to+\infty$ (grado 3 > 2); \ $\frac{100x^2+x}{x^3-100x}\to0$ (el 100 no importa); \ $\frac{3x^2+1}{2x^2-x}\to\frac32$ (mismo grado: cociente de principales).\\[2pt]
+\textbf{Asíntota oblicua (3).} $y=mx+n$ con $m=\lim\frac{f(x)}x$ y $n=\lim\big(f(x)-mx\big)$. Ej.: $f=\frac{x^2+1}{x-1}$: $m=1$, $n=\lim\frac{x^2+1-x^2+x}{x-1}=1$. Asíntota $y=x+1$.
+\begin{falta}
+Las funciones concretas de 4.4.2 y 4.4.3 están resumidas en tu transcripción; con el método de arriba se hacen todas.
+\end{falta}
+
+\begin{enunciado}{PRÁCTICO 4.4 · EJ 4 · LIPSCHITZ}
+$f$ Lipschitz $\Rightarrow\frac{f(x)}{x^n}\to0$ para $n>1$; un polinomio Lipschitz es $ax+b$.
+\end{enunciado}
+Resuelto en el libro del parcial (cap.\ 10): $|f(x)|\le|f(0)|+K|x|$, divido por $|x|^n$, y un polinomio de grado $d\ge2$ contradice eso con $n=d$.
+
+\begin{enunciado}{PRÁCTICO 4.4 · EJ 5 · PARTE ENTERA CONTRA LÍMITE}
+Ejemplos: $\lim\fl{f}$ existe y $\lim f$ no; y al revés.
+\end{enunciado}
+$f(x)=\frac12+\frac25\sin x$ en $+\infty$: oscila entre $0{,}1$ y $0{,}9$, sin límite; pero $\fl f\equiv0$.\\
+$f(x)=\frac{\sin x}x\to0$; pero $\fl f$ salta entre 0 (cuando $\sin x\ge0$) y $-1$ (cuando $\sin x<0$): sin límite.
+\begin{trampa}{EL $\fl{\cdot}$ NO ES CONTINUO}
+No se puede «pasar el límite adentro» de $\fl\cdot$: el ejemplo 2 muestra que $f\to0$ no implica $\fl f\to\fl0$ (\P{limcomp} pide continuidad en el punto).
+\end{trampa}
+
+\begin{enunciado}{PRÁCTICO 4.4 · EJ 6, 7, 8 y 9}
+Parte entera, oscilantes, exponenciales, $\infty-\infty$ e integrales de $\fl t$, todo en $+\infty$.
+\end{enunciado}
+\paso{6}{parte entera}
+$x-1<\fl x\le x$, divido por $x>0$: $1-\frac1x<\frac{\fl x}x\le1$. Sándwich: $\frac{\fl x}x\to1$.
+\paso{7}{variados}
+$\frac{\sin x}x\to0$ (\P{acotinf}). \ $x\cos x$: \textbf{no tiene límite} (toma valores $\pm$ tan grandes como quieras). \ $\frac x{\sqrt{x^2+x+1}}\to1$ (dividí por $x$). \ $\frac{2^x}{x^n}\to+\infty$ (la exponencial gana a cualquier potencia).
+\paso{8}{$\infty-\infty$}
+$x-\sqrt{x^2+x}\to-\frac12$ (libro del parcial). \ $\sqrt{x+1}-\sqrt x=\frac1{\sqrt{x+1}+\sqrt x}\to0$.
+\paso{9}{integrales}
+$F(x)=\int_0^x\fl t\,dt$: como $t-1<\fl t\le t$, $\frac{x^2}2-x<F(x)\le\frac{x^2}2$. Entonces $F\to+\infty$ y $\frac{F(x)}{x^2}\to\frac12$.
+
+\begin{enunciado}{PRÁCTICO 4.4 · EJ 10}
+$f$ monótona: ¿cuándo tiene límite en $+\infty$?
+\end{enunciado}
+Si $f$ es creciente y acotada superiormente: $\lim_{+\infty}f=\sup f$ (misma prueba que 4.2.7). Si no está acotada: $\to+\infty$. \textbf{Una monótona siempre tiene límite en $+\infty$, finito o infinito.}
+
+% ============================================================
+\section{Continuidad}
+
+\begin{enunciado}{PRÁCTICO 4.5 · EJ 1 y 2}
+1) Límites de combinaciones de continuas dadas por tabla. 2) Continuidad de funciones con parte entera, distancia al entero y dígitos.
+\end{enunciado}
+\begin{falta}
+La tabla del ej.\ 1 y algunas funciones del 2 están en el EVA. Reglas: 1) si $f,g$ son continuas, el límite de cualquier combinación es la combinación de los valores (\P{algcont}): se lee de la tabla. 2) $\fl x$: discontinua en cada entero. $[x]$ (distancia al entero más próximo): \textbf{continua} en todo $\R$ (es un diente sin saltos). «$n$-ésimo dígito decimal»: salta en los puntos con desarrollo decimal finito; es continua en el resto.
+\end{falta}
+
+\begin{enunciado}{PRÁCTICO 4.5 · EJ 3 · HALLAR LOS PARÁMETROS}
+a) $x^2+3x+2$ / $ax^2+bx+1$ en 1. c) $\sin\pi x$ / $ax+b$ / $x^2$ en 1 y 2. d) $x\sin\frac1x$ / $a\sin(x+b)$ en 0. f) $ax^2$ / $a^2x^2-2$ en 1.
+\end{enunciado}
+Todos resueltos paso a paso en el libro del parcial (cap.\ 6):
+\resp{a) familia $a+b=5$; \ c) $a=4$, $b=-4$; \ d) $a=0$ o $b=k\pi$; \ f) $a=2$ o $a=-1$.}
+\begin{uso}{\P{cont} CONTINUIDAD · \P{lat} LATERALES}
+En cada pegado: izquierda = derecha = valor. Una ecuación por pegado.
+\end{uso}
+
+\begin{enunciado}{PRÁCTICO 4.5 · EJ 4 y 5}
+Límites trigonométricos y logarítmicos; funciones definidas distinto en racionales e irracionales.
+\end{enunciado}
+Para 4: herramientas \P{seno} y 4.3.6. Para 5, el ejemplo típico: $f(x)=x$ en $\Q$, $0$ fuera.\\
+En $0$: $|f(x)|\le|x|$ siempre, así que $f\to0=f(0)$: \textbf{continua en 0}.\\
+En $a\neq0$: hay racionales cerca de $a$ (valores $\approx a$) e irracionales (valor 0). Como $a\neq0$, no hay un único candidato: \textbf{no hay límite}.
+\begin{falta}
+Las funciones exactas del ej.\ 5 no están en tu transcripción; el razonamiento de arriba sirve para todas: el límite existe solo donde las dos «fórmulas» (la de racionales y la de irracionales) tienden a lo mismo.
+\end{falta}
+
+\begin{enunciado}{PRÁCTICO 4.5 · EJ 6}
+$f(x)=1$ si $x=\frac1n$, $x$ si no: no es continua en 0.
+\end{enunciado}
+Resuelto en el libro del parcial (cap.\ 6): con $\eps=\frac12$, en todo entorno de 0 hay un $\frac1n$ donde $f$ vale 1.
+
+\begin{enunciado}{PRÁCTICO 4.5 · EJ 7}
+a) $|f(x)|\le|x|\Rightarrow$ continua en 0. b) $|f|\le|g|$, $g$ continua en 0 con $g(0)=0\Rightarrow f$ continua en 0. c) $x\sin\frac1x$ (con 0 en 0) es continua.
+\end{enunciado}
+\begin{uso}{\P{sandwich} SÁNDWICH}
+$0\le|f(x)-0|\le|x|$ o $\le|g(x)|$, que tienden a 0.
+\end{uso}
+a) $|f(0)|\le0\Rightarrow f(0)=0$. Y $|f(x)-f(0)|=|f(x)|\le|x|<\eps$ si $|x|<\delta=\eps$. $\blacksquare$\\
+b) Igual: $f(0)=0$ y $|f(x)|\le|g(x)|\to0$. $\blacksquare$\\
+c) Caso particular de a): $|x\sin\frac1x|\le|x|$. $\blacksquare$
+
+\begin{enunciado}{PRÁCTICO 4.5 · EJ 8 y 9}
+Problema de dos circunferencias; monótonas y límites laterales.
+\end{enunciado}
+\begin{falta}
+El 8 depende de una figura del EVA. Para el 9: si $f$ es creciente, $g(a)=\lim_{x\to a^+}f(x)$ existe para todo $a$ (4.2.7) y es continua por la derecha, porque es el ínfimo de los valores a la derecha y esos ínfimos se «pegan» al moverse a la derecha.
+\end{falta}

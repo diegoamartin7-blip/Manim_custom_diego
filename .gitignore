@@ -8,3 +8,8 @@ calculo1/snaps/
 calculo1/concat_*.txt
 calculo1/*.mp4
 calculo1/render_all_linuxtest.ps1
+calculo1_practicos/*.aux
+calculo1_practicos/*.log
+calculo1_practicos/*.out
+calculo1_practicos/*.toc
+calculo1_practicos/main.pdf
