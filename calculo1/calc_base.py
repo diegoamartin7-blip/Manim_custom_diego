@@ -80,7 +80,15 @@ BOARD_BOTTOM = -2.42
 BOARD_TOP = 3.05
 
 
+def _tiene_griego(s):
+    return any("Ͱ" <= c <= "Ͽ" for c in s)
+
+
 def T(text, size=28, color=INK, font=SANS, weight=NORMAL, **kw):
+    # IBM Plex Mono no tiene glifos griegos (ε, δ, ...): sin fallback de Pango,
+    # eso sale como tofu. Para texto plano con letras griegas, uso SANS (sí las tiene).
+    if font == MONO and _tiene_griego(text):
+        font = SANS
     # Siempre se genera a 48 y se escala (evita espaciado roto de Pango).
     t = Text(text, font=font, font_size=48, color=color, weight=weight,
              disable_ligatures=True, **kw)
