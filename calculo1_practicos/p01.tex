@@ -1,0 +1,168 @@
+% ================= PARTE 0: PROPIEDADES =================
+\chapter*{Parte 0 · Todas las propiedades, de la más simple a la más compleja}
+\addcontentsline{toc}{chapter}{Parte 0 · Todas las propiedades}
+\markboth{PARTE 0 · PROPIEDADES}{}
+
+Esto es la caja de herramientas completa del primer parcial. Está ordenada por niveles: cada nivel usa solo lo de los anteriores. Cada propiedad tiene un número \textbf{P}; los ejercicios resueltos las citan así (por ejemplo, «\P{cdist} distributiva»).
+
+\begin{tip}{CÓMO REPASARLA}
+Tapá la columna de la derecha de cada fórmula y reconstruíla. Las que no te salgan en 5 segundos son las que tenés que releer el martes.
+\end{tip}
+
+% --------------------------------------------------------------
+\section*{Nivel 1 · Conjuntos}
+\begin{sello}{OPERACIONES ENTRE CONJUNTOS}
+\pr{cconm}{Conmutativa.} $A\cup B=B\cup A$, \quad $A\cap B=B\cap A$.
+\pr{casoc}{Asociativa.} $(A\cup B)\cup C=A\cup(B\cup C)$, \quad $(A\cap B)\cap C=A\cap(B\cap C)$.
+\pr{cdist}{Distributiva.} $A\cup(B\cap C)=(A\cup B)\cap(A\cup C)$, \quad $A\cap(B\cup C)=(A\cap B)\cup(A\cap C)$.
+\pr{cdif}{Diferencia.} $A\setminus B=\{x\in A: x\notin B\}=A\cap B^c$.
+\pr{demorgan}{De Morgan.} $A\setminus(B\cup C)=(A\setminus B)\cap(A\setminus C)$, \quad $A\setminus(B\cap C)=(A\setminus B)\cup(A\setminus C)$.
+\pr{incl}{Inclusión.} $A\subset B\iff$ todo $x\in A$ cumple $x\in B$. \textbf{Igualdad} $A=B\iff A\subset B$ y $B\subset A$ (doble inclusión).
+\pr{absor}{Absorción.} $A\cap B\subset A\subset A\cup B$; \ $B\subset A\iff A\cup B=A\iff A\cap B=B$.
+\end{sello}
+\begin{sello}{CONTAR}
+\pr{card}{Cardinal de la unión.} $|A\cup B|=|A|+|B|-|A\cap B|$.
+\pr{cart}{Producto cartesiano.} $A\times B=\{(a,b):a\in A,b\in B\}$ y $|A\times B|=|A|\cdot|B|$. El orden importa: $(a,b)\neq(b,a)$.
+\pr{subc}{Subconjuntos.} Un conjunto de $n$ elementos tiene $\binom{n}{k}=\frac{n!}{k!(n-k)!}$ subconjuntos de $k$ elementos y $2^n$ subconjuntos en total ($\mathcal P(U)$, el conjunto potencia).
+\end{sello}
+
+% --------------------------------------------------------------
+\section*{Nivel 2 · Funciones}
+\begin{sello}{FUNCIONES}
+\pr{func}{Función.} $f:A\to B$ asigna a \textbf{cada} $x\in A$ \textbf{un único} $f(x)\in B$.
+\pr{comp}{Composición.} $(g\circ f)(x)=g(f(x))$: \textbf{primero} $f$. En general $g\circ f\neq f\circ g$. Es asociativa.
+\pr{iny}{Inyectiva.} $f(x)=f(x')\Rightarrow x=x'$ (a imágenes iguales, preimágenes iguales). Equivalente: $x\neq x'\Rightarrow f(x)\neq f(x')$.
+\pr{sobre}{Sobreyectiva.} Para todo $y\in B$ existe $x\in A$ con $f(x)=y$.
+\pr{biy}{Biyectiva e inversa.} Biyectiva = inyectiva y sobreyectiva. Entonces existe $f^{-1}:B\to A$ con $f^{-1}(f(x))=x$ y $f(f^{-1}(y))=y$.
+\pr{imag}{Imagen y preimagen.} $f(A_1)=\{f(x):x\in A_1\}$; \ $f^{-1}(B_1)=\{x:f(x)\in B_1\}$ (existe aunque $f$ no sea biyectiva).
+\pr{par}{Par e impar.} Par: $f(-x)=f(x)$ (simétrica respecto al eje $y$). Impar: $f(-x)=-f(x)$ (simétrica respecto al origen).
+\pr{mono}{Monótona.} Creciente: $x<x'\Rightarrow f(x)\le f(x')$. Estrictamente creciente: $\Rightarrow f(x)<f(x')$. Estrictamente monótona $\Rightarrow$ inyectiva.
+\end{sello}
+
+% --------------------------------------------------------------
+\section*{Nivel 3 · Axiomas de cuerpo (las cuentas)}
+\begin{sello}{AXIOMAS DE CUERPO: $(\R,+,\cdot)$}
+\pr{conm}{Conmutativa.} $a+b=b+a$, \quad $ab=ba$.
+\pr{asoc}{Asociativa.} $(a+b)+c=a+(b+c)$, \quad $(ab)c=a(bc)$.
+\pr{neut}{Neutros.} $a+0=a$, \quad $a\cdot1=a$, con $0\neq1$.
+\pr{opin}{Opuesto e inverso.} Existe $-a$ con $a+(-a)=0$. Si $a\neq0$ existe $a^{-1}$ con $a\cdot a^{-1}=1$.
+\pr{dist}{Distributiva.} $a(b+c)=ab+ac$. \textbf{Es la única que mezcla suma y producto.}
+\end{sello}
+\begin{memo}{CONSECUENCIAS QUE SE USAN SIN DECIRLO}
+\pr{cero}{Cero absorbe.} $a\cdot0=0$ \ (prueba: $a\cdot0=a(0+0)=a\cdot0+a\cdot0$, y cancelo).\\
+\pr{signos}{Signos.} $-(-a)=a$, \ $(-a)b=a(-b)=-(ab)$, \ $(-a)(-b)=ab$.\\
+\pr{prodnulo}{Producto nulo.} $ab=0\iff a=0$ o $b=0$. \textbf{Por eso se factoriza para resolver ecuaciones.}\\
+\pr{cancel}{Cancelativa.} $a+c=b+c\Rightarrow a=b$; \ si $c\neq0$, $ac=bc\Rightarrow a=b$.
+\end{memo}
+
+% --------------------------------------------------------------
+\section*{Nivel 4 · Orden (las desigualdades)}
+\begin{sello}{AXIOMAS DE ORDEN}
+\pr{tric}{Tricotomía.} Para cada $a$ vale exactamente una: $a<0$, $a=0$ o $a>0$.
+\pr{trans}{Transitiva.} $a<b$ y $b<c\Rightarrow a<c$.
+\pr{sumord}{Suma respeta el orden.} $a<b\Rightarrow a+c<b+c$ (para cualquier $c$).
+\pr{prodpos}{Producto por positivo respeta.} $a<b$ y $c>0\Rightarrow ac<bc$.
+\end{sello}
+\begin{memo}{CONSECUENCIAS DE ORDEN (LAS QUE ROMPEN EJERCICIOS)}
+\pr{prodneg}{Por negativo se da vuelta.} $a<b$ y $c<0\Rightarrow ac>bc$. \textbf{No multiplicar por algo de signo desconocido.}\\
+\pr{cuad}{Cuadrados.} $a^2\ge0$, con igualdad solo si $a=0$. En particular $1=1^2>0$.\\
+\pr{inv}{Inversos.} $0<a<b\Rightarrow 0<\frac1b<\frac1a$ (invertir positivos da vuelta el orden).\\
+\pr{potraiz}{Potencias y raíces de positivos.} Si $0\le a<b$: $a^2<b^2$ y $\sqrt a<\sqrt b$. \textbf{Solo con los dos no negativos.}\\
+\pr{signoprod}{Signo de producto y cociente.} $ab>0$ y $\frac ab>0$ si tienen igual signo; $<0$ si tienen signo distinto.
+\end{memo}
+
+% --------------------------------------------------------------
+\section*{Nivel 5 · Valor absoluto e inecuaciones}
+\begin{sello}{VALOR ABSOLUTO}
+\pr{absdef}{Definición.} $|a|=a$ si $a\ge0$; $|a|=-a$ si $a<0$. \ Es la distancia de $a$ al 0; $|a-b|$ es la distancia entre $a$ y $b$.
+\pr{absprod}{Producto.} $|ab|=|a||b|$, \ $\left|\frac ab\right|=\frac{|a|}{|b|}$, \ $|a|^2=a^2$, \ $\sqrt{a^2}=|a|$.
+\pr{entorno}{Entornos.} $|x-a|<r\iff a-r<x<a+r$. \quad $|x-a|>r\iff x<a-r$ o $x>a+r$.
+\pr{triang}{Desigualdad triangular.} $|a+b|\le|a|+|b|$ \ y \ $\big||a|-|b|\big|\le|a-b|$.
+\end{sello}
+\begin{metodo}{CUALQUIER INECUACIÓN}
+\begin{enumerate}
+\item Pasá todo a un lado: $\text{algo}\ \lessgtr\ 0$. \textbf{No multipliques por expresiones con $x$} (\P{prodneg}).
+\item Factorizá (raíces de cuadráticas: $x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$).
+\item Tabla de signos: una columna por intervalo entre raíces, una fila por factor (\P{signoprod}).
+\item Con $|\cdot|$: separá en casos según el signo de lo de adentro (\P{absdef}), o usá \P{entorno}.
+\item Con $\sqrt{\cdot}$: primero el dominio (lo de adentro $\ge0$); elevar al cuadrado solo si ambos lados son $\ge0$ (\P{potraiz}).
+\end{enumerate}
+\end{metodo}
+
+% --------------------------------------------------------------
+\section*{Nivel 6 · Completitud (sup e ínf)}
+\begin{sello}{SUPREMO, ÍNFIMO, MÁXIMO, MÍNIMO}
+\pr{cota}{Cota superior.} $k$ con $a\le k$ para todo $a\in A$. $A$ es acotado si tiene cota superior e inferior.
+\pr{sup}{Supremo.} $\sup A$ es la \textbf{menor} cota superior. \ $\inf A$ es la \textbf{mayor} cota inferior.
+\pr{max}{Máximo.} $\max A$ = cota superior que \textbf{pertenece} a $A$. Si existe, $\max A=\sup A$.
+\pr{complet}{Axioma de completitud.} $A\neq\emptyset$ acotado superiormente $\Rightarrow$ existe $\sup A\in\R$. (Espejo: acotado inferiormente $\Rightarrow$ existe $\inf A$.)
+\pr{supeps}{Caracterización con ε.} $S=\sup A\iff S$ es cota superior y $\forall\eps>0\ \exists a\in A:\ S-\eps<a$.
+\end{sello}
+\begin{memo}{CONSECUENCIAS DE LA COMPLETITUD}
+\pr{arqui}{Arquímedes.} $\N$ no está acotado: para todo $x\in\R$ existe $n\in\N$ con $n>x$. Si $x>0$: existe $n$ con $\frac1n<x$.\\
+\pr{dens}{Densidad.} Entre dos reales distintos hay un racional y hay un irracional.\\
+\pr{pent}{Parte entera.} $\fl{x}$ = el mayor entero $\le x$: \ $\fl{x}\le x<\fl{x}+1$. \ $\ce{x}$ = el menor entero $\ge x$.\\
+\pr{supsub}{Sup de subconjunto.} $\emptyset\neq A\subset B$, $B$ acotado $\Rightarrow\inf B\le\inf A\le\sup A\le\sup B$.\\
+\pr{supsuma}{Sup de suma y escala.} $\sup(A+B)=\sup A+\sup B$; \ $\sup(\alpha A)=\alpha\sup A$ si $\alpha>0$; si $\alpha<0$, $\sup(\alpha A)=\alpha\inf A$.
+\end{memo}
+
+% --------------------------------------------------------------
+\section*{Nivel 7 · Integral}
+\begin{sello}{SUMAS DE DARBOUX}
+\pr{part}{Partición.} $P=\{a_0<a_1<\dots<a_M\}$ con $a_0=a$, $a_M=b$. Refinar = agregar puntos.
+\pr{sumas}{Sumas.} $\Ss(f,P)=\sum M_i(a_{i+1}-a_i)$, \ $\Si(f,P)=\sum m_i(a_{i+1}-a_i)$, con $M_i=\sup$ y $m_i=\inf$ de $f$ en \textbf{todo} el bloque cerrado.
+\pr{refin}{Refinar.} $P\subset P'\Rightarrow \Si(f,P)\le\Si(f,P')\le\Ss(f,P')\le\Ss(f,P)$. Y $\Si(f,Q)\le\Ss(f,P)$ para toda $P,Q$.
+\pr{integ}{Integrable.} $I_*=\sup_P\Si$, $I^*=\inf_P\Ss$. Integrable $\iff I_*=I^*$ $\iff\forall\eps>0\ \exists P:\Ss-\Si<\eps$.
+\pr{crit}{Criterios.} Monótona, continua, o acotada con finitas discontinuidades $\Rightarrow$ integrable. Cambiar $f$ en finitos puntos no cambia la integral.
+\pr{telesc}{Telescópica.} $f$ monótona, partición uniforme de $n$ bloques: $\Ss-\Si=\frac{b-a}n|f(b)-f(a)|$.
+\end{sello}
+\begin{sello}{PROPIEDADES DE LA INTEGRAL}
+\pr{lineal}{Linealidad.} $\int_a^b(\alpha f+\beta g)=\alpha\int_a^bf+\beta\int_a^bg$.
+\pr{chasles}{Chasles (aditividad).} $\int_a^cf=\int_a^bf+\int_b^cf$, con $a,b,c$ en cualquier orden.
+\pr{orient}{Orientación.} $\int_a^bf=-\int_b^af$, \ $\int_a^af=0$.
+\pr{monoint}{Monotonía.} $f\le g$ en $[a,b]\Rightarrow\int_a^bf\le\int_a^bg$. En particular $f\ge0\Rightarrow\int f\ge0$.
+\pr{acot}{Acotación.} $m\le f\le M$ en $[a,b]\Rightarrow m(b-a)\le\int_a^bf\le M(b-a)$. \ También $\left|\int_a^bf\right|\le\int_a^b|f|$.
+\pr{cvl}{Cambio de variable lineal.} $\int_a^bf(t)\,dt=\int_{a+p}^{b+p}f(t-p)\,dt$ \ y \ $\int_a^bf(t)\,dt=r\int_{a/r}^{b/r}f(rt)\,dt$ ($r>0$).
+\pr{parint}{Par e impar.} En $[-a,a]$: $f$ par $\Rightarrow\int_{-a}^af=2\int_0^af$; \ $f$ impar $\Rightarrow\int_{-a}^af=0$.
+\end{sello}
+\begin{memo}{INTEGRALES QUE SE ASUMEN CONOCIDAS}
+\pr{tabla}{Tabla.} $\int_a^b1=b-a$, \ $\int_a^bt=\frac{b^2-a^2}2$, \ $\int_a^bt^2=\frac{b^3-a^3}3$, \ $\int_a^b\sqrt t=\frac23\big(b^{3/2}-a^{3/2}\big)$, \ $\int_1^x\frac1t=\log x$.\\
+\pr{geom}{Geometría.} Rectángulo $b\cdot h$; triángulo $\frac{b\cdot h}2$; trapecio $\frac{(B+b)h}2$. \textbf{Lo de abajo del eje cuenta negativo.}
+\end{memo}
+
+% --------------------------------------------------------------
+\section*{Nivel 8 · Límites}
+\begin{sello}{DEFINICIÓN Y ÁLGEBRA DE LÍMITES}
+\pr{limdef}{Definición.} $\lim_{x\to a}f=L\iff\forall\eps>0\ \exists\delta>0:\ 0<|x-a|<\delta\Rightarrow|f(x)-L|<\eps$.
+\pr{unic}{Unicidad.} Si existe, el límite es único.
+\pr{algebra}{Álgebra.} Si $f\to L$ y $g\to M$: $f\pm g\to L\pm M$, \ $fg\to LM$, \ $\frac fg\to\frac LM$ (si $M\neq0$).
+\pr{sandwich}{Sándwich.} $g\le f\le h$ cerca de $a$ y $g,h\to L\Rightarrow f\to L$.
+\pr{acotinf}{Acotado por infinitésimo.} $|g|\le K$ cerca de $a$ y $h\to0\Rightarrow gh\to0$ (aunque $g$ no tenga límite).
+\pr{lat}{Laterales.} $\lim_{x\to a}f=L\iff\lim_{x\to a^-}f=\lim_{x\to a^+}f=L$.
+\pr{limcomp}{Composición.} $g\to b$ cuando $x\to a$, y $f$ continua en $b$ $\Rightarrow f(g(x))\to f(b)$.
+\end{sello}
+\begin{memo}{LÍMITES QUE SE USAN COMO HERRAMIENTA}
+\pr{seno}{Seno.} $\lim_{u\to0}\frac{\sin u}u=1$; \ $|\sin x|\le|x|$; \ $\lim_{x\to0}\frac{1-\cos x}x=0$.\\
+\pr{conj}{Conjugado.} $(\sqrt A-\sqrt B)(\sqrt A+\sqrt B)=A-B$: se usa para $\frac00$ y $\infty-\infty$ con raíces.\\
+\pr{polinf}{Polinomios en $\infty$.} $\frac{a_nx^n+\dots}{b_mx^m+\dots}\to0$ si $n<m$; $\to\frac{a_n}{b_m}$ si $n=m$; $\to\pm\infty$ si $n>m$.\\
+\pr{logl}{Logaritmo.} $\lim_{x\to1}\frac{\log x}{x-1}=1$; \ $\lim_{x\to0^+}x\log x=0$.
+\end{memo}
+
+% --------------------------------------------------------------
+\section*{Nivel 9 · Continuidad y los grandes teoremas}
+\begin{sello}{CONTINUIDAD}
+\pr{cont}{Continua en $a$.} $\lim_{x\to a}f(x)=f(a)$: existe $f(a)$, existe el límite, y son iguales.
+\pr{algcont}{Álgebra de continuas.} Sumas, productos, cocientes (denominador $\neq0$) y composiciones de continuas son continuas. Polinomios, $\sin$, $\cos$, $e^x$, $\log$, $\sqrt{\ }$ lo son en su dominio.
+\pr{intindef}{Integral indefinida.} $f$ integrable $\Rightarrow F(x)=\int_a^xf$ es Lipschitz, y por lo tanto continua.
+\end{sello}
+\begin{sello}{LOS TEOREMAS}
+\pr{bolzano}{Bolzano.} $f$ continua en $[a,b]$ y $f(a)f(b)<0\Rightarrow\exists c\in(a,b):f(c)=0$.
+\pr{vi}{Valor intermedio.} $f$ continua en $[a,b]$ toma todos los valores entre $f(a)$ y $f(b)$.
+\pr{weier}{Weierstrass.} $f$ continua en $[a,b]$ \textbf{cerrado y acotado} $\Rightarrow$ alcanza máximo y mínimo.
+\pr{vm}{Valor medio para integrales.} $f$ continua en $[a,b]\Rightarrow\exists c:\ f(c)(b-a)=\int_a^bf$.
+\pr{lips}{Lipschitz.} $|f(x)-f(y)|\le K|x-y|$ para todo $x,y$. Lipschitz $\Rightarrow$ continua ($\delta=\eps/K$) e integrable. Continua $\not\Rightarrow$ Lipschitz ($\sqrt x$ en 0).
+\end{sello}
+
+\begin{tip}{EL MAPA EN UNA LÍNEA}
+Conjuntos $\to$ funciones $\to$ cuentas (cuerpo) $\to$ desigualdades (orden) $\to$ sup/ínf (completitud) $\to$ integral (sup/ínf de sumas) $\to$ límites (ε-δ) $\to$ continuidad $\to$ teoremas. Cada piso está construido sobre el de abajo: por eso cuando un ejercicio de integral se traba, casi siempre el problema está en una desigualdad o en un sup.
+\end{tip}

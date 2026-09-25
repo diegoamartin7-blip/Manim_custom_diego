@@ -1,0 +1,53 @@
+% ================= PORTADA =================
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+  \foreach \x in {0,5,...,150} \draw[borde!60,line width=0.2pt] ([xshift=\x mm]current page.south west) -- ([xshift=\x mm]current page.north west);
+  \foreach \y in {0,5,...,215} \draw[borde!60,line width=0.2pt] ([yshift=\y mm]current page.south west) -- ([yshift=\y mm]current page.south east);
+\end{tikzpicture}
+\vspace*{18mm}
+{\ttfamily\small\color{suave} CDIV · IMERL · FING · 2S 2026}\par\vspace{3mm}
+{\plexbold\fontsize{26}{30}\selectfont Cálculo 1}\par\vspace{1mm}
+{\plexbold\fontsize{17}{21}\selectfont\color{rojo} Prácticos resueltos}\par\vspace{4mm}
+{\large Todos los ejercicios que entran al primer parcial,\\ uno por uno, paso a paso.}\par\vspace{10mm}
+\begin{sello}{CÓMO ESTÁ ARMADO}
+\textbf{Parte 0:} todas las propiedades que usás en el curso, en orden, de la más simple (la conmutativa) a la más compleja (Weierstrass). Cada una tiene un número \textbf{P1, P2, \dots}\\[3pt]
+\textbf{Capítulos 1 a 5:} los prácticos oficiales resueltos. En cada paso, una cajita gris \textbf{TEORÍA QUE USO} te dice qué propiedad se aplica, con su número. Si no te acordás, vas a la Parte 0.
+\end{sello}
+\vfill
+{\ttfamily\scriptsize\color{suave} Hecho sobre los prácticos oficiales 1 a 5 y tus apuntes de clase. Todas las cuentas verificadas por computadora (sympy).}
+\newpage
+
+{\hypersetup{linkcolor=tinta}\renewcommand{\contentsname}{Índice}\tableofcontents}
+\newpage
+
+\chapter*{Cómo usar este cuaderno}
+\markboth{CÓMO USAR ESTE CUADERNO}{}
+
+\begin{memo}{LAS CAJAS}
+\textbf{\color{rojo}Roja doble:} definición o teorema que hay que saber literal.\\
+\textbf{\color{acero}Gris fina, «TEORÍA QUE USO»:} la propiedad que se aplica en ese paso, con su número de la Parte 0.\\
+\textbf{\color{acero}Gris con borde:} método, el procedimiento paso a paso.\\
+\textbf{\color{verde}Verde:} ayuda-memoria. \textbf{\color{teal}Teal:} intuición o analogía.\\
+\textbf{\color{rojo}Barra roja:} trampa típica. \textbf{\color{naranja}Barra naranja:} el ejercicio depende de una figura del EVA que no tengo; te dejo el método para que lo termines mirando la figura.
+\end{memo}
+
+\section*{Qué entra y qué no}
+Este cuaderno cubre las secciones de los prácticos que el cronograma asigna antes del primer parcial:
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}l X@{}}
+\toprule
+\textbf{Capítulo} & \textbf{Secciones resueltas} \\ \midrule
+1 · Conjuntos y funciones & 1.1 Conjuntos · 1.2 Funciones · 1.3 Modelado \\
+2 · Número real & 2.1 Axiomas · 2.2 Funciones reales · 2.3 Completitud · 2.4 Funciones y completitud \\
+3 · Integración & 3.1 a 3.7 (introducción, acotaciones, Darboux, integrabilidad, cambio de variable, cálculo, aplicaciones) \\
+4 · Límites & 4.1 a 4.5 (geométrica, definición, cálculo, infinito, continuidad) \\
+5 · Funciones continuas & 5.1 Continuidad · 5.2 Bolzano · 5.3 Weierstrass \\ \bottomrule
+\end{tabularx}
+\end{center}
+
+Complementarios, Talleres y Laboratorio \textbf{no} están: el cronograma no los asigna para el parcial. Si te sobra tiempo, el libro del parcial tiene los ejercicios con más probabilidad.
+
+\begin{tip}{CÓMO LEER CADA EJERCICIO}
+Primera pasada: leelo entero. Segunda: tapá la resolución, leé solo el enunciado y escribí los pasos vos. Cuando te trabes, mirá solo la cajita \textbf{TEORÍA QUE USO} del paso siguiente: te dice qué herramienta usar sin darte la cuenta.
+\end{tip}

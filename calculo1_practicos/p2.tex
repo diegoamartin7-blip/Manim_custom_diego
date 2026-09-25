@@ -1,0 +1,463 @@
+% ================= CAPÍTULO 2 =================
+\chapter{Número real}
+\prob{PRÁCTICO 2}{semanas 2 y 3 · axiomas, desigualdades, completitud}
+
+\section{Axiomas de cuerpo ordenado}
+
+\begin{enunciado}{PRÁCTICO 2.1 · EJ 1 · ORDENAR}
+Ordenar $0,\ 1,\ p,\ p^2,\ \sqrt p,\ \frac1p$: \ a) si $p>1$; \ b) si $0<p<1$.
+\end{enunciado}
+\begin{uso}{\P{prodpos} PRODUCTO POR POSITIVO · \P{inv} INVERSOS}
+Multiplicar una desigualdad por un número positivo la respeta. Invertir positivos da vuelta el orden.
+\end{uso}
+\paso{1}{a) $p>1$}
+Multiplico $p>1$ por $p>0$: $p^2>p$. Como $p>1$, $\sqrt p>1$; multiplico $\sqrt p>1$ por $\sqrt p>0$: $p>\sqrt p$. Invierto $p>1$: $\frac1p<1$. Y $\frac1p>0$.
+\resp{$0<\frac1p<1<\sqrt p<p<p^2$.}
+\paso{2}{b) $0<p<1$}
+Todo se da vuelta: $p^2<p$ (multiplico $p<1$ por $p$), $p<\sqrt p<1$, y $\frac1p>1$.
+\resp{$0<p^2<p<\sqrt p<1<\frac1p$.}
+\begin{tip}{LA IMAGEN}
+Elevar al cuadrado «aleja del 1» y sacar raíz «acerca al 1». Por encima de 1 los cuadrados crecen; por debajo, se achican. Probá con $p=4$ y $p=\frac14$.
+\end{tip}
+
+\begin{enunciado}{PRÁCTICO 2.1 · EJ 2 · INECUACIONES}
+Resolver de a) a m).
+\end{enunciado}
+\begin{uso}{MÉTODO DE LA PARTE 0 · \P{prodneg} · \P{signoprod} · \P{potraiz}}
+Todo a un lado, factorizar, tabla de signos. Nunca multiplicar por algo con $x$ (no sabés su signo).
+\end{uso}
+\paso{a}{$x^2-2x>3$}
+$x^2-2x-3=(x-3)(x+1)>0$: producto positivo, factores del mismo signo. \textbf{$x<-1$ o $x>3$.}
+\paso{b}{$x^2+4x+1\ge0$}
+Raíces $-2\pm\sqrt3$. Parábola hacia arriba: $\ge0$ afuera de las raíces. \textbf{$x\le-2-\sqrt3$ o $x\ge-2+\sqrt3$.}
+\paso{c}{$x(x-1)(x-2)(x-3)<0$}
+Cuatro raíces; el signo alterna empezando en $+$ a la derecha de 3. \textbf{$x\in(0,1)\cup(2,3)$.}
+\paso{d}{$\frac{2-x}{1+x}\le\frac{1+x}{2-x}$}
+Todo a la izquierda y denominador común:
+\[\frac{(2-x)^2-(1+x)^2}{(1+x)(2-x)}=\frac{3(1-2x)}{(1+x)(2-x)}\le0.\]
+Raíz del numerador $\frac12$ (entra, es $\le$); del denominador $-1$ y $2$ (no entran). Tabla de signos:
+\begin{center}\small
+\begin{tabular}{@{}lcccc@{}}
+& $x<-1$ & $-1<x<\frac12$ & $\frac12<x<2$ & $x>2$\\\midrule
+$1-2x$ & $+$ & $+$ & $-$ & $-$\\
+$1+x$ & $-$ & $+$ & $+$ & $+$\\
+$2-x$ & $+$ & $+$ & $+$ & $-$\\
+cociente & $-$ & $+$ & $-$ & $+$
+\end{tabular}
+\end{center}
+\textbf{$x\in(-\infty,-1)\cup[\frac12,2)$.}
+\begin{trampa}{MULTIPLICAR EN CRUZ}
+Pasar $(1+x)(2-x)$ multiplicando está mal: su signo depende de $x$. Si lo hacés, perdés el tramo $x<-1$.
+\end{trampa}
+\paso{e}{$\frac1x+\frac1{x+1}>0$}
+$\frac{2x+1}{x(x+1)}>0$. Puntos: $-1$, $-\frac12$, $0$. \textbf{$x\in(-1,-\frac12)\cup(0,+\infty)$.}
+\paso{f}{$\frac x{x-1}<\frac{2x+1}x$}
+$\frac{x^2-(2x+1)(x-1)}{x(x-1)}=\frac{-(x^2-x-1)}{x(x-1)}<0\iff\frac{x^2-x-1}{x(x-1)}>0$. Raíces del numerador $\frac{1\pm\sqrt5}2$; del denominador $0$ y $1$.\\
+\textbf{$x\in\big(-\infty,\frac{1-\sqrt5}2\big)\cup(0,1)\cup\big(\frac{1+\sqrt5}2,+\infty\big)$.}
+\paso{g}{$\sqrt{x+4}<\sqrt{x-1}$}
+Dominio $x\ge1$. Ahí los dos lados son $\ge0$ y elevar al cuadrado es válido: $x+4<x-1$, falso. \textbf{Sin solución.}
+\paso{h}{$\sqrt{x^2+1}>2x-3$}
+\textbf{Caso $2x-3<0$} ($x<\frac32$): izquierda $\ge0>$ derecha, vale siempre.\\
+\textbf{Caso $x\ge\frac32$:} los dos lados $\ge0$, elevo: $x^2+1>4x^2-12x+9\iff3x^2-12x+8<0\iff x\in\big(2-\frac{2\sqrt3}3,\ 2+\frac{2\sqrt3}3\big)$. Con $x\ge\frac32$: $[\frac32,\ 2+\frac{2\sqrt3}3)$.\\
+Uniendo: \textbf{$x<2+\frac{2\sqrt3}3\approx3{,}15$.}
+\begin{trampa}{ELEVAR AL CUADRADO SIN MIRAR SIGNOS}
+Si elevás sin separar casos, perdés todos los $x<\frac32$. Solo se puede elevar cuando los dos lados son $\ge0$ (\P{potraiz}).
+\end{trampa}
+\paso{i}{$|2x-5|<|3x+4|$}
+Los dos lados son $\ge0$: elevo (\P{absprod}: $|a|^2=a^2$). $(2x-5)^2<(3x+4)^2\iff0<5x^2+44x-9=(5x-1)(x+9)$. \textbf{$x<-9$ o $x>\frac15$.}
+\paso{j}{$x^2-5|x|+4\ge0$}
+Como $x^2=|x|^2$: $(|x|-1)(|x|-4)\ge0\iff|x|\le1$ o $|x|\ge4$. \textbf{$x\in(-\infty,-4]\cup[-1,1]\cup[4,+\infty)$.}
+\paso{k}{$3|x|-|x-2|>2$}
+Tres casos según los signos de $x$ y $x-2$ (\P{absdef}):
+\begin{itemize}
+\item $x<0$: $-3x-(2-x)=-2x-2>2\iff x<-2$.
+\item $0\le x<2$: $3x-(2-x)=4x-2>2\iff x>1$. Queda $(1,2)$.
+\item $x\ge2$: $3x-(x-2)=2x+2>2\iff x>0$: todo $[2,+\infty)$.
+\end{itemize}
+\textbf{$x<-2$ o $x>1$.}
+\paso{l}{$\sqrt{x+n}-\sqrt x>1$, $n\in\N$}
+Dominio $x\ge0$. $\sqrt{x+n}>1+\sqrt x$, ambos positivos, elevo: $x+n>1+2\sqrt x+x\iff\sqrt x<\frac{n-1}2$.\\
+\textbf{Si $n\ge2$: $0\le x<\frac{(n-1)^2}4$. Si $n\le1$: sin solución.} (Ej.: $n=3$ da $[0,1)$.)
+\paso{m}{$|nx|>x^2$, $n\in\N^+$}
+$n|x|>|x|^2\iff|x|(n-|x|)>0\iff0<|x|<n$. \textbf{$x\in(-n,0)\cup(0,n)$.} ($x=0$ da $0>0$, falso.)
+
+\begin{enunciado}{PRÁCTICO 2.1 · EJ 3 · INTERVALOS}
+a) Si $b<a$, $[a,b]=\emptyset$. b) La intersección de dos intervalos cerrados es un intervalo cerrado. c) Ejemplos de unión de cerrados que es y que no es intervalo cerrado.
+\end{enunciado}
+\begin{uso}{\P{trans} TRANSITIVA}
+$a\le x$ y $x\le b$ implican $a\le b$.
+\end{uso}
+a) Si existiera $x\in[a,b]$: $a\le x\le b$, y por transitividad $a\le b$. Contradice $b<a$. $\blacksquare$\\
+b) $[a,b]\cap[c,d]=\{x:\ x\ge a,\ x\ge c,\ x\le b,\ x\le d\}=[\max\{a,c\},\min\{b,d\}]$. Cerrado (posiblemente vacío, por a).\\
+c) $[0,2]\cup[1,3]=[0,3]$ sí es intervalo cerrado. \ $[0,1]\cup[2,3]$ no es un intervalo: le falta el $1{,}5$, que está entre dos de sus puntos.
+
+\begin{enunciado}{PRÁCTICO 2.1 · EJ 4 · LAS MEDIAS}
+$0<a<b$, $A=\frac{a+b}2$, $G=\sqrt{ab}$, $H=\frac2{\frac1a+\frac1b}$, $C=\sqrt{\frac{a^2+b^2}2}$. Probar $a<H<G<A<b$ y ubicar $C$.
+\end{enunciado}
+\begin{uso}{\P{cuad} CUADRADOS · \P{potraiz} RAÍCES DE POSITIVOS}
+El truco para comparar medias: pasar a una desigualdad equivalente que termine en $(a-b)^2>0$.
+\end{uso}
+\paso{1}{$a<A<b$}
+$a=\frac{a+a}2<\frac{a+b}2<\frac{b+b}2=b$.
+\paso{2}{$G<A$}
+Todo es positivo, así que equivale a comparar cuadrados: $ab<\frac{(a+b)^2}4\iff4ab<a^2+2ab+b^2\iff0<(a-b)^2$. Cierto porque $a\neq b$.
+\paso{3}{$H<G$}
+$H=\frac{2ab}{a+b}$. $\ \frac{2ab}{a+b}<\sqrt{ab}\iff2\sqrt{ab}<a+b$ (dividí por $\sqrt{ab}>0$ y multiplicá por $a+b>0$), que es el paso 2.
+\paso{4}{$a<H$}
+$a<\frac{2ab}{a+b}\iff a(a+b)<2ab\iff a<b$.
+\paso{5}{la cuadrática}
+$C^2-A^2=\frac{a^2+b^2}2-\frac{(a+b)^2}4=\frac{(a-b)^2}4>0$, así que $C>A$. Y $C<b$ porque $a^2+b^2<2b^2$.
+\resp{$a<H<G<A<C<b$. Con $a=1$, $b=4$: $1<1{,}6<2<2{,}5<2{,}92<4$.}
+
+\begin{enunciado}{PRÁCTICO 2.1 · EJ 5}
+Bosquejar juntos: $\max\{|x|,|y|\}=1$, \ $|x|+|y|=1$, \ $x^2+y^2=1$, \ $4x^2+y^2=4$.
+\end{enunciado}
+\begin{center}
+\begin{tikzpicture}[scale=1.15]
+\draw[suave,-{Stealth}] (-2.3,0)--(2.4,0); \draw[suave,-{Stealth}] (0,-2.3)--(0,2.4);
+\draw[rojo,thick] (-1,-1) rectangle (1,1);
+\draw[teal,thick] (1,0)--(0,1)--(-1,0)--(0,-1)--cycle;
+\draw[acero,thick] (0,0) circle (1);
+\draw[naranja,thick] (0,0) ellipse (1 and 2);
+\node[rojo,font=\scriptsize,anchor=west] at (1.05,1.05) {cuadrado: $\max\{|x|,|y|\}=1$};
+\node[teal,font=\scriptsize,anchor=west] at (0.55,0.55) {rombo};
+\node[acero,font=\scriptsize,anchor=west] at (0.75,-0.8) {círculo};
+\node[naranja,font=\scriptsize,anchor=west] at (0.45,-1.8) {elipse $x^2+\frac{y^2}4=1$};
+\end{tikzpicture}
+\end{center}
+Las tres primeras son «círculos de radio 1» con distintas distancias: la del máximo da un cuadrado, la suma de módulos un rombo, la euclídea el círculo. La cuarta, dividida por 4, es $x^2+\frac{y^2}{4}=1$: elipse de semiejes 1 (horizontal) y 2 (vertical).
+
+\begin{enunciado}{PRÁCTICO 2.1 · EJ 6 · SUMA DE CONJUNTOS}
+a) $\alpha A$. b) $A+B$. c) $\Z+\{-1,2,5\}$, $\Z+\{1,2,\frac52\}$. d) $\{p\}+[a,b]$, $\{p\}+(a,b)$.
+\end{enunciado}
+a) $2\{0,2,4\}=\{0,4,8\}$; \ $-\{-4,-1,0,1\}=\{-1,0,1,4\}$.\\
+b) $\{1,2,3\}+\{1,\pi\}=\{2,3,4,1+\pi,2+\pi,3+\pi\}$; \ $\{0,2,3\}+\{\sqrt2,\pi\}=\{\sqrt2,2+\sqrt2,3+\sqrt2,\pi,2+\pi,3+\pi\}$.\\
+c) $\Z+\{-1,2,5\}=\Z$ (sumar un entero no te saca de $\Z$). \ $\Z+\{1,2,\frac52\}=\Z\cup\big(\Z+\frac12\big)$: todos los enteros y todos los «medios».\\
+d) $\{p\}+[a,b]=[a+p,b+p]$; $\{p\}+(a,b)=(a+p,b+p)$: trasladar $p$.
+
+% ============================================================
+\section{Funciones reales}
+
+\begin{enunciado}{PRÁCTICO 2.2 · EJ 1 · BOSQUEJAR CON VALOR ABSOLUTO}
+a) $x+|x+1|$ \quad b) $|x|+|x+1|$ \quad c) $2x+|x+1|$
+\end{enunciado}
+\begin{uso}{\P{absdef} DEFINICIÓN DE $|\cdot|$}
+Cada valor absoluto parte la recta donde lo de adentro vale 0. En cada tramo la función es una recta.
+\end{uso}
+a) $x\ge-1$: $2x+1$; \ $x<-1$: $-1$ (constante).\\
+b) $x<-1$: $-2x-1$; \ $-1\le x<0$: $1$; \ $x\ge0$: $2x+1$. (Una «bañera»: plana en 1 entre $-1$ y $0$.)\\
+c) $x\ge-1$: $3x+1$; \ $x<-1$: $x-1$.
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[width=0.85\linewidth,height=4.6cm,axis lines=middle,xmin=-3,xmax=2,ymin=-4,ymax=5,
+  xtick={-2,-1,1},ytick={-2,1,3},tick label style={font=\scriptsize},legend style={font=\tiny,at={(0.02,0.98)},anchor=north west,fill=papel}]
+\addplot[rojo,thick,domain=-3:2,samples=101]{x+abs(x+1)}; \addlegendentry{a}
+\addplot[acero,thick,domain=-3:2,samples=101]{abs(x)+abs(x+1)}; \addlegendentry{b}
+\addplot[teal,thick,domain=-3:2,samples=101]{2*x+abs(x+1)}; \addlegendentry{c}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\begin{enunciado}{PRÁCTICO 2.2 · EJ 2}
+$f(x)=|x|$, $g(x)=\sgn(x)$. Probar $f\circ f=f$, $g\circ g=g$, $g\circ f=f\circ g$.
+\end{enunciado}
+$f(f(x))=\big||x|\big|=|x|$ porque $|x|\ge0$. \ $g$ toma valores en $\{-1,0,1\}$ y $\sgn$ deja fijos esos tres: $g(g(x))=g(x)$.\\
+$g(f(x))=\sgn|x|$ vale 1 si $x\neq0$ y 0 si $x=0$. $f(g(x))=|\sgn x|$ vale lo mismo. $\blacksquare$
+
+\begin{enunciado}{PRÁCTICO 2.2 · EJ 3}
+Imagen de la restricción $f|_{[a,b]}$ de una $f$ dada por gráfico.
+\end{enunciado}
+\begin{falta}
+El gráfico está en el EVA. Método: tapá el gráfico fuera de $[a,b]$, y la imagen es la «sombra» de lo que queda sobre el eje $y$: desde el punto más bajo hasta el más alto de ese tramo (si la función es continua ahí, es un intervalo, por \P{vi}).
+\end{falta}
+
+\begin{enunciado}{PRÁCTICO 2.2 · EJ 4 · AFINES}
+$f(x)=ax+b$, $a\neq0$. a) Si $b=0$: $f(x+z)=f(x)+f(z)$ y $f(\alpha x)=\alpha f(x)$; falla si $b\neq0$. b) Inversa. c) ¿Qué afines conmutan con $x+2$? ¿Con $2x$? ¿Con $2x+4$?
+\end{enunciado}
+\begin{uso}{\P{dist} DISTRIBUTIVA · \P{biy} INVERSA}
+Dos afines $u(x)=cx+d$ son iguales si coinciden sus coeficientes. Para ver si conmutan, calculá las dos composiciones y compará.
+\end{uso}
+\paso{1}{a)}
+$a(x+z)=ax+az$ y $a(\alpha x)=\alpha(ax)$. Si $b\neq0$: $f(0+0)=b\neq2b=f(0)+f(0)$.
+\paso{2}{b)}
+$y=ax+b\iff x=\frac{y-b}a$: \ $f^{-1}(y)=\frac{y-b}a$.
+\paso{3}{c) con $x+2$}
+$u(x)=cx+d$. $u(x+2)=cx+2c+d$ y $u(x)+2=cx+d+2$. Iguales $\iff2c=2\iff c=1$. \textbf{Conmutan las traslaciones $x+d$.}
+\paso{4}{c) con $2x$}
+$u(2x)=2cx+d$ y $2u(x)=2cx+2d$. Iguales $\iff d=0$. \textbf{Conmutan las $cx$ (rectas por el origen).}
+\paso{5}{c) con $2x+4$}
+$u(2x+4)=2cx+4c+d$ y $2u(x)+4=2cx+2d+4$. Iguales $\iff d=4c-4$. \textbf{Conmutan las $u(x)=cx+4(c-1)$.}
+\begin{tip}{EL PATRÓN}
+$2x+4$ deja fijo el $-4$ ($2(-4)+4=-4$), y todas las que conmutan con ella también: $u(-4)=-4c+4c-4=-4$. Igual que $2x$ fija el $0$ y conmuta con las que fijan el 0. Es «escalar respecto a un pivote».
+\end{tip}
+
+\begin{enunciado}{PRÁCTICO 2.2 · EJ 5 · MONÓTONAS}
+$x-5$, $-2x$, $|x|$, $x^2$, $x^3$ en $\R$.
+\end{enunciado}
+\begin{uso}{\P{mono} MONÓTONA}
+Para \emph{no} ser monótona alcanza con subir en un lugar y bajar en otro.
+\end{uso}
+$x-5$: estrictamente creciente. \ $-2x$: estrictamente decreciente. \ $x^3$: estrictamente creciente ($x<y\Rightarrow y^3-x^3=(y-x)(x^2+xy+y^2)>0$).\\
+$|x|$ y $x^2$: \textbf{no monótonas} en $\R$: bajan en $(-\infty,0]$ y suben en $[0,+\infty)$. (Sí lo son en cada mitad.)
+
+\begin{enunciado}{PRÁCTICO 2.2 · EJ 6 · CONVEXAS}
+$f$ convexa: $f(ta+(1-t)b)\le tf(a)+(1-t)f(b)$. a) Suma de convexas. b) Todo $c\in[a,b]$ es $ta+(1-t)b$. c) Forma equivalente con la cuerda. d) Clasificar seis funciones. e) Un pico estricto impide ser convexa.
+\end{enunciado}
+\begin{tip}{LA IMAGEN}
+Convexa = la cuerda entre dos puntos del gráfico queda \textbf{por encima} del gráfico. Una «taza» ($x^2$), nunca una «montaña».
+\end{tip}
+\paso{a}{suma}
+Sumo las dos desigualdades de $f$ y $g$ (\P{sumord}): $(f+g)(ta+(1-t)b)\le t(f+g)(a)+(1-t)(f+g)(b)$. $\blacksquare$
+\paso{b}{parametrizar}
+$t=\frac{b-c}{b-a}\in[0,1]$ cumple $ta+(1-t)b=\frac{(b-c)a+(c-a)b}{b-a}=\frac{c(b-a)}{b-a}=c$.
+\paso{c}{la cuerda}
+Con ese $t$: $1-t=\frac{c-a}{b-a}$, y $tf(a)+(1-t)f(b)=f(a)+(1-t)(f(b)-f(a))=f(a)+(c-a)\frac{f(b)-f(a)}{b-a}$. Es la recta por $(a,f(a))$ y $(b,f(b))$ evaluada en $c$. La definición dice exactamente $f(c)\le$ eso.
+\paso{d}{clasificar}
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}l l X@{}}\toprule
+Función & ¿Convexa? & Por qué\\\midrule
+$\sqrt{|x|}$ & no & $a=0$, $b=1$, $t=\frac12$: $f(\frac12)\approx0{,}71>\frac12$\\
+$x^2$ & sí & $t a^2+(1-t)b^2-(ta+(1-t)b)^2=t(1-t)(a-b)^2\ge0$\\
+$x^3$ & no & $a=-1$, $b=0$: $f(-\frac12)=-\frac18>-\frac12$\\
+$|x|$ & sí & desigualdad triangular (\P{triang})\\
+$2x$ ($x<0$), $3x$ ($x\ge0$) & sí & las pendientes \textbf{aumentan} (2 y después 3)\\
+$3x$ ($x<0$), $2x$ ($x\ge0$) & no & las pendientes disminuyen: $f(0)=0>\frac{f(-1)+f(1)}2=-\frac12$\\\bottomrule
+\end{tabularx}
+\end{center}
+\paso{e}{el pico}
+Si $a<b<c$ con $f(b)>f(a)$ y $f(b)>f(c)$: por c), $f(b)\le$ la cuerda entre $a$ y $c$ en $b$, que queda entre $f(a)$ y $f(c)$, o sea $\le\max\{f(a),f(c)\}<f(b)$. Absurdo.\\
+Ejemplo de valle en una convexa: $x^2$ con $a=-1$, $b=0$, $c=1$.
+
+\begin{enunciado}{PRÁCTICO 2.2 · EJ 7 · BIYECCIONES}
+a) $[0,5]\to[3,4]$ b) $(2,6)\to(0,1)$ c) $(1,4]\to[1,4)$ d) $(0,+\infty)\to\R$ e) $(0,2)\to\R$ f) $[1,2)\to[0,+\infty)$
+\end{enunciado}
+\begin{uso}{\P{biy} BIYECTIVA · \P{mono}}
+Una estrictamente monótona es inyectiva. Si además llega a todos los valores, es biyectiva. Para intervalos finitos alcanza una recta.
+\end{uso}
+a) $f(x)=3+\frac x5$. \ b) $f(x)=\frac{x-2}4$. \ c) $f(x)=5-x$ (espejo: da vuelta cuál extremo es cerrado).\\
+d) $f(x)=\log x$. \ e) $f(x)=\tan\big(\frac\pi2(x-1)\big)$: lleva $(0,2)$ a $(-\frac\pi2,\frac\pi2)$ y la tangente a $\R$.\\
+f) $f(x)=\frac{x-1}{2-x}$: vale 0 en 1, crece, y se va a $+\infty$ cuando $x\to2$.
+\begin{trampa}{CERRADO CONTRA ABIERTO}
+En c), una recta creciente $x\mapsto x$ no sirve: manda $4$ (que está) al $4$ (que no está en la llegada). Hay que dar vuelta la orientación.
+\end{trampa}
+
+\begin{enunciado}{PRÁCTICO 2.2 · EJ 8 · LIPSCHITZ (I)}
+¿Cuáles son Lipschitz? a) $3x+7$ b) $\sqrt x$ en $[0,+\infty)$ c) $x^2$ d) $2^x$ e) $\sgn x$
+\end{enunciado}
+\begin{uso}{\P{lips} LIPSCHITZ}
+Existe $K$ con $|f(x)-f(y)|\le K|x-y|$. Para refutarlo: encontrá pares donde $\frac{|f(x)-f(y)|}{|x-y|}$ crece sin cota.
+\end{uso}
+a) \textbf{Sí}, $K=3$: $|3x+7-(3y+7)|=3|x-y|$.\\
+b) \textbf{No.} Con $y=0$: $\frac{\sqrt x}x=\frac1{\sqrt x}\to\infty$ cuando $x\to0$.\\
+c) \textbf{No.} $|x^2-y^2|=|x+y|\,|x-y|$ y $|x+y|$ no está acotado. (En un intervalo acotado sí.)\\
+d) \textbf{No.} Con $y=x+1$: $|2^{x+1}-2^x|=2^x$, sin cota.\\
+e) \textbf{No.} $x=t$, $y=-t$: $\frac{|1-(-1)|}{2t}=\frac1t\to\infty$. Ni siquiera es continua.
+
+\begin{enunciado}{PRÁCTICO 2.2 · EJ 9 · LIPSCHITZ (II)}
+Visualización del cono en el EVA.
+\end{enunciado}
+\begin{falta}
+Las funciones están en la visualización del EVA. Criterio: poné un «reloj de arena» de pendientes $\pm K$ con centro en cada punto del gráfico. Si con algún $K$ la curva queda siempre adentro, es Lipschitz con ese $K$ (el mínimo es la pendiente más empinada). Si hay una tangente vertical, un salto, o la curva se empina sin límite, no lo es.
+\end{falta}
+
+% ============================================================
+\section{Axioma de completitud}
+
+\begin{enunciado}{PRÁCTICO 2.3 · EJ 1 · SUP E ÍNF DE INTERVALOS}
+Hallar sup, ínf, máx y mín de trece conjuntos.
+\end{enunciado}
+\begin{uso}{\P{sup} SUP · \P{max} MÁX}
+En un intervalo, el sup y el ínf son los extremos. Son máx o mín si el extremo está incluido (corchete).
+\end{uso}
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}l X l l l l@{}}\toprule
+& Conjunto simplificado & ínf & mín & sup & máx\\\midrule
+a & $[-1,1]$ & $-1$ & $-1$ & 1 & 1\\
+b & $(2,5)$ & 2 & no & 5 & no\\
+c & $(2,6]$ & 2 & no & 6 & 6\\
+d & $[-10,-2)$ & $-10$ & $-10$ & $-2$ & no\\
+e & $\{0\}$ & 0 & 0 & 0 & 0\\
+f & $[0,1]\cup[2,5]$ & 0 & 0 & 5 & 5\\
+g & $[-1,1]\cap(0,2)=(0,1]$ & 0 & no & 1 & 1\\
+h & $[0,5)\setminus(1,2)=[0,1]\cup[2,5)$ & 0 & 0 & 5 & no\\
+i & $[1,2]\setminus(1,2)=\{1,2\}$ & 1 & 1 & 2 & 2\\
+j & $([1,2]\cup[3,4])\cap[0,3]=[1,2]\cup\{3\}$ & 1 & 1 & 3 & 3\\
+k & $[1,2]\cup([3,4]\cap[0,3])=[1,2]\cup\{3\}$ & 1 & 1 & 3 & 3\\
+l & $[1,3]\setminus\big([1,2)\cup(3,4]\big)=[2,3]$ & 2 & 2 & 3 & 3\\
+m & $[1,4]\setminus[1,2)=[2,4]$ & 2 & 2 & 4 & 4\\\bottomrule
+\end{tabularx}
+\end{center}
+\begin{trampa}{PARÉNTESIS ANIDADOS}
+En l) y m), resolvé primero el paréntesis de adentro. En l): $[1,4]\setminus[2,3]=[1,2)\cup(3,4]$, y recién después se lo sacás a $[1,3]$.
+\end{trampa}
+
+\begin{enunciado}{PRÁCTICO 2.3 · EJ 2 · SUP E ÍNF DE CONJUNTOS DEFINIDOS POR CONDICIONES}
+De a) a k).
+\end{enunciado}
+\begin{uso}{MÉTODO SUP/ÍNF · \P{dens} DENSIDAD}
+Simplificar $\to$ listar o despejar $\to$ techo y piso $\to$ \textbf{preguntar la pertenencia}.
+\end{uso}
+\paso{a}{$\{\cos\frac{n\pi}2:n\in\N\}$}
+$n=0,1,2,3,\dots$ da $1,0,-1,0,1,\dots$: el conjunto es $\{-1,0,1\}$. \textbf{Máx 1, mín $-1$.}
+\paso{b}{$\{\theta\in[0,10]:\cos\theta=\sin\theta\}$}
+$\tan\theta=1\iff\theta=\frac\pi4+k\pi$. En $[0,10]$: $\frac\pi4,\frac{5\pi}4,\frac{9\pi}4$ ($\frac{13\pi}4\approx10{,}2$ se pasa). \textbf{Mín $\frac\pi4$, máx $\frac{9\pi}4$.}
+\paso{c}{$\{\theta\in[0,10]:\cos\theta<\sin\theta\}$}
+$\sin\theta-\cos\theta=\sqrt2\sin(\theta-\frac\pi4)>0\iff\theta\in(\frac\pi4,\frac{5\pi}4)\cup(\frac{9\pi}4,\frac{13\pi}4)$. Cortado en $[0,10]$: $(\frac\pi4,\frac{5\pi}4)\cup(\frac{9\pi}4,10]$.\\
+\textbf{Ínf $\frac\pi4$ (no es mín, ahí son iguales); máx 10} (en 10: $\cos10\approx-0{,}84<\sin10\approx-0{,}54$\ok).
+\paso{d}{$\{\theta\in[0,10]:\tan\theta<1\}$}
+En cada rama $(-\frac\pi2+k\pi,\frac\pi2+k\pi)$ la tangente es $<1$ antes de $\frac\pi4+k\pi$. En $[0,10]$: $[0,\frac\pi4)\cup(\frac\pi2,\frac{5\pi}4)\cup(\frac{3\pi}2,\frac{9\pi}4)\cup(\frac{5\pi}2,10]$.\\
+\textbf{Mín 0 ($\tan0=0$), máx 10} ($\tan10\approx0{,}65<1$).
+\paso{e}{$\{x^2\le3\}$}
+$[-\sqrt3,\sqrt3]$: \textbf{mín $-\sqrt3$, máx $\sqrt3$} (en $\R$ sí pertenecen).
+\paso{f}{$\{x>0:(x-1)(x-2)<0\}$}
+$(1,2)$: \textbf{ínf 1, sup 2, sin mín ni máx.}
+\paso{g}{$\{\frac{3x+1}{x-2}\le0\}$}
+$[-\frac13,2)$ (resuelto en el libro del parcial): \textbf{mín $-\frac13$, sup 2 sin máx.}
+\paso{h}{$\{\frac{2x+1}{x-3}\le0\}$}
+Mismo molde: $[-\frac12,3)$. \textbf{Mín $-\frac12$, sup 3 sin máx} (3 anula el denominador).
+\paso{i}{$[0,1]\setminus\Q$}
+Los irracionales de $[0,1]$. Por densidad (\P{dens}) hay irracionales tan cerca de 0 y de 1 como quieras. \textbf{Ínf 0, sup 1; sin mín ni máx} (0 y 1 son racionales, no están).
+\paso{j}{$[1,2]\cap\Q$}
+\textbf{Mín 1, máx 2} (son racionales, sí están).
+\paso{k}{$\{x^2+x-1\le0\}\cap\Q$}
+$[\frac{-1-\sqrt5}2,\frac{-1+\sqrt5}2]\cap\Q$. \textbf{Ínf $\frac{-1-\sqrt5}2$, sup $\frac{-1+\sqrt5}2$; sin mín ni máx} (los extremos son irracionales).
+\begin{memo}{i) CONTRA j)}
+Mismo intervalo, resultados opuestos: lo que decide es si los extremos pertenecen \textbf{al conjunto}, no al intervalo.
+\end{memo}
+
+\begin{enunciado}{PRÁCTICO 2.3 · EJ 3}
+a1) $A\subset B$, $B$ acotado $\Rightarrow\inf B\le\inf A\le\sup A\le\sup B$. a2) Ejemplo con $\inf B=\inf A<\sup A<\sup B$. b1) Si $a\le b$ para todo $a\in A$, $b\in B$: $\sup A\le\inf B$. b2) Ejemplo con $a<b$ siempre y $\sup A=\inf B$. c) $A\subset[\inf A,\sup A]$.
+\end{enunciado}
+\begin{uso}{\P{sup} «LA MENOR COTA» · \P{supsub}}
+La jugada de siempre: mostrá que algo es \emph{una} cota; entonces el sup (la \emph{menor}) es $\le$ eso.
+\end{uso}
+\paso{a1}{}
+$\sup B$ es cota de $B$, y por lo tanto de $A$; $\sup A$ es la menor: $\sup A\le\sup B$. Espejo con ínf. Y $\inf A\le a_0\le\sup A$ para un $a_0\in A$. $\blacksquare$
+\paso{a2}{}
+$A=[0,1]$, $B=[0,2]$: $\inf A=\inf B=0<1=\sup A<2=\sup B$.
+\paso{b1}{}
+Fijo $b\in B$: todo $a\le b$, así que $b$ es cota de $A$ y $\sup A\le b$. Esto vale para todo $b$: $\sup A$ es cota inferior de $B$, así que $\sup A\le\inf B$ (el ínf es la mayor). $\blacksquare$
+\paso{b2}{}
+$A=(0,1)$, $B=(1,2)$: siempre $a<1<b$, y $\sup A=1=\inf B$.
+\paso{c}{}
+Para todo $a\in A$: $\inf A\le a\le\sup A$. $\blacksquare$
+
+\begin{enunciado}{PRÁCTICO 2.3 · EJ 4}
+a) Completitud equivale a: todo conjunto no vacío acotado inferiormente tiene ínfimo. b) Caracterización: $\forall\delta>0\ \exists a_\delta\in A$ con $\alpha-\delta<a_\delta\le\alpha$.
+\end{enunciado}
+\paso{a}{el espejo}
+Si $A$ está acotado inferiormente por $m$, el conjunto $-A=\{-a\}$ está acotado superiormente por $-m$. Por completitud existe $s=\sup(-A)$, y $-s=\inf A$ (dar vuelta el signo da vuelta el orden, \P{prodneg}). La otra implicación es igual. $\blacksquare$
+\paso{b}{por el absurdo}
+Es la demostración del parcial 2022-2 (libro del parcial, cap.\ 2). Si para algún $\delta_0$ ningún elemento cae en $(\alpha-\delta_0,\alpha]$, entonces $\alpha-\delta_0$ es cota superior menor que $\alpha$. Absurdo. $\blacksquare$
+
+\begin{enunciado}{PRÁCTICO 2.3 · EJ 5}
+$\alpha=\sup A\notin A$ $\Rightarrow$ $A$ es infinito.
+\end{enunciado}
+\begin{uso}{\P{supeps} CARACTERIZACIÓN}
+En cada franja $(\alpha-\eps,\alpha)$ hay un elemento, y como $\alpha\notin A$, ese elemento es $<\alpha$.
+\end{uso}
+Por el absurdo: si $A$ fuera finito (y no vacío) tendría un elemento mayor que todos, su máximo, y ese máximo sería el supremo, que estaría en $A$. Contradicción. $\blacksquare$\\
+(Otra forma: con $\eps=1$ encuentro $a_1<\alpha$; con $\eps=\alpha-a_1$ encuentro $a_2\in(a_1,\alpha)$; y así, una sucesión estrictamente creciente de elementos distintos.)
+
+\begin{enunciado}{PRÁCTICO 2.3 · EJ 6}
+$A=\{\frac1n:n\in\N^+\}$, $\alpha=\inf A$. a) $\alpha\ge0$. b) Si $\alpha$ es cota inferior, $2\alpha$ también. c) $\alpha=0$; y $\forall x>0\ \exists n:\frac1n<x$.
+\end{enunciado}
+a) 0 es cota inferior ($\frac1n>0$) y $\alpha$ es la \emph{mayor}: $\alpha\ge0$.\\
+b) Dado $m$, uso $n=2m$: $\alpha\le\frac1{2m}$, o sea $2\alpha\le\frac1m$. Vale para todo $m$. $\blacksquare$\\
+c) Por b), $2\alpha$ es cota inferior, y $\alpha$ es la mayor: $2\alpha\le\alpha\Rightarrow\alpha\le0$. Con a), $\alpha=0$. Si $x>0=\inf A$, $x$ no es cota inferior: algún $\frac1n<x$. $\blacksquare$
+\begin{tip}{ESTO ES ARQUÍMEDES}
+Es la propiedad \P{arqui} demostrada solo con el axioma de completitud.
+\end{tip}
+
+\begin{enunciado}{PRÁCTICO 2.3 · EJ 7 y 9 · ARQUÍMEDES Y DENSIDAD}
+7) $x>0$: existe $n$ con $nx>y$. \ 9a) $\N$ no acotado; existen enteros $m<x<n$. 9b) $\inf\{\frac{x_0}n\}=0$; entre $x<y$ hay un irracional.
+\end{enunciado}
+\paso{9a}{$\N$ no acotado}
+Si lo fuera, sea $s=\sup\N$. $s-1$ no es cota: existe $n>s-1$, y entonces $n+1>s$ con $n+1\in\N$. Absurdo. Con esto, dado $x$ hay $n>x$, y hay $k>-x$, así que $m=-k<x$.
+\paso{7}{}
+Por 9a existe $n>\frac yx$. Multiplico por $x>0$: $nx>y$. $\blacksquare$
+\paso{9b}{un irracional entre $x$ e $y$}
+Por el ej.\ 6 (escalado), $\inf\{\frac{\sqrt2}n\}=0$: existe $n$ con $\frac{\sqrt2}n<y-x$. Los puntos $\frac{k\sqrt2}n$ ($k\in\Z$) están separados por un paso más chico que el hueco $(x,y)$, así que alguno cae adentro. Ese $\frac{k\sqrt2}n$ es irracional si $k\neq0$. (Si el único que cae es el 0, repetí el argumento en $(x,0)$ o en $(0,y)$.) $\blacksquare$
+
+\begin{enunciado}{PRÁCTICO 2.3 · EJ 8}
+$A=\{\frac mn:0<m<n\}$: elegir la opción correcta.
+\end{enunciado}
+Resuelto en el libro del parcial: $\frac mn<1$, el 1 es cota y no se alcanza, $1-\frac1n\to1$.
+\resp{Acotado superiormente, con supremo 1, sin máximo.}
+
+\begin{enunciado}{PRÁCTICO 2.3 · EJ 10 · SUMA DE CONJUNTOS II}
+a1) $\sup(A+B)=\sup A+\sup B$ (y lo mismo con ínf). a2) $A=(0,2]$, $C=(0,3]$: hallar $B$ con $A+B=C$. b) $\sup(\alpha A)$ según el signo de $\alpha$.
+\end{enunciado}
+\begin{uso}{\P{supeps} CARACTERIZACIÓN CON ε}
+Para probar que $S$ es el sup: (i) es cota, (ii) para cada $\eps$ hay un elemento arriba de $S-\eps$.
+\end{uso}
+\paso{a1}{}
+(i) $a+b\le\sup A+\sup B$. (ii) Dado $\eps$, elijo $a>\sup A-\frac\eps2$ y $b>\sup B-\frac\eps2$: $a+b>\sup A+\sup B-\eps$. $\blacksquare$
+\paso{a2}{}
+$B=(0,1]$. Chequeo: todo $a+b\in(0,3]$; y dado $c\in(0,3]$, $c=\frac{2c}3+\frac c3$ con $\frac{2c}3\in(0,2]$ y $\frac c3\in(0,1]$. Coherente con a1): $\sup=2+1=3$, $\inf=0+0$.
+\paso{b}{}
+$\alpha>0$: $\alpha a\le\alpha\sup A$ y el resto sale igual; $\sup(\alpha A)=\alpha\sup A$. \ $\alpha<0$: multiplicar da vuelta el orden (\P{prodneg}), así que el techo viene del piso: $\sup(\alpha A)=\alpha\inf A$ e $\inf(\alpha A)=\alpha\sup A$.
+
+% ============================================================
+\section{Funciones reales y completitud}
+
+\begin{enunciado}{PRÁCTICO 2.4 · EJ 1 · LA PARTE ENTERA}
+Bosquejar $f=\fl{x}$, $f_1=x-\fl x$, $f_2=\sqrt{f_1}$, $f_3=f+f_2$, $f_4=f+|x+1|$, $f_5=f(x+1)+|2x|$, $f_6=\fl{1/x}$, $f_7=1/f_6$.
+\end{enunciado}
+\begin{uso}{\P{pent} PARTE ENTERA}
+$\fl x\le x<\fl x+1$. Entonces $f_1=x-\fl x\in[0,1)$: la «parte decimal».
+\end{uso}
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[width=0.9\linewidth,height=4.6cm,axis lines=middle,xmin=-2.2,xmax=3.2,ymin=-2.4,ymax=3.4,
+  xtick={-2,-1,1,2,3},ytick={-2,-1,1,2,3},tick label style={font=\scriptsize},legend style={font=\tiny,at={(0.02,0.98)},anchor=north west,fill=papel}]
+\addplot[acero,thick,domain=-2:3,samples=501,jump mark left]{floor(x)}; \addlegendentry{$\fl x$}
+\addplot[rojo,thick,domain=-2:3,samples=501,jump mark left]{x-floor(x)}; \addlegendentry{$f_1$ (diente de sierra)}
+\addplot[teal,thick,domain=-2:3,samples=801]{floor(x)+sqrt(x-floor(x))}; \addlegendentry{$f_3$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\begin{itemize}
+\item $f_1$: diente de sierra, sube de 0 a casi 1 en cada $[n,n+1)$. \ $f_2=\sqrt{f_1}$: igual, pero cada diente es una rama de $\sqrt{\ }$.
+\item $f_3=\fl x+\sqrt{x-\fl x}$: \textbf{es continua}. En $n$ por izquierda tiende a $(n-1)+1=n$, y vale $n+0$.
+\item $f_4=\fl x+|x+1|$: escalones con pendiente $-1$ a la izquierda de $-1$ y $+1$ a la derecha.
+\item $f_5=\fl{x}+1+2|x|$ (porque $\fl{x+1}=\fl x+1$).
+\item $f_6=\fl{1/x}$ ($x\neq0$): vale $n$ en $(\frac1{n+1},\frac1n]$; se dispara cerca de $0^+$; vale 0 para $x>1$.
+\item $f_7=1/f_6$: definida donde $f_6\neq0$, o sea fuera de $(1,+\infty)$ y de $0$.
+\end{itemize}
+
+\begin{enunciado}{PRÁCTICO 2.4 · EJ 2}
+$\sup(f+g)\le\sup f+\sup g$ e $\inf(f+g)\ge\inf f+\inf g$ en $[a,b]$. Ejemplos con desigualdad estricta.
+\end{enunciado}
+Para todo $x$: $f(x)+g(x)\le\sup f+\sup g$. Es cota, y el sup es la menor: listo. El ínf es el espejo. $\blacksquare$\\
+Estricta: $f(x)=x$, $g(x)=-x$ en $[0,1]$: $f+g\equiv0$, $\sup(f+g)=0<1+0$. Cada una alcanza su techo en un punto distinto.
+
+\begin{enunciado}{PRÁCTICO 2.4 · EJ 3 · MONÓTONAS (II)}
+a) $f,g$ estrictamente crecientes $\Rightarrow f\circ g$ y $f+g$ también. b) $f$ creciente: 1) en $[a,b]$ el sup es $f(b)$; 2) la preimagen de un intervalo es un intervalo; 3) $\sup_{x<a}f\le f(a)\le\inf_{x>a}f$.
+\end{enunciado}
+\paso{a}{}
+$x<y\Rightarrow g(x)<g(y)\Rightarrow f(g(x))<f(g(y))$. Y sumando $f(x)<f(y)$ con $g(x)<g(y)$ (\P{sumord}). $\blacksquare$
+\paso{b1}{}
+$f(a)\le f(x)\le f(b)$ para $x\in[a,b]$: acotado. $f(b)$ es cota y pertenece: es el máximo, y por lo tanto el sup (\P{max}).
+\paso{b2}{}
+Si $x_1<x<x_2$ con $f(x_1),f(x_2)\in I$: $f(x_1)\le f(x)\le f(x_2)$, y como $I$ es un intervalo, $f(x)\in I$. $\blacksquare$
+\paso{b3}{}
+$x<a\Rightarrow f(x)\le f(a)$: $f(a)$ es cota del conjunto de la izquierda y el sup es menor o igual. Espejo a la derecha. $\blacksquare$
+
+\begin{enunciado}{PRÁCTICO 2.4 · EJ 4 · CONSTRUIR $\sqrt x$}
+a) $a^2$ es estrictamente creciente en $\R^+$. b) $A_x=\{a:a^2\le x\}$ es acotado. c) $f(x)=\sup A_x$ es creciente. d) $f(x)^2=x$.
+\end{enunciado}
+\paso{a}{}
+$0<a<b\Rightarrow a^2<ab<b^2$ (\P{prodpos} dos veces).
+\paso{b}{}
+Si $a>\max\{1,x\}$: $a^2>a>x$, así que $a\notin A_x$. Cota: $\max\{1,x\}$.
+\paso{c}{}
+$x<y\Rightarrow A_x\subset A_y\Rightarrow\sup A_x\le\sup A_y$ (\P{supsub}).
+\paso{d}{por doble absurdo}
+Sea $s=\sup A_x$ con $x>0$ (entonces $s>0$).\\
+\textbf{Si $s^2<x$:} con $0<h\le1$, $(s+h)^2\le s^2+h(2s+1)$. Eligiendo $h<\frac{x-s^2}{2s+1}$ queda $(s+h)^2<x$: $s+h\in A_x$ y supera al sup. Absurdo.\\
+\textbf{Si $s^2>x$:} con $h<\frac{s^2-x}{2s}$, $(s-h)^2>s^2-2sh>x$. Todo $a\in A_x$ cumple $a^2\le x<(s-h)^2$, o sea $a<s-h$: $s-h$ es una cota menor que el sup. Absurdo.\\
+Queda $s^2=x$. $\blacksquare$
+\begin{tip}{POR QUÉ IMPORTA}
+En $\Q$ este argumento se cae: $\{a\in\Q:a^2\le2\}$ no tiene sup racional. Por eso $\sqrt2$ «existe» recién en $\R$: la completitud es lo que hace que las raíces existan.
+\end{tip}

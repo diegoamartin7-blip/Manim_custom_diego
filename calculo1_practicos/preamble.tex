@@ -1,0 +1,150 @@
+\documentclass[10pt,oneside]{book}
+\usepackage[a5paper,top=16mm,bottom=17mm,left=14mm,right=13mm,headsep=5mm,footskip=8mm]{geometry}
+\usepackage[no-math]{fontspec}
+\setmainfont{IBMPlexSans}[Path=fonts/, Extension=.otf,
+  UprightFont=*-Regular, BoldFont=*-SemiBold, ItalicFont=*-Italic, BoldItalicFont=*-BoldItalic]
+\setmonofont{IBMPlexMono}[Path=fonts/, Extension=.otf,
+  UprightFont=*-Regular, BoldFont=*-Bold]
+\newfontfamily\plexbold{IBMPlexSans}[Path=fonts/, Extension=.otf, UprightFont=*-Bold]
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{tikz,pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta,patterns,decorations.pathreplacing,calc}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{booktabs,array,tabularx}
+\usepackage{pagecolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{multicol}
+
+% ---------------- paleta cuaderno técnico (fondo apagado) ----------------
+\definecolor{papel}{HTML}{F6F1E4}
+\definecolor{papel2}{HTML}{ECE4D0}
+\definecolor{borde}{HTML}{D9CFB8}
+\definecolor{tinta}{HTML}{2B2B28}
+\definecolor{suave}{HTML}{6A665C}
+\definecolor{rojo}{HTML}{A3312A}
+\definecolor{teal}{HTML}{1F6F6B}
+\definecolor{verde}{HTML}{4A7A2C}
+\definecolor{acero}{HTML}{3D4F58}
+\definecolor{naranja}{HTML}{C06A1F}
+\definecolor{dorado}{HTML}{B8860B}
+\pagecolor{papel}
+\color{tinta}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4.5pt}
+\linespread{1.08}
+\setlist{itemsep=2pt,topsep=3pt,leftmargin=15pt}
+
+% ---------------- títulos ----------------
+\titleformat{\chapter}[display]
+  {\color{tinta}}
+  {\ttfamily\small\color{rojo}\fcolorbox{rojo}{papel}{\,CAPÍTULO \thechapter\,}}
+  {6pt}
+  {\plexbold\LARGE}
+  [\vspace{2pt}{\color{tinta}\titlerule[1.2pt]}]
+\titlespacing*{\chapter}{0pt}{-6mm}{7mm}
+\titleformat{\section}{\plexbold\large\color{tinta}}{\ttfamily\color{rojo}\thesection}{8pt}{}
+\titlespacing*{\section}{0pt}{10pt}{4pt}
+\titleformat{\subsection}{\bfseries\normalsize\color{acero}}{}{0pt}{}
+\titlespacing*{\subsection}{0pt}{8pt}{2pt}
+\setcounter{secnumdepth}{1}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{borde}\leaders\hrule height \headrulewidth\hfill}}
+\fancyhead[L]{\ttfamily\scriptsize\color{suave}CÁLCULO 1 · PRÁCTICOS RESUELTOS}
+\fancyhead[R]{\ttfamily\scriptsize\color{suave}\leftmark}
+\fancyfoot[C]{\ttfamily\scriptsize\color{suave}\thepage}
+\renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{#1}}{}}
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\fancyfoot[C]{\ttfamily\scriptsize\color{suave}\thepage}}
+
+% ---------------- cajas ----------------
+\newcommand{\rotulo}[2]{{\ttfamily\scriptsize\bfseries\color{#1}#2}}
+
+% Resultado clave / definición / teorema: rojo doble
+\newtcolorbox{sello}[1]{enhanced,breakable,colback=rojo!4!papel,colframe=rojo,
+  boxrule=0.5pt,arc=0pt,left=6pt,right=6pt,top=5pt,bottom=5pt,
+  borderline={0.4pt}{1.6pt}{rojo},
+  title={\ttfamily\scriptsize\bfseries #1},coltitle=rojo,colbacktitle=rojo!4!papel,
+  attach boxed title to top left={xshift=6pt,yshift=-5pt},boxed title style={boxrule=0pt,colframe=papel,colback=papel,arc=0pt,left=2pt,right=2pt,top=0pt,bottom=0pt},
+  before skip=8pt,after skip=8pt}
+
+% Intuición / analogía: teal borde izquierdo
+\newtcolorbox{tip}[1]{enhanced,breakable,colback=teal!6!papel,frame hidden,arc=0pt,
+  borderline west={2.5pt}{0pt}{teal},left=8pt,right=6pt,top=4pt,bottom=4pt,
+  before upper={\rotulo{teal}{#1}\par\smallskip},before skip=7pt,after skip=7pt}
+
+% Ayuda-memoria: verde
+\newtcolorbox{memo}[1]{enhanced,breakable,colback=verde!7!papel,colframe=verde,boxrule=0.5pt,
+  arc=0pt,borderline west={3pt}{0pt}{verde},left=8pt,right=6pt,top=4pt,bottom=4pt,
+  before upper={\rotulo{verde}{#1}\par\smallskip},before skip=7pt,after skip=7pt}
+
+% Método: acero
+\newtcolorbox{metodo}[1]{enhanced,breakable,colback=acero!6!papel,colframe=acero,boxrule=0.6pt,
+  arc=0pt,left=7pt,right=6pt,top=4pt,bottom=4pt,
+  before upper={\rotulo{acero}{MÉTODO · #1}\par\smallskip},before skip=7pt,after skip=7pt}
+
+% Pausá e intentalo: naranja punteado
+\newtcolorbox{pausa}[1]{enhanced,breakable,colback=naranja!5!papel,frame hidden,arc=0pt,
+  borderline={0.8pt}{0pt}{naranja,dashed},left=7pt,right=6pt,top=4pt,bottom=4pt,
+  before upper={\rotulo{naranja}{PAUSÁ E INTENTALO · #1}\par\smallskip},before skip=8pt,after skip=8pt}
+
+% Enunciado de parcial / práctico
+\newtcolorbox{enunciado}[1]{enhanced,breakable,colback=papel2,colframe=borde,boxrule=0.6pt,arc=0pt,
+  left=7pt,right=6pt,top=6pt,bottom=4pt,
+  overlay={\node[anchor=west,fill=tinta,text=papel,inner sep=2pt,font=\ttfamily\scriptsize\bfseries] at ([xshift=6pt]frame.north west) {#1};},
+  before skip=10pt,after skip=6pt}
+
+% Trampa
+\newtcolorbox{trampa}[1]{enhanced,breakable,colback=rojo!7!papel,frame hidden,arc=0pt,
+  borderline west={2.5pt}{0pt}{rojo},left=8pt,right=6pt,top=4pt,bottom=4pt,
+  before upper={\rotulo{rojo}{TRAMPA · #1}\par\smallskip},before skip=7pt,after skip=7pt}
+
+\newcommand{\paso}[2]{\par\smallskip{\ttfamily\footnotesize\bfseries\color{rojo}PASO #1 — \MakeUppercase{#2}}\par\nopagebreak}
+\newtcolorbox{respbox}{enhanced,colback=verde!8!papel,colframe=verde,boxrule=0.6pt,arc=0pt,left=5pt,right=5pt,top=2pt,bottom=2pt,before skip=5pt,after skip=5pt}
+\newcommand{\resp}[1]{\begin{respbox}\small{\ttfamily\bfseries\color{verde}RESPUESTA\ \ }\bfseries #1\end{respbox}}
+\newcommand{\prob}[2]{\par\noindent{\ttfamily\footnotesize\colorbox{rojo}{\color{papel}\bfseries\,PROBABILIDAD: #1\,}}\par\vspace{2pt}{\raggedright\ttfamily\footnotesize\color{suave}#2\par}\medskip}
+\newcommand{\etiq}[1]{{\ttfamily\scriptsize\color{suave}[#1]}}
+\newcommand{\ok}{\ \textcolor{verde}{\checkmark}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Ss}{S^{*}}
+\newcommand{\Si}{S_{*}}
+\newcommand{\fl}[1]{\lfloor #1\rfloor}
+\newcommand{\eps}{\varepsilon}
+
+
+% Letras griegas sueltas: IBM Plex Mono no las tiene (salían como tofu en los rótulos).
+\usepackage{newunicodechar}
+\newunicodechar{ε}{\ensuremath{\varepsilon}}
+\newunicodechar{δ}{\ensuremath{\delta}}
+\newunicodechar{α}{\ensuremath{\alpha}}
+\newunicodechar{π}{\ensuremath{\pi}}
+\newunicodechar{Δ}{\ensuremath{\Delta}}
+
+% ---------------- agregados del cuaderno de prácticos ----------------
+% Teoría que se aplica en ese paso: acero fino
+\newtcolorbox{uso}[1]{enhanced,breakable,colback=acero!7!papel,colframe=acero!55,boxrule=0.4pt,arc=0pt,
+  left=6pt,right=6pt,top=2pt,bottom=2pt,fontupper=\small,
+  before upper={\rotulo{acero}{TEORÍA QUE USO · #1}\par\smallskip},before skip=4pt,after skip=5pt}
+% Falta el dato (figura del EVA, enunciado incompleto)
+\newtcolorbox{falta}{enhanced,breakable,colback=naranja!6!papel,frame hidden,arc=0pt,
+  borderline west={2.5pt}{0pt}{naranja},left=8pt,right=6pt,top=3pt,bottom=3pt,fontupper=\small,
+  before upper={\rotulo{naranja}{DATO QUE NO TENGO}\par\smallskip},before skip=5pt,after skip=5pt}
+% Propiedad numerada del recordatorio
+\newcounter{prop}
+\newcommand{\pr}[2]{\refstepcounter{prop}\label{p:#1}\par\noindent{\ttfamily\footnotesize\bfseries\color{rojo}P\theprop}\enspace\textbf{#2}\enspace}
+\renewcommand{\P}[1]{\textbf{\hyperref[p:#1]{P\ref*{p:#1}}}}
+\newcommand{\sgn}{\operatorname{signo}}
+\newcommand{\ce}[1]{\lceil #1\rceil}
+\newcommand{\dist}[1]{[\![#1]\!]}
+\newcommand{\sub}[1]{\subsection*{#1}}
+\setcounter{tocdepth}{1}

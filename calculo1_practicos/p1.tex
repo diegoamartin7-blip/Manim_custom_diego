@@ -1,0 +1,487 @@
+% ================= CAPÍTULO 1 =================
+\chapter{Conjuntos y funciones}
+\prob{PRÁCTICO 1}{semanas 1 y 2 · la base de todo lo demás}
+
+\newcommand{\mini}[2]{%
+\begin{tikzpicture}[x=0.2cm,y=0.2cm]
+\begin{scope}\clip (-5.5,-5.5) rectangle (5.5,5.5); #2 \end{scope}
+\draw[suave!70,-{Stealth[length=3pt]}] (-5.5,0)--(5.6,0); \draw[suave!70,-{Stealth[length=3pt]}] (0,-5.5)--(0,5.6);
+\node[font=\ttfamily\scriptsize,anchor=north west] at (-5.5,5.5) {#1};
+\end{tikzpicture}}
+
+\section{Conjuntos}
+
+\begin{enunciado}{PRÁCTICO 1.1 · EJ 1}
+a) ¿Cuántos subconjuntos de $U=\{1,2,a,b,c\}$ tienen 2 elementos? ¿Y 3? \quad b) Calcular el conjunto potencia de $U=\{a,1,U\}$.
+\end{enunciado}
+\begin{uso}{\P{subc} SUBCONJUNTOS}
+Elegir $k$ elementos entre $n$, sin orden: $\binom nk=\frac{n!}{k!\,(n-k)!}$. Todos los subconjuntos: $2^n$.
+\end{uso}
+\paso{1}{a) contar}
+$U$ tiene 5 elementos. Con 2: $\binom52=\frac{5\cdot4}{2}=10$. Con 3: $\binom53=\frac{5\cdot4\cdot3}{6}=10$.\\
+Los de 2, para verlos: $\{1,2\}$, $\{1,a\}$, $\{1,b\}$, $\{1,c\}$, $\{2,a\}$, $\{2,b\}$, $\{2,c\}$, $\{a,b\}$, $\{a,c\}$, $\{b,c\}$.
+\begin{tip}{POR QUÉ DAN IGUAL}
+Elegir 3 que entran es lo mismo que elegir los 2 que quedan afuera: $\binom53=\binom52$.
+\end{tip}
+\paso{2}{b) el conjunto potencia}
+$U=\{a,1,U\}$ tiene 3 elementos: $a$, $1$ y el propio $U$ (que acá funciona como un elemento más). Tiene $2^3=8$ subconjuntos:
+\[\mathcal P(U)=\big\{\emptyset,\ \{a\},\ \{1\},\ \{U\},\ \{a,1\},\ \{a,U\},\ \{1,U\},\ \{a,1,U\}\big\}.\]
+\begin{trampa}{ELEMENTO CONTRA SUBCONJUNTO}
+$U\in U$ (es un elemento) y también $U\subset U$ (todo conjunto es subconjunto de sí mismo). Son dos cosas distintas: $\{U\}$ es el subconjunto que tiene a $U$ como único elemento; $U$ mismo es el subconjunto con los tres.
+\end{trampa}
+
+\begin{enunciado}{PRÁCTICO 1.1 · EJ 2}
+$A=\{1,\dots,6\}$, $B=\{3,\dots,8\}$, $C=\{7,8,9,10\}$. Calcular las 14 operaciones.
+\end{enunciado}
+\begin{uso}{\P{cdif} DIFERENCIA · \P{cdist} DISTRIBUTIVA}
+$A\cup B$: está en alguno. $A\cap B$: está en los dos. $A\setminus B$: está en $A$ y no en $B$. Paréntesis primero.
+\end{uso}
+\begin{center}\small
+\begin{tabular}{@{}lll@{}}\toprule
+Operación & Cuenta & Resultado\\\midrule
+a) $A\cap B$ & comunes & $\{3,4,5,6\}$\\
+b) $B\cap C$ & comunes & $\{7,8\}$\\
+c) $A\cap C$ & no hay comunes & $\emptyset$\\
+d) $A\cap B\cap C$ & $(A\cap B)\cap C=\{3,4,5,6\}\cap C$ & $\emptyset$\\
+e) $A\cup B$ & todos & $\{1,\dots,8\}$\\
+f) $B\cup C$ & todos & $\{3,\dots,10\}$\\
+g) $A\cup C$ & todos & $\{1,\dots,10\}$\\
+h) $A\cup B\cup C$ & todos & $\{1,\dots,10\}$\\
+i) $A\cup(B\cap C)$ & $A\cup\{7,8\}$ & $\{1,\dots,8\}$\\
+j) $A\cap(B\cup C)$ & $A\cap\{3,\dots,10\}$ & $\{3,4,5,6\}$\\
+k) $(A\cup B)\cap(B\cup C)$ & $\{1,\dots,8\}\cap\{3,\dots,10\}$ & $\{3,\dots,8\}$\\
+l) $(A\setminus B)\cup(B\setminus A)$ & $\{1,2\}\cup\{7,8\}$ & $\{1,2,7,8\}$\\
+m) $(A\setminus C)\cup(C\setminus A)$ & $A\cup C$ (son disjuntos) & $\{1,\dots,10\}$\\
+n) $A\cup(B\setminus C)$ & $A\cup\{3,4,5,6\}$ & $\{1,\dots,6\}$\\\bottomrule
+\end{tabular}
+\end{center}
+\begin{memo}{LA DIFERENCIA SIMÉTRICA}
+l) y m) son la \emph{diferencia simétrica}: lo que está en uno solo. Si los conjuntos son disjuntos (como $A$ y $C$), es la unión entera.
+\end{memo}
+
+\begin{enunciado}{PRÁCTICO 1.1 · EJ 3}
+Describir las regiones numeradas de un diagrama de Venn de tres conjuntos usando $\cup,\cap,\setminus$.
+\end{enunciado}
+\begin{falta}
+La numeración de las regiones está en la figura del EVA. Acá están las 8 regiones posibles con su fórmula: buscá cada número de la figura en esta lista.
+\end{falta}
+\begin{uso}{\P{cdif} DIFERENCIA}
+«Estar en $A$ y no en $B$» se escribe $A\setminus B$. «No estar en ninguno de $B$, $C$» es $\setminus(B\cup C)$.
+\end{uso}
+\begin{center}\small
+\begin{tabular}{@{}lll@{}}\toprule
+Región & En palabras & Fórmula\\\midrule
+$R_A$ & solo en $A$ & $A\setminus(B\cup C)$\\
+$R_B$ & solo en $B$ & $B\setminus(A\cup C)$\\
+$R_C$ & solo en $C$ & $C\setminus(A\cup B)$\\
+$R_{AB}$ & en $A$ y $B$, no en $C$ & $(A\cap B)\setminus C$\\
+$R_{AC}$ & en $A$ y $C$, no en $B$ & $(A\cap C)\setminus B$\\
+$R_{BC}$ & en $B$ y $C$, no en $A$ & $(B\cap C)\setminus A$\\
+$R_{ABC}$ & en los tres & $A\cap B\cap C$\\
+afuera & en ninguno & $U\setminus(A\cup B\cup C)$\\\bottomrule
+\end{tabular}
+\end{center}
+Estas 8 regiones las uso abajo, en el ejercicio 7, para probar identidades.
+
+\begin{enunciado}{PRÁCTICO 1.1 · EJ 4}
+$P_1=A\cup B$, $P_2=A\cap B$, $P_3=A\setminus B$, $P_4=A$, $P_5=B$. ¿Para qué pares vale siempre $P_i\subset P_j$?
+\end{enunciado}
+\begin{uso}{\P{absor} ABSORCIÓN · \P{incl} INCLUSIÓN}
+$A\cap B\subset A\subset A\cup B$. Para ver que una inclusión \emph{no} vale siempre, alcanza un contraejemplo.
+\end{uso}
+\begin{center}\small
+\begin{tabular}{@{}c|ccccc@{}}
+$P_i\subset P_j$? & $P_1$ & $P_2$ & $P_3$ & $P_4$ & $P_5$\\\midrule
+$P_1=A\cup B$ & sí & no & no & no & no\\
+$P_2=A\cap B$ & sí & sí & no & sí & sí\\
+$P_3=A\setminus B$ & sí & no & sí & sí & no\\
+$P_4=A$ & sí & no & no & sí & no\\
+$P_5=B$ & sí & no & no & no & sí
+\end{tabular}
+\end{center}
+Contraejemplo para todos los «no»: $A=\{1,2\}$, $B=\{2,3\}$. Entonces $P_1=\{1,2,3\}$, $P_2=\{2\}$, $P_3=\{1\}$, $P_4=\{1,2\}$, $P_5=\{2,3\}$, y cada «no» de la tabla falla con estos conjuntos. Por ejemplo $P_3=\{1\}\not\subset\{2,3\}=P_5$.
+\begin{trampa}{«NO SIEMPRE» NO ES «NUNCA»}
+$P_3\subset P_2$ puede pasar (si $A\setminus B=\emptyset$, es decir $A\subset B$). La tabla dice «no» porque no vale \emph{siempre}.
+\end{trampa}
+
+\begin{enunciado}{PRÁCTICO 1.1 · EJ 5 · PRODUCTO CARTESIANO}
+a) Listar $U\times W$ y $W\times U$ con $U=\{1,2,3\}$, $W=\{a,b,c\}$. b) Si $(x,y)\in A\times B$ y $(x,y)\in B\times A$, entonces $\{x,y\}\subset A\cap B$. c) $A,B\neq\emptyset$ y $A\times B=B\times A\Rightarrow A=B$. d) Bosquejar 10 regiones. e) $(A\times B)\cup(C\times D)\subset(A\cup C)\times(B\cup D)$.
+\end{enunciado}
+\begin{uso}{\P{cart} PRODUCTO CARTESIANO}
+$(x,y)\in A\times B\iff x\in A$ y $y\in B$. El primer lugar viene del primer conjunto.
+\end{uso}
+\paso{1}{a) listar}
+$U\times W=\{(1,a),(1,b),(1,c),(2,a),(2,b),(2,c),(3,a),(3,b),(3,c)\}$ (9 pares).\\
+$W\times U=\{(a,1),(a,2),(a,3),(b,1),\dots,(c,3)\}$ (9 pares). Son distintos: $(1,a)\neq(a,1)$.
+\paso{2}{b) traducir cada pertenencia}
+$(x,y)\in A\times B$: $x\in A$, $y\in B$. \ $(x,y)\in B\times A$: $x\in B$, $y\in A$. Juntando: $x\in A\cap B$ y $y\in A\cap B$. $\blacksquare$
+\paso{3}{c) doble inclusión}
+Pruebo $A\subset B$. Sea $a\in A$. Como $B\neq\emptyset$ elijo $b\in B$. Entonces $(a,b)\in A\times B=B\times A$, así que $a\in B$. La otra inclusión es igual cambiando letras. $\blacksquare$
+\begin{trampa}{PARA QUÉ ESTÁ «NO VACÍOS»}
+Si $B=\emptyset$, $A\times\emptyset=\emptyset=\emptyset\times A$ para cualquier $A$. Sin la hipótesis, $A=\{1\}$, $B=\emptyset$ es contraejemplo. En la prueba se usó justo al elegir $b\in B$.
+\end{trampa}
+\paso{4}{d) las regiones}
+Receta: despejá $y$, dibujá la recta del borde (llena si hay $\le$ o $\ge$, punteada si es estricta) y sombreá el lado correcto.
+
+\begin{center}
+\mini{i) $y=3$}{\draw[acero,thick] (-6,3)--(6,3);}\hspace{2pt}
+\mini{ii) $x=-1$}{\draw[acero,thick] (-1,-6)--(-1,6);}\hspace{2pt}
+\mini{iii) $y=x$}{\draw[acero,thick] (-6,-6)--(6,6);}\hspace{2pt}
+\mini{iv) $y=-x$}{\draw[acero,thick] (-6,6)--(6,-6);}\hspace{2pt}
+\mini{v)}{\fill[rojo!25] (0,2) rectangle (4,4); \draw[rojo,thick] (0,2)--(4,2) (0,4)--(4,4); \draw[rojo,dashed] (0,2)--(0,4) (4,2)--(4,4);}\\[3pt]
+\mini{vi)}{\fill[rojo!25] (1,1) rectangle (3,4); \draw[rojo,thick] (1,1)--(3,1) (3,1)--(3,4); \draw[rojo,dashed] (1,1)--(1,4) (1,4)--(3,4);}\hspace{2pt}
+\mini{vii)}{\fill[rojo!25] (-6,4)--(6,-2)--(6,-6)--(-6,-6)--cycle; \draw[rojo,dashed] (-6,4)--(6,-2);}\hspace{2pt}
+\mini{viii)}{\fill[rojo!25] (-6,-12)--(6,6)--(6,-6)--(-6,-6)--cycle; \draw[rojo,dashed] (-2,-6)--(6,6);}\hspace{2pt}
+\mini{ix)}{\fill[rojo!25] (3,3)--(-6,-6)--(-6,-15)--cycle; \draw[rojo,dashed] (-6,-6)--(6,6) (-1.5,-6)--(4.5,6);}\hspace{2pt}
+\mini{x)}{\fill[rojo!25] (-3,-3)--(-6,-6)--(-6,-4.5)--cycle; \draw[rojo,dashed] (-6,-6)--(6,6) (-7,-5)--(7,2);}
+\end{center}
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}l X@{}}\toprule
+Región & Cómo se lee\\\midrule
+v) $0<x<4$, $2\le y\le4$ & rectángulo; lados verticales punteados (estricta), horizontales llenos\\
+vi) $1<x\le3$, $1\le y<4$ & rectángulo; izquierda y arriba punteados\\
+vii) $2x+4y<4$ & $y<1-\frac x2$: debajo de la recta por $(0,1)$ y $(2,0)$\\
+viii) $3x-2y>6$ & $y<\frac32x-3$: debajo de la recta por $(2,0)$ y $(0,-3)$\\
+ix) $2x<y+3$, $x>y$ & $2x-3<y<x$: cuña entre las dos rectas, a la izquierda de su cruce $(3,3)$\\
+x) $x>2y+3$, $x<y$ & $x<y<\frac{x-3}2$: solo posible si $x<-3$; cuña a la izquierda de $(-3,-3)$\\\bottomrule
+\end{tabularx}
+\end{center}
+\begin{trampa}{DESPEJAR CON UN NEGATIVO}
+En viii), $3x-2y>6\iff-2y>6-3x\iff y<\frac{3x-6}{2}$. Dividir por $-2$ \textbf{da vuelta} la desigualdad (\P{prodneg}).
+\end{trampa}
+\paso{5}{e) la inclusión}
+Sea $(x,y)\in A\times B$: $x\in A\subset A\cup C$, $y\in B\subset B\cup D$, así que $(x,y)\in(A\cup C)\times(B\cup D)$. Igual si $(x,y)\in C\times D$. $\blacksquare$\\
+\textbf{Con igualdad:} $A=C$, $B=D$ (los dos lados son $A\times B$).\\
+\textbf{Sin igualdad:} $A=B=\{1\}$, $C=D=\{2\}$. Izquierda: $\{(1,1),(2,2)\}$. Derecha: $\{1,2\}\times\{1,2\}$, que además tiene $(1,2)$ y $(2,1)$.
+
+\begin{enunciado}{PRÁCTICO 1.1 · EJ 6 · CARDINALES}
+a) $|A|=15$, $|B|=7$: $|A\times B|$. \ b) $|A|=20$, $|B|=30$, $|A\cup B|=37$: $|A\cap B|$. \ c) $|A|=20$, $|B|=30$, $|A\cap B|=15$: $|A\cup B|$.
+\end{enunciado}
+\begin{uso}{\P{card} CARDINAL DE LA UNIÓN · \P{cart} PRODUCTO}
+$|A\cup B|=|A|+|B|-|A\cap B|$: los de la intersección se contaron dos veces. $|A\times B|=|A||B|$.
+\end{uso}
+a) $15\cdot7=105$. \ b) $37=20+30-|A\cap B|\Rightarrow|A\cap B|=13$. \ c) $20+30-15=35$.
+\resp{a) 105; \ b) 13; \ c) 35.}
+
+\begin{enunciado}{PRÁCTICO 1.1 · EJ 7 · IDENTIDADES POR DIAGRAMAS DE VENN}
+Probar a) a g) (asociativas, distributivas, De Morgan y la g).
+\end{enunciado}
+\begin{uso}{MÉTODO DE LAS REGIONES (EJ 3)}
+Cada elemento cae en exactamente una de las 8 regiones. Si los dos lados de la identidad ocupan \textbf{las mismas regiones}, son el mismo conjunto. Esto \emph{es} una prueba: revisa todos los casos posibles.
+\end{uso}
+\begin{center}\small
+\begin{tabular}{@{}lll@{}}\toprule
+Identidad & Lado izquierdo & Lado derecho\\\midrule
+a) $(A\cup B)\cup C=A\cup(B\cup C)$ & las 7 regiones de adentro & las mismas 7\\
+b) $(A\cap B)\cap C=A\cap(B\cap C)$ & $R_{ABC}$ & $R_{ABC}$\\
+c) $A\cup(B\cap C)=(A\cup B)\cap(A\cup C)$ & $R_A,R_{AB},R_{AC},R_{ABC},R_{BC}$ & las mismas 5\\
+d) $A\cap(B\cup C)=(A\cap B)\cup(A\cap C)$ & $R_{AB},R_{AC},R_{ABC}$ & las mismas 3\\
+e) $A\setminus(B\cap C)=(A\setminus B)\cup(A\setminus C)$ & $R_A,R_{AB},R_{AC}$ & las mismas 3\\
+f) $A\setminus(B\cup C)=(A\setminus B)\cap(A\setminus C)$ & $R_A$ & $R_A$\\
+g) $A\setminus(B\setminus C)=(A\setminus B)\cup(A\cap B\cap C)$ & $R_A,R_{AC},R_{ABC}$ & las mismas 3\\\bottomrule
+\end{tabular}
+\end{center}
+Ejemplo de cómo se llena una fila, la g). Izquierda: $B\setminus C=\{R_B,R_{AB}\}$; quitarle eso a $A=\{R_A,R_{AB},R_{AC},R_{ABC}\}$ deja $\{R_A,R_{AC},R_{ABC}\}$. Derecha: $A\setminus B=\{R_A,R_{AC}\}$, más $R_{ABC}$. Iguales. $\blacksquare$
+\begin{tip}{EN TU IDIOMA}
+Las regiones son como los canales de una máscara: cada operación de conjuntos es una operación booleana de máscaras (unión = OR, intersección = AND, diferencia = AND NOT). Dos fórmulas son iguales si dan la misma máscara.
+\end{tip}
+
+% ============================================================
+\section{Funciones}
+
+\begin{enunciado}{PRÁCTICO 1.2 · EJ 1}
+$f:A\to B$, $g:B\to C$ dadas por un diagrama. a) $g\circ f$. b) Inyectividad y sobreyectividad de $f$, $g$, $g\circ f$.
+\end{enunciado}
+\begin{falta}
+El diagrama de flechas está en el EVA. Con él delante, seguí este método.
+\end{falta}
+\begin{metodo}{DIAGRAMAS DE FLECHAS}
+\begin{enumerate}
+\item $g\circ f$: para cada $x\in A$ seguí la flecha de $f$ y después la de $g$ (\P{comp}).
+\item \textbf{Inyectiva} (\P{iny}): a ningún punto de llegada le llegan dos flechas.
+\item \textbf{Sobreyectiva} (\P{sobre}): a todo punto de llegada le llega al menos una flecha.
+\item Chequeo gratis (ej. 8): si $g\circ f$ es inyectiva, $f$ lo es; si $g\circ f$ es sobre, $g$ lo es.
+\end{enumerate}
+\end{metodo}
+
+\begin{enunciado}{PRÁCTICO 1.2 · EJ 2}
+Con la tabla $f(1..6)=3,1,4,2,2,5$ y $g(1..6)=6,3,2,1,2,3$: a) $f(g(1))$ b) $g(f(1))$ c) $f(f(1))$ d) $g(g(1))$.
+\end{enunciado}
+\begin{uso}{\P{comp} COMPOSICIÓN}
+Se evalúa de adentro hacia afuera.
+\end{uso}
+a) $g(1)=6$, $f(6)=5$. \ b) $f(1)=3$, $g(3)=2$. \ c) $f(1)=3$, $f(3)=4$. \ d) $g(1)=6$, $g(6)=3$.
+\resp{a) 5; \ b) 2; \ c) 4; \ d) 3. (Fijate a) $\neq$ b): $f\circ g\neq g\circ f$.)}
+
+\begin{enunciado}{PRÁCTICO 1.2 · EJ 3}
+a1) Si $f$ no tiene raíces, $f\circ g$ no tiene raíces. a2) Ejemplo con $f$ con raíces y $f\circ g$ sin. b) Raíces de: $\sqrt{x+5}\sqrt{x+6}$; \ $\sqrt x-\sqrt{x-3}$; \ $2\sqrt x-\sqrt[3]x$; \ $(e^x)^2+e^x-4$; \ $2\sin^2x+3\sin x-2$.
+\end{enunciado}
+\paso{1}{a1) por el absurdo}
+Si $f(g(x_0))=0$ para algún $x_0$, entonces $y_0=g(x_0)$ es raíz de $f$. Contradice la hipótesis. $\blacksquare$
+\paso{2}{a2) ejemplo}
+$f(x)=x$ (raíz en 0) y $g(x)=x^2+1$: $f(g(x))=x^2+1\ge1$, sin raíces. La imagen de $g$ esquiva la raíz de $f$.
+\begin{metodo}{RAÍCES CON RAÍCES, EXPONENCIALES Y SENOS}
+\begin{enumerate}
+\item \textbf{Dominio primero.} Lo de adentro de $\sqrt{\ }$ tiene que ser $\ge0$.
+\item \textbf{Producto nulo} (\P{prodnulo}): un producto es 0 si algún factor lo es.
+\item \textbf{Cambio de variable:} $u=e^x$ (con $u>0$) o $s=\sin x$ (con $-1\le s\le1$). Resolvés en $u$ o $s$ y descartás lo que no cumple la restricción.
+\item Si elevaste al cuadrado, \textbf{verificá} (puede aparecer una solución falsa).
+\end{enumerate}
+\end{metodo}
+\textbf{a)} Dominio: $x\ge-5$ y $x\ge-6$, o sea $x\ge-5$. Producto nulo: $x=-5$ o $x=-6$. Pero $-6$ está fuera del dominio. \textbf{Raíz: $x=-5$.}\\[3pt]
+\textbf{b)} Dominio $x\ge3$. $\sqrt x=\sqrt{x-3}\Rightarrow x=x-3\Rightarrow0=-3$. \textbf{No tiene raíces.} (Siempre $\sqrt x>\sqrt{x-3}$, por \P{potraiz}.)\\[3pt]
+\textbf{c)} Dominio $x\ge0$. $2\sqrt x=\sqrt[3]x$. Elevo a la 6: $64x^3=x^2\Rightarrow x^2(64x-1)=0$. Candidatos $0$ y $\frac1{64}$. Verifico $\frac1{64}$: $2\cdot\frac18=\frac14=\sqrt[3]{\frac1{64}}$\ok. \textbf{Raíces: $0$ y $\frac1{64}$.}\\[3pt]
+\textbf{d)} $u=e^x>0$: $u^2+u-4=0\Rightarrow u=\frac{-1\pm\sqrt{17}}2$. La negativa se descarta. \textbf{Raíz: $x=\log\frac{\sqrt{17}-1}2$.}\\[3pt]
+\textbf{e)} $s=\sin x$: $2s^2+3s-2=(2s-1)(s+2)=0$. $s=-2$ es imposible. $\sin x=\frac12$: \textbf{$x=\frac\pi6+2k\pi$ o $x=\frac{5\pi}6+2k\pi$, $k\in\Z$.}
+\begin{trampa}{PERDER RAÍCES O INVENTARLAS}
+En a), olvidarse del dominio agrega $x=-6$. En c), dividir por $x$ pierde el $0$. En e), olvidarse del $+2k\pi$ deja solo dos de las infinitas raíces.
+\end{trampa}
+
+\begin{enunciado}{PRÁCTICO 1.2 · EJ 4}
+Con el gráfico de $f:[-5,5]\to\R$: a) $f(1{,}4)$; b) $x$ con $f(x)=0$; c) $f^{-1}(\{1\})$.
+\end{enunciado}
+\begin{falta}
+Se lee del gráfico del EVA. a) Subí desde $x=1{,}4$ hasta la curva y leé la altura. b) Marcá dónde la curva corta el eje $x$. c) $f^{-1}(\{1\})$ son \textbf{todos} los $x$ donde la curva corta la recta horizontal $y=1$: puede ser más de uno, o ninguno (\P{imag}).
+\end{falta}
+
+\begin{enunciado}{PRÁCTICO 1.2 · EJ 5 · $f\circ g$, $g\circ f$, $f+g$}
+Diez pares de funciones, de a) a j).
+\end{enunciado}
+\begin{uso}{\P{comp} COMPOSICIÓN}
+$f\circ g$: donde dice $x$ en la fórmula de $f$, meté \textbf{toda} la fórmula de $g$. Con funciones a trozos, la interna también entra en las \textbf{condiciones}.
+\end{uso}
+\begin{center}\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\linewidth}{@{}l X X X@{}}\toprule
+& $f\circ g$ & $g\circ f$ & $f+g$\\\midrule
+a) $2x+1$, $3x-1$ & $6x-1$ & $6x+2$ & $5x$\\
+b) $5x-1$, $2x-3$ & $10x-16$ & $10x-5$ & $7x-4$\\
+c) $2x+1$, $x^3-x^2-4$ & $2x^3-2x^2-7$ & $8x^3+8x^2+2x-4$ & $x^3-x^2+2x-3$\\
+d) $2x^2+1$, $-3x^2-4$ & $18x^4+48x^2+33$ & $-12x^4-12x^2-7$ & $-x^2-3$\\
+e) $|2x+1|$, $x^2+x+1$ & $2x^2+2x+3$ & $(2x+1)^2+|2x+1|+1$ & $|2x+1|+x^2+x+1$\\
+f) $|2x-5|$, $x^2-x+1$ & $|2x^2-2x-3|$ & $(2x-5)^2-|2x-5|+1$ & $|2x-5|+x^2-x+1$\\
+g) $x+1$, $\max\{1,x-1\}$ & $\max\{2,x\}$ & $\max\{1,x\}$ & $\max\{x+2,2x\}$\\
+h) $x-2$, $\max\{1,x-2\}$ & $\max\{-1,x-4\}$ & $\max\{1,x-4\}$ & $\max\{x-1,2x-4\}$\\\bottomrule
+\end{tabularx}
+\end{center}
+\textbf{Detalles que se preguntan.} En e), $2x^2+2x+3>0$ siempre (discriminante $4-24<0$), así que el valor absoluto se va. En f), $2x^2-2x-3$ cambia de signo en $\frac{1\pm\sqrt7}2$: el valor absoluto \textbf{se queda}. En g), $\max\{1,x-1\}+1=\max\{2,x\}$ porque sumar una constante entra al máximo.
+\paso{i}{a trozos: $f=2x+1$ si $x\le0$, $x-1$ si $x>0$; \ $g=x$ si $x\le0$, $2x$ si $x>0$}
+$f\circ g$: si $x\le0$, $g(x)=x\le0$ y entra a la 1.ª rama de $f$: $2x+1$. Si $x>0$, $g(x)=2x>0$, 2.ª rama: $2x-1$.\\
+$g\circ f$: ahora la condición de $g$ depende del \textbf{signo de $f(x)$}:
+\begin{itemize}
+\item $x\le0$: $f=2x+1$, que es $\le0$ si $x\le-\frac12$. Entonces $g=2x+1$ si $x\le-\frac12$; $g=2(2x+1)=4x+2$ si $-\frac12<x\le0$.
+\item $x>0$: $f=x-1$, que es $\le0$ si $x\le1$. Entonces $g=x-1$ si $0<x\le1$; $g=2x-2$ si $x>1$.
+\end{itemize}
+$f+g$: $3x+1$ si $x\le0$; $3x-1$ si $x>0$.
+\paso{j}{a trozos: $f=0$ ($x\le0$), $x+3$ ($0<x<4$), $1-x$ ($x\ge4$); \ $g=x$ ($x\le0$), $\frac1{x^2}$ ($x>0$)}
+$f\circ g$: si $x\le0$, $g=x\le0$, $f=0$. Si $x>0$, $g=\frac1{x^2}>0$; y $\frac1{x^2}<4\iff x>\frac12$. Entonces:
+\[f\circ g=\begin{cases}0 & x\le0\\ 1-\frac1{x^2} & 0<x\le\frac12\\ \frac1{x^2}+3 & x>\frac12\end{cases}\qquad
+g\circ f=\begin{cases}0 & x\le0\\ \frac1{(x+3)^2} & 0<x<4\\ 1-x & x\ge4\end{cases}\]
+\[f+g=\begin{cases}x & x\le0\\ x+3+\frac1{x^2} & 0<x<4\\ 1-x+\frac1{x^2} & x\ge4\end{cases}\]
+En $g\circ f$ con $x\ge4$: $f=1-x\le-3\le0$, así que usa la rama $g(u)=u$.
+\begin{trampa}{LOS QUIEBRES SE CORREN}
+En $g\circ f$ del inciso i) aparecen quiebres en $-\frac12$ y en $1$, que no estaban en ninguna de las dos. En j), el quiebre $\frac12$ sale de resolver $\frac1{x^2}<4$.
+\end{trampa}
+
+\begin{enunciado}{PRÁCTICO 1.2 · EJ 6 · MODELAR ÁREAS}
+Área de: a) cuadrado según su diagonal; b) círculo según su diámetro; c) triángulo equilátero según su lado; d) triángulo rectángulo isósceles según su hipotenusa; e) hexágono regular según su lado.
+\end{enunciado}
+\begin{uso}{PITÁGORAS · ÁREAS BÁSICAS}
+Diagonal de un cuadrado de lado $l$: $l\sqrt2$. Altura de un equilátero de lado $l$: $\frac{\sqrt3}2l$.
+\end{uso}
+a) Lado $\frac d{\sqrt2}$: $A(d)=\frac{d^2}2$. \ b) Radio $\frac D2$: $A(D)=\frac{\pi D^2}4$. \ c) $A(l)=\frac12\cdot l\cdot\frac{\sqrt3}2l=\frac{\sqrt3}4l^2$. \ d) Catetos $\frac h{\sqrt2}$: $A(h)=\frac12\cdot\frac{h^2}2=\frac{h^2}4$. \ e) Seis equiláteros: $A(l)=\frac{3\sqrt3}2l^2$.\\
+Dominio en todos: $(0,+\infty)$ (una longitud es positiva).
+
+\begin{enunciado}{PRÁCTICO 1.2 · EJ 7 · PARES E IMPARES}
+a) Clasificar $|x|$, $x^2+1$, $x^3+1$, $\frac1{x^2+1}$, $\sqrt{x^2+3}$, $\sqrt[3]{2x}$. b) $e^x$, $\sin$, $\cos$, $\log(x^2+1)$, $\arctan$. c) Suma y múltiplo. d), e) Productos. f) Toda $f$ es par más impar.
+\end{enunciado}
+\begin{uso}{\P{par} PAR E IMPAR}
+Par: $f(-x)=f(x)$. Impar: $f(-x)=-f(x)$. Para probar que \textbf{no} es par, alcanza un $x$ con $f(-x)\neq f(x)$.
+\end{uso}
+\paso{1}{a) y b) clasificar}
+Pares: $|x|$, $x^2+1$, $\frac1{x^2+1}$, $\sqrt{x^2+3}$ (todas dependen de $x^2$ o $|x|$), $\cos x$, $\log(x^2+1)$.\\
+Impares: $\sqrt[3]{2x}$ ($\sqrt[3]{-2x}=-\sqrt[3]{2x}$), $\sin x$, $\arctan x$.\\
+Ninguna: $x^3+1$ ($f(1)=2$, $f(-1)=0$: ni iguales ni opuestos); $e^x$ ($e^{-1}\neq\pm e$).
+\begin{memo}{DETECTOR RÁPIDO}
+Una impar definida en 0 cumple $f(0)=0$. Como $x^3+1$ vale 1 en 0, no puede ser impar.
+\end{memo}
+\paso{2}{c) linealidad}
+$f,g$ pares: $(f+g)(-x)=f(-x)+g(-x)=f(x)+g(x)$. Y $(\lambda f)(-x)=\lambda f(x)$. Con impares, igual pero con signo: $(f+g)(-x)=-f(x)-g(x)=-(f+g)(x)$.
+\paso{3}{d) y e) productos}
+$f$ par, $g$ impar: $(fg)(-x)=f(x)\cdot(-g(x))=-(fg)(x)$: impar. Dos pares: par. Dos impares: $(-f(x))(-g(x))=f(x)g(x)$: \textbf{par}.
+\begin{tip}{COMO LOS SIGNOS}
+Par $\approx+$, impar $\approx-$: par$\cdot$impar $=-$, impar$\cdot$impar $=+$. (Con la suma no funciona así: par + impar en general no es ninguna.)
+\end{tip}
+\paso{4}{f) descomposición}
+$h(-x)=\frac{f(-x)+f(x)}2=h(x)$: par. \ $g(-x)=\frac{f(-x)-f(x)}2=-g(x)$: impar. \ $h+g=\frac{2f(x)}2=f(x)$. $\blacksquare$\\
+Ejemplo: $e^x=\underbrace{\tfrac{e^x+e^{-x}}2}_{\text{par}}+\underbrace{\tfrac{e^x-e^{-x}}2}_{\text{impar}}$.
+
+\begin{enunciado}{PRÁCTICO 1.2 · EJ 8}
+$f:A\to B$, $g:B\to C$. a) $g\circ f$ inyectiva $\Rightarrow f$ inyectiva. b) $g\circ f$ sobreyectiva $\Rightarrow g$ sobreyectiva.
+\end{enunciado}
+\begin{uso}{\P{iny} INYECTIVA · \P{sobre} SOBREYECTIVA}
+Para probar inyectiva: suponé $f(x)=f(x')$ y llegá a $x=x'$. Para probar sobre: dado $z$, fabricá la preimagen.
+\end{uso}
+\paso{1}{a)}
+Sean $x,x'$ con $f(x)=f(x')$. Aplico $g$ a los dos lados: $g(f(x))=g(f(x'))$. Como $g\circ f$ es inyectiva, $x=x'$. $\blacksquare$
+\paso{2}{b)}
+Dado $z\in C$, como $g\circ f$ es sobre existe $x\in A$ con $g(f(x))=z$. Entonces $y=f(x)\in B$ cumple $g(y)=z$. $\blacksquare$
+\begin{trampa}{AL REVÉS NO}
+$g\circ f$ inyectiva \textbf{no} implica $g$ inyectiva: $f:\{1\}\to\{1,2\}$, $f(1)=1$, y $g:\{1,2\}\to\{0\}$ constante. $g\circ f$ es inyectiva (un solo punto) y $g$ no.
+\end{trampa}
+
+\begin{enunciado}{PRÁCTICO 1.2 · EJ 9}
+Con los gráficos de funciones $[-1,1]\to[-1,1]$ del EVA: inyectividad, sobreyectividad, biyectividad.
+\end{enunciado}
+\begin{falta}
+Se lee del gráfico. \textbf{Inyectiva:} ninguna recta horizontal corta la curva dos veces. \textbf{Sobreyectiva:} toda altura entre $-1$ y $1$ se alcanza, o sea que la proyección de la curva sobre el eje $y$ es todo $[-1,1]$. \textbf{Biyectiva:} las dos cosas.
+\end{falta}
+
+\begin{enunciado}{PRÁCTICO 1.2 · EJ 10 · IMAGEN DE UNIONES E INTERSECCIONES}
+a) $f(A_1\cup A_2)=f(A_1)\cup f(A_2)$. b) $f(A_1\cap A_2)\subset f(A_1)\cap f(A_2)$. c) Si $f$ es inyectiva, vale la igualdad en b).
+\end{enunciado}
+\begin{uso}{\P{imag} IMAGEN · \P{incl} DOBLE INCLUSIÓN}
+$y\in f(A_1)\iff$ existe $x\in A_1$ con $f(x)=y$.
+\end{uso}
+\paso{1}{a)}
+$y\in f(A_1\cup A_2)\iff y=f(x)$ con $x\in A_1$ o $x\in A_2\iff y\in f(A_1)$ o $y\in f(A_2)$. $\blacksquare$
+\paso{2}{b)}
+$y=f(x)$ con $x\in A_1\cap A_2$: entonces $y\in f(A_1)$ y $y\in f(A_2)$. $\blacksquare$
+\paso{3}{c)}
+Sea $y\in f(A_1)\cap f(A_2)$: $y=f(x_1)$ con $x_1\in A_1$ e $y=f(x_2)$ con $x_2\in A_2$. Por inyectividad $x_1=x_2$, que está en $A_1\cap A_2$. $\blacksquare$\\
+Sin inyectividad falla: $f(x)=x^2$, $A_1=\{-1\}$, $A_2=\{1\}$: $f(A_1\cap A_2)=\emptyset$ pero $f(A_1)\cap f(A_2)=\{1\}$.
+
+\begin{enunciado}{PRÁCTICO 1.2 · EJ 11 · MONÓTONAS}
+a) Estrictamente creciente $\Rightarrow$ creciente. b) Monotonía de los gráficos del ej. 9 y relación con la inyectividad.
+\end{enunciado}
+a) Si $x_0<x_1$ entonces $f(x_0)<f(x_1)$, y en particular $f(x_0)\le f(x_1)$. Si $x_0=x_1$, $f(x_0)=f(x_1)$. $\blacksquare$\\
+b) \P{mono}: \textbf{estrictamente monótona $\Rightarrow$ inyectiva} ($x\neq x'$ da $f(x)<f(x')$ o $>$). Al revés no: $\frac1x$ en $\R\setminus\{0\}$ es inyectiva y no es monótona. (Los gráficos concretos están en el EVA.)
+
+\begin{enunciado}{PRÁCTICO 1.2 · EJ 12 · TRANSFORMACIONES DE GRÁFICOS}
+Con $f(x)=x^2-3$: $f(x)+5$, $f(x+3)$, $|f(x)|$, $2f(x)$, $f(2x)$, $\frac{f(2x)}2$. Y lo mismo con un $f$ genérico.
+\end{enunciado}
+\begin{memo}{LAS SEIS TRANSFORMACIONES (COMO EN UN SOFTWARE 3D)}
+$f(x)+c$: sube $c$ (translate Y). \quad $f(x+c)$: se corre $c$ a la \textbf{izquierda} (¡al revés de lo que parece!).\\
+$cf(x)$: estira en vertical (scale Y). \quad $f(cx)$: comprime en horizontal por $c$ (scale X por $\frac1c$).\\
+$|f(x)|$: lo de abajo del eje se refleja hacia arriba. \quad $f(|x|)$: se descarta la mitad izquierda y se copia en espejo la derecha.
+\end{memo}
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[width=0.95\linewidth,height=5.2cm,axis lines=middle,xmin=-6.5,xmax=3.5,ymin=-4,ymax=6.5,
+  xtick={-5,-4,...,3},ytick={-3,0,3,6},tick label style={font=\scriptsize},legend style={font=\tiny,at={(1,1)},anchor=north east,fill=papel}]
+\addplot[acero,very thick,domain=-3:3,samples=60]{x^2-3}; \addlegendentry{$x^2-3$}
+\addplot[rojo,thick,domain=-2:2,samples=60]{x^2+2}; \addlegendentry{$+5$: $x^2+2$}
+\addplot[teal,thick,domain=-6:0,samples=60]{(x+3)^2-3}; \addlegendentry{$f(x+3)$}
+\addplot[verde,thick,domain=-3:3,samples=90]{abs(x^2-3)}; \addlegendentry{$|f(x)|$}
+\addplot[naranja,thick,domain=-1.6:1.6,samples=60]{4*x^2-3}; \addlegendentry{$f(2x)=4x^2-3$}
+\end{axis}
+\end{tikzpicture}
+\end{center}
+Las que faltan: $2f(x)=2x^2-6$ (misma forma, más empinada, vértice en $-6$); $\frac{f(2x)}2=2x^2-\frac32$.
+\begin{falta}
+La parte b) usa un $f$ dado por gráfico en el EVA: aplicá las reglas del recuadro. Para $\max(f(x),f(-x))$: dibujá $f$ y su espejo $f(-x)$, y quedate con la de más arriba en cada punto (queda una función par).
+\end{falta}
+
+\begin{enunciado}{PRÁCTICO 1.2 · EJ 13}
+¿Inyectiva? ¿Sobre? a) $A\subset B$, $f(x)=x$ (inclusión). b) $f:A\times B\to A$, $f(a,b)=a$. c) $f:A\to A\times B$, $f(a)=(a,b_0)$. d) $f(a,b)=(b,a)$.
+\end{enunciado}
+a) Inyectiva siempre ($x=x'$). Sobre solo si $A=B$.\\
+b) Sobre: dado $a$, $f(a,b)=a$ con cualquier $b\in B\neq\emptyset$. Inyectiva solo si $B$ tiene un único elemento ($f(a,b)=f(a,b')$ con $b\neq b'$).\\
+c) Inyectiva: $(a,b_0)=(a',b_0)\Rightarrow a=a'$. Sobre solo si $B=\{b_0\}$.\\
+d) Biyectiva: la inversa es $g(b,a)=(a,b)$, que cumple $g\circ f=\mathrm{id}$ y $f\circ g=\mathrm{id}$.
+
+\begin{enunciado}{PRÁCTICO 1.2 · EJ 14 · DESPEJAR LA FUNCIÓN}
+Hallar $f$ con: a) $f(x^3+1)=2x+3$; b) $f(x^2)=x\sin x+1$; c) $f(\sqrt{x+1})=x^2+3$, $x>0$; d) $f\big(\frac1{x+3}\big)=3x-1$, $x\neq-3$.
+\end{enunciado}
+\begin{metodo}{CAMBIO DE NOMBRE}
+\begin{enumerate}
+\item Llamá $u$ a lo de adentro: $u=x^3+1$.
+\item Despejá $x$ en función de $u$.
+\item Reemplazá en el lado derecho: queda $f(u)$ en función de $u$.
+\item Mirá para qué $u$ vale (los valores que toma lo de adentro). Fuera de ahí, $f$ es libre.
+\end{enumerate}
+\end{metodo}
+a) $u=x^3+1\Rightarrow x=\sqrt[3]{u-1}$: $f(u)=2\sqrt[3]{u-1}+3$, para todo $u\in\R$.\\[2pt]
+b) $u=x^2\ge0$, $x=\pm\sqrt u$. ¿Está bien definida? $(-x)\sin(-x)=x\sin x$: los dos candidatos dan lo mismo. $f(u)=\sqrt u\sin\sqrt u+1$ para $u\ge0$; para $u<0$, cualquier valor.\\[2pt]
+c) $u=\sqrt{x+1}$ con $x>0$, o sea $u>1$; $x=u^2-1$: $f(u)=(u^2-1)^2+3$ para $u>1$; libre para $u\le1$.\\[2pt]
+d) $u=\frac1{x+3}$ toma todo valor $\neq0$; $x=\frac1u-3$: $f(u)=\frac3u-10$ para $u\neq0$; $f(0)$ libre.
+\begin{trampa}{¿ESTÁ BIEN DEFINIDA?}
+En b), si el lado derecho fuera $x+1$ no habría solución: $x=1$ y $x=-1$ dan el mismo $u=1$ pero valores distintos (2 y 0). Siempre chequeá que las $x$ que comparten $u$ den lo mismo.
+\end{trampa}
+
+% ============================================================
+\section{Modelado y aplicaciones}
+
+\begin{enunciado}{PRÁCTICO 1.3 · EJ 1 · TAXI}
+Bajada de bandera (primeros 100 m) \$65,82; cada ficha de 100 m, \$3,83. a) $P(x)$. b) Costo estimado Universidad $\to$ FING. c) Recargo nocturno del 20\%.
+\end{enunciado}
+\begin{uso}{\P{pent} PARTE ENTERA}
+«Cada 100 m completos suma una ficha» es un escalón: se cuenta con $\fl{\cdot}$.
+\end{uso}
+\paso{1}{a) el modelo}
+Supongo que la bajada cubre los primeros 100 m y después cae una ficha por cada 100 m completos:
+\[P(x)=\begin{cases}65{,}82 & 0<x<100\\[2pt] 65{,}82+3{,}83\left\lfloor\dfrac{x-100}{100}\right\rfloor & x\ge100\end{cases}\qquad\text{($x$ en metros).}\]
+El gráfico es una escalera: escalones de ancho 100 m y alto \$3,83. (Si el taxímetro cobra la ficha al \emph{empezar} cada tramo, se cambia $\fl{\cdot}$ por $\ce{\cdot}$: el modelo es el mismo con otro redondeo.)
+\paso{2}{b) estimar}
+Por calle, de la explanada de la Universidad a la FING son unos 3,5 km (estimación: medilo en un mapa). $P(3500)=65{,}82+3{,}83\cdot34=\$196{,}04$.
+\paso{3}{c) recargo}
+Todo se multiplica por 1,2: $P_{\text{noche}}(x)=1{,}2\,P(x)$. El gráfico se estira en vertical (ej. 1.2.12). Para el viaje de b): \$235,25.
+
+\begin{enunciado}{PRÁCTICO 1.3 · EJ 2 · TARIFAS UTE}
+Comparar la tarifa residencial simple con la de doble horario.
+\end{enunciado}
+\begin{falta}
+Los cargos por kWh, por potencia y fijos están en la tabla del EVA. Método: cada tarifa es una función \textbf{afín a trozos} del consumo $c$: cargo fijo + cargo por potencia (30 kW) + precio por kWh × $c$ (con escalones si la tarifa tiene tramos). En doble horario, $\frac c3$ va a precio punta y $\frac{2c}3$ a precio fuera de punta. Conviene la que queda por debajo: resolvé $C_{\text{simple}}(c)=C_{\text{doble}}(c)$ para encontrar el consumo donde se cruzan.
+\end{falta}
+
+\begin{enunciado}{PRÁCTICO 1.3 · EJ 3 · ARENA}
+Cajón de base cuadrada, altura 0,3 m, arena seca de 1600 kg/m³: masa según el lado. Pesa esférica de arena húmeda, 1860 kg/m³: masa según el radio; ¿radio de una pesa de 10 kg?
+\end{enunciado}
+\begin{uso}{MASA = DENSIDAD × VOLUMEN}
+Volumen de la caja: $l^2\cdot0{,}3$. Volumen de la esfera: $\frac43\pi r^3$.
+\end{uso}
+Cajón: $m(l)=1600\cdot0{,}3\,l^2=480\,l^2$ kg, con $l>0$ en metros.\\
+Pesa: $m(r)=1860\cdot\frac43\pi r^3=2480\pi r^3$ kg. Para 10 kg: $r^3=\frac{10}{2480\pi}\approx0{,}001284$, así que $r\approx0{,}109$ m.
+\resp{Cajón $480\,l^2$ kg; pesa $2480\pi r^3$ kg; 10 kg $\Rightarrow r\approx10{,}9$ cm (unos 22 cm de diámetro).}
+
+\begin{enunciado}{PRÁCTICO 1.3 · EJ 4 · DILATACIÓN}
+$I(T)=I_0\big(1+\alpha(T-T_0)\big)$. a) Conociendo el largo a $T_0$, se determina $I_0$. b) Conociendo el largo a dos temperaturas, se determina $\alpha$. c) Barra de cobre: 1 m a 0°, se estira 0,001 m a 60°.
+\end{enunciado}
+a) En $T=T_0$ el paréntesis vale 1: $I(T_0)=I_0$. El largo medido a $T_0$ \emph{es} $I_0$.\\[2pt]
+b) Con $I_1=I(T_1)$ e $I_2=I(T_2)$: dividiendo, $\frac{I_2}{I_1}=\frac{1+\alpha(T_2-T_0)}{1+\alpha(T_1-T_0)}$. Despejando:
+\[\alpha=\frac{I_2-I_1}{I_1(T_2-T_0)-I_2(T_1-T_0)}.\]
+(Si una de las dos temperaturas es $T_0$, queda simplemente $\alpha=\frac{I(T)-I_0}{I_0(T-T_0)}$.)\\[2pt]
+c) $T_0=0$, $I_0=1$, $I(60)=1{,}001$: $\alpha=\frac{0{,}001}{60}=\frac1{60000}\approx1{,}67\times10^{-5}$ por grado. $I(T)=1+\frac T{60000}$ metros.
+
+\begin{enunciado}{PRÁCTICO 1.3 · EJ 5 · ERROR DE MEDICIÓN}
+Cubo de 1 m³ medido con una regla de precisión 0,01 m: mayor error posible en el volumen. $g(x)$ = mayor error según el lado. ¿Crece?
+\end{enunciado}
+\paso{1}{el peor caso}
+Con lado real entre $0{,}99$ y $1{,}01$, el volumen está entre $0{,}99^3\approx0{,}9703$ y $1{,}01^3\approx1{,}0303$. El error más grande es para arriba: $1{,}01^3-1=0{,}030301$ m³ (hacia abajo es $0{,}029701$).
+\paso{2}{la función}
+$g(x)=(x+0{,}01)^3-x^3=0{,}03x^2+0{,}0003x+0{,}000001$.
+\paso{3}{¿crece?}
+Para $x>0$ los tres términos crecen con $x$: $g$ es \textbf{creciente}. El mismo error de 1 cm en la regla pesa más cuanto más grande es el cubo (se multiplica por $3x^2$, el área de una cara).
+\resp{Error máximo $\approx0{,}0303$ m³ (un 3\%); $g$ es creciente.}
+
+\begin{enunciado}{PRÁCTICO 1.3 · EJ 6, 7 y 8 · LECTURA DE GRÁFICAS}
+Carrera de 100 m, solubilidad de sales y aislantes térmicos.
+\end{enunciado}
+\begin{falta}
+Las tres son gráficas del EVA. Qué mirar en cada una: \textbf{6)} en posición-tiempo, llega primero la curva que alcanza 100 m en el menor tiempo; el orden cambia donde dos curvas se cruzan. \textbf{7)} sube = la solubilidad aumenta con la temperatura; si una curva sube y después baja, no es monótona. \textbf{8)} la pendiente mide cuántos °F cae la temperatura por pulgada: el mejor aislante es el de pendiente \textbf{más grande} en valor absoluto (más caída de temperatura por pulgada de material).
+\end{falta}
+
+\begin{enunciado}{PRÁCTICO 1.3 · EJ 9 · ONDA CUADRADA}
+Componiendo $f(x)=\lambda x$ (con los $\lambda$ que quieras), $g=\cos$ y $h=\fl{\cdot}$, construir una onda cuadrada de período 1 e imagen $\{0,5\}$.
+\end{enunciado}
+\paso{1}{alternar con la parte entera}
+$\fl{2x}$ es un entero que sube 1 cada medio período: par en $[0,\frac12)$, impar en $[\frac12,1)$, y así sigue.
+\paso{2}{par/impar a $\pm1$}
+$\cos(\pi\fl{2x})=1$ si $\fl{2x}$ es par, $-1$ si es impar.
+\paso{3}{$\pm1$ a $\{0,5\}$}
+Multiplico por $\frac12$: da $\pm\frac12$. La parte entera de $\frac12$ es 0 y la de $-\frac12$ es $-1$. Multiplico por $-5$:
+\[F(x)=-5\,\left\lfloor\tfrac12\cos\big(\pi\fl{2x}\big)\right\rfloor=\begin{cases}0 & x\in[k,k+\frac12)\\ 5 & x\in[k+\frac12,k+1)\end{cases}\quad k\in\Z.\]
+Período 1: $\fl{2(x+1)}=\fl{2x}+2$ tiene la misma paridad.\ok
+\begin{tip}{EN TU IDIOMA}
+Es una cadena de nodos: \texttt{x → ×2 → floor → ×π → cos → ×½ → floor → ×(−5)}. Cada nodo es una de las tres funciones permitidas.
+\end{tip}
