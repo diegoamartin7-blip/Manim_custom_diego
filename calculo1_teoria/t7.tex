@@ -1,0 +1,51 @@
+% ================= APÉNDICE =================
+\appendix
+\chapter{Tus preguntas del cuaderno}
+En tus apuntes dejaste cinco preguntas anotadas. Van con sus respuestas.
+
+\begin{enunciado}{PÁG. 1 · «EXPLICAME ESTO»}
+¿Por qué $B\subset A\iff B\cup A=A$?
+\end{enunciado}
+\textbf{Intuición.} Si $B$ ya está adentro de $A$, pegarle $B$ a $A$ no agrega nada. Y al revés: si pegárselo no cambió nada, es porque $B$ no tenía nada que $A$ no tuviera. La prueba formal está en el capítulo 1, sección Unión.
+
+\begin{enunciado}{PÁG. 7 · «AYUDAME A ENTENDER ESTO»}
+$A\setminus B=B\setminus A\iff A=B$.
+\end{enunciado}
+\textbf{Idea.} Un elemento de $A\setminus B$ no está en $B$; uno de $B\setminus A$ sí está en $B$. Si los dos conjuntos son iguales, un mismo elemento tendría que estar y no estar en $B$: así que los dos son vacíos, o sea $A\subset B$ y $B\subset A$. Prueba completa en el capítulo 1, sección Diferencia.
+
+\begin{enunciado}{PÁG. 29 · «RECORDAME DEMOSTRAR ESTO, IMPORTANTE»}
+$\emptyset\neq A\subset B$, $B$ acotado $\Rightarrow\inf B\le\inf A\le\sup A\le\sup B$.
+\end{enunciado}
+Capítulo 3, «Comparación de cotas». En una frase: toda cota de $B$ es cota de $A$, y el sup de $A$ es la mejor de sus cotas.
+
+\begin{enunciado}{PÁG. 34 · «DIFERENCIA QUÉ ES $\Ss$ Y $I^*$»}
+¿Qué diferencia hay entre la suma superior y la integral superior?
+\end{enunciado}
+$\Ss(f,P)$ es la suma de cajas de \emph{una} partición. $I^*$ es el ínfimo de todas esas sumas, sobre todas las particiones posibles. Siempre $\Si(f,P)\le I_*\le I^*\le\Ss(f,P)$. Capítulo 4, caja teal.
+
+\begin{enunciado}{PÁG. 43 · «DEMOSTRAR»}
+$f(x)=x$ si $x\neq0$, $f(0)=1$: límite en 0.
+\end{enunciado}
+El límite es 0. Dado $\eps$, tomo $\delta=\eps$: si $0<|x|<\delta$, entonces $f(x)=x$ y $|f(x)-0|=|x|<\eps$. La definición nunca evalúa $f(0)$ (por el $0<|x|$). Es una discontinuidad evitable.
+
+\chapter{Mapa del curso en una página}
+\begin{center}
+\begin{tikzpicture}[node distance=7mm,
+  caja/.style={draw=acero,fill=acero!6!papel,thick,rounded corners=1pt,align=center,font=\small,minimum width=34mm,inner sep=4pt},
+  flecha/.style={-{Stealth},thick,suave}]
+\node[caja] (con) {\textbf{Conjuntos}\\ $\cup,\cap,\setminus$, De Morgan};
+\node[caja,below=of con] (fun) {\textbf{Funciones}\\ iny., sobre, inversa};
+\node[caja,below=of fun] (cue) {\textbf{Cuerpo y orden}\\ cuentas y desigualdades};
+\node[caja,below=of cue] (com) {\textbf{Completitud}\\ sup, ínf, caracterización ε};
+\node[caja,below left=8mm and -6mm of com] (int) {\textbf{Integral}\\ sup/ínf de sumas};
+\node[caja,below right=8mm and -6mm of com] (lim) {\textbf{Límites}\\ ε-δ};
+\node[caja,below=of lim] (cont) {\textbf{Continuidad}\\ lím $=$ valor};
+\node[caja,below=of cont,draw=rojo,fill=rojo!5!papel] (teo) {\textbf{Teoremas}\\ Bolzano · Weierstrass\\ valor medio};
+\draw[flecha] (con)--(fun); \draw[flecha] (fun)--(cue); \draw[flecha] (cue)--(com);
+\draw[flecha] (com)--(int); \draw[flecha] (com)--(lim); \draw[flecha] (lim)--(cont); \draw[flecha] (cont)--(teo);
+\draw[flecha] (int.south) -- (teo.west);
+\end{tikzpicture}
+\end{center}
+\begin{tip}{CÓMO USAR EL MAPA}
+Cuando una demostración se traba, bajá un piso: casi siempre lo que falta es una desigualdad (orden) o un sup (completitud). Y después de este PDF: el \textbf{libro del parcial} para los ejercicios más probables, y el \textbf{cuaderno de prácticos} para entrenar.
+\end{tip}

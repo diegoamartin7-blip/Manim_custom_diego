@@ -1,0 +1,194 @@
+% ================= CAPÍTULO 3: NÚMEROS REALES =================
+\chapter{Números reales}
+\prob{SEMANA 2 · 10 DE AGOSTO}{los reales son los que cumplen tres grupos de axiomas}
+
+\apuntes
+\begin{sello}{LA FRASE DE LA PROFESORA (SUBRAYADA EN TU CUADERNO)}
+\textbf{Los números reales se definen como el conjunto que verifica los axiomas de cuerpo, de orden y de completitud.}
+\end{sello}
+\begin{tip}{EL MAPA DEL CAPÍTULO}
+Cuerpo = se puede sumar, restar, multiplicar y dividir. Orden = se puede comparar. Completitud = la recta no tiene agujeros. $\Q$ cumple los dos primeros y falla en el tercero: por eso hace falta $\R$.
+\end{tip}
+
+\section{Los conjuntos numéricos}
+\apuntes
+\begin{memo}{DE $\N$ A $\Q$}
+$\N=\{0,1,2,\dots\}$: la suma es asociativa, conmutativa y tiene neutro (0).\\
+$\Z=\{\dots,-2,-1,0,1,2,\dots\}$: aparecen los opuestos.\\
+$\Q=\{\frac MN: M,N\in\Z,\ N\neq0\}$: aparecen los inversos ($\frac MN\cdot\frac NM=1$). $\Q$ es un \textbf{cuerpo}.
+\end{memo}
+
+\apuntes
+\begin{sello}{TEOREMA: $\sqrt2\notin\Q$}
+No existe ningún racional cuyo cuadrado sea 2.
+\end{sello}
+\begin{demo}
+Por absurdo: supongo $\sqrt2=\frac NM$ con $N,M\in\Z$, $M\neq0$, sin factores primos en común. Elevando: $N^2=2M^2$.\\
+En la descomposición en primos de $N^2$, el primo 2 aparece una cantidad \textbf{par} de veces (el doble de las que aparece en $N$). En $2M^2$ aparece una cantidad \textbf{impar} de veces (el 2 de adelante más un número par de $M^2$).\\
+Como la descomposición en primos es única, es una contradicción. $\blacksquare$
+\end{demo}
+
+\section{Axiomas de cuerpo}
+\apuntes
+\begin{sello}{AXIOMAS DE CUERPO}
+$\R\neq\emptyset$ con dos operaciones $+$ y $\cdot$ tales que, para todo $x,y,z$:\\[2pt]
+1) \textbf{Conmutativa:} $x+y=y+x$, \ $xy=yx$.\\
+2) \textbf{Asociativa:} $(x+y)+z=x+(y+z)$, \ $(xy)z=x(yz)$.\\
+3) \textbf{Distributiva:} $x(y+z)=xy+xz$.\\
+4) \textbf{Neutros:} existen $0\neq1$ con $x+0=x$ y $x\cdot1=x$.\\
+5) \textbf{Opuesto e inverso:} existe $-x$ con $x+(-x)=0$; si $x\neq0$, existe $x^{-1}$ con $x\cdot x^{-1}=1$.
+\end{sello}
+\begin{memo}{EJEMPLOS DE CLASE}
+$\Q$ cumple 1--5. \ $\Z$ y $\N$ no son cuerpos (no hay inverso: $2^{-1}\notin\Z$).\\
+$\Z_2=\{0,1\}$ con suma y producto «módulo 2» ($1+1=0$) es un cuerpo con solo dos elementos.
+\end{memo}
+\apuntes
+\begin{memo}{OBSERVACIONES DE CLASE}
+Despejar es consecuencia de los axiomas: $x+a=b\Rightarrow x=b-a$; \ $xa=b$ con $a\neq0\Rightarrow x=\frac ba$.\\
+Nota de la profesora: con solo los axiomas de cuerpo \textbf{no} se puede probar que existe $\sqrt a$. No lo prohíben, pero no lo garantizan ($\Q$ es un cuerpo y no tiene $\sqrt2$).
+\end{memo}
+
+\agregado
+\begin{sello}{CONSECUENCIAS DE LOS AXIOMAS}
+a) $x\cdot0=0$. \quad b) $-(-x)=x$. \quad c) $(-x)y=-(xy)$ y $(-x)(-y)=xy$. \quad d) $xy=0\Rightarrow x=0$ o $y=0$.
+\end{sello}
+\begin{demo}
+a) $x\cdot0=x(0+0)=x\cdot0+x\cdot0$ (neutro y distributiva). Sumo $-(x\cdot0)$ a los dos lados: $0=x\cdot0$.\\[2pt]
+b) $-x$ es el número que sumado a $x$ da 0; y $x+(-x)=0$ dice que $x$ es el opuesto de $-x$. Como el opuesto es único, $-(-x)=x$.\\[2pt]
+c) $xy+(-x)y=(x+(-x))y=0\cdot y=0$, así que $(-x)y$ es el opuesto de $xy$. Aplicando dos veces, $(-x)(-y)=xy$.\\[2pt]
+d) Si $x\neq0$, multiplico por $x^{-1}$: $y=x^{-1}\cdot0=0$. $\blacksquare$
+\end{demo}
+\begin{tip}{POR QUÉ IMPORTA d)}
+Es la razón por la que se factoriza para resolver ecuaciones: $(x-2)(x+3)=0$ obliga a que alguno de los dos factores sea 0.
+\end{tip}
+
+\section{Axiomas de orden}
+\apuntes
+\begin{sello}{AXIOMAS DE ORDEN}
+Existe $\R^+\subset\R$ (los positivos) tal que:\\[2pt]
+6) $x,y\in\R^+\Rightarrow x+y\in\R^+$ y $xy\in\R^+$.\\
+7) Si $x\neq0$: $x\in\R^+$ o $-x\in\R^+$, pero no las dos.\\
+8) $0\notin\R^+$.\\[3pt]
+\textbf{Definición:} $x<y\iff y-x\in\R^+$. \ $x\le y\iff x<y$ o $x=y$.
+\end{sello}
+\begin{memo}{EJEMPLOS DE CLASE}
+$\Q$ es un cuerpo ordenado (con $\Q^+$ = los cocientes de naturales positivos). $\Z_2$ \textbf{no} se puede ordenar: tendría que ser $1>0$, y entonces $1+1>0$, pero $1+1=0$.
+\end{memo}
+\apuntes
+\begin{sello}{PROPIEDADES DEL ORDEN}
+1) \textbf{Transitiva:} $a<b$ y $b<c\Rightarrow a<c$.\\
+2) \textbf{Tricotomía:} vale exactamente una de $a=b$, $a<b$, $b<a$.\\
+3) \textbf{Monotonía de la suma:} $a<b\Rightarrow a+c<b+c$.\\
+4) \textbf{Monotonía del producto:} $a<b$ y $0<c\Rightarrow ac<bc$.
+\end{sello}
+\begin{demo}
+\textbf{1.} $b-a\in\R^+$ y $c-b\in\R^+$; por el axioma 6, su suma $c-a\in\R^+$, o sea $a<c$.\\[2pt]
+\textbf{4.} $b-a\in\R^+$ y $c\in\R^+$; por el axioma 6, $(b-a)c=bc-ac\in\R^+$, o sea $ac<bc$.\\[2pt]
+\agregado
+\textbf{2.} Aplico el axioma 7 a $b-a$: si $b-a\neq0$, exactamente uno de $b-a$, $a-b$ es positivo. \\[2pt]
+\textbf{3.} $(b+c)-(a+c)=b-a\in\R^+$. $\blacksquare$
+\end{demo}
+
+\agregado
+\begin{sello}{CONSECUENCIAS QUE SE USAN TODO EL TIEMPO}
+a) $a<b$ y $c<0\Rightarrow ac>bc$ (\textbf{multiplicar por negativo da vuelta}).\\
+b) $x\neq0\Rightarrow x^2>0$. En particular $1=1^2>0$.\\
+c) $0<a<b\Rightarrow 0<\frac1b<\frac1a$.\\
+d) $0\le a<b\Rightarrow a^2<b^2$ y $\sqrt a<\sqrt b$.
+\end{sello}
+\begin{demo}
+a) $-c>0$, así que por la prop.\ 4, $a(-c)<b(-c)$, es decir $-ac<-bc$, o sea $bc<ac$.\\[2pt]
+b) Si $x>0$, $x\cdot x>0$ por el axioma 6. Si $x<0$, $-x>0$ y $x^2=(-x)(-x)>0$.\\[2pt]
+c) $\frac1a>0$ (si fuera negativo, $a\cdot\frac1a=1$ sería negativo, contra b). Multiplico $a<b$ por $\frac1{ab}>0$: $\frac1b<\frac1a$.\\[2pt]
+d) $b^2-a^2=(b-a)(b+a)$, producto de positivos. Para las raíces, si fuera $\sqrt a\ge\sqrt b$, elevando quedaría $a\ge b$. $\blacksquare$
+\end{demo}
+
+\section{Valor absoluto}
+\agregado
+\begin{sello}{DEFINICIÓN Y PROPIEDADES}
+$|a|=a$ si $a\ge0$; \ $|a|=-a$ si $a<0$. \quad $|a-b|$ = distancia entre $a$ y $b$.\\[3pt]
+1) $|ab|=|a||b|$. \quad 2) $|x|<r\iff-r<x<r$. \quad 3) \textbf{Triangular:} $|a+b|\le|a|+|b|$.
+\end{sello}
+\begin{demo}
+\textbf{3.} Siempre $-|a|\le a\le|a|$ y $-|b|\le b\le|b|$. Sumando: $-(|a|+|b|)\le a+b\le|a|+|b|$, que por la prop.\ 2 es $|a+b|\le|a|+|b|$. $\blacksquare$
+\end{demo}
+\begin{memo}{ENTORNOS}
+$|x-a|<r\iff x\in(a-r,a+r)$: el entorno de centro $a$ y radio $r$. Es el idioma de los límites.
+\end{memo}
+
+\section{Axioma de completitud}
+\apuntes
+\begin{sello}{COTAS, SUPREMO, MÁXIMO}
+$A\subset\R$, $A\neq\emptyset$.\\[2pt]
+$k$ es \textbf{cota superior} de $A$ $\iff x\le k$ para todo $x\in A$. $A$ es \textbf{acotado superiormente} si tiene alguna.\\[2pt]
+$\sup A$ es la \textbf{menor} de las cotas superiores. \ $\inf A$ es la \textbf{mayor} de las inferiores.\\[2pt]
+$\max A$ es una cota superior que \textbf{pertenece} a $A$ (análogo $\min A$).
+\end{sello}
+\begin{memo}{EJEMPLOS DE CLASE}
+$A=[1,2)$: $\sup A=2$, no hay máximo; $\inf A=\min A=1$.\\
+$A=\N$: $\inf\N=\min\N=0$; no hay supremo ni máximo (no está acotado).
+\end{memo}
+\begin{center}
+\begin{tikzpicture}[x=5cm]
+\draw[-{Stealth},thick] (0.85,0) -- (2.2,0);
+\draw[teal,line width=3pt] (1,0)--(1.97,0);
+\fill[teal] (1,0) circle (2.5pt); \draw[rojo,thick,fill=papel] (2,0) circle (2.5pt);
+\node[font=\scriptsize,below=3pt] at (1,0) {$1=\min A$};
+\node[rojo,font=\scriptsize,below=3pt] at (2,0) {$2=\sup A\notin A$};
+\foreach \k in {2.05,2.1,2.15} \draw[suave] (\k,-0.07)--(\k,0.07);
+\node[suave,font=\ttfamily\scriptsize,above=4pt] at (2.1,0) {otras cotas};
+\end{tikzpicture}\\
+{\ttfamily\scriptsize\color{suave} $A=[1,2)$: todas las cotas superiores son $\ge2$, y la menor es 2, que no está en $A$.}
+\end{center}
+\apuntes
+\begin{sello}{AXIOMA DE COMPLETITUD}
+Si $A\subset\R$ es no vacío y acotado superiormente, entonces \textbf{existe} $\sup A\in\R$.
+\end{sello}
+\begin{memo}{$\Q$ NO ES COMPLETO (EJEMPLO DE CLASE)}
+$A=\{q\in\Q: q\ge0,\ q^2<2\}$. No vacío ($1\in A$) y acotado por 2 (si $q>2$, $q^2>4$). Pero en $\Q$ no tiene una cota superior mínima: la candidata sería $\sqrt2$, que no es racional.
+\end{memo}
+\begin{tip}{LA IMAGEN}
+$\Q$ es una recta con agujeros infinitamente finos (en $\sqrt2$, $\pi$, $e$\dots). El axioma de completitud los tapa: dice que todo conjunto acotado tiene un «borde» que es un número real.
+\end{tip}
+
+\apuntes
+\begin{sello}{PROPOSICIÓN: EXISTE EL ÍNFIMO}
+$A\neq\emptyset$ acotado inferiormente $\Rightarrow$ existe $\inf A$.
+\end{sello}
+\begin{demo}
+Sea $-A=\{-a:a\in A\}$, no vacío. Si $k$ es cota inferior de $A$, entonces $-k$ es cota superior de $-A$ (multiplicar por $-1$ da vuelta el orden). Por completitud existe $S=\sup(-A)$.\\
+\agregado
+Veo que $-S=\inf A$. \emph{Es cota inferior:} para $a\in A$, $-a\le S$, así que $a\ge-S$. \emph{Es la mayor:} si $m$ fuera cota inferior de $A$ con $m>-S$, entonces $-m$ sería cota superior de $-A$ con $-m<S$, contra que $S$ es la menor. $\blacksquare$
+\end{demo}
+
+\apuntes
+\begin{sello}{PROPOSICIÓN: CARACTERIZACIÓN «A MENOS DE ÉPSILON»}
+$S=\sup A\iff$ (i) $S$ es cota superior de $A$, \ y \ (ii) $\forall\eps>0\ \exists a\in A:\ S-\eps<a\le S$.
+\end{sello}
+\begin{demo}
+($\Rightarrow$) (i) por definición. (ii) Por absurdo: si para algún $\eps>0$ fuera $a\le S-\eps$ para todo $a\in A$, entonces $S-\eps$ sería una cota superior menor que $S$. Contradicción.\\[3pt]
+($\Leftarrow$) $S$ es cota por (i). Si $S'<S$ fuera otra cota superior, con $\eps=S-S'$ la (ii) da $a\in A$ con $S'<a$, contra que $S'$ es cota. Entonces $S$ es la menor. $\blacksquare$
+\end{demo}
+\begin{tip}{LA IMAGEN}
+Si bajás el techo un pelito ($\eps$), algún punto del conjunto queda por encima. Esa es la prueba de que el techo era el más bajo posible.
+\end{tip}
+
+\apuntes
+\begin{sello}{PROPOSICIÓN: COMPARACIÓN DE COTAS}
+$\emptyset\neq A\subset B$, $B$ acotado $\Rightarrow\inf B\le\inf A\le\sup A\le\sup B$.
+\end{sello}
+\agregado
+\begin{demo}
+$\sup B$ es cota superior de $B$, y como $A\subset B$, también de $A$. El sup de $A$ es la \emph{menor} cota: $\sup A\le\sup B$. Espejo para el ínfimo. Y con cualquier $a_0\in A$: $\inf A\le a_0\le\sup A$. $\blacksquare$
+\end{demo}
+
+\agregado
+\begin{sello}{CONSECUENCIAS DE LA COMPLETITUD}
+\textbf{Arquímedes:} $\N$ no está acotado superiormente. Dado $x>0$, existe $n$ con $\frac1n<x$.\\[2pt]
+\textbf{Densidad:} entre dos reales distintos hay un racional y un irracional.\\[2pt]
+\textbf{Parte entera:} $\fl x$ = el mayor entero $\le x$ (existe por completitud); cumple $\fl x\le x<\fl x+1$.\\[2pt]
+\textbf{Raíces:} para $x\ge0$, $\sup\{a:a^2\le x\}$ es un número cuyo cuadrado es $x$. Así se define $\sqrt x$.
+\end{sello}
+\begin{demo}
+Arquímedes. Si $\N$ estuviera acotado, sea $s=\sup\N$. $s-1$ no es cota: existe $n>s-1$, y entonces $n+1>s$ con $n+1\in\N$. Absurdo. Para la segunda parte, elijo $n>\frac1x$. $\blacksquare$
+\end{demo}

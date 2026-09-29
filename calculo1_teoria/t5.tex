@@ -1,0 +1,159 @@
+% ================= CAPÍTULO 5: LÍMITES =================
+\chapter{Límites}
+\prob{SEMANAS 5-6}{tu cuaderno llega hasta el límite de la suma; el resto está agregado}
+
+\section{Definición}
+\apuntes
+\begin{sello}{DEFINICIÓN ε-δ}
+$f:I\to\R$, $I$ intervalo, $x_0\in\bar I$ (en $I$ o en su borde).
+\[\lim_{x\to x_0}f(x)=L\iff\forall\eps>0\ \exists\delta>0:\]\[0<|x-x_0|<\delta,\ x\in I\ \Longrightarrow\ |f(x)-L|<\eps.\]
+\end{sello}
+\begin{center}
+\begin{tikzpicture}[x=1.7cm,y=1.1cm]
+\fill[rojo!9] (0,1.55) rectangle (2.7,2.45);
+\fill[teal!18] (0.8,0) rectangle (1.2,2.9);
+\draw[rojo,dashed] (0,1.55) -- (2.7,1.55) (0,2.45) -- (2.7,2.45);
+\draw[teal,dashed] (0.8,0) -- (0.8,2.9) (1.2,0) -- (1.2,2.9);
+\draw[-{Stealth}] (0,0) -- (2.8,0); \draw[-{Stealth}] (0,0) -- (0,3);
+\draw[acero,very thick,domain=0.1:2.3,samples=40] plot (\x,{2+0.9*(\x-1)+0.25*(\x-1)^3});
+\draw[acero,thick,fill=papel] (1,2) circle (2pt);
+\draw[densely dotted] (1,0) -- (1,2) -- (0,2);
+\node[font=\scriptsize,left] at (0,2) {$L$}; \node[font=\scriptsize,below] at (1,0) {$x_0$};
+\node[rojo,font=\ttfamily\scriptsize,anchor=west] at (1.6,2.62) {banda $(L-\eps,L+\eps)$};
+\node[teal,font=\ttfamily\scriptsize,anchor=west] at (1.25,0.3) {entorno $(x_0-\delta,x_0+\delta)$};
+\end{tikzpicture}\\
+{\ttfamily\scriptsize\color{suave} Te dan la banda roja; vos tenés que encontrar la franja teal tal que la curva sobre ella quede dentro de la banda. El punto $x_0$ mismo no importa (círculo hueco).}
+\end{center}
+\begin{memo}{TRES COSAS DE LA DEFINICIÓN}
+\textbf{El orden:} primero $\eps$ (lo que te exigen), después $\delta$ (lo que respondés). El $\delta$ puede depender de $\eps$.\\
+\textbf{El $0<$:} $|x-x_0|>0$ saca al punto: el límite no mira $f(x_0)$, ni siquiera necesita que exista.\\
+\textbf{Achicar sirve:} si un $\delta$ funciona, cualquiera más chico también.
+\end{memo}
+
+\section{Ejemplos de clase}
+\apuntes
+\begin{sello}{CINCO EJEMPLOS}
+1) \textbf{Constante} $f=k$: $|f(x)-k|=0<\eps$ siempre; sirve cualquier $\delta$ (ej. $\delta=1$). Límite $k$.\\[2pt]
+2) \textbf{Identidad} $f=x$: $|x-x_0|<\eps$ si $\delta=\eps$. Límite $x_0$.\\[2pt]
+3) $f=-2x$: $|f(x)-(-2x_0)|=2|x-x_0|<\eps$ si $\delta=\frac\eps2$. Límite $-2x_0$.\\[2pt]
+4) $f(x)=x$ si $x\neq0$, $f(0)=1$: límite en 0 es 0, con $\delta=\eps$. (El valor $f(0)=1$ no importa.)\\[2pt]
+5) \textbf{Signo} ($1$ si $x>0$, $0$ en 0, $-1$ si $x<0$): \textbf{no existe} el límite en 0.
+\end{sello}
+\agregado
+\begin{demo}
+Ejemplo 5. Supongo que el límite es $L$ y tomo $\eps=1$. Para cualquier $\delta$, en $(0,\delta)$ la función vale 1 y en $(-\delta,0)$ vale $-1$. Tendría que ser $|1-L|<1$ y $|-1-L|<1$, o sea $L\in(0,2)$ y $L\in(-2,0)$ a la vez. Imposible. $\blacksquare$
+\end{demo}
+\begin{tip}{EL PATRÓN LINEAL}
+Para $f(x)=mx+n$: $|f(x)-f(x_0)|=|m||x-x_0|$, así que $\delta=\frac\eps{|m|}$. La pendiente divide.
+\end{tip}
+
+\section{Unicidad y límite de la suma}
+\apuntes
+\begin{sello}{TEOREMA: UNICIDAD DEL LÍMITE}
+Si $\lim_{x\to x_0}f=L_1$ y $\lim_{x\to x_0}f=L_2$, entonces $L_1=L_2$.
+\end{sello}
+\begin{demo}
+Por absurdo, $L_1<L_2$. Tomo $\eps=\frac{L_2-L_1}2$. Hay $\delta_1$ que deja a $f(x)$ en $(L_1-\eps,L_1+\eps)$ y $\delta_2$ que la deja en $(L_2-\eps,L_2+\eps)$. Con $\delta=\min\{\delta_1,\delta_2\}$ valen las dos a la vez, pero con ese $\eps$ los dos intervalos son \textbf{disjuntos} (se tocan justo en el punto medio). Contradicción. $\blacksquare$
+\end{demo}
+\apuntes
+\begin{sello}{TEOREMA: LÍMITE DE LA SUMA}
+$\lim_{x\to x_0}f=L_1$ y $\lim_{x\to x_0}g=L_2\Rightarrow\lim_{x\to x_0}(f+g)=L_1+L_2$.
+\end{sello}
+\begin{demo}
+Dado $\eps$, uso $\frac\eps2$ en cada definición: hay $\delta_1$ y $\delta_2$ con $|f(x)-L_1|<\frac\eps2$ y $|g(x)-L_2|<\frac\eps2$. Con $\delta=\min\{\delta_1,\delta_2\}$ y la triangular:
+\[|(f+g)(x)-(L_1+L_2)|\le|f(x)-L_1|+|g(x)-L_2|<\tfrac\eps2+\tfrac\eps2=\eps.\ \blacksquare\]
+\end{demo}
+\begin{trampa}{ACÁ SE CORTA TU CUADERNO}
+Todo lo que sigue en este capítulo y el siguiente lo da la profesora (está en el cronograma de las semanas 5 a 7), pero no está en tus apuntes. Es teoría estándar del curso.
+\end{trampa}
+
+\section{Álgebra de límites}
+\agregado
+\begin{sello}{CUATRO LEMAS}
+Si $f\to L$ cuando $x\to x_0$:\\[2pt]
+a) \textbf{Acotación local:} existe un entorno de $x_0$ donde $|f(x)|<|L|+1$.\\
+b) \textbf{Conservación del signo:} si $L>0$, existe un entorno donde $f(x)>\frac L2>0$.\\
+c) \textbf{Producto:} si además $g\to M$, entonces $fg\to LM$.\\
+d) \textbf{Cociente:} si además $g\to M\neq0$, entonces $\frac fg\to\frac LM$.
+\end{sello}
+\begin{demo}
+a) Uso $\eps=1$: $|f(x)|\le|f(x)-L|+|L|<1+|L|$.\\[2pt]
+b) Uso $\eps=\frac L2$: $f(x)>L-\frac L2=\frac L2$.\\[2pt]
+c) Sumo y resto $f(x)M$: $|fg-LM|\le|f|\,|g-M|+|M|\,|f-L|$. Por a), $|f|<|L|+1$. Cada término se hace chico eligiendo el $\delta$ adecuado.\\[2pt]
+d) Alcanza con $\frac1g\to\frac1M$. $\left|\frac1g-\frac1M\right|=\frac{|g-M|}{|g||M|}$, y por b) aplicado a $|g|$, cerca de $x_0$ vale $|g|>\frac{|M|}2$: queda $\le\frac2{M^2}|g-M|$. $\blacksquare$
+\end{demo}
+
+\agregado
+\begin{sello}{COMPARACIÓN, SÁNDWICH Y ACOTADO POR INFINITÉSIMO}
+\textbf{Monotonía del límite:} si $f\le g$ cerca de $x_0$, $f\to L$ y $g\to M$, entonces $L\le M$.\\[2pt]
+\textbf{Sándwich:} si $g\le f\le h$ cerca de $x_0$ y $g,h\to L$, entonces $f\to L$.\\[2pt]
+\textbf{Acotado por infinitésimo:} si $|g|\le K$ cerca de $x_0$ y $h\to0$, entonces $gh\to0$ (aunque $g$ no tenga límite).
+\end{sello}
+\begin{demo}
+Monotonía: si fuera $L>M$, por conservación del signo aplicada a $f-g\to L-M>0$, sería $f>g$ cerca. Contradicción.\\[2pt]
+Sándwich: dado $\eps$, cerca de $x_0$ vale $L-\eps<g\le f\le h<L+\eps$.\\[2pt]
+Acotado por infinitésimo: $|gh|\le K|h|$, y $K|h|<\eps$ si $|h|<\frac\eps K$. $\blacksquare$
+\end{demo}
+\begin{tip}{LA IMAGEN}
+Un noise de amplitud acotada ($\sin\frac1x$) por una máscara que se apaga ($x$): el resultado se apaga. Por eso $x\sin\frac1x\to0$.
+\end{tip}
+
+\agregado
+\begin{sello}{LÍMITE DE LA COMPOSICIÓN}
+Si $g(x)\to b$ cuando $x\to x_0$, y $f$ es continua en $b$, entonces $f(g(x))\to f(b)$.
+\end{sello}
+\begin{demo}
+Dado $\eps$, por continuidad de $f$ en $b$ hay $\eta$ con $|y-b|<\eta\Rightarrow|f(y)-f(b)|<\eps$. Por el límite de $g$, hay $\delta$ con $0<|x-x_0|<\delta\Rightarrow|g(x)-b|<\eta$. Encadenando, listo. $\blacksquare$
+\end{demo}
+\begin{trampa}{HACE FALTA CONTINUIDAD}
+Sin continuidad de $f$ en $b$ falla: $\fl{\frac{\sin x}x}$ no tiene límite en $+\infty$ aunque $\frac{\sin x}x\to0$, porque $\fl\cdot$ salta en 0.
+\end{trampa}
+
+\section{Límites generalizados}
+\agregado
+\begin{sello}{LATERALES}
+$\lim_{x\to x_0^+}f=L$: la misma definición, pero solo con $x_0<x<x_0+\delta$. (Análogo por izquierda.)\\[2pt]
+\textbf{Teorema:} $\lim_{x\to x_0}f=L\iff$ existen los dos laterales y valen $L$.
+\end{sello}
+\begin{sello}{LÍMITES INFINITOS Y EN EL INFINITO}
+$\lim_{x\to x_0}f=+\infty\iff\forall K\ \exists\delta>0:\ 0<|x-x_0|<\delta\Rightarrow f(x)>K$.\\[2pt]
+$\lim_{x\to+\infty}f=L\iff\forall\eps>0\ \exists M:\ x>M\Rightarrow|f(x)-L|<\eps$.\\[2pt]
+$\lim_{x\to+\infty}f=+\infty\iff\forall K\ \exists M:\ x>M\Rightarrow f(x)>K$.
+\end{sello}
+\begin{tip}{EL MISMO JUEGO}
+Siempre es «te piden algo, vos respondés con un entorno». Cambia qué es el entorno: $(x_0-\delta,x_0+\delta)$ para un punto, $(M,+\infty)$ para el infinito; y $(L-\eps,L+\eps)$ o $(K,+\infty)$ para el valor.
+\end{tip}
+
+\section{Cálculo de límites e indeterminaciones}
+\agregado
+\begin{metodo}{QUÉ HACER SEGÚN LO QUE APARECE}
+\begin{enumerate}
+\item \textbf{Sustituir.} Si no aparece nada raro, el límite es el valor (continuidad).
+\item \textbf{$\frac00$ con polinomios:} factorizar $(x-x_0)$ arriba y abajo y cancelar. Es legal: el límite solo mira $x\neq x_0$.
+\item \textbf{$\frac00$ con raíces:} multiplicar por el conjugado: $(\sqrt A-\sqrt B)(\sqrt A+\sqrt B)=A-B$.
+\item \textbf{Senos:} $\lim_{u\to0}\frac{\sin u}u=1$. Acomodar para que el argumento del seno aparezca abajo.
+\item \textbf{Acotado por infinitésimo:} da 0.
+\item \textbf{Cocientes de polinomios en $\pm\infty$:} mandan los grados (0, cociente de coeficientes principales, o $\pm\infty$).
+\item \textbf{$\infty-\infty$ con raíces:} conjugado.
+\item \textbf{Parte entera o valor absoluto:} laterales por separado.
+\end{enumerate}
+\end{metodo}
+\agregado
+\begin{sello}{EL LÍMITE DEL SENO}
+Para $0<x<\frac\pi2$: \ $\sin x<x<\tan x$ \ (comparando áreas en la circunferencia unidad).\\[2pt]
+Dividiendo por $\sin x>0$: $1<\frac x{\sin x}<\frac1{\cos x}$, o sea $\cos x<\frac{\sin x}x<1$. Como $\cos x\to1$, por sándwich: $\displaystyle\lim_{x\to0}\frac{\sin x}x=1$.
+\end{sello}
+\begin{center}
+\begin{tikzpicture}[scale=1.8]
+\fill[teal!12] (0,0)--(1,0) arc (0:40:1)--cycle;
+\draw[-{Stealth}] (-0.1,0)--(1.3,0); \draw[-{Stealth}] (0,-0.1)--(0,0.95);
+\draw[suave] (1,0) arc (0:70:1);
+\draw[acero,thick] (0,0)--(1,0.839);
+\draw[rojo,thick] ({cos(40)},0)--({cos(40)},{sin(40)});
+\draw[naranja,thick] (1,0)--(1,0.839);
+\node[rojo,font=\scriptsize,left] at ({cos(40)},0.3) {$\sin x$};
+\node[naranja,font=\scriptsize,right] at (1,0.42) {$\tan x$};
+\node[teal!70!black,font=\scriptsize] at (0.5,0.13) {$x$};
+\end{tikzpicture}\\
+{\ttfamily\scriptsize\color{suave} Triángulo chico $\subset$ sector $\subset$ triángulo grande: áreas $\frac{\sin x}2<\frac x2<\frac{\tan x}2$.}
+\end{center}

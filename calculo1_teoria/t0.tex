@@ -1,0 +1,51 @@
+% ================= PORTADA =================
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+  \foreach \x in {0,5,...,150} \draw[borde!60,line width=0.2pt] ([xshift=\x mm]current page.south west) -- ([xshift=\x mm]current page.north west);
+  \foreach \y in {0,5,...,215} \draw[borde!60,line width=0.2pt] ([yshift=\y mm]current page.south west) -- ([yshift=\y mm]current page.south east);
+\end{tikzpicture}
+\vspace*{18mm}
+{\ttfamily\small\color{suave} CDIV · IMERL · FING · 2S 2026}\par\vspace{3mm}
+{\plexbold\fontsize{26}{30}\selectfont Cálculo 1}\par\vspace{1mm}
+{\plexbold\fontsize{17}{21}\selectfont\color{rojo} Teoría del primer parcial}\par\vspace{4mm}
+{\large Tus apuntes de clase, pasados en limpio y completados.}\par\vspace{10mm}
+\begin{sello}{CÓMO ESTÁ ARMADO}
+Mismo orden en que lo dio la profesora: conjuntos, funciones, números reales, integral, límites y continuidad. Cada definición, cada teorema y cada demostración.\\[3pt]
+Cada bloque dice de dónde sale:\\[2pt]
+{\ttfamily\scriptsize\colorbox{teal}{\color{papel}\bfseries\,DE TUS APUNTES\,}} \ está en tu cuaderno; acá está pasado en limpio.\\[2pt]
+{\ttfamily\scriptsize\colorbox{naranja}{\color{papel}\bfseries\,AGREGADO · NO ESTÁ EN TU CUADERNO\,}} \ entra al parcial pero tu cuaderno no lo tiene (se corta en límites), o está enunciado sin prueba.
+\end{sello}
+\vfill
+{\small\color{suave} Complementa al libro del parcial (ejercicios por probabilidad) y al cuaderno de prácticos resueltos. Primero esto, después los ejercicios.\par}
+\newpage
+
+{\hypersetup{linkcolor=tinta}\renewcommand{\contentsname}{Índice}\tableofcontents}
+\newpage
+
+\chapter*{Antes de empezar: la lógica}
+\addcontentsline{toc}{chapter}{Antes de empezar: lógica}
+\markboth{LÓGICA}{}
+
+Todo el curso está escrito en este idioma. Si estas cinco reglas están firmes, las demostraciones se leen solas.
+
+\apuntes
+\begin{sello}{TEOREMA, RECÍPROCO, CONTRARRECÍPROCO}
+Un teorema es $H\Rightarrow T$: si vale la hipótesis $H$, vale la tesis $T$.\\[3pt]
+\textbf{Contrarrecíproco:} $\neg T\Rightarrow\neg H$. \ Es \textbf{equivalente} al teorema: probar uno es probar el otro.\\[3pt]
+\textbf{Recíproco:} $T\Rightarrow H$. \ \textbf{No} es equivalente. Puede ser falso aunque el teorema sea cierto.
+\end{sello}
+\begin{tip}{UN EJEMPLO QUE NO FALLA}
+«Si llueve, el piso está mojado.» Contrarrecíproco: «si el piso está seco, no llovió» (cierto, dice lo mismo). Recíproco: «si el piso está mojado, llovió» (falso: alguien pudo haber baldeado).
+\end{tip}
+
+\agregado
+\begin{memo}{LAS OTRAS CUATRO REGLAS}
+\textbf{Absurdo:} para probar $T$, suponés $\neg T$ y llegás a una contradicción con $H$ o con algo que ya sabés.\\[2pt]
+\textbf{Doble inclusión:} para probar $A=B$ entre conjuntos, probás $A\subset B$ y $B\subset A$.\\[2pt]
+\textbf{Si y solo si ($\iff$):} son dos teoremas: ($\Rightarrow$) y ($\Leftarrow$). Se prueban por separado.\\[2pt]
+\textbf{Negar cuantificadores:} $\neg(\forall x\ P)\equiv\exists x\ \neg P$ \quad y \quad $\neg(\exists x\ P)\equiv\forall x\ \neg P$.\\
+Ejemplo: negar «$\forall\eps>0\ \exists\delta>0: \dots$» da «$\exists\eps>0\ \forall\delta>0: \text{no}\dots$». Así se prueba que algo \emph{no} tiene límite.
+\end{memo}
+\begin{tip}{EN TU IDIOMA}
+Una demostración es un grafo de nodos: la hipótesis es el input, la tesis el output, y cada paso es un nodo que solo puede usar lo que le llega por los cables (definiciones, axiomas, teoremas ya probados). Si un paso usa algo que no está conectado, la prueba está rota.
+\end{tip}

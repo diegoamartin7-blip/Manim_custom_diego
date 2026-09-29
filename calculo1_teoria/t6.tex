@@ -1,0 +1,93 @@
+% ================= CAPÍTULO 6: CONTINUIDAD =================
+\chapter{Continuidad y teoremas}
+\prob{SEMANAS 6-7}{todo este capítulo está agregado: no está en tu cuaderno}
+
+\section{Definición}
+\agregado
+\begin{sello}{CONTINUIDAD EN UN PUNTO}
+$f$ es \textbf{continua en $a$} $\iff\lim_{x\to a}f(x)=f(a)$. Son tres condiciones a la vez:\\[2pt]
+(i) existe $f(a)$; \quad (ii) existe el límite (laterales iguales); \quad (iii) son el mismo número.\\[3pt]
+En ε-δ: $\forall\eps>0\ \exists\delta>0:\ |x-a|<\delta\Rightarrow|f(x)-f(a)|<\eps$ (ahora sí entra $x=a$).\\[2pt]
+$f$ es continua en un conjunto si lo es en cada uno de sus puntos.
+\end{sello}
+\begin{tip}{LA IMAGEN}
+Continua = se dibuja sin levantar el lápiz. La definición formal dice: si movés $x$ un poquito, $f(x)$ se mueve un poquito.
+\end{tip}
+\begin{memo}{TIPOS DE DISCONTINUIDAD}
+\textbf{Evitable:} el límite existe pero $\neq f(a)$ (o $f(a)$ no existe). Se arregla redefiniendo un punto.\\
+\textbf{Salto:} los laterales existen y son distintos. Ningún valor de $f(a)$ lo arregla.\\
+\textbf{Esencial:} algún lateral no existe ($\sin\frac1x$ en 0).
+\end{memo}
+
+\agregado
+\begin{sello}{ÁLGEBRA DE CONTINUAS}
+Si $f,g$ son continuas en $a$: $f\pm g$, $fg$ y $\frac fg$ (si $g(a)\neq0$) son continuas en $a$. Si $g$ es continua en $a$ y $f$ en $g(a)$, $f\circ g$ es continua en $a$.\\[3pt]
+Son continuas en su dominio: polinomios, $\sin$, $\cos$, $e^x$, $\log$ ($x>0$), $\sqrt x$ ($x\ge0$), $|x|$.
+\end{sello}
+\begin{demo}
+Sale directo del álgebra de límites y del límite de la composición del capítulo 5, con $L=f(a)$ y $M=g(a)$. $\blacksquare$
+\end{demo}
+
+\section{Teorema de Bolzano}
+\agregado
+\begin{sello}{BOLZANO}
+\textbf{H:} $f$ continua en $[a,b]$ y $f(a)\cdot f(b)<0$. \quad \textbf{T:} existe $c\in(a,b)$ con $f(c)=0$.
+\end{sello}
+\begin{demo}
+Supongo $f(a)<0<f(b)$. Sea $A=\{y\in[a,b]:f<0\text{ en todo }[a,y]\}$. Es no vacío ($a\in A$) y acotado por $b$: existe $s=\sup A$ (completitud).\\[2pt]
+Si $f(s)<0$: por conservación del signo, $f<0$ en un entorno $(s-\eta,s+\eta)$. Hay $y\in A$ con $y>s-\eta$, así que $f<0$ en $[a,s+\frac\eta2]$: $s+\frac\eta2\in A$, mayor que el sup. Absurdo.\\[2pt]
+Si $f(s)>0$: $f>0$ en $(s-\eta,s]$; pero hay $y\in A$ en ese tramo, con $f<0$ en $[a,y]$. Absurdo.\\[2pt]
+Queda $f(s)=0$, y $s\neq a,b$ porque ahí $f\neq0$. $\blacksquare$
+\end{demo}
+\begin{tip}{LA IMAGEN}
+Se busca «el último punto donde la curva todavía está bajo el eje». La completitud garantiza que ese punto exista, y la continuidad, que ahí la curva valga 0.
+\end{tip}
+\begin{memo}{LO QUE BOLZANO NO DICE}
+No dice que la raíz sea única ni dónde está. El recíproco es falso ($x^2$ en $[-1,1]$ tiene raíz sin cambiar de signo). Sin continuidad falla ($\sgn x$ en $[-1,1]$).
+\end{memo}
+
+\agregado
+\begin{sello}{VALOR INTERMEDIO}
+$f$ continua en $[a,b]$ toma \textbf{todos} los valores entre $f(a)$ y $f(b)$.
+\end{sello}
+\begin{demo}
+Dado $k$ estrictamente entre $f(a)$ y $f(b)$, la función $h=f-k$ es continua y $h(a)h(b)<0$. Bolzano da $c$ con $h(c)=0$, o sea $f(c)=k$. $\blacksquare$
+\end{demo}
+
+\section{Teorema de Weierstrass}
+\agregado
+\begin{sello}{WEIERSTRASS (SE ENUNCIA SIN PRUEBA EN EL CURSO)}
+$f$ continua en $[a,b]$ \textbf{cerrado y acotado} $\Rightarrow f$ está acotada y alcanza su máximo y su mínimo: existen $x_m,x_M\in[a,b]$ con $f(x_m)\le f(x)\le f(x_M)$ para todo $x\in[a,b]$.
+\end{sello}
+\begin{memo}{POR QUÉ HACE FALTA CADA HIPÓTESIS}
+Sin cerrado: $x$ en $(0,1)$ no tiene ni máximo ni mínimo.\\
+Sin acotado: $x$ en $[0,+\infty)$ no tiene máximo.\\
+Sin continua: $f(x)=x$ en $[0,1)$ y $f(1)=0$ no tiene máximo en $[0,1]$.
+\end{memo}
+\agregado
+\begin{sello}{CONTINUA $\Rightarrow$ INTEGRABLE (SIN PRUEBA EN EL CURSO)}
+Toda $f$ continua en $[a,b]$ es integrable. También las seccionalmente continuas (finitos saltos).
+\end{sello}
+
+\section{Valor medio para integrales}
+\agregado
+\begin{sello}{VALOR MEDIO}
+$f$ continua en $[a,b]\Rightarrow$ existe $c\in[a,b]$ con $f(c)\,(b-a)=\int_a^bf$.
+\end{sello}
+\begin{demo}
+Por Weierstrass, $m\le f\le M$ con $m$ y $M$ alcanzados. Por acotación, $m\le\frac1{b-a}\int_a^bf\le M$. Por valor intermedio, $f$ toma ese promedio en algún $c$. $\blacksquare$
+\end{demo}
+\begin{tip}{LA IMAGEN}
+Agua en una pecera con fondo irregular: al nivelarse queda a la altura del promedio, y como el fondo es continuo, en algún punto el fondo está justo a esa altura.
+\end{tip}
+
+\section{Lipschitz}
+\agregado
+\begin{sello}{FUNCIONES LIPSCHITZ}
+$f$ es \textbf{Lipschitz} en $I$ si existe $K$ con $|f(x)-f(y)|\le K|x-y|$ para todo $x,y\in I$.\\[3pt]
+Lipschitz $\Rightarrow$ continua (dado $\eps$, sirve $\delta=\frac\eps K$). \ Lipschitz $\Rightarrow$ integrable.\\[2pt]
+Continua $\not\Rightarrow$ Lipschitz: $\sqrt x$ en $[0,1]$ (las pendientes $\frac1{\sqrt x}$ no están acotadas cerca de 0).
+\end{sello}
+\begin{tip}{LA IMAGEN}
+Un límite de velocidad: la función no puede cambiar más rápido que $K$ por unidad. En cada punto, el gráfico queda dentro de un «reloj de arena» de pendientes $\pm K$.
+\end{tip}

@@ -13,3 +13,8 @@ calculo1_practicos/*.log
 calculo1_practicos/*.out
 calculo1_practicos/*.toc
 calculo1_practicos/main.pdf
+calculo1_teoria/*.aux
+calculo1_teoria/*.log
+calculo1_teoria/*.out
+calculo1_teoria/*.toc
+calculo1_teoria/main.pdf

@@ -1,0 +1,140 @@
+% ================= CAPÍTULO 4: INTEGRAL =================
+\chapter{Integral de Riemann}
+\prob{SEMANAS 3-4 · 26 DE AGOSTO}{la integral es un supremo de sumas: acá se usa todo lo del capítulo 3}
+
+\begin{tip}{LA IDEA EN UNA IMAGEN}
+Querés el área bajo una curva. La aproximás con ladrillos: unos que sobresalen (suma superior) y otros que quedan cortos (suma inferior). Si afinando los ladrillos podés hacer que las dos aproximaciones se toquen, ese número es la integral.
+\end{tip}
+
+\section{Particiones y sumas}
+\apuntes
+\begin{sello}{PARTICIÓN Y SUMAS DE DARBOUX}
+$f:[a,b]\to\R$ acotada. Una \textbf{partición} es $P=\{a_0,a_1,\dots,a_M\}$ con $a=a_0<a_1<\dots<a_M=b$.\\[3pt]
+$\displaystyle \Si(f,P)=\sum_{i=0}^{M-1}\inf\big(f,[a_i,a_{i+1}]\big)\,(a_{i+1}-a_i)$ \quad (suma inferior)\\[3pt]
+$\displaystyle \Ss(f,P)=\sum_{i=0}^{M-1}\sup\big(f,[a_i,a_{i+1}]\big)\,(a_{i+1}-a_i)$ \quad (suma superior)\\[3pt]
+\textbf{Propiedad básica:} $\Si(f,P)\le\Ss(f,P)$ (en cada bloque, el ínfimo no supera al supremo).
+\end{sello}
+\begin{center}
+\begin{tikzpicture}[x=2.6cm,y=1.1cm]
+\foreach \a/\b/\hi/\lo in {0.3/0.9/2.62/2.02, 0.9/1.6/2.02/1.52, 1.6/2.4/1.52/1.42, 2.4/3.0/2.3/1.42}{
+ \fill[rojo!18] (\a,0) rectangle (\b,\hi); \draw[rojo!70] (\a,0) rectangle (\b,\hi);
+ \fill[teal!35] (\a,0) rectangle (\b,\lo); }
+\draw[acero,very thick,domain=0.3:3.0,samples=60] plot (\x,{0.35*(\x-1.9)^2+1.42});
+\draw[-{Stealth}] (0.2,0)--(3.2,0); \draw[-{Stealth}] (0.25,-0.1)--(0.25,3);
+\foreach \p/\l in {0.3/a_0,0.9/a_1,1.6/a_2,2.4/a_3,3.0/a_4} \node[font=\scriptsize,below] at (\p,0) {$\l$};
+\node[rojo,font=\ttfamily\scriptsize] at (2.75,2.65) {$\Ss$}; \node[teal!80!black,font=\ttfamily\scriptsize] at (2.7,0.6) {$\Si$};
+\end{tikzpicture}\\
+{\ttfamily\scriptsize\color{suave} Rojo: cajas de la superior (tocan el punto más alto de cada bloque). Teal: de la inferior (el más bajo).}
+\end{center}
+
+\agregado
+\begin{sello}{LEMA DE REFINAMIENTO}
+Si $P\subset P'$ ($P'$ tiene todos los puntos de $P$ y quizás más):
+\[\Si(f,P)\le\Si(f,P')\le\Ss(f,P')\le\Ss(f,P).\]
+Consecuencia: para dos particiones cualesquiera $P$, $Q$: \ $\Si(f,Q)\le\Ss(f,P)$.
+\end{sello}
+\begin{demo}
+Alcanza con agregar un punto $c$ dentro de un bloque $[a_i,a_{i+1}]$. En la inferior, ese bloque aportaba $m\,(a_{i+1}-a_i)$ con $m=\inf$ en todo el bloque. Ahora aporta $m_1(c-a_i)+m_2(a_{i+1}-c)$, con $m_1,m_2$ los ínfimos en cada mitad. Como cada mitad está dentro del bloque, $m_1,m_2\ge m$: la suma no baja. Con la superior es al revés.\\[2pt]
+Para $P$ y $Q$: pasando por $P\cup Q$, que refina a las dos, $\Si(f,Q)\le\Si(f,P\cup Q)\le\Ss(f,P\cup Q)\le\Ss(f,P)$. $\blacksquare$
+\end{demo}
+
+\section{Definición de integral}
+\apuntes
+\begin{sello}{INTEGRAL INFERIOR, SUPERIOR E INTEGRABILIDAD}
+$I_*=\sup\{\Si(f,P): P\text{ partición}\}$ \quad (integral inferior)\\[2pt]
+$I^*=\inf\{\Ss(f,P): P\text{ partición}\}$ \quad (integral superior)\\[3pt]
+$f$ es \textbf{integrable} en $[a,b]\iff I_*=I^*$, y ese número es $\displaystyle\int_a^bf$.
+\end{sello}
+\agregado
+\begin{memo}{POR QUÉ EXISTEN $I_*$ E $I^*$, Y POR QUÉ $I_*\le I^*$}
+Por el lema, cualquier $\Ss(f,P)$ es cota superior del conjunto de las sumas inferiores: por completitud existe $I_*$, y $I_*\le\Ss(f,P)$ para toda $P$. Entonces $I_*$ es cota inferior de las superiores, y $I_*\le I^*$.
+\end{memo}
+\begin{tip}{$\Ss$ CONTRA $I^*$ (TU PREGUNTA DEL CUADERNO)}
+$\Ss(f,P)$ es \textbf{un número} de \textbf{una} partición: una foto. $I^*$ es el \textbf{mejor} de todos esos números: el ínfimo sobre todas las particiones. Siempre $\Si(f,P)\le I_*\le I^*\le\Ss(f,P)$.
+\end{tip}
+
+\section{Criterio de integrabilidad}
+\apuntes
+\begin{sello}{CRITERIO «A MENOS DE ÉPSILON»}
+Son equivalentes:\\[2pt]
+(1) $f$ es integrable y $\int_a^bf=I$.\\
+(2) $\forall\eps>0\ \exists P$ partición tal que $I-\eps<\Si(f,P)\le\Ss(f,P)<I+\eps$.\\[3pt]
+\textbf{Forma que se usa:} $f$ integrable $\iff\forall\delta>0\ \exists P:\ \Ss(f,P)-\Si(f,P)<\delta$.
+\end{sello}
+\begin{demo}
+(1)$\Rightarrow$(2). Dado $\eps$, por la caracterización del sup (cap.\ 3) aplicada a $I=I_*$, hay $P_1$ con $\Si(f,P_1)>I-\eps$. Por la del ínfimo aplicada a $I=I^*$, hay $P_2$ con $\Ss(f,P_2)<I+\eps$. Con $P=P_1\cup P_2$, el lema de refinamiento da $I-\eps<\Si(f,P)\le\Ss(f,P)<I+\eps$.\\[3pt]
+(2)$\Rightarrow$(1). Con la $P$ de (2): $\Si(f,P)\le I_*\le I^*\le\Ss(f,P)$, así que $I^*-I_*\le\Ss-\Si<2\eps$. Como vale para todo $\eps>0$, por el lema «$a\le b+\delta$ para todo $\delta>0\Rightarrow a\le b$» queda $I^*\le I_*$. Y siempre $I_*\le I^*$: son iguales. $\blacksquare$
+\end{demo}
+\begin{tip}{LA IMAGEN}
+Una pinza: por abajo $\Si$, por arriba $\Ss$. Integrable = la pinza se puede cerrar tanto como quieras eligiendo bien la partición.
+\end{tip}
+
+\apuntes
+\begin{sello}{EJEMPLO: LA CONSTANTE}
+$f(x)=k$. En cada bloque sup = inf $=k$: $\Ss=\Si=\sum k(a_{i+1}-a_i)=k(b-a)$ (suma telescópica). Integrable y $\int_a^bk\,dx=k(b-a)$.
+\end{sello}
+\apuntes
+\begin{sello}{CONTRAEJEMPLO: DIRICHLET}
+$f(x)=1$ si $x\in\Q$, $0$ si $x\notin\Q$. En cualquier bloque hay racionales e irracionales (densidad): $\Ss(f,P)=b-a$ y $\Si(f,P)=0$ para toda $P$. $I^*=b-a\neq0=I_*$: \textbf{no es integrable}.
+\end{sello}
+\begin{trampa}{ACOTADA NO ALCANZA}
+Dirichlet está acotada entre 0 y 1 y aun así no es integrable. Integrable pide algo más que acotada.
+\end{trampa}
+
+\section{Funciones monótonas}
+\apuntes
+\begin{sello}{TEOREMA: MONÓTONA $\Rightarrow$ INTEGRABLE}
+$f:[a,b]\to\R$ monótona creciente $\Rightarrow f$ es integrable (y es automáticamente acotada: $f(a)\le f(x)\le f(b)$).
+\end{sello}
+\begin{demo}
+Tomo la partición uniforme $P_N$ con bloques de ancho $\frac{b-a}N$. Como $f$ crece, en cada bloque el sup está a la derecha y el ínfimo a la izquierda:
+\[\Ss(f,P_N)-\Si(f,P_N)=\frac{b-a}N\sum_{i=0}^{N-1}\big[f(a_{i+1})-f(a_i)\big]=\frac{b-a}N\big[f(b)-f(a)\big],\]
+porque la suma es \textbf{telescópica} (cada término cancela con el siguiente). Dado $\delta>0$, elijo $N>\frac{(b-a)(f(b)-f(a))}\delta$. Por el criterio, integrable. $\blacksquare$
+\end{demo}
+\agregado
+\begin{sello}{LOS OTROS CRITERIOS (SIN PRUEBA EN EL CURSO)}
+$f$ continua en $[a,b]\Rightarrow$ integrable.\\
+$f$ acotada con finitas discontinuidades $\Rightarrow$ integrable.\\
+Cambiar $f$ en finitos puntos no cambia ni la integrabilidad ni el valor de la integral.
+\end{sello}
+
+\section{Propiedades de la integral}
+\apuntes
+\begin{sello}{MONOTONÍA}
+$f\le g$ en $[a,b]$, ambas integrables $\Rightarrow\int_a^bf\le\int_a^bg$. \quad \textbf{Corolario:} $f\ge0\Rightarrow\int_a^bf\ge0$.
+\end{sello}
+\begin{demo}
+En cada bloque $\inf f\le\inf g$, así que $\Si(f,P)\le\Si(g,P)\le I_*(g)$ para toda $P$. Tomando supremo en $P$: $I_*(f)\le I_*(g)$. Como son integrables, eso es $\int f\le\int g$. $\blacksquare$
+\end{demo}
+\apuntes
+\begin{sello}{LINEALIDAD}
+$f,g$ integrables $\Rightarrow f+g$ integrable y $\int_a^b(f+g)=\int_a^bf+\int_a^bg$. \quad También $\int_a^b\lambda f=\lambda\int_a^bf$.
+\end{sello}
+\agregado
+\begin{demo}
+En cada bloque $\sup(f+g)\le\sup f+\sup g$ e $\inf(f+g)\ge\inf f+\inf g$. Entonces
+\[\Si(f,P)+\Si(g,P)\le\Si(f+g,P)\le\Ss(f+g,P)\le\Ss(f,P)+\Ss(g,P).\]
+Con $P$ que deje a $f$ y a $g$ a menos de $\frac\eps2$ de sus integrales (refinando una común), $f+g$ queda a menos de $\eps$ de $\int f+\int g$. Por el criterio, listo. Para $\lambda\ge0$ las sumas se multiplican por $\lambda$; para $\lambda<0$, además se intercambian sup e ínf. $\blacksquare$
+\end{demo}
+\apuntes
+\begin{sello}{ADITIVIDAD (CHASLES)}
+$f$ integrable en $[a,b]$ y en $[b,c]\Rightarrow$ integrable en $[a,c]$ y $\int_a^cf=\int_a^bf+\int_b^cf$.\\[3pt]
+Con la convención $\int_a^bf=-\int_b^af$ y $\int_a^af=0$, vale con $a,b,c$ \textbf{en cualquier orden}.
+\end{sello}
+\begin{demo}
+Dado $\eps$, tomo $P_1$ en $[a,b]$ y $P_2$ en $[b,c]$, cada una a menos de $\frac\eps2$ de su integral. Con $P=P_1\cup P_2$: $\Si(f,P)=\Si(f,P_1)+\Si(f,P_2)$ y lo mismo con $\Ss$. Sumando las desigualdades, $P$ deja a $f$ a menos de $\eps$ de $\int_a^b+\int_b^c$. $\blacksquare$
+\end{demo}
+\agregado
+\begin{sello}{MÁS PROPIEDADES QUE SE USAN}
+\textbf{Valor absoluto:} $\left|\int_a^bf\right|\le\int_a^b|f|$. \ (Prueba: $-|f|\le f\le|f|$ e integro, por monotonía.)\\[2pt]
+\textbf{Acotación:} $m\le f\le M$ en $[a,b]\Rightarrow m(b-a)\le\int_a^bf\le M(b-a)$. \ (Monotonía con las constantes $m$ y $M$.)\\[2pt]
+\textbf{Cambio de variable lineal:} $\int_a^bf(t)\,dt=\int_{a+p}^{b+p}f(t-p)\,dt$ \ y \ $\int_a^bf(t)\,dt=r\int_{a/r}^{b/r}f(rt)\,dt$ ($r>0$).\\[2pt]
+\textbf{Integrales conocidas:} $\int_a^bt=\frac{b^2-a^2}2$, \ $\int_a^bt^2=\frac{b^3-a^3}3$, \ $\int_1^x\frac{dt}t=\log x$.
+\end{sello}
+\agregado
+\begin{sello}{LA INTEGRAL INDEFINIDA ES CONTINUA}
+$f$ integrable en $[a,b]$, con $|f|\le M$. Entonces $F(x)=\int_a^xf$ cumple $|F(x)-F(y)|\le M|x-y|$ (es Lipschitz), y por lo tanto es continua, aunque $f$ tenga saltos.
+\end{sello}
+\begin{demo}
+Por Chasles, $F(x)-F(y)=\int_y^xf$. Por acotación, $\left|\int_y^xf\right|\le M|x-y|$. $\blacksquare$
+\end{demo}

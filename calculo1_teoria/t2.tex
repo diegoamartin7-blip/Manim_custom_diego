@@ -1,0 +1,97 @@
+% ================= CAPÍTULO 2: FUNCIONES =================
+\chapter{Funciones}
+\prob{SEMANA 1-2}{las funciones son el objeto de estudio de todo el curso}
+
+\section{Definición}
+\apuntes
+\begin{sello}{FUNCIÓN}
+Dados $A,B\neq\emptyset$, $f:A\to B$ es una \textbf{función} si asocia a \textbf{cada} elemento de $A$ \textbf{un único} elemento de $B$.\\[3pt]
+$A$ es el dominio, $B$ el codominio. El \textbf{gráfico} es $G_f=\{(x,f(x)):x\in A\}\subset A\times B$.
+\end{sello}
+\begin{trampa}{LAS DOS CONDICIONES}
+«Cada» (ningún $x$ se queda sin imagen) y «único» (ningún $x$ tiene dos imágenes). Una circunferencia no es gráfico de una función de $x$: una recta vertical la corta dos veces.
+\end{trampa}
+
+\section{Inyectiva, sobreyectiva, biyectiva}
+\apuntes
+\begin{sello}{DEFINICIONES}
+\textbf{Inyectiva:} $\forall x,x'\in A$: $f(x)=f(x')\Rightarrow x=x'$.\\
+Forma contrarrecíproca: $x\neq x'\Rightarrow f(x)\neq f(x')$ (puntos distintos van a imágenes distintas).\\[3pt]
+\textbf{Sobreyectiva:} $\forall y\in B\ \exists x\in A:\ f(x)=y$ (todo el codominio se alcanza).\\[3pt]
+\textbf{Biyectiva:} inyectiva y sobreyectiva a la vez.
+\end{sello}
+\begin{memo}{LOS EJEMPLOS DE CLASE}
+$f_3:[0,+\infty)\to\R$, $f_3(x)=x^2$: \textbf{inyectiva} (si $0\le x<x'$, entonces $x^2<x'^2$), pero \textbf{no sobreyectiva} (los $y<0$ no tienen preimagen).\\[2pt]
+$f_4:[0,+\infty)\to[0,+\infty)$, $f_4(x)=x^2$: \textbf{sobreyectiva} (dado $y\ge0$, $y=(\sqrt y)^2=f_4(\sqrt y)$). Como es la misma fórmula, también inyectiva: biyectiva.\\[2pt]
+\textbf{Moraleja:} ser sobreyectiva depende del codominio que elijas, no solo de la fórmula.
+\end{memo}
+\begin{sello}{TEST GEOMÉTRICO CON RECTAS HORIZONTALES}
+Cada recta $y=b$ corta el gráfico \textbf{a lo sumo una vez} $\iff f$ es inyectiva.\\
+Cada recta $y=b$ (con $b\in B$) corta el gráfico \textbf{al menos una vez} $\iff f$ es sobreyectiva.
+\end{sello}
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+\begin{scope}
+\draw[-{Stealth}] (-1.6,0)--(1.7,0); \draw[-{Stealth}] (0,-0.3)--(0,2.4);
+\draw[acero,very thick,domain=-1.4:1.4,samples=40] plot (\x,{\x*\x});
+\draw[rojo,dashed] (-1.6,1)--(1.7,1); \fill[rojo] (-1,1) circle (1.5pt) (1,1) circle (1.5pt);
+\node[font=\ttfamily\scriptsize,rojo] at (0,2.6) {$x^2$ en $\R$: no inyectiva};
+\end{scope}
+\begin{scope}[xshift=4.3cm]
+\draw[-{Stealth}] (-0.3,0)--(1.8,0); \draw[-{Stealth}] (0,-0.3)--(0,2.4);
+\draw[acero,very thick,domain=0:1.45,samples=40] plot (\x,{\x*\x});
+\draw[verde,dashed] (-0.3,1)--(1.8,1); \fill[verde] (1,1) circle (1.5pt);
+\node[font=\ttfamily\scriptsize,verde] at (0.8,2.6) {$x^2$ en $[0,+\infty)$: inyectiva};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\section{Imagen y preimagen}
+\apuntes
+\begin{sello}{DEFINICIONES}
+\textbf{Imagen} de $X\subset A$: $f(X)=\{f(x):x\in X\}\subset B$. \ La imagen de $f$ es $\mathrm{Im}(f)=f(A)$.\\[3pt]
+\textbf{Preimagen} de $Y\subset B$: $f^{-1}(Y)=\{x\in A: f(x)\in Y\}\subset A$. \ Siempre $f^{-1}(B)=A$.
+\end{sello}
+\begin{memo}{OBSERVACIONES DE CLASE}
+$f$ sobreyectiva $\iff f(A)=B$.\\
+$f$ inyectiva $\iff$ cada $f^{-1}(\{y\})$ tiene a lo sumo un elemento. \ Biyectiva $\iff$ exactamente uno.\\
+Ej.: con $f(x)=x^2$, $f^{-1}([0,1])=[-1,1]$.
+\end{memo}
+\begin{trampa}{$f^{-1}(Y)$ NO NECESITA INVERSA}
+La preimagen de un conjunto existe para \emph{cualquier} función. La función inversa $f^{-1}$ (sección siguiente) solo existe si $f$ es biyectiva. Se escriben igual; son cosas distintas.
+\end{trampa}
+
+\section{Composición}
+\apuntes
+\begin{sello}{COMPOSICIÓN}
+$f:A\to B$, $g:C\to D$, con $f(A)\subset C$. \quad $g\circ f:A\to D$, \ $(g\circ f)(x)=g(f(x))$. \ \textbf{Primero $f$.}
+\end{sello}
+\begin{memo}{EL EJEMPLO DE CLASE}
+$f(x)=x^2$, $g(x)=3x+1$. \ $(g\circ f)(x)=g(x^2)=3x^2+1$. \ $(f\circ g)(x)=f(3x+1)=9x^2+6x+1$.\\
+\textbf{En general $g\circ f\neq f\circ g$.}
+\end{memo}
+\begin{tip}{EN TU IDIOMA}
+Nodos en cadena: \texttt{x → [f] → [g] → salida}. Cambiar el orden de los nodos cambia el resultado.
+\end{tip}
+
+\section{Función inversa}
+\apuntes
+\begin{sello}{DEFINICIÓN Y TEOREMA}
+$f^{-1}:B\to A$ es la \textbf{inversa} de $f:A\to B$ si $f^{-1}\circ f=\mathrm{id}_A$ y $f\circ f^{-1}=\mathrm{id}_B$ (donde $\mathrm{id}(a)=a$).\\[3pt]
+\textbf{Teorema.} $f$ tiene inversa $\iff f$ es biyectiva.
+\end{sello}
+\agregado
+\begin{demo}
+($\Rightarrow$) \emph{Inyectiva:} si $f(x)=f(x')$, aplico $f^{-1}$: $x=f^{-1}(f(x))=f^{-1}(f(x'))=x'$. \emph{Sobreyectiva:} dado $y\in B$, $x=f^{-1}(y)$ cumple $f(x)=f(f^{-1}(y))=y$.\\[3pt]
+($\Leftarrow$) Para cada $y\in B$ hay un $x$ con $f(x)=y$ (sobre) y es único (inyectiva). Defino $f^{-1}(y)=$ ese $x$. Entonces $f(f^{-1}(y))=y$, y $f^{-1}(f(x))=x$ porque $x$ es el único que va a $f(x)$. $\blacksquare$
+\end{demo}
+\begin{tip}{LA IMAGEN}
+El gráfico de $f^{-1}$ es el de $f$ reflejado en la diagonal $y=x$: se intercambian los roles de $x$ e $y$.
+\end{tip}
+
+\agregado
+\begin{sello}{PARES, IMPARES Y MONÓTONAS (SE USAN EN EL PRÁCTICO)}
+\textbf{Par:} $f(-x)=f(x)$. \ \textbf{Impar:} $f(-x)=-f(x)$.\\[2pt]
+\textbf{Creciente:} $x<x'\Rightarrow f(x)\le f(x')$. \ \textbf{Estrictamente creciente:} $\Rightarrow f(x)<f(x')$. (Análogo decreciente.)\\[2pt]
+Estrictamente monótona $\Rightarrow$ inyectiva.
+\end{sello}
