@@ -1,0 +1,218 @@
+% ================= CAPÍTULO 6: RECETARIO =================
+\chapter{El recetario: un ejercicio real por tipo}
+Cada receta es un ejercicio de parcial, resuelto como lo escribirías vos. Primero intentalo tapando la solución.
+
+% ---------------- R1
+\section*{R1 · Sistema con parámetro}
+\addcontentsline{toc}{section}{R1 · Sistema con parámetro}
+\prob{MUY ALTA}{salió en 11 de 14 parciales}
+\begin{enunciado}{2S 2023 · PREGUNTAS 2 Y 3}
+Discutir según $a\in\R$: \quad $\left\{\begin{array}{l}x+ay+z=1\\x+2(a-1)y+2z=4\\(a-2)y+az=5\end{array}\right.$ \quad y resolverlo para $a=3$.
+\end{enunciado}
+\paso{1}{escalonar sin dividir por nada con $a$}
+$\begin{amp}{ccc|c}1&a&1&1\\1&2a-2&2&4\\0&a-2&a&5\end{amp}
+\op{F_2-F_1}
+\begin{amp}{ccc|c}1&a&1&1\\0&a-2&1&3\\0&a-2&a&5\end{amp}$\\[4pt]
+\hspace*{25mm}$\op{F_3-F_2}
+\begin{amp}{ccc|c}1&a&1&1\\0&a-2&1&3\\0&0&a-1&2\end{amp}$
+\begin{uso}{PIVOTES CON PARÁMETRO}
+Los pivotes son $1$, $a-2$ y $a-1$. Valores críticos: $a=2$ y $a=1$. Chequeo: $\det A=(a-1)(a-2)$\ok
+\end{uso}
+\paso{2}{fuera de los críticos}
+$a\neq1,2$: tres pivotes en una $3\times3$: \textbf{SCD}.
+\paso{3}{$a=1$}
+La última fila queda $(0\ 0\ 0\,|\,2)$: dice $0=2$. \textbf{SI}.
+\paso{4}{$a=2$: acá está la trampa}
+$\begin{amp}{ccc|c}1&2&1&1\\0&0&1&3\\0&0&1&2\end{amp}$ no está escalonada (el segundo pivote desapareció). $F_3-F_2$ da $(0\ 0\ 0\,|\,-1)$: \textbf{SI}.
+\paso{5}{$a=3$}
+$y+z=3$, $2z=2$: $z=1$, $y=2$, $x=1-3\cdot2-1=-6$.
+\resp{Incompatible para $a=1$ y $a=2$; SCD para los demás. Para $a=3$: $S=\{(-6,2,1)\}$.}
+
+% ---------------- R2
+\section*{R2 · Sistema con dos parámetros (desarrollo)}
+\addcontentsline{toc}{section}{R2 · Sistema con dos parámetros}
+\prob{MUY ALTA}{2S 2022, parte de desarrollo; el mismo sistema salió en 2008}
+\begin{enunciado}{2S 2022 · DESARROLLO}
+$\alpha x+y+z=\beta,\ \ x+\alpha y+z=\beta,\ \ x+y+\alpha z=\beta$. Hallar $\alpha,\beta$ para que sea SI, SCI y SCD, y dar las soluciones en los casos compatibles.
+\end{enunciado}
+\paso{1}{pongo arriba la fila con 1 al principio}
+$\begin{amp}{ccc|c}1&1&\alpha&\beta\\1&\alpha&1&\beta\\\alpha&1&1&\beta\end{amp}
+\op{F_2-F_1,\ F_3-\alpha F_1}
+\begin{amp}{ccc|c}1&1&\alpha&\beta\\0&\alpha-1&1-\alpha&0\\0&1-\alpha&1-\alpha^2&\beta-\alpha\beta\end{amp}$
+\paso{2}{$F_3+F_2$}
+$\begin{amp}{ccc|c}1&1&\alpha&\beta\\0&\alpha-1&1-\alpha&0\\0&0&(1-\alpha)(2+\alpha)&\beta(1-\alpha)\end{amp}$
+\paso{3}{casos}
+$\alpha\neq1,-2$: \textbf{SCD}. De abajo hacia arriba: $z=\frac{\beta}{\alpha+2}$, $y=z$, $x=\beta-y-\alpha z=\frac\beta{\alpha+2}$.\\
+$\alpha=1$: las filas 2 y 3 se anulan y queda $x+y+z=\beta$: \textbf{SCI} con 2 parámetros, para todo $\beta$.\\
+$\alpha=-2$: la fila 3 queda $(0\ 0\ 0\,|\,3\beta)$. Si $\beta\neq0$: \textbf{SI}. Si $\beta=0$: $-3y+3z=0$ y $x+y-2z=0$ dan $x=y=z$: \textbf{SCI}.
+\resp{SI: $\alpha=-2,\ \beta\neq0$. \ SCI: $\alpha=1$ (sol. $\{(\beta-y-z,y,z)\}$) o $\alpha=-2,\beta=0$ (sol. $\{(t,t,t)\}$). \ SCD: $\alpha\neq1,-2$, con $x=y=z=\frac\beta{\alpha+2}$.}
+
+% ---------------- R3
+\section*{R3 · Rango con parámetro}
+\addcontentsline{toc}{section}{R3 · Rango con parámetro}
+\prob{MUY ALTA}{en los 3 últimos parciales}
+\begin{enunciado}{1S 2024 · PREGUNTA 1}
+$A=\begin{pmatrix}a-1&3&a+1\\-1&1&1\\a&2&-1\end{pmatrix}$. ¿Para cuántos $a$ el rango es 3 y para cuántos es 2?
+\end{enunciado}
+\paso{1}{fila con pivote numérico arriba}
+Subo la fila $(-1,1,1)$ y la uso para anular la primera columna: a la vieja $F_1$ le sumo $(a-1)$ veces la nueva, y a $F_3$ le sumo $a$ veces la nueva.
+\[\begin{pmatrix}-1&1&1\\0&a+2&2a\\0&a+2&a-1\end{pmatrix}\op{F_3-F_2}\begin{pmatrix}-1&1&1\\0&a+2&2a\\0&0&-(a+1)\end{pmatrix}\]
+\paso{2}{casos}
+$a\neq-1,-2$: tres pivotes, $\rg=3$.\\
+$a=-1$: la fila 3 se anula; la fila 2 es $(0,1,-2)$: $\rg=2$.\\
+$a=-2$: filas 2 y 3 quedan $(0,0,-4)$ y $(0,0,1)$: proporcionales, $\rg=2$.
+\begin{uso}{CHEQUEO CON EL DETERMINANTE}
+$\det A=-(a+1)(a+2)$: se anula exactamente en los dos valores críticos\ok
+\end{uso}
+\resp{Infinitos valores con rango 3 y exactamente dos ($a=-1,-2$) con rango 2. Opción (D).}
+
+% ---------------- R4
+\section*{R4 · Rango con dos parámetros}
+\addcontentsline{toc}{section}{R4 · Rango con dos parámetros}
+\begin{enunciado}{2S 2024 · PREGUNTA 1}
+$A=\begin{pmatrix}-1&1&2\\a&-1&-2a+1\\-b&b&2b+ab+a\end{pmatrix}$. Discutir el rango.
+\end{enunciado}
+\paso{1}{escalonar}
+$F_2\to F_2+aF_1$ y $F_3\to F_3-bF_1$: \quad $\begin{pmatrix}-1&1&2\\0&a-1&1\\0&0&a(b+1)\end{pmatrix}$.
+\begin{uso}{¿ES LEGAL $F_2+aF_1$ SI $a$ PUEDE SER 0?}
+Sí. Lo prohibido es \emph{multiplicar la fila que cambia} por algo que puede ser 0. Sumarle a $F_2$ un múltiplo de otra fila siempre está permitido.
+\end{uso}
+\paso{2}{casos}
+$a=1$: filas $(0,0,1)$ y $(0,0,b+1)$, proporcionales: $\rg=2$ para todo $b$.\\
+$a=0$ o $b=-1$: la última fila se anula: $\rg=2$.\\
+Resto: $\rg=3$.
+\resp{Hay exactamente dos valores de $a$ (0 y 1) con $\rg=2$ para todo $b$. Opción (B).}
+
+% ---------------- R5
+\section*{R5 · Inversa y sus entradas}
+\addcontentsline{toc}{section}{R5 · Inversa y sus entradas}
+\prob{MUY ALTA}{en los 4 parciales más recientes}
+\begin{enunciado}{1S 2025 · PREGUNTA 5}
+$A=\begin{pmatrix}1&1&1\\1&2&-1\\2&1&0\end{pmatrix}$, $B=A^{-1}=(b_{ij})$. Hallar $b_{11}$, $b_{22}$ y $b_{31}$.
+\end{enunciado}
+\paso{1}{$(A|I)$ y escalonar}
+$\begin{amp}{rrr|rrr}1&1&1&1&0&0\\1&2&-1&0&1&0\\2&1&0&0&0&1\end{amp}
+\op{F_2-F_1,\ F_3-2F_1}
+\begin{amp}{rrr|rrr}1&1&1&1&0&0\\0&1&-2&-1&1&0\\0&-1&-2&-2&0&1\end{amp}$
+\paso{2}{terminar la escalera}
+$\op{F_3+F_2}\begin{amp}{rrr|rrr}1&1&1&1&0&0\\0&1&-2&-1&1&0\\0&0&-4&-3&1&1\end{amp}
+\op{-\frac14F_3}\begin{amp}{rrr|rrr}1&1&1&1&0&0\\0&1&-2&-1&1&0\\0&0&1&\frac34&-\frac14&-\frac14\end{amp}$
+\paso{3}{hacia arriba}
+$F_2+2F_3$: $(0,1,0\,|\,\frac12,\frac12,-\frac12)$. \quad $F_1-F_2-F_3$: $(1,0,0\,|\,-\frac14,-\frac14,\frac34)$.
+\[A^{-1}=\begin{pmatrix}-\frac14&-\frac14&\frac34\\[1pt]\frac12&\frac12&-\frac12\\[1pt]\frac34&-\frac14&-\frac14\end{pmatrix}\]
+\paso{4}{chequeo}
+Fila 1 de $A$ por columna 1 de $A^{-1}$: $-\frac14+\frac12+\frac34=1$\ok \quad Fila 2 por columna 1: $-\frac14+1-\frac34=0$\ok
+\resp{$b_{11}=-\frac14$, $b_{22}=\frac12$, $b_{31}=\frac34$. Opción (A).}
+
+% ---------------- R6
+\section*{R6 · Determinante por propiedades}
+\addcontentsline{toc}{section}{R6 · Determinante por propiedades}
+\prob{MUY ALTA}{2S 2024 y 1S 2025 seguidos}
+\begin{enunciado}{2S 2024 · PREGUNTA 4}
+$\det\begin{pmatrix}a&b&c\\d&e&f\\g&h&i\end{pmatrix}=5$. Calcular $\det B$, con $B=\begin{pmatrix}2g&2i&2h\\a+d&c+f&b+e\\3d&3f&3e\end{pmatrix}$.
+\end{enunciado}
+\paso{1}{sacar factores}
+Sale 2 de la fila 1 y 3 de la fila 3: $\det B=6\begin{vmatrix}g&i&h\\a+d&c+f&b+e\\d&f&e\end{vmatrix}$.
+\paso{2}{deshacer la suma}
+$F_2-F_3$ (no cambia): $6\begin{vmatrix}g&i&h\\a&c&b\\d&f&e\end{vmatrix}$.
+\paso{3}{reordenar}
+Intercambio columnas 2 y 3 (signo $-$): $-6\begin{vmatrix}g&h&i\\a&b&c\\d&e&f\end{vmatrix}$. Las filas están en orden $(g,a,d)$: pasar a $(a,d,g)$ es cíclico, dos intercambios (signo $+$).
+\resp{$\det B=-6\cdot5=-30$. Opción (B).}
+\begin{enunciado}{1S 2025 · PREGUNTA 1}
+$\det\begin{pmatrix}a&b&c\\5&-5&10\\1&1&1\end{pmatrix}=-\frac54$. Calcular $\det\begin{pmatrix}2a&-2b&2c\\4&4&8\\7&-7&7\end{pmatrix}$.
+\end{enunciado}
+\paso{1}{normalizo los dos}
+En $A$ saco 5 de la fila 2: $\begin{vmatrix}a&b&c\\1&-1&2\\1&1&1\end{vmatrix}=-\frac14$.\\
+En $B$ saco 2, 4 y 7 de las filas: $56\begin{vmatrix}a&-b&c\\1&1&2\\1&-1&1\end{vmatrix}$.
+\paso{2}{la columna del medio}
+Multiplico la columna 2 por $-1$ (signo $-$): $-56\begin{vmatrix}a&b&c\\1&-1&2\\1&1&1\end{vmatrix}=-56\cdot\left(-\frac14\right)$.
+\resp{$\det B=14$. Opción (B).}
+
+% ---------------- R7
+\section*{R7 · Determinante de una expresión}
+\addcontentsline{toc}{section}{R7 · Determinante de una expresión}
+\prob{ALTA}{8 de 14}
+\begin{enunciado}{1S 2023 · PREGUNTA 6}
+$A,B$ de $3\times3$ con $\det(2A)=64$, $\det(A^2+2AB)=32$ y $\det(A^2+2AB-2BA-4B^2)=24$. Hallar $\det(A-2B)$.
+\end{enunciado}
+\paso{1}{$\det A$}
+$\det(2A)=2^3\det A=64\Rightarrow\det A=8$. \ (Si pusiste $2\det A$, te dio 32 y ya perdiste.)
+\paso{2}{factorizar}
+$A^2+2AB=A(A+2B)$: \ $8\det(A+2B)=32\Rightarrow\det(A+2B)=4$.\\
+$A^2+2AB-2BA-4B^2=A(A+2B)-2B(A+2B)=(A-2B)(A+2B)$.
+\paso{3}{despejar}
+$\det(A-2B)\cdot4=24$.
+\resp{$\det(A-2B)=6$. Opción (C).}
+\begin{enunciado}{1S 2023 VESPERTINO · PREGUNTA 6}
+$\det A=1$, $\det B=3$, $\det(B^3A^3B^{-1}+B^4A^2B^{-1})=36$. Hallar $\det(A+B)$.
+\end{enunciado}
+$B^3A^3B^{-1}+B^4A^2B^{-1}=B^3(A^3+BA^2)B^{-1}=B^3(A+B)A^2B^{-1}$. \ $\det$: $27\cdot\det(A+B)\cdot1\cdot\frac13=9\det(A+B)=36$.
+\resp{$\det(A+B)=4$. Opción (B).}
+
+% ---------------- R8
+\section*{R8 · Inversa a partir de una ecuación}
+\addcontentsline{toc}{section}{R8 · Inversa a partir de una ecuación}
+\prob{ALTA}{2 de los últimos 4}
+\begin{enunciado}{1S 2025 · PREGUNTA 6}
+$A\in\Mat_{n\times n}$ cumple $A^2+3AA^t+2I=O$. ¿Es invertible? ¿Quién es $A^{-1}$?
+\end{enunciado}
+$A^2+3AA^t=-2I\ \Rightarrow\ A(A+3A^t)=-2I\ \Rightarrow\ A\cdot\left(-\tfrac12(A+3A^t)\right)=I$.
+\resp{Es invertible y $A^{-1}=-\frac12(A+3A^t)$. Opción (C).}
+\begin{enunciado}{2S 2024 · PREGUNTA 5}
+$A=\begin{pmatrix}1&0&\lambda+1\\\lambda&1&-1\\0&0&1\end{pmatrix}$. ¿Para cuántos $\lambda$ vale $A^{-1}=2I-A$?
+\end{enunciado}
+\paso{1}{traducir}
+$A^{-1}=2I-A\iff A(2I-A)=I$ ($A$ es invertible siempre: $\det A=1$).
+\paso{2}{multiplicar}
+$2I-A=\begin{pmatrix}1&0&-\lambda-1\\-\lambda&1&1\\0&0&1\end{pmatrix}$, \quad $A(2I-A)=\begin{pmatrix}1&0&0\\0&1&-\lambda(\lambda+1)\\0&0&1\end{pmatrix}$.
+\paso{3}{igualar a $I$}
+$\lambda(\lambda+1)=0$.
+\resp{Exactamente dos valores: $\lambda=0$ y $\lambda=-1$. Opción (D).}
+
+% ---------------- R9
+\section*{R9 · Problema modelado}
+\addcontentsline{toc}{section}{R9 · Problema modelado}
+\prob{MEDIA}{5 de 14; el sushi está en el práctico 2}
+\begin{enunciado}{1S 2023 VESPERTINO · PREGUNTA 1}
+Hay 30 piezas Philadelphia, 20 New York y 50 California. Tablas: Lagrange $(4,3,5)$, Hausdorff $(2,1,5)$, Gauss $(6,3,15)$, Kolmogorov $(8,6,10)$. Se usan todas las piezas, con exactamente 1 Lagrange y al menos una de cada otra.
+\end{enunciado}
+\paso{1}{el sistema, con $L=1$}
+Philadelphia: $4+2H+6G+8K=30$; \ New York: $3+H+3G+6K=20$; \ California: $5+5H+15G+10K=50$.\\
+Simplificando: $H+3G+4K=13$, \ $H+3G+6K=17$, \ $H+3G+2K=9$.
+\paso{2}{resolver}
+Restando las dos primeras: $2K=4$, $K=2$. Queda $H+3G=5$ (la tercera se cumple sola: SCI).
+\paso{3}{restricciones enteras}
+$G\ge1$ y $H\ge1$: $3G\le4$, así que $G=1$ y $H=2$.
+\resp{1 Lagrange, 2 Hausdorff, 1 Gauss, 2 Kolmogorov. Opción (D).}
+\begin{tip}{EN MÚLTIPLE OPCIÓN, PROBÁ LAS OPCIONES}
+Sustituir las cuatro opciones en las tres ecuaciones lleva un minuto. Igual con «las cajas» de 2S 2023: $a+b+c=18$ y $a+b=c$ dan $c=9$ sin más.
+\end{tip}
+
+% ---------------- R10
+\section*{R10 · Traza de un producto}
+\addcontentsline{toc}{section}{R10 · Traza de un producto}
+\begin{enunciado}{1S 2025 · PREGUNTA 4}
+$A=\begin{pmatrix}3&-1\\2&-3\end{pmatrix}$, $B=\begin{pmatrix}-1&-2\\0&2\end{pmatrix}$. Calcular $\tr\big(2B(A+B^t)\big)$.
+\end{enunciado}
+$A+B^t=\begin{pmatrix}2&-1\\0&-1\end{pmatrix}$. \ Solo necesito la diagonal de $B(A+B^t)$: \ $(-1)(2)+(-2)(0)=-2$ \ y \ $(0)(-1)+(2)(-1)=-2$.
+\resp{$\tr=2\cdot(-4)=-8$. Opción (E).}
+
+% ---------------- R11
+\section*{R11 · Complejos (ejercicio tipo)}
+\addcontentsline{toc}{section}{R11 · Complejos}
+\prob{ALTA}{nuevo este año: no hay parciales viejos, estos son ejercicios tipo}
+\begin{enunciado}{EJERCICIO TIPO 1}
+Sea $z=\dfrac{1+i\sqrt3}{1-i}$. Hallar $|z|$, $\arg z$ y $z^{12}$.
+\end{enunciado}
+\paso{1}{cada uno en polar}
+$1+i\sqrt3=2e^{i\pi/3}$ (cuadrante I). \quad $1-i=\sqrt2\,e^{-i\pi/4}$ (cuadrante IV).
+\paso{2}{dividir: módulos se dividen, argumentos se restan}
+$z=\frac2{\sqrt2}e^{i(\pi/3+\pi/4)}=\sqrt2\,e^{i7\pi/12}$.
+\paso{3}{De Moivre}
+$z^{12}=(\sqrt2)^{12}e^{i\,7\pi}=64\,e^{i\pi}=-64$.
+\resp{$|z|=\sqrt2$, \ $\arg z=\frac{7\pi}{12}$, \ $z^{12}=-64$.}
+\begin{enunciado}{EJERCICIO TIPO 2}
+Resolver $z^4=-16$ y dibujar las soluciones.
+\end{enunciado}
+$-16=16e^{i\pi}$. \ $z_k=2e^{i(\pi+2k\pi)/4}$, $k=0,1,2,3$: ángulos $\frac\pi4,\frac{3\pi}4,\frac{5\pi}4,\frac{7\pi}4$.
+\resp{$z=\pm\sqrt2\pm i\sqrt2$ (las cuatro combinaciones de signos): un cuadrado inscripto en la circunferencia de radio 2.}

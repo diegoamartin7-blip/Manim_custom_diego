@@ -1,0 +1,71 @@
+% ================= APÉNDICE =================
+\appendix
+\chapter{Los 25 verdadero/falso clásicos}
+Todos salieron (con esta u otra redacción) en parciales entre 2007 y 2022. Tapá la columna de la derecha. $A,B,C$ son cuadradas $n\times n$ salvo que se diga otra cosa.
+
+{\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{@{}r X c@{}}
+\toprule
+& \textbf{Afirmación} & \\
+\midrule
+1 & $AB=AC$ y $A\neq O\Rightarrow B=C$. & \textcolor{rojo}{\textbf{F}}\\
+2 & $(A+B)^2=A^2+2AB+B^2$. & \textcolor{rojo}{\textbf{F}}\\
+3 & $AB=O\Rightarrow A=O$ o $B=O$. & \textcolor{rojo}{\textbf{F}}\\
+4 & $A$, $B$ invertibles $\Rightarrow A+B$ invertible. & \textcolor{rojo}{\textbf{F}}\\
+5 & $\lambda\neq0$, $A,B$ invertibles $\Rightarrow(\lambda AB)^{-1}=\frac1\lambda B^{-1}A^{-1}$. & \textcolor{verde}{\textbf{V}}\\
+6 & $\det(2A)=2\det A$. & \textcolor{rojo}{\textbf{F}}\\
+7 & $\det(A+B)=\det A+\det B$. & \textcolor{rojo}{\textbf{F}}\\
+8 & $A^2=I\Rightarrow A$ es invertible. & \textcolor{verde}{\textbf{V}}\\
+9 & $\det A=0\Rightarrow A$ tiene una fila o una columna de ceros. & \textcolor{rojo}{\textbf{F}}\\
+10 & $AA^t$ es simétrica y $\det(AA^t)\ge0$ ($A$ real). & \textcolor{verde}{\textbf{V}}\\
+11 & Un sistema con más incógnitas que ecuaciones siempre tiene solución. & \textcolor{rojo}{\textbf{F}}\\
+12 & Un sistema con más incógnitas que ecuaciones, si tiene solución, no es única. & \textcolor{verde}{\textbf{V}}\\
+13 & El rango de $A$ es la cantidad de filas no nulas de $A$. & \textcolor{rojo}{\textbf{F}}\\
+14 & Toda matriz elemental tiene determinante 1. & \textcolor{rojo}{\textbf{F}}\\
+15 & $AB$ invertible $\iff A$ y $B$ invertibles. & \textcolor{verde}{\textbf{V}}\\
+16 & Si $X_1,X_2$ resuelven $AX=b$, entonces $\frac12(X_1+X_2)$ también. & \textcolor{verde}{\textbf{V}}\\
+17 & Antisimétrica con $n$ impar $\Rightarrow\det A=0$. & \textcolor{verde}{\textbf{V}}\\
+18 & $\rg(AB)=n\Rightarrow\rg A=\rg B=n$. & \textcolor{verde}{\textbf{V}}\\
+19 & Toda invertible es producto de elementales, y toda elemental es invertible. & \textcolor{verde}{\textbf{V}}\\
+20 & $AX=0$ es SCD $\Rightarrow A$ invertible y $A^{-1}b$ resuelve $AX=b$ para todo $b$. & \textcolor{verde}{\textbf{V}}\\
+21 & $A$ de $5\times7$ $\Rightarrow$ existe $b$ con $AX=b$ compatible determinado. & \textcolor{rojo}{\textbf{F}}\\
+22 & Si $A$ no es cuadrada, $\rg(A)\neq\rg(A^t)$. & \textcolor{rojo}{\textbf{F}}\\
+23 & Si $E$ es una forma escalonada de $A$, entonces $\det E=\det A$. & \textcolor{rojo}{\textbf{F}}\\
+24 & $A=PBP^{-1}$ con $P$ invertible $\Rightarrow$ ($A$ invertible $\iff B$ invertible). & \textcolor{verde}{\textbf{V}}\\
+25 & $\tr(AB)=\tr A\cdot\tr B$. & \textcolor{rojo}{\textbf{F}}\\
+\bottomrule
+\end{tabularx}}
+
+\begin{memo}{CONTRAEJEMPLOS DE BOLSILLO}
+$N=\begin{pmatrix}0&1\\0&0\end{pmatrix}$: $N\neq O$ pero $N^2=O$. Rompe 1 ($NN=NO$), 3 y la cancelación.\\
+$A=I$, $B=-I$: rompe 4 y 7 ($\det O=0$, pero $1+(-1)^n$ puede ser 2).\\
+$\begin{pmatrix}1&1\\1&1\end{pmatrix}$: sin ceros, determinante 0, rango 1 (rompe 9 y 13).\\
+$E=\mathrm{diag}(1,5)$: elemental con determinante 5 (rompe 14).\\
+23: escalerizar cambia el determinante (un intercambio cambia el signo, escalar una fila lo multiplica).
+\end{memo}
+
+\chapter{Formulario en una página}
+{\small
+\begin{memo}{COMPLEJOS}
+$z\conj z=|z|^2$ \quad $\frac1z=\frac{\conj z}{|z|^2}$ \quad $|zw|=|z||w|$ \quad $e^{i\theta}=\cos\theta+i\sin\theta$\\
+$re^{i\theta}\cdot se^{i\varphi}=rse^{i(\theta+\varphi)}$ \quad $(re^{i\theta})^n=r^ne^{in\theta}$ \quad $z^n=Re^{i\varphi}$: $z_k=\sqrt[n]R\,e^{i(\varphi+2k\pi)/n}$, $k=0,\dots,n-1$
+\end{memo}
+\begin{memo}{SISTEMAS}
+Rouché--Frobenius: compatible $\iff\rg A=\rg(A|b)$; \ SCD si además $\rg A=n$; SCI con $n-\rg A$ parámetros.\\
+Sol. general = una particular + las del homogéneo. \ $m<n$: nunca SCD. \ Homogéneo: siempre compatible.
+\end{memo}
+\begin{memo}{MATRICES}
+$(AB)^t=B^tA^t$ \quad $(AB)^{-1}=B^{-1}A^{-1}$ \quad $(A^t)^{-1}=(A^{-1})^t$ \quad $(\lambda A)^{-1}=\frac1\lambda A^{-1}$\\
+$\tr(AB)=\tr(BA)$ \quad $\begin{pmatrix}a&b\\c&d\end{pmatrix}^{-1}=\frac1{ad-bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}$ \quad $(A|I)\to(I|A^{-1})$\\
+$(A+B)^2=A^2+AB+BA+B^2$ \quad $\rg A=\rg A^t\le\min(m,n)$ \quad $\rg(PA)=\rg A$ si $P$ invertible
+\end{memo}
+\begin{memo}{DETERMINANTES}
+$F_i\leftrightarrow F_j$: $\times(-1)$ \quad $F_i\to\lambda F_i$: $\times\lambda$ \quad $F_i\to F_i+\lambda F_j$: igual \quad $\det A^t=\det A$\\
+$\det(AB)=\det A\det B$ \quad $\det(\lambda A)=\lambda^n\det A$ \quad $\det A^{-1}=\frac1{\det A}$ \quad triangular: producto de la diagonal\\
+Invertible $\iff\det\neq0\iff\rg=n\iff AX=0$ solo trivial\\
+Antisim. $n$ impar: 0 \quad nilpotente: 0 \quad $A^2=A$: 0 o 1 \quad $A^2=I$: $\pm1$ \quad $\det\begin{pmatrix}A&B\\O&C\end{pmatrix}=\det A\det C$
+\end{memo}
+\begin{trampa}{ANTES DE MARCAR}
+¿Sustituiste el valor crítico y terminaste de escalerizar? \ ¿$\det(\lambda A)$ con $\lambda^n$? \ ¿Factorizaste respetando izquierda y derecha? \ ¿Chequeaste la inversa multiplicando una fila por una columna? \ ¿Dibujaste el complejo para ver el cuadrante?
+\end{trampa}}

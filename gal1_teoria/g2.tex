@@ -1,0 +1,145 @@
+% ================= CAPÍTULO 2: SISTEMAS =================
+\chapter{Sistemas de ecuaciones lineales}
+\salio{11}{sistemas con parámetro: la pregunta más segura del parcial}
+
+\section{Definiciones}
+\begin{sello}{SISTEMA LINEAL}
+Un sistema de $m$ ecuaciones y $n$ incógnitas:
+\[\left\{\begin{array}{ccccccc}
+a_{11}x_1&+&\cdots&+&a_{1n}x_n&=&b_1\\
+\vdots&&&&\vdots&&\vdots\\
+a_{m1}x_1&+&\cdots&+&a_{mn}x_n&=&b_m
+\end{array}\right.\quad\iff\quad AX=b.\]
+$A\in\Mat_{m\times n}$ es la \textbf{matriz del sistema}, $b$ el término independiente, y $(A|b)$ la \textbf{matriz ampliada}.\\[2pt]
+Una \textbf{solución} es una $n$-upla que cumple \emph{todas} las ecuaciones a la vez.\\[2pt]
+El sistema es \textbf{homogéneo} si $b=0$.
+\end{sello}
+\begin{sello}{CLASIFICACIÓN}
+\textbf{Incompatible (SI):} no tiene solución.\\
+\textbf{Compatible determinado (SCD):} tiene exactamente una.\\
+\textbf{Compatible indeterminado (SCI):} tiene infinitas.\\[2pt]
+No hay otra opción: un sistema lineal nunca tiene exactamente 2 soluciones.
+\end{sello}
+\begin{demo}
+Si $X_1\neq X_2$ son soluciones, $X_t=X_1+t(X_2-X_1)$ también lo es para todo $t$:
+$AX_t=AX_1+t(AX_2-AX_1)=b+t(b-b)=b$. Son infinitas distintas. $\blacksquare$
+\end{demo}
+\begin{tip}{LA IMAGEN}
+Con 2 incógnitas cada ecuación es una recta del plano: dos rectas se cortan en un punto (SCD), son paralelas (SI) o son la misma (SCI). Con 3 incógnitas son planos. Resolver el sistema es encontrar \textbf{dónde se cruzan todos a la vez}. (Esto es solo para visualizar: la geometría no entra.)
+\end{tip}
+
+\section{Escalerización (método de Gauss)}
+\begin{sello}{OPERACIONES ELEMENTALES}
+1) Intercambiar dos ecuaciones: $F_i\leftrightarrow F_j$.\\
+2) Multiplicar una ecuación por $\lambda\neq0$: $F_i\to\lambda F_i$.\\
+3) Sumarle a una ecuación un múltiplo de otra: $F_i\to F_i+\lambda F_j$ ($i\neq j$).\\[2pt]
+\textbf{Teorema:} no cambian el conjunto de soluciones (dan un sistema \textbf{equivalente}).
+\end{sello}
+\begin{demo}
+Toda solución del sistema viejo cumple las ecuaciones nuevas, porque son combinaciones de las viejas. Y cada operación se deshace con otra del mismo tipo ($F_i\leftrightarrow F_j$; $F_i\to\frac1\lambda F_i$; $F_i\to F_i-\lambda F_j$), así que toda solución del nuevo cumple el viejo. $\blacksquare$
+\end{demo}
+\begin{trampa}{POR QUÉ $\lambda\neq0$}
+Multiplicar una fila por $0$ borra una ecuación: agrega soluciones. En los sistemas con parámetro, «multiplicar por $a-1$» es ilegal si $a$ puede valer 1.
+\end{trampa}
+\begin{sello}{FORMA ESCALONADA}
+Una matriz está \textbf{escalonada} si cada fila no nula empieza con más ceros que la anterior, y las filas nulas van al final. El primer número no nulo de cada fila es el \textbf{pivote}.\\[2pt]
+Es \textbf{escalonada reducida} si además cada pivote vale 1 y es lo único no nulo de su columna.\\[2pt]
+Toda matriz se puede escalonar con operaciones elementales.
+\end{sello}
+
+\subsection*{Leer el resultado}
+\begin{metodo}{CLASIFICAR MIRANDO LA ESCALERA}
+Escaloná la ampliada $(A|b)$ y mirá:\\
+1) ¿Hay una fila $(0\ 0\ \cdots\ 0\,|\,c)$ con $c\neq0$? Dice $0=c$: \textbf{SI}.\\
+2) Si no: cada columna \emph{sin} pivote es una \textbf{variable libre} (parámetro).\\
+\quad Sin variables libres (tantos pivotes como incógnitas): \textbf{SCD}.\\
+\quad Con variables libres: \textbf{SCI}, con tantos parámetros como variables libres.\\
+3) Para resolver: despejá de abajo hacia arriba (sustitución hacia atrás).
+\end{metodo}
+
+\begin{enunciado}{PRÁCTICO 2 · EJ. 1C Y 1E: MISMA MATRIZ, DISTINTO $b$}
+$\left\{\begin{array}{l}x-y+5z=-2\\2x+y+4z=2\\2x+4y-2z=c\end{array}\right.$ \quad con $c=10$ (parte c) y con $c=8$ (parte e).
+\end{enunciado}
+\paso{1}{escalonar}
+$\begin{amp}{rrr|r}1&-1&5&-2\\2&1&4&2\\2&4&-2&c\end{amp}
+\op{F_2-2F_1,\ F_3-2F_1}
+\begin{amp}{rrr|r}1&-1&5&-2\\0&3&-6&6\\0&6&-12&c+4\end{amp}$\\[4pt]
+\hspace*{25mm}$\op{F_3-2F_2}
+\begin{amp}{rrr|r}1&-1&5&-2\\0&3&-6&6\\0&0&0&c-8\end{amp}$
+\paso{2}{leer}
+$c=10$: la última fila dice $0=2$. \textbf{SI}.\\
+$c=8$: la última fila es $0=0$ y la columna de $z$ no tiene pivote: $z$ libre. \ $3y-6z=6\Rightarrow y=2+2z$; \ $x=-2+y-5z=-3z$.
+\resp{$c=10$: incompatible. \ $c=8$: SCI, $\ \mathrm{Sol}=\{(-3z,\ 2+2z,\ z):\ z\in\R\}$.}
+\begin{tip}{LO QUE ENSEÑA ESTE EJEMPLO}
+La parte izquierda (la matriz $A$) decide si puede haber solución única: acá nunca, porque $A$ tiene una fila que se anula. La columna $b$ decide entre \textbf{ninguna} e \textbf{infinitas}.
+\end{tip}
+
+\section{Sistemas con parámetros}
+\salio{11}{últimos 4: 2S 2023, 2S 2024 y 1S 2025}
+\begin{metodo}{DISCUTIR SEGÚN $a$}
+1) Escaloná la ampliada \textbf{sin dividir} por expresiones con $a$. Si hace falta un pivote, elegí uno numérico (intercambiá filas o columnas).\\
+2) Los pivotes que quedan con $a$ (por ejemplo $a-1$, $(a-2)(a+3)$) marcan los \textbf{valores críticos}: donde se anulan.\\
+3) Para $a$ \textbf{no crítico}: todos los pivotes están, es SCD (si $A$ es cuadrada).\\
+4) Para cada valor crítico: \textbf{sustituí el número} en la matriz escalonada y seguí escalonando si hace falta. Recién ahí decidí SI o SCI.\\
+5) Chequeo rápido: si $A$ es cuadrada, los valores críticos son las raíces de $\det A$.
+\end{metodo}
+\begin{trampa}{EL ERROR QUE MÁS PUNTOS CUESTA}
+En el caso crítico, la matriz «escalonada» con el parámetro puede dejar de estar escalonada. En 2S 2023, con $a=2$ se anula el \emph{segundo} pivote y hay que dar un paso más para ver que da $0=-1$. Siempre reescribí la matriz con el número y terminá de escalonar.
+\end{trampa}
+\begin{memo}{EL SISTEMA CLÁSICO (2008, 2S 2022)}
+$\lambda x+y+z=1,\ x+\lambda y+z=1,\ x+y+\lambda z=1$. \ $\det A=(\lambda-1)^2(\lambda+2)$.\\
+$\lambda\neq1,-2$: SCD. \ $\lambda=1$: las tres ecuaciones son $x+y+z=1$, SCI con 2 parámetros. \ $\lambda=-2$: sumando las tres queda $0=3$, SI.\\
+Con término independiente $\beta$ en vez de 1 (2S 2022): para $\lambda=-2$ la suma da $0=3\beta$; es SCI si $\beta=0$ y SI si $\beta\neq0$. Resuelto en la receta R2.
+\end{memo}
+
+\section{Sistemas homogéneos}
+\begin{sello}{PROPIEDADES}
+1) $AX=0$ \textbf{siempre es compatible}: $X=0$ es solución (la trivial).\\
+2) Si $X$ e $Y$ son soluciones, $X+Y$ y $cX$ también lo son.\\
+3) Si hay \textbf{más incógnitas que ecuaciones} ($m<n$), tiene soluciones no triviales (es SCI).
+\end{sello}
+\begin{demo}
+2) $A(X+Y)=AX+AY=0+0=0$ y $A(cX)=cAX=0$.\\
+3) La escalonada tiene a lo sumo $m$ pivotes, uno por fila. Como $m<n$, quedan al menos $n-m\ge1$ columnas sin pivote: hay variables libres. $\blacksquare$
+\end{demo}
+\begin{sello}{ESTRUCTURA DE LA SOLUCIÓN}
+Si $X_p$ es \textbf{una} solución de $AX=b$, todas las soluciones son
+\[X=X_p+X_h,\qquad X_h\ \text{solución del homogéneo } AX=0.\]
+\end{sello}
+\begin{demo}
+Si $AX=b$, entonces $A(X-X_p)=b-b=0$: $X-X_p$ es solución del homogéneo. Y al revés, $A(X_p+X_h)=b+0=b$. $\blacksquare$
+\end{demo}
+\begin{memo}{CONSECUENCIAS QUE CAEN EN V/F}
+Si $X_1,X_2$ resuelven $AX=b$: \ $\frac12X_1+\frac12X_2$ \textbf{sí} es solución (en general $tX_1+(1-t)X_2$). \ $X_1+X_2$ \textbf{no} (da $2b$), salvo que $b=0$. \ $X_1-X_2$ resuelve el homogéneo.\\[2pt]
+2S 2018: «la solución general es $(4,0,0)+\lambda(-2,1,0)+\mu(0,0,1)$ y $b=(4,24,28)$». Entonces $A(4,0,0)^t=b$ da la 1.ª columna: $C_1=\frac b4=(1,6,7)$. Y $A(-2,1,0)^t=0$ da $C_2=2C_1=(2,12,14)$.
+\end{memo}
+
+\section{Teorema de Rouché--Frobenius}
+\salio{6}{en 2S 2022 pidieron enunciarlo textual}
+\begin{sello}{ROUCHÉ--FROBENIUS (ENUNCIADO PARA ESCRIBIR)}
+Sea $AX=b$ un sistema de $m$ ecuaciones y $n$ incógnitas. Entonces:\\[2pt]
+1) El sistema es \textbf{compatible} si y solo si $\rg(A)=\rg(A|b)$.\\
+2) Si es compatible y $\rg(A)=n$, es \textbf{determinado}.\\
+3) Si es compatible y $\rg(A)<n$, es \textbf{indeterminado}, y la solución depende de $n-\rg(A)$ parámetros.
+\end{sello}
+\begin{tip}{POR QUÉ ES CIERTO}
+El rango es la cantidad de pivotes (capítulo 4). $\rg(A|b)>\rg(A)$ quiere decir que la columna $b$ tiene un pivote propio: aparece la fila $(0\cdots0|c)$. Si no, las $n-\rg(A)$ columnas sin pivote son las variables libres.
+\end{tip}
+\begin{memo}{TABLA RÁPIDA SEGÚN LA FORMA DE $A$ ($m\times n$)}
+$m<n$ (más incógnitas): nunca SCD. Puede ser SI o SCI. «Si tiene solución, no es única».\\
+$m=n$: SCD $\iff\det A\neq0$, y en ese caso para \emph{todo} $b$.\\
+$m>n$ (más ecuaciones): puede ser cualquiera. «Si $\rg(A)=n$ tiene solución única» es \textbf{falso}: puede ser SI (2S 2022).\\[2pt]
+Un sistema $15\times20$ no siempre es compatible (dos ecuaciones contradictorias alcanzan). Uno $5\times7$ nunca es SCD.
+\end{memo}
+
+\section{Problemas que se modelan con un sistema}
+\salio{5}{sushi, cajas, polinomio por puntos}
+\begin{metodo}{DE ENUNCIADO A SISTEMA}
+1) Nombrá las incógnitas con lo que te preguntan (cantidades de cada cosa, coeficientes).\\
+2) Una ecuación por cada dato: cada ingrediente que se reparte, cada punto por el que pasa la curva.\\
+3) Resolvé. Si queda SCI, aplicá las restricciones del problema: enteros, $\ge0$, «al menos uno de cada».\\
+4) En múltiple opción: \textbf{sustituí las opciones} en las ecuaciones. Suele ser lo más rápido.
+\end{metodo}
+\begin{memo}{POLINOMIO POR PUNTOS}
+«$p(x)=ax^3+bx^2+cx+d$ pasa por $(1,1)$» se traduce en $a+b+c+d=1$. Cada punto es una ecuación lineal en los coeficientes. $n+1$ puntos (con $x$ distintos) determinan un único polinomio de grado $\le n$.
+\end{memo}

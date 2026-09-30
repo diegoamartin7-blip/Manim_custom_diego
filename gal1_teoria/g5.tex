@@ -1,0 +1,148 @@
+% ================= CAPÍTULO 5: DETERMINANTES =================
+\chapter{Determinantes}
+\salio{9}{«$\det A=k$, calcular $\det B$» o escalerizar; más 8 de expresiones matriciales}
+
+\section{Definición y cálculo}
+\begin{sello}{DEFINICIÓN (DESARROLLO POR UNA FILA)}
+$\det(a)=a$. \quad $\begin{vmatrix}a&b\\c&d\end{vmatrix}=ad-bc$.\\[3pt]
+Para $n\times n$: $\det A=\displaystyle\sum_{j=1}^n(-1)^{i+j}a_{ij}\det A_{ij}$, donde $A_{ij}$ es la matriz que queda al \textbf{borrar la fila $i$ y la columna $j$}.\\[2pt]
+\textbf{Teorema:} da lo mismo para cualquier fila $i$, y también desarrollando por cualquier columna.
+\end{sello}
+\begin{memo}{SIGNOS Y SARRUS}
+Los signos $(-1)^{i+j}$ forman un tablero de ajedrez: $\begin{smallmatrix}+&-&+\\-&+&-\\+&-&+\end{smallmatrix}$.\\[2pt]
+Regla de Sarrus ($3\times3$, \textbf{solo} $3\times3$):\\
+$\begin{vmatrix}a&b&c\\d&e&f\\g&h&i\end{vmatrix}=aei+bfg+cdh-ceg-afh-bdi$.
+\end{memo}
+\begin{metodo}{EL CAMINO RÁPIDO PARA MATRICES GRANDES}
+1) Desarrollá por la fila o columna con \textbf{más ceros}.\\
+2) Si no hay ceros, fabricalos: $F_i\to F_i+\lambda F_j$ \textbf{no cambia} el determinante.\\
+3) Llevá a triangular: el determinante es el \textbf{producto de la diagonal}.\\[2pt]
+1S 2019: una $6\times6$. Restando la fila 1 a todas las demás queda triangular con diagonal $1,-2,-2,-2,1,1$: $\det=-8$.
+\end{metodo}
+
+\section{Propiedades}
+\begin{sello}{CÓMO REACCIONA A LAS OPERACIONES}
+1) \textbf{Intercambiar} dos filas: cambia el signo.\\
+2) \textbf{Multiplicar una fila} por $\lambda$: el determinante queda multiplicado por $\lambda$.\\
+3) \textbf{Sumarle a una fila un múltiplo de otra}: no cambia.\\
+4) $\det(A^t)=\det A$: todo lo anterior vale igual para \textbf{columnas}.\\
+5) \textbf{Lineal en cada fila:} si una fila es suma, el determinante se parte en dos:
+\[\begin{vmatrix}u+v\\ F_2\\ F_3\end{vmatrix}=\begin{vmatrix}u\\ F_2\\ F_3\end{vmatrix}+\begin{vmatrix}v\\ F_2\\ F_3\end{vmatrix}.\]
+\end{sello}
+\begin{sello}{CONSECUENCIAS}
+Fila (o columna) de ceros, dos filas iguales, o dos filas proporcionales $\Rightarrow\det=0$.\\
+Triangular (superior o inferior) $\Rightarrow\det$ = producto de la diagonal. En particular $\det I=1$.\\
+$\boldsymbol{\det(\lambda A)=\lambda^n\det A}$ para $A$ de $n\times n$ ($\lambda$ sale una vez \emph{por fila}).
+\end{sello}
+\begin{trampa}{LAS DOS QUE MÁS SE EQUIVOCAN}
+$\det(2A)=2\det A$ es \textbf{falso}: es $2^n\det A$. (1S 2019, 2S 2018, 2S 2019.)\\
+$\det(A+B)=\det A+\det B$ es \textbf{falso}. La linealidad es \emph{de a una fila}, no de toda la matriz.\\
+Y «$\det A=0\Rightarrow A$ tiene una fila o columna de ceros» también es falso: $\begin{pmatrix}1&2\\2&4\end{pmatrix}$.
+\end{trampa}
+
+\section{El determinante del producto}
+\begin{sello}{TEOREMA}
+$\boldsymbol{\det(AB)=\det A\cdot\det B}$ \quad ($A,B$ de $n\times n$).\\[3pt]
+De ahí: \ $\det(A^k)=(\det A)^k$ \quad $\det(A^{-1})=\dfrac1{\det A}$ \quad $\det(P^{-1}AP)=\det A$.\\[3pt]
+$A$ es invertible $\iff\det A\neq0$.
+\end{sello}
+\begin{demo}
+$\det(A^{-1})$: de $AA^{-1}=I$ sale $\det A\cdot\det A^{-1}=\det I=1$.\\
+Invertible $\Rightarrow\det\neq0$: por lo anterior, $\det A\cdot\det A^{-1}=1$.\\
+$\det\neq0\Rightarrow$ invertible: al escalerizar, cada operación multiplica el determinante por un número no nulo. Si $\det A\neq0$, la escalonada tiene determinante no nulo, así que no tiene filas de ceros: rango $n$, invertible. $\blacksquare$
+\end{demo}
+\begin{metodo}{DETERMINANTE DE UNA EXPRESIÓN MATRICIAL}
+1) \textbf{Factorizá} la expresión en un producto (respetando izquierda y derecha).\\
+2) Aplicá $\det(XY)=\det X\det Y$, $\det(\lambda X)=\lambda^n\det X$, $\det X^{-1}=1/\det X$, $\det X^t=\det X$.\\
+3) Despejá el número que te piden.
+\end{metodo}
+\begin{memo}{FACTORIZACIONES QUE SALIERON}
+$A^2+AB-BA-B^2=A(A+B)-B(A+B)=(A-B)(A+B)$ \quad (2S 2017).\\
+$A^2+2AB-2BA-4B^2=(A-2B)(A+2B)$ \quad (1S 2023).\\
+$B^3A^3B^{-1}+B^4A^2B^{-1}=B^3(A^3+BA^2)B^{-1}=B^3(A+B)A^2B^{-1}$ \quad (1S 2023 vesp.).\\
+Fijate que $A^3+BA^2=(A+B)A^2$: el $A^2$ sale por la \textbf{derecha}.
+\end{memo}
+\begin{memo}{ECUACIONES MATRICIALES}
+2S 2016 ($2\times2$): $3A^{-1}B^2=2I$, $\det B=2$. \ $\det$: $3^2\cdot\frac1{\det A}\cdot4=2^2\Rightarrow\det A=9$.\\
+1S 2018 ($3\times3$): $B^{-1}A(B^t)^2=-2I$, $\det B=2$. \ $\frac12\det A\cdot4=(-2)^3\Rightarrow\det A=-4$.\\
+2S 2019 ($5\times5$): $|A|=2\Rightarrow|2A^{-1}|=2^5\cdot\frac12=16$. «Vale 1» es falso.
+\end{memo}
+
+\section{Casos especiales}
+\salio{5}{antisimétricas, nilpotentes, idempotentes}
+\begin{sello}{LO QUE SE SABE DEL DETERMINANTE SIN CALCULARLO}
+\textbf{Antisimétrica con $n$ impar:} $\det A=0$.\\
+\textbf{Nilpotente} ($A^k=O$): $\det A=0$.\\
+\textbf{Idempotente} ($A^2=A$): $\det A\in\{0,1\}$.\\
+\textbf{Involutiva} ($A^2=I$): $\det A=\pm1$.\\
+$A^3=A$ con $\det A\neq0$: $\det A=\pm1$ y $A=A^{-1}$.
+\end{sello}
+\begin{demo}
+Antisimétrica: $\det A=\det A^t=\det(-A)=(-1)^n\det A=-\det A$, así que $\det A=0$.\\
+Nilpotente: $(\det A)^k=\det(A^k)=\det O=0$.\\
+Idempotente: $(\det A)^2=\det A$, así que $\det A(\det A-1)=0$.\\
+Involutiva: $(\det A)^2=1$. \ $A^3=A$: $(\det A)^3=\det A\neq0\Rightarrow(\det A)^2=1$; y multiplicando $A^3=A$ por $A^{-1}$: $A^2=I$. $\blacksquare$
+\end{demo}
+\begin{memo}{1S 2018 · ANTISIMÉTRICA NO NULA, $n$ IMPAR}
+$A$ no es invertible ($\det=0$), y $A^tA$ tampoco: $\det(A^tA)=(\det A)^2=0$. Respuesta: ninguna de las dos.
+\end{memo}
+\begin{sello}{BLOQUES Y VANDERMONDE}
+$\det\begin{pmatrix}A&B\\O&C\end{pmatrix}=\det A\cdot\det C$ \quad (práctico 5, ej. 6).\\[3pt]
+$\begin{vmatrix}1&1&1\\a&b&c\\a^2&b^2&c^2\end{vmatrix}=(b-a)(c-a)(c-b)$: es invertible $\iff a,b,c$ son distintos.\\
+2S 2022: $\rg(V)=1\iff a=b=c$.
+\end{sello}
+
+\section{El método estrella: «$\det A=k$, ¿cuánto vale $\det B$?»}
+\salio{5}{1S 2017, 2S 2017, 2S 2018, 2S 2024, 1S 2025}
+\begin{metodo}{LLEVAR $B$ HASTA $A$ ANOTANDO CADA FACTOR}
+1) Sacá los factores comunes de cada fila y de cada columna (cada uno multiplica).\\
+2) Deshacé las sumas: $F_i\to F_i-\lambda F_j$ (no cambia nada). Si una fila es suma de dos cosas que no se cancelan, partila (linealidad).\\
+3) Reordená filas y columnas hasta llegar a $A$: \textbf{cada intercambio cambia el signo}. Una permutación cíclica de 3 filas son 2 intercambios: signo $+$.\\
+4) Multiplicá todos los factores por $k$.
+\end{metodo}
+\begin{memo}{PRÁCTICO 5 · EJ. 2 (CON $\det A=5$)}
+$(d,e,f;\ g,h,j;\ a,b,c)$: cíclica, dos intercambios $\to5$.\\
+$(-a,-b,-c;\ 2d,2e,2f;\ -g,-h,-j)$: $(-1)(2)(-1)=2\ \to10$.\\
+$(a,b,c;\ d-3a,\dots;\ 2g,2h,2j)$: la resta no cambia, el 2 sí $\to10$.\\
+$(a+5c,3b,c;\ \dots;\ 2g+10j,6h,2j)$: sale 2 de la fila 3, sale 3 de la columna 2, y $C_1\to C_1-5C_3$ $\to30$.
+\end{memo}
+
+\section{Lo que significa: área y volumen}
+\begin{tip}{LA IMAGEN QUE LO EXPLICA TODO}
+$|\det A|$ es el \textbf{factor por el que la transformación $X\mapsto AX$ multiplica las áreas} (en $3\times3$, los volúmenes). El cuadradito unitario se convierte en el paralelogramo formado por las columnas de $A$, y su área es $|\det A|$.\\[2pt]
+\textbf{El signo} dice si la transformación da vuelta el plano como un espejo (negativo) o no (positivo).\\[2pt]
+\textbf{$\det A=0$} quiere decir que el plano se \textbf{aplasta} en una recta o en un punto: se pierde información y no hay forma de volver atrás. Por eso $\det A=0\iff A$ no es invertible.\\[2pt]
+$\det(AB)=\det A\det B$: si una máquina multiplica las áreas por 3 y la otra por 2, hacer las dos las multiplica por 6.
+\end{tip}
+\begin{center}
+\begin{tikzpicture}[scale=0.75,>=Stealth]
+\fill[acero!25] (0,0) rectangle (1,1); \draw[acero] (0,0) rectangle (1,1);
+\node[font=\scriptsize] at (0.5,-0.7) {área 1};
+\draw[->,thick,suave] (1.4,0.5)--(2.2,0.5);
+\begin{scope}[xshift=2.7cm]
+\fill[rojo!20] (0,0)--(3,0)--(4,2)--(1,2)--cycle; \draw[rojo] (0,0)--(3,0)--(4,2)--(1,2)--cycle;
+\draw[->,thick,rojo] (0,0)--(3,0); \draw[->,thick,teal] (0,0)--(1,2);
+\node[font=\scriptsize,align=center] at (2,-0.9) {$\begin{pmatrix}3&1\\0&2\end{pmatrix}$\\ área $6=\det$};
+\end{scope}
+\begin{scope}[xshift=8.2cm]
+\draw[rojo,dashed] (-0.3,-0.6)--(1.4,2.8);
+\draw[->,thick,teal] (0,0)--(1.2,2.4); \draw[->,thick,rojo] (0,0)--(0.6,1.2);
+\node[font=\scriptsize,align=center] at (0.6,-0.9) {$\begin{pmatrix}1&2\\2&4\end{pmatrix}$\\ $\det=0$: se aplasta};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\section{Con parámetro: ¿para qué valores es invertible?}
+\begin{metodo}{PRÁCTICO 5 · EJ. 3}
+1) Calculá $\det A$ como polinomio en $k$ (desarrollo o escalerizando con cuidado).\\
+2) \textbf{Factorizá.} $A$ es invertible exactamente cuando ese polinomio no se anula.\\[2pt]
+Ej. 3a: $\begin{vmatrix}k&-k&3\\0&k+1&1\\k&-8&k-1\end{vmatrix}=k(k-2)^2$: invertible $\iff k\neq0$ y $k\neq2$.\\
+2S 2017: $\det=-2k^2+8k+24=-2(k+2)(k-6)$: positivo entre $-2$ y $6$, negativo afuera.
+\end{metodo}
+\begin{sello}{INVERSA CON LA ADJUNTA Y REGLA DE CRAMER}
+$A^{-1}=\dfrac1{\det A}\,\mathrm{Adj}(A)$, con $\mathrm{Adj}(A)_{ij}=(-1)^{i+j}\det A_{ji}$ (la traspuesta de la matriz de cofactores). En $2\times2$ es la fórmula del capítulo 4.\\[3pt]
+\textbf{Cramer:} si $\det A\neq0$, la solución de $AX=b$ es $x_j=\dfrac{\det A_j}{\det A}$, donde $A_j$ es $A$ con la columna $j$ cambiada por $b$. Sirve cuando piden \textbf{una sola} incógnita.
+\end{sello}
+\begin{memo}{PRÁCTICO 5 · EJ. 5}
+$d_n$: la matriz de unos con ceros en la diagonal salvo el primer lugar. Restando la fila 1 a cada una de las otras, la fila $i$ queda $-e_i$. Queda triangular con diagonal $1,-1,\dots,-1$: $\ d_n=(-1)^{n-1}$.
+\end{memo}

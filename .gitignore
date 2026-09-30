@@ -18,3 +18,13 @@ calculo1_teoria/*.log
 calculo1_teoria/*.out
 calculo1_teoria/*.toc
 calculo1_teoria/main.pdf
+gal1/media_*/
+gal1/logs/
+gal1/snaps/
+gal1/concat_*.txt
+gal1/*.mp4
+gal1_teoria/*.aux
+gal1_teoria/*.log
+gal1_teoria/*.out
+gal1_teoria/*.toc
+gal1_teoria/main.pdf

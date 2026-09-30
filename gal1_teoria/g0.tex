@@ -1,0 +1,89 @@
+% ================= PORTADA =================
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+  \foreach \x in {0,5,...,150} \draw[borde!60,line width=0.2pt] ([xshift=\x mm]current page.south west) -- ([xshift=\x mm]current page.north west);
+  \foreach \y in {0,5,...,215} \draw[borde!60,line width=0.2pt] ([yshift=\y mm]current page.south west) -- ([yshift=\y mm]current page.south east);
+\end{tikzpicture}
+\vspace*{18mm}
+{\ttfamily\small\color{suave} GAL 1 · IMERL · FING · 2S 2026}\par\vspace{3mm}
+{\plexbold\fontsize{24}{28}\selectfont Geometría y Álgebra Lineal 1}\par\vspace{1mm}
+{\plexbold\fontsize{17}{21}\selectfont\color{rojo} Teoría del primer parcial}\par\vspace{4mm}
+{\large De los números complejos a los determinantes: todo lo que entra, y cómo lo preguntan.}\par\vspace{9mm}
+\begin{sello}{CÓMO ESTÁ ARMADO}
+\textbf{Capítulo 0:} el radar. Qué salió en los 14 primeros parciales de 2016 a 2025 y qué es lo más probable para el sábado.\\[2pt]
+\textbf{Capítulos 1 a 5:} la teoría en el orden del curso: complejos, sistemas, matrices, invertibles y rango, determinantes. Cada definición, cada propiedad y cada trampa.\\[2pt]
+\textbf{Capítulo 6:} el recetario. Un ejercicio real de parcial por cada tipo, resuelto paso a paso.\\[2pt]
+\textbf{Apéndice:} 25 verdadero/falso clásicos y el formulario en una página.
+\end{sello}
+\begin{memo}{ALCANCE}
+Entra: complejos, sistemas lineales, matrices, invertibilidad, rango y determinantes (prácticos 1 a 5).\\
+\textbf{No entra:} geometría en el espacio (rectas, planos, producto escalar y vectorial). Por el paro no se llegó.
+\end{memo}
+\vfill
+{\small\color{suave} Parcial: sábado 3 de octubre, 15:00. Todas las cuentas del libro están verificadas con \texttt{verify.py} (sympy).\par}
+\newpage
+
+{\hypersetup{linkcolor=tinta}\renewcommand{\contentsname}{Índice}\tableofcontents}
+\newpage
+
+% ================= CAPÍTULO 0: RADAR =================
+\chapter*{0 · El radar del parcial}
+\addcontentsline{toc}{chapter}{0 · El radar del parcial}
+\markboth{EL RADAR DEL PARCIAL}{}
+
+Leí los 14 primeros parciales de la compilación, de 2016 a 2025: 2S 2016; 1S y 2S de 2017, 2018 y 2019; 2S 2022; 1S 2023 matutino y vespertino; 2S 2023; 1S y 2S 2024; 1S 2025. Conté en cuántos aparece cada tipo de ejercicio. La geometría la saqué porque este año no entra.
+
+\section{El formato}
+\begin{memo}{LO QUE VAS A VER}
+Desde 2023 el primer parcial es de \textbf{8 preguntas de múltiple opción} (4 o 5 opciones). Antes solía haber una tanda de verdadero/falso.\\[2pt]
+En 2S 2022 hubo además una parte de \textbf{desarrollo}: «enuncie el teorema de Rouché--Frobenius» y un sistema con dos parámetros. Tené el enunciado exacto en la cabeza (capítulo 2).\\[2pt]
+En los parciales viejos, entre 2 y 3 de las 8 preguntas eran de geometría. Este año esas preguntas tienen que salir de otro lado, y lo más natural es que salgan de \textbf{complejos}, que ahora es el práctico 1.
+\end{memo}
+
+\section{Qué salió y cuántas veces}
+{\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\linewidth}{@{}Xccc@{}}
+\toprule
+\textbf{Tipo de ejercicio} & \textbf{14 parciales} & \textbf{últimos 4} & \textbf{prob.}\\
+\midrule
+Sistema con parámetro: discutir según $a$ & 11 & 3 & \textcolor{rojo}{\textbf{muy alta}}\\
+Rango de una matriz (casi siempre con parámetro) & 8 & 4 & \textcolor{rojo}{\textbf{muy alta}}\\
+Inversa de una matriz numérica (dar entradas $b_{ij}$) & 6 & 4 & \textcolor{rojo}{\textbf{muy alta}}\\
+Determinante: «$\det A=k$, calcular $\det B$» o escalerizar & 9 & 3 & \textcolor{rojo}{\textbf{muy alta}}\\
+Determinante de expresiones: $\det(AB)$, $\det(\lambda A)$, factorizar & 8 & 1 & \textcolor{naranja}{\textbf{alta}}\\
+Inversa a partir de una ecuación ($A^2-2A+5I=0$) & 4 & 2 & \textcolor{naranja}{\textbf{alta}}\\
+Complejos (nuevo en el programa) & 0 & 0 & \textcolor{naranja}{\textbf{alta}}\\
+V/F de propiedades: $AB=AC$, $(A+B)^2$, $A+B$ inv. & 8 & 0 & \textcolor{teal}{\textbf{media}}\\
+Traza, matrices $\delta(i,j)$, matrices por fórmula & 6 & 1 & \textcolor{teal}{\textbf{media}}\\
+Teoría de sistemas y Rouché--Frobenius & 6 & 0 & \textcolor{teal}{\textbf{media}}\\
+Problema modelado (sushi, cajas, polinomio por puntos) & 5 & 1 & \textcolor{teal}{\textbf{media}}\\
+Simétricas, antisimétricas, nilpotentes & 5 & 0 & \textcolor{teal}{\textbf{media}}\\
+Matrices elementales, matrices en bloques & 3 & 0 & \textcolor{suave}{\textbf{baja}}\\
+\bottomrule
+\end{tabularx}}
+
+{\footnotesize\color{suave}«Últimos 4» = 2S 2023, 1S 2024, 2S 2024 y 1S 2025. En la compilación falta la pregunta 4 de 1S 2019.\par}
+
+\begin{tip}{LECTURA DEL RADAR}
+Los cuatro primeros renglones aparecieron en los cuatro parciales más recientes: casi seguro caen \textbf{todos}. Eso ya son 4 de las 8 preguntas, y son las más mecánicas: escalerizar bien, sin errores de cuenta.\\[2pt]
+Complejos no aparece en la compilación porque antes no estaba en el programa. Este año sí está y el parcial no tiene geometría, así que esperá una o dos preguntas.
+\end{tip}
+
+\section{Tendencias}
+\begin{memo}{QUÉ CAMBIÓ CON LOS AÑOS}
+\textbf{2016--2019:} muchos V/F conceptuales (propiedades del producto, rango de $AB$, antisimétricas) y combinaciones lineales.\\
+\textbf{2022--2025:} menos teoría pura y \textbf{más cuenta dirigida}: «hallá la inversa y decí cuánto vale $b_{31}b_{32}$», «hallá el rango según $a$». Hay que llegar al número exacto.\\
+Las combinaciones lineales e independencia lineal ya no salen en el primer parcial: pasaron al segundo.
+\end{memo}
+\begin{trampa}{LA RESPUESTA SIEMPRE SE PUEDE CHEQUEAR}
+En múltiple opción, una inversa se chequea multiplicando ($AB=I$), una solución se chequea sustituyendo, y un rango con parámetro se chequea con el determinante. Treinta segundos de chequeo valen más que una pregunta perdida.
+\end{trampa}
+
+\section{Plan hasta el sábado}
+\begin{metodo}{CUATRO DÍAS}
+\textbf{Miércoles:} capítulo 2 (sistemas) y capítulo 4 (inversa y rango). Recetas R1 a R4.\\
+\textbf{Jueves:} capítulo 5 (determinantes) y capítulo 3 (matrices). Recetas R5 a R8.\\
+\textbf{Viernes:} capítulo 1 (complejos) y recetas R9 a R11. Mirá los videos.\\
+\textbf{Sábado de mañana:} los 25 V/F del apéndice y el formulario. Nada nuevo.
+\end{metodo}

@@ -1,0 +1,134 @@
+% ================= CAPÍTULO 3: MATRICES =================
+\chapter{Matrices}
+\salio{8}{propiedades del producto en V/F; traza y $\delta(i,j)$ en 6}
+
+\section{Definiciones y operaciones}
+\begin{sello}{MATRIZ}
+$A=(a_{ij})\in\Mat_{m\times n}(\R\text{ o }\C)$: $m$ filas, $n$ columnas; $a_{ij}$ está en la fila $i$, columna $j$.\\[2pt]
+Suma y producto por escalar: entrada a entrada. Solo se suman matrices del mismo tamaño.\\[2pt]
+$I_n$: identidad (unos en la diagonal, ceros afuera). \ $O$: matriz nula.
+\end{sello}
+\begin{sello}{PRODUCTO}
+Si $A$ es $m\times n$ y $B$ es $n\times p$, $AB$ es $m\times p$ con
+\[(AB)_{ij}=\sum_{k=1}^n a_{ik}b_{kj}=\text{(fila $i$ de $A$)}\cdot\text{(columna $j$ de $B$)}.\]
+Solo está definido si \textbf{columnas de $A$ = filas de $B$}.
+\end{sello}
+\begin{memo}{DIMENSIONES (PRÁCTICO 3, EJ. 2)}
+$(m\times\underline{n})(\underline{n}\times p)=m\times p$: los del medio se cancelan.\\
+$A,B$ de $4\times5$; $C$ de $5\times2$; $E$ de $5\times4$: \ $BA$ no está definido; $AC+D$ ($D$ de $4\times2$) sí, da $4\times2$; $E(A+B)$ da $5\times5$; $EAC$ da $5\times2$.
+\end{memo}
+
+\section{Tres formas de mirar el producto}
+\begin{sello}{COLUMNAS Y FILAS}
+1) $AX$, con $X$ columna, es una \textbf{combinación lineal de las columnas de $A$}:
+\[A\begin{pmatrix}x_1\\\vdots\\x_n\end{pmatrix}=x_1A^{(1)}+x_2A^{(2)}+\cdots+x_nA^{(n)}.\]
+2) La columna $j$ de $AB$ es $A\cdot$(columna $j$ de $B$).\\[2pt]
+3) La fila $i$ de $AB$ es (fila $i$ de $A$)$\cdot B$.
+\end{sello}
+\begin{memo}{LO QUE SE DEDUCE (PRÁCTICO 3, EJ. 7 · PARCIAL 2007)}
+Si dos \textbf{columnas} de $B$ son iguales, esas columnas de $AB$ son iguales. \ \textbf{V}\\
+Si dos \textbf{filas} de $A$ son iguales, esas filas de $AB$ son iguales. \ \textbf{V}\\
+Si dos filas de $B$ son iguales, las de $AB$ también. \ \textbf{F} (las filas de $AB$ dependen de las filas de $A$)\\
+Si $A$ tiene una columna de ceros, $AB$ también. \ \textbf{F}. \ Si $B$ tiene una columna de ceros, $AB$ también. \ \textbf{V}
+\end{memo}
+\begin{tip}{LA IMAGEN}
+Un sistema $AX=b$ pregunta: \emph{¿con qué pesos $x_1,\dots,x_n$ hay que combinar las columnas de $A$ para fabricar $b$?} SI = no se puede fabricar. SCI = hay muchas recetas.
+\end{tip}
+
+\section{Propiedades: las que valen y las que no}
+\begin{sello}{LAS QUE VALEN}
+Asociativa: $(AB)C=A(BC)$. \ Distributivas: $A(B+C)=AB+AC$, \ $(A+B)C=AC+BC$.\\
+$\lambda(AB)=(\lambda A)B=A(\lambda B)$. \quad $AI=IA=A$. \quad $AO=O$.
+\end{sello}
+\begin{trampa}{LAS QUE NO VALEN (V/F SEGURO)}
+\textbf{No es conmutativo:} en general $AB\neq BA$. Puede que $AB$ exista y $BA$ ni siquiera esté definido.\\[2pt]
+\textbf{Hay divisores de cero:} $AB=O$ no implica $A=O$ o $B=O$. Ej.: $\begin{pmatrix}0&1\\0&0\end{pmatrix}^2=O$.\\[2pt]
+\textbf{No se cancela:} $AB=AC$ con $A\neq O$ no implica $B=C$. (Sí vale si $A$ es invertible.)\\[2pt]
+\textbf{Binomio:} $(A+B)^2=A^2+AB+BA+B^2$. Es $A^2+2AB+B^2$ solo si $AB=BA$. Igual $(A+B)(A-B)=A^2-AB+BA-B^2$.\\[2pt]
+$(AB)^2=ABAB\neq A^2B^2$ en general.
+\end{trampa}
+\begin{memo}{CONMUTAN CON $A$ (PRÁCTICO 3, EJ. 5)}
+Para hallar todas las $X$ con $AX=XA$: escribí $X=\begin{pmatrix}x&y\\z&w\end{pmatrix}$, hacé los dos productos e igualá entrada a entrada. Queda un sistema homogéneo en $x,y,z,w$.\\
+Con $A=\begin{pmatrix}1&1\\0&1\end{pmatrix}$ sale $z=0$, $x=w$: \ $X=\begin{pmatrix}x&y\\0&x\end{pmatrix}$.\\
+Las potencias de $A$ y los polinomios en $A$ (como $I+A+A^2$) siempre conmutan con $A$.
+\end{memo}
+
+\section{Traspuesta, simétricas y antisimétricas}
+\begin{sello}{TRASPUESTA}
+$(A^t)_{ij}=a_{ji}$: las filas pasan a ser columnas.\\[2pt]
+$(A+B)^t=A^t+B^t$ \quad $(\lambda A)^t=\lambda A^t$ \quad $(A^t)^t=A$ \quad $\boldsymbol{(AB)^t=B^tA^t}$ (se da vuelta el orden).
+\end{sello}
+\begin{demo}
+$((AB)^t)_{ij}=(AB)_{ji}=\sum_k a_{jk}b_{ki}=\sum_k (B^t)_{ik}(A^t)_{kj}=(B^tA^t)_{ij}$. $\blacksquare$
+\end{demo}
+\begin{sello}{SIMÉTRICA Y ANTISIMÉTRICA}
+$A$ es \textbf{simétrica} si $A^t=A$, y \textbf{antisimétrica} si $A^t=-A$.\\[2pt]
+Una antisimétrica tiene la \textbf{diagonal nula} ($a_{ii}=-a_{ii}\Rightarrow a_{ii}=0$).\\[2pt]
+$AA^t$ y $A^tA$ son siempre simétricas: $(AA^t)^t=(A^t)^tA^t=AA^t$.\\[2pt]
+Toda cuadrada es simétrica + antisimétrica: $A=\frac{A+A^t}2+\frac{A-A^t}2$.
+\end{sello}
+\begin{memo}{SALIERON (1S 2019, 1S 2023)}
+$A$ simétrica, $B$ antisimétrica y $AB$ antisimétrica $\Rightarrow AB=-(AB)^t=-B^tA^t=BA$. Conmutan.\\[2pt]
+$H=I-2U^tU$ con $U$ fila de norma 1 (Householder): $H^t=I-2U^t(U^t)^t=H$, simétrica; y $H^2=I-4U^tU+4U^t(UU^t)U=I$ porque $UU^t=1$. Es invertible, con $H^{-1}=H$.\\[2pt]
+Práctico 3: si $A^t=\lambda A$ con $\lambda\neq\pm1$, entonces $A=\lambda A^t=\lambda^2A$, así que $(1-\lambda^2)A=O$ y $A=O$.
+\end{memo}
+
+\section{Traza}
+\begin{sello}{TRAZA}
+$\tr(A)=a_{11}+a_{22}+\cdots+a_{nn}$ (suma de la diagonal, solo para cuadradas).\\[2pt]
+$\tr(A+B)=\tr A+\tr B$ \quad $\tr(\lambda A)=\lambda\tr A$ \quad $\tr(A^t)=\tr A$ \quad $\boldsymbol{\tr(AB)=\tr(BA)}$.\\[2pt]
+\textbf{No vale:} $\tr(AB)=\tr A\cdot\tr B$.
+\end{sello}
+\begin{memo}{LOS DOS USOS FAMOSOS}
+$AB-BA=I_n$ es imposible: la traza de la izquierda es $\tr(AB)-\tr(BA)=0$, la de la derecha es $n$.\\[2pt]
+Si $A$ es real, $\tr(AA^t)=\sum_{i,j}a_{ij}^2\ge0$, y vale $0$ solo si $A=O$.\\[2pt]
+2S 2022: si $B=I+A+A^2+A^3$, entonces $\tr B=n+\tr A+\tr(A^2)+\tr(A^3)$, y \textbf{no} $n+\tr A+(\tr A)^2+(\tr A)^3$.
+\end{memo}
+\begin{metodo}{TRAZA DE UN PRODUCTO SIN HACER TODO EL PRODUCTO}
+Solo hacen falta las entradas de la diagonal: $(AB)_{ii}=$ fila $i$ de $A$ por columna $i$ de $B$. En 1S 2025 ($\tr(2B(A+B^t))=-8$) alcanzan dos productos fila por columna.
+\end{metodo}
+
+\section{Matrices definidas por fórmula y $\delta(i,j)$}
+\begin{sello}{LA MATRIZ $\delta(i_0,j_0)$}
+Es la matriz con un 1 en el lugar $(i_0,j_0)$ y ceros en el resto.\\[2pt]
+$\delta(i_0,j_0)\,A$: la fila $j_0$ de $A$ se copia en la fila $i_0$; el resto queda en cero.\\
+$A\,\delta(i_0,j_0)$: la columna $i_0$ de $A$ se copia en la columna $j_0$; el resto queda en cero.
+\end{sello}
+\begin{memo}{EJEMPLOS DE PARCIAL}
+1S 2023 (vespertino): $a_{ij}=i+j$. $A\,\delta(1,1)$ solo tiene la columna 1 de $A$, en la columna 1. Su traza es $a_{11}=2$.\\[2pt]
+1S 2023 (matutino): $b_{ij}=i$ si $i\le j$, $0$ si no. $B=\begin{pmatrix}1&1&1\\0&2&2\\0&0&3\end{pmatrix}$, y $\delta(2,2)+B$ es triangular con diagonal $1,3,3$: determinante $9$.
+\end{memo}
+\begin{metodo}{CONSTRUIR $A$ A PARTIR DE $a_{ij}$}
+Armá la tabla recorriendo $i$ (fila) y $j$ (columna). Para productos generales usá $c_{ij}=\sum_k a_{ik}b_{kj}$ con la fórmula: en 1S 2019 ($a_{ij}=(-1)^{i+j}\pi^j$, $b_{ij}=(-1)^{i+j}\pi^{-i}$) cada término da $(-1)^{i+j}$, y la suma de $n$ términos da $c_{ij}=n(-1)^{i+j}$.
+\end{metodo}
+
+\section{Matrices como transformaciones del plano}
+\begin{tip}{LA IDEA QUE ORDENA TODO}
+Una matriz $2\times2$ es una \textbf{máquina que mueve el plano}: el punto $X$ va a $AX$. Las columnas de $A$ dicen adónde van $\binom10$ y $\binom01$; el resto de la grilla las sigue, manteniendo las rectas rectas y el origen fijo.
+\end{tip}
+\begin{center}
+\begin{tikzpicture}[scale=0.55,>=Stealth]
+\foreach \x in {-2,...,2} \draw[borde] (\x,-2)--(\x,2);
+\foreach \y in {-2,...,2} \draw[borde] (-2,\y)--(2,\y);
+\draw[->,thick,rojo] (0,0)--(1,0); \draw[->,thick,teal] (0,0)--(0,1);
+\fill[acero!30] (0,0) rectangle (1,1);
+\node[font=\scriptsize] at (0,-2.7) {antes};
+\begin{scope}[xshift=7cm]
+\foreach \x in {-2,...,2} \draw[borde] ({\x-2},-2)--({\x+2},2);
+\foreach \y in {-2,...,2} \draw[borde] (-2,\y)--(2,\y);
+\fill[acero!30] (0,0)--(2,0)--(3,1)--(1,1)--cycle;
+\draw[->,thick,rojo] (0,0)--(2,0); \draw[->,thick,teal] (0,0)--(1,1);
+\node[font=\scriptsize] at (0.5,-2.7) {$A=\begin{pmatrix}2&1\\0&1\end{pmatrix}$};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+\begin{memo}{CATÁLOGO (PRÁCTICO 3, SECCIÓN 3)}
+\textbf{Giro de ángulo $\theta$:} $G_\theta=\begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}$. \ Girar $\theta$ y después $\psi$ es girar $\theta+\psi$: $G_\psi G_\theta=G_{\theta+\psi}$. Multiplicando las matrices salen las fórmulas del coseno y el seno de la suma.\\[2pt]
+\textbf{Simetría respecto a $y=x$:} $S=\begin{pmatrix}0&1\\1&0\end{pmatrix}$ intercambia coordenadas. $S^2=I$, así que $S^{-1}=S$.\\[2pt]
+\textbf{Escala:} $\begin{pmatrix}a&0\\0&b\end{pmatrix}$ estira $a$ en horizontal y $b$ en vertical.\\[2pt]
+\textbf{Cizalla:} $\begin{pmatrix}1&k\\0&1\end{pmatrix}$ desliza cada fila horizontal proporcional a su altura.\\[2pt]
+\textbf{Componer = multiplicar:} aplicar $B$ y después $A$ es aplicar $AB$ (se lee de derecha a izquierda). Por eso el orden importa.
+\end{memo}
+\begin{tip}{EL MISMO PUENTE CON LOS COMPLEJOS}
+Multiplicar por $w=\cos\theta+i\sin\theta$ en $\C$ es exactamente aplicar $G_\theta$ a $(a,b)$. Los complejos son giros y escalas escritos como números.
+\end{tip}

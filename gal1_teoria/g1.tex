@@ -1,0 +1,141 @@
+% ================= CAPÍTULO 1: COMPLEJOS =================
+\chapter{Números complejos}
+\nuevo
+\begin{falta}
+No me pasaste el práctico 1, así que este capítulo sigue el programa estándar de GAL 1 de la FING: forma binómica, conjugado, módulo, forma polar, De Moivre y raíces. Si en tu práctico hay algo más (por ejemplo, regiones del plano con condiciones raras), mandámelo y lo agrego.
+\end{falta}
+
+\section{Qué son y cómo se opera}
+\begin{sello}{DEFINICIÓN}
+$\C=\{a+bi:\ a,b\in\R\}$, donde $i$ cumple $i^2=-1$.\\[2pt]
+Si $z=a+bi$: \ $\Re(z)=a$ es la \textbf{parte real} y $\Im(z)=b$ la \textbf{parte imaginaria} (un número real, sin la $i$).\\[2pt]
+Dos complejos son iguales si y solo si tienen la misma parte real \textbf{y} la misma parte imaginaria. Una ecuación entre complejos son dos ecuaciones reales.
+\end{sello}
+\begin{memo}{LAS CUENTAS}
+\textbf{Suma:} $(a+bi)+(c+di)=(a+c)+(b+d)i$.\\
+\textbf{Producto:} $(a+bi)(c+di)=(ac-bd)+(ad+bc)i$ \ (distributiva y $i^2=-1$).\\
+\textbf{Potencias de $i$:} $i^0=1,\ i^1=i,\ i^2=-1,\ i^3=-i$, y se repite cada 4: \ $i^n=i^{\,n\bmod 4}$. Ej.: $i^{27}=i^3=-i$.
+\end{memo}
+
+\section{Conjugado y módulo}
+\begin{sello}{CONJUGADO Y MÓDULO}
+$\conj z=a-bi$ \qquad $|z|=\sqrt{a^2+b^2}$ (la distancia de $z$ al origen).\\[3pt]
+\textbf{La identidad que más se usa:} $z\,\conj z=a^2+b^2=|z|^2$ (siempre un real $\ge0$).
+\end{sello}
+\begin{memo}{PROPIEDADES}
+$\conj{z+w}=\conj z+\conj w$ \quad $\conj{zw}=\conj z\,\conj w$ \quad $\conj{\conj z}=z$\\
+$z+\conj z=2\Re(z)$ \quad $z-\conj z=2i\Im(z)$ \quad $z\in\R\iff z=\conj z$\\
+$|zw|=|z|\,|w|$ \quad $\left|\frac zw\right|=\frac{|z|}{|w|}$ \quad $|\conj z|=|z|$ \quad $|z+w|\le|z|+|w|$ (triangular)
+\end{memo}
+\begin{metodo}{DIVIDIR}
+Multiplicá arriba y abajo por el conjugado del denominador: abajo queda un real.
+\[\frac{2+3i}{1-i}=\frac{(2+3i)(1+i)}{(1-i)(1+i)}=\frac{2+2i+3i+3i^2}{1+1}=\frac{-1+5i}{2}=-\tfrac12+\tfrac52i.\]
+Inverso: $\dfrac1z=\dfrac{\conj z}{|z|^2}$.
+\end{metodo}
+\begin{trampa}{TRES CLÁSICAS}
+$|z|^2\neq z^2$: \ $|i|^2=1$ pero $i^2=-1$. \ El módulo es real; el cuadrado no.\\
+$\sqrt{-4}\cdot\sqrt{-9}\neq\sqrt{36}$: la regla $\sqrt a\sqrt b=\sqrt{ab}$ es solo para reales positivos. ($2i\cdot3i=-6$.)\\
+$\Im(3+4i)=4$, no $4i$.
+\end{trampa}
+
+\section{El plano complejo}
+\begin{center}
+\begin{tikzpicture}[scale=0.62,>=Stealth]
+\draw[->,suave] (-1,0)--(5,0) node[right,font=\scriptsize]{$\Re$};
+\draw[->,suave] (0,-1.2)--(0,4.2) node[above,font=\scriptsize]{$\Im$};
+\draw[->,thick,teal] (0,0)--(3,1) node[right,font=\scriptsize]{$z$};
+\draw[->,thick,acero] (0,0)--(1,2.5) node[above,font=\scriptsize]{$w$};
+\draw[->,thick,rojo] (0,0)--(4,3.5) node[above right,font=\scriptsize]{$z+w$};
+\draw[dashed,suave] (3,1)--(4,3.5)--(1,2.5);
+\node[font=\scriptsize,align=center] at (2.2,-1.6) {suma = regla del paralelogramo};
+\begin{scope}[xshift=8.3cm]
+\draw[->,suave] (-1,0)--(4.5,0);
+\draw[->,suave] (0,-1.2)--(0,4.2);
+\draw[->,thick,teal] (0,0)--(2,1) node[right,font=\scriptsize]{$z$};
+\draw[->,thick,rojo] (0,0)--(-1,2) node[left,font=\scriptsize]{$iz$};
+\draw[->,thick,acero] (0,0)--(2,-1) node[right,font=\scriptsize]{$\conj z$};
+\draw[teal,->] (0.9,0.45) arc (26.6:116.6:1);
+\node[font=\scriptsize] at (0.55,1.25) {$90^\circ$};
+\node[font=\scriptsize,align=center] at (1.6,-1.6) {$\times i$ gira $90^\circ$ · conjugar refleja};
+\end{scope}
+\end{tikzpicture}
+\end{center}
+\begin{tip}{LA IMAGEN}
+$z=a+bi$ es el punto $(a,b)$, o la flecha desde el origen. Sumar es encadenar flechas. Conjugar es reflejar en el eje real. Multiplicar por $i$ es \textbf{girar 90°}. En la próxima sección: multiplicar por cualquier $w$ es girar un ángulo $\arg w$ y estirar un factor $|w|$.
+\end{tip}
+
+\section{Forma polar y exponencial}
+\begin{sello}{FORMA POLAR}
+Todo $z\neq0$ se escribe $z=|z|(\cos\theta+i\sin\theta)=|z|\cis\theta=|z|e^{i\theta}$.\\[2pt]
+$\theta=\arg z$ es el ángulo con el semieje real positivo; está definido \textbf{a menos de múltiplos de $2\pi$}.\\[2pt]
+Fórmula de Euler: $e^{i\theta}=\cos\theta+i\sin\theta$. \ Caso famoso: $e^{i\pi}=-1$.
+\end{sello}
+\begin{metodo}{PASAR DE BINÓMICA A POLAR}
+1) $|z|=\sqrt{a^2+b^2}$.\\
+2) Ubicá el \textbf{cuadrante} dibujando el punto $(a,b)$.\\
+3) Ángulo de referencia $\alpha=\arctan\frac{|b|}{|a|}$, y ajustalo al cuadrante: \ I: $\alpha$; \ II: $\pi-\alpha$; \ III: $\pi+\alpha$; \ IV: $-\alpha$ (o $2\pi-\alpha$).\\
+Ej.: $z=-1+i\sqrt3$: \ $|z|=2$, cuadrante II, $\alpha=\frac\pi3$, $\arg z=\frac{2\pi}3$. \ $z=2e^{i2\pi/3}$.
+\end{metodo}
+\begin{trampa}{EL ARCOTANGENTE NO VE EL CUADRANTE}
+$\arctan\frac{b}{a}$ da lo mismo para $1+i$ y para $-1-i$ ($\frac\pi4$), pero el segundo tiene argumento $\frac{5\pi}4$. Siempre dibujá el punto.
+\end{trampa}
+\begin{sello}{PRODUCTO, COCIENTE Y POTENCIA EN POLAR}
+$r e^{i\theta}\cdot s e^{i\varphi}=rs\,e^{i(\theta+\varphi)}$: \ los módulos se \textbf{multiplican}, los argumentos se \textbf{suman}.\\[2pt]
+$\dfrac{re^{i\theta}}{se^{i\varphi}}=\dfrac rs e^{i(\theta-\varphi)}$.\\[2pt]
+\textbf{De Moivre:} $(re^{i\theta})^n=r^ne^{in\theta}$, es decir $(\cos\theta+i\sin\theta)^n=\cos n\theta+i\sin n\theta$.
+\end{sello}
+\begin{memo}{EJEMPLO: $(1+i)^{10}$}
+$1+i=\sqrt2\,e^{i\pi/4}$. \ $(1+i)^{10}=(\sqrt2)^{10}e^{i10\pi/4}=32\,e^{i5\pi/2}=32\,e^{i\pi/2}=32i$.\\
+En binómica habría que desarrollar un binomio a la 10. En polar son dos renglones.
+\end{memo}
+
+\section{Raíces $n$-ésimas}
+\begin{sello}{TEOREMA}
+Si $w=Re^{i\varphi}\neq0$, la ecuación $z^n=w$ tiene exactamente $n$ soluciones:
+\[z_k=\sqrt[n]{R}\;e^{\,i\frac{\varphi+2k\pi}{n}},\qquad k=0,1,\dots,n-1.\]
+Están sobre la circunferencia de radio $\sqrt[n]R$ y forman un \textbf{polígono regular de $n$ lados}.
+\end{sello}
+\begin{demo}
+Escribo $z=re^{i\theta}$. Por De Moivre, $z^n=r^ne^{in\theta}=Re^{i\varphi}$. Dos complejos en polar son iguales si los módulos son iguales y los argumentos difieren en un múltiplo de $2\pi$: $r^n=R$ y $n\theta=\varphi+2k\pi$. Así $r=\sqrt[n]R$ y $\theta=\frac{\varphi+2k\pi}n$. Para $k=n$ se repite el ángulo de $k=0$ (le suma $2\pi$), así que hay exactamente $n$ distintas. $\blacksquare$
+\end{demo}
+\begin{center}
+\begin{tikzpicture}[scale=0.8,>=Stealth]
+\draw[->,suave] (-2.6,0)--(2.8,0) node[right,font=\scriptsize]{$\Re$};
+\draw[->,suave] (0,-2.4)--(0,2.5) node[above,font=\scriptsize]{$\Im$};
+\draw[borde,thick] (0,0) circle (2);
+\draw[rojo,thick] (60:2)--(180:2)--(300:2)--cycle;
+\foreach \a/\l in {60/{1+i\sqrt3},180/{-2},300/{1-i\sqrt3}} {\fill[rojo] (\a:2) circle (2.2pt); \node[font=\scriptsize] at (\a:2.65) {$\l$};}
+\node[font=\scriptsize,align=left,anchor=west] at (3.2,0.6) {$z^3=-8=8e^{i\pi}$};
+\node[font=\scriptsize,align=left,anchor=west] at (3.2,0) {$z_k=2e^{i(\pi+2k\pi)/3}$};
+\node[font=\scriptsize,align=left,anchor=west] at (3.2,-0.6) {ángulos $\frac\pi3,\ \pi,\ \frac{5\pi}3$};
+\end{tikzpicture}
+\end{center}
+\begin{metodo}{RAÍZ CUADRADA SIN PASAR A POLAR}
+Para $\sqrt{3+4i}$: busco $z=x+yi$ con $z^2=3+4i$, es decir $x^2-y^2=3$ y $2xy=4$.\\
+Truco: también $|z|^2=|3+4i|$, o sea $x^2+y^2=5$. Sumando con la primera: $x^2=4$, $y^2=1$. Como $xy=2>0$, van con el mismo signo: $z=\pm(2+i)$.
+\end{metodo}
+
+\section{Ecuaciones y polinomios}
+\begin{sello}{SEGUNDO GRADO Y TEOREMA FUNDAMENTAL}
+$az^2+bz+c=0$ se resuelve con la fórmula de siempre, $z=\frac{-b\pm\sqrt{\Delta}}{2a}$, con $\sqrt\Delta$ = cualquiera de las dos raíces cuadradas complejas de $\Delta$.\\[2pt]
+\textbf{Teorema fundamental del álgebra:} todo polinomio de grado $n\ge1$ con coeficientes complejos tiene exactamente $n$ raíces en $\C$ (contadas con multiplicidad).\\[2pt]
+Si los coeficientes son \textbf{reales} y $z_0$ es raíz, entonces $\conj{z_0}$ también es raíz.
+\end{sello}
+\begin{memo}{EJEMPLO}
+$z^2-2z+5=0$: \ $\Delta=4-20=-16$, $\sqrt\Delta=4i$. \ $z=\frac{2\pm4i}2=1\pm2i$. Son conjugadas porque los coeficientes son reales.
+\end{memo}
+
+\section{Complejos dentro de sistemas y matrices}
+\begin{tip}{TODO LO QUE SIGUE VALE EN $\C$}
+Escalerizar, invertir, calcular rango y determinantes funciona igual con entradas complejas: solo cambian las cuentas. Para dividir por un pivote complejo, multiplicá la fila por su inverso $\frac{\conj p}{|p|^2}$.
+\end{tip}
+\begin{enunciado}{PRÁCTICO 2 · EJ. 4A}
+Resolver $\ z_1-z_2=i,\quad (1-i)z_1+(1+i)z_2=1$.
+\end{enunciado}
+\paso{1}{despejo de la primera}
+$z_1=z_2+i$.
+\paso{2}{sustituyo}
+$(1-i)(z_2+i)+(1+i)z_2=1\ \Rightarrow\ (1-i+1+i)z_2+(1-i)i=1\ \Rightarrow\ 2z_2+i+1=1\ \Rightarrow\ z_2=-\tfrac i2$.
+\paso{3}{vuelvo}
+$z_1=-\tfrac i2+i=\tfrac i2$. \ Chequeo: $(1-i)\frac i2+(1+i)(-\frac i2)=\frac{i+1}2+\frac{-i+1}2=1$\ok
+\resp{$(z_1,z_2)=\left(\tfrac i2,\,-\tfrac i2\right)$, sistema compatible determinado.}

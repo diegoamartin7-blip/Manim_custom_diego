@@ -1,0 +1,136 @@
+% ================= CAPÍTULO 4: INVERTIBLES Y RANGO =================
+\chapter{Matrices invertibles y rango}
+\salio{6}{inversa numérica: en los 4 parciales más recientes}
+
+\section{Definición y propiedades}
+\begin{sello}{MATRIZ INVERTIBLE}
+$A\in\Mat_{n\times n}$ es \textbf{invertible} si existe $B$ con $AB=BA=I$. Esa $B$ es única y se escribe $A^{-1}$.\\[2pt]
+Solo las matrices \textbf{cuadradas} pueden ser invertibles.\\[2pt]
+Para cuadradas alcanza con un lado: si $AB=I$, entonces también $BA=I$.
+\end{sello}
+\begin{demo}
+\textbf{Unicidad:} si $B$ y $C$ son inversas de $A$, entonces $B=BI=B(AC)=(BA)C=IC=C$. $\blacksquare$
+\end{demo}
+\begin{sello}{PROPIEDADES}
+$(A^{-1})^{-1}=A$ \qquad $(\lambda A)^{-1}=\frac1\lambda A^{-1}$ ($\lambda\neq0$) \qquad $(A^t)^{-1}=(A^{-1})^t$\\[2pt]
+$\boldsymbol{(AB)^{-1}=B^{-1}A^{-1}}$: se da vuelta el orden, como con la traspuesta.\\[2pt]
+Juntando: $(\lambda AB)^{-1}=\frac1\lambda B^{-1}A^{-1}$ (2S 2016, práctico 4 ej. 6a).
+\end{sello}
+\begin{demo}
+$(AB)(B^{-1}A^{-1})=A(BB^{-1})A^{-1}=AIA^{-1}=AA^{-1}=I$. \\
+$A^t(A^{-1})^t=(A^{-1}A)^t=I^t=I$. $\blacksquare$
+\end{demo}
+\begin{tip}{LA IMAGEN}
+Si $A$ es una transformación del plano, $A^{-1}$ es la que la \textbf{deshace}. Para deshacer «primero $B$, después $A$» hay que deshacer $A$ primero: $(AB)^{-1}=B^{-1}A^{-1}$. Es como sacarse las medias y los zapatos: en el orden inverso al que te los pusiste.
+\end{tip}
+\begin{trampa}{LA SUMA NO SE LLEVA CON LA INVERSA}
+$A,B$ invertibles \textbf{no} implica $A+B$ invertible: $I+(-I)=O$.\\
+Y aunque $A+B$ sea invertible, $(A+B)^{-1}\neq A^{-1}+B^{-1}$: con $A=B=I$, a la izquierda queda $\frac12I$ y a la derecha $2I$.
+\end{trampa}
+\begin{memo}{SI $A$ ES INVERTIBLE}
+$AB=AC\Rightarrow B=C$ (multiplicás por $A^{-1}$ a la izquierda).\\
+$AX=b$ es SCD para todo $b$, con solución $X=A^{-1}b$ (1S 2024: «para $a=1$, hallá $z$»).\\
+$A$ invertible y $AB$ no invertible $\Rightarrow B$ no invertible (si $B$ lo fuera, $AB$ también).\\
+$AB$ invertible ($A,B$ cuadradas) $\iff A$ y $B$ invertibles.
+\end{memo}
+
+\section{Cómo se calcula: Gauss--Jordan}
+\begin{metodo}{$\big(A\,|\,I\big)\ \longrightarrow\ \big(I\,|\,A^{-1}\big)$}
+1) Escribí $A$ con la identidad a la derecha.\\
+2) Escalerizá \textbf{toda la fila} (las dos mitades a la vez) hasta que la izquierda sea escalonada.\\
+3) Si aparece una fila de ceros a la izquierda: $A$ \textbf{no es invertible}. Cortá.\\
+4) Si no, seguí hasta la escalonada reducida (pivotes 1, ceros arriba y abajo). La derecha es $A^{-1}$.\\
+5) \textbf{Chequeo:} multiplicá una fila de $A$ por una columna de tu $A^{-1}$ y fijate que dé 1 o 0.
+\end{metodo}
+\begin{tip}{POR QUÉ FUNCIONA}
+Cada operación elemental es multiplicar a la izquierda por una matriz elemental $E_k$. Si $E_r\cdots E_1A=I$, entonces $E_r\cdots E_1=A^{-1}$. Y esas mismas operaciones, aplicadas a $I$, fabrican $E_r\cdots E_1\,I=A^{-1}$.
+\end{tip}
+\begin{sello}{FÓRMULA $2\times2$}
+$\begin{pmatrix}a&b\\c&d\end{pmatrix}^{-1}=\dfrac1{ad-bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}$, \ si $ad-bc\neq0$.\\[2pt]
+Se intercambia la diagonal, se le cambia el signo a la otra diagonal y se divide por el determinante.
+\end{sello}
+\begin{memo}{INVERSAS QUE SE ESCRIBEN DE UNA (PRÁCTICO 4, EJ. 3)}
+Diagonal: $\mathrm{diag}(k_1,\dots,k_n)^{-1}=\mathrm{diag}(\frac1{k_1},\dots,\frac1{k_n})$.\\
+Antidiagonal $4\times4$ con $k_1,k_2,k_3,k_4$ (de arriba a abajo): la inversa es antidiagonal con $\frac1{k_4},\frac1{k_3},\frac1{k_2},\frac1{k_1}$.\\
+Bloques diagonales: $\begin{pmatrix}A&O\\O&B\end{pmatrix}^{-1}=\begin{pmatrix}A^{-1}&O\\O&B^{-1}\end{pmatrix}$.\\
+Bloques triangulares: $\begin{pmatrix}A&B\\O&D\end{pmatrix}^{-1}=\begin{pmatrix}A^{-1}&-A^{-1}BD^{-1}\\O&D^{-1}\end{pmatrix}$ \ y \ $\begin{pmatrix}A&O\\C&D\end{pmatrix}^{-1}=\begin{pmatrix}A^{-1}&O\\-D^{-1}CA^{-1}&D^{-1}\end{pmatrix}$ (1S 2019).
+\end{memo}
+\begin{trampa}{EN MÚLTIPLE OPCIÓN NO HACE FALTA TODA LA INVERSA}
+«Si $A^{-1}=(b_{ij})$, entonces $b_{31}b_{32}$ vale\dots»: la fila 3 de $A^{-1}$ es la única solución de $(x,y,z)\,A=(0,0,1)$. Muchas veces conviene igual hacer Gauss--Jordan completo y chequear, pero si vas corto de tiempo, sacá solo lo que piden y verificá multiplicando.
+\end{trampa}
+
+\section{Matrices elementales}
+\salio{3}{V/F: «toda elemental tiene determinante 1» (falso)}
+\begin{sello}{MATRIZ ELEMENTAL}
+Es la que sale de aplicarle \textbf{una} operación elemental a la identidad.\\[2pt]
+$EA$ = aplicarle a $A$ esa misma operación \textbf{por filas}. ($AE$ la aplica por columnas.)\\[2pt]
+Toda elemental es invertible, y su inversa es la elemental de la operación que la deshace.\\[2pt]
+$A$ invertible $\iff A$ es producto de matrices elementales.
+\end{sello}
+\begin{memo}{LOS TRES TIPOS Y SU DETERMINANTE}
+$F_i\leftrightarrow F_j$: \ $\det=-1$. \qquad $F_i\to\lambda F_i$: \ $\det=\lambda$. \qquad $F_i\to F_i+\lambda F_j$: \ $\det=1$.\\[2pt]
+Práctico 4, ej. 4: con $A=\begin{pmatrix}1&0\\3&4\end{pmatrix}$, \ $E_1$: $F_2\to F_2-3F_1$ y $E_2$: $F_2\to\frac14F_2$ dan $E_2E_1A=I$. Así $A^{-1}=E_2E_1$ y $A=E_1^{-1}E_2^{-1}$.
+\end{memo}
+
+\section{Inversa a partir de una ecuación}
+\salio{4}{2S 2022, 1S 2023, 2S 2024, 1S 2025}
+\begin{metodo}{FACTORIZAR PARA QUE APAREZCA LA IDENTIDAD}
+1) Pasá el término con $I$ al otro lado: $A^2-2A+5I=O\Rightarrow A^2-2A=-5I$.\\
+2) Sacá $A$ de factor común \textbf{del lado correcto}: $A(A-2I)=-5I$.\\
+3) Dividí por el número: $A\cdot\left(-\frac15(A-2I)\right)=I$.\\
+4) Leé la inversa: $A^{-1}=\frac15(2I-A)$. Como $A$ es cuadrada, alcanza con un lado.
+\end{metodo}
+\begin{memo}{LAS VERSIONES QUE SALIERON}
+\textbf{1S 2023:} $A^2-2A+5I=O\ \Rightarrow\ A^{-1}=\frac15(2I-A)$.\\
+\textbf{1S 2025:} $A^2+3AA^t+2I=O\ \Rightarrow\ A(A+3A^t)=-2I\ \Rightarrow\ A^{-1}=-\frac12(A+3A^t)$. Ojo: $A$ sale a la \textbf{izquierda} de los dos términos.\\
+\textbf{2S 2022:} si $A^4=O$ y $B=I+A+A^2+A^3$, entonces $(I-A)B=I-A^4=I$: \ $B^{-1}=I-A$.\\
+\textbf{2S 2024:} «¿para qué $\lambda$ vale $A^{-1}=2I-A$?». Se multiplica $A(2I-A)$ y se exige que dé $I$. Resuelto en la receta R7.
+\end{memo}
+\begin{trampa}{SI AL FINAL NO QUEDA $I$ SOLA, NO HAY CONCLUSIÓN}
+De $A^2=A$ (idempotente) sale $A(A-I)=O$: no hay $I$ del otro lado, y no se puede concluir que $A$ sea invertible. De hecho, si $A\neq I$, no lo es. De $A^3=A$ con $\det A\neq0$ sí sale $A^2=I$, y entonces $A^{-1}=A$ (2008).
+\end{trampa}
+
+\section{Rango}
+\salio{8}{con parámetro en los 3 últimos parciales}
+\begin{sello}{DEFINICIÓN}
+El \textbf{rango} de $A$, $\rg(A)$, es la cantidad de \textbf{filas no nulas de una forma escalonada} de $A$ (equivalentemente, la cantidad de pivotes).\\[2pt]
+No depende de cómo escalerices: todas las formas escalonadas de $A$ tienen la misma cantidad de pivotes.
+\end{sello}
+\begin{trampa}{DE LA ESCALONADA, NO DE $A$}
+«El rango es la cantidad de filas no nulas de $A$» es \textbf{falso} (1S 2019). La matriz de unos $3\times3$ tiene tres filas no nulas y rango 1.
+\end{trampa}
+\begin{sello}{PROPIEDADES}
+1) $\rg(A)\le\min\{m,n\}$ (un pivote por fila y uno por columna, a lo sumo).\\
+2) $\rg(A)=\rg(A^t)$, aunque $A$ no sea cuadrada.\\
+3) Si $P$ es invertible, $\rg(PA)=\rg(A)$ (práctico 4, ej. 2.4): $P$ es producto de elementales, y las operaciones elementales no cambian el rango.\\
+4) $\rg(AB)\le\min\{\rg A,\rg B\}$. En particular, si $\rg(AB)=n$ ($n\times n$), $A$ y $B$ tienen rango $n$.\\
+5) $\rg(A)$ = cantidad máxima de columnas (o filas) que no son combinación lineal de las otras.
+\end{sello}
+\begin{tip}{LA IMAGEN}
+El rango es la \textbf{dimensión de lo que sale} de la máquina $X\mapsto AX$. Una $3\times3$ de rango 3 llena el espacio; de rango 2 aplasta todo sobre un plano; de rango 1, sobre una recta. Una $2\times2$ de rango 1 aplasta el plano en una recta: dos puntos distintos caen en el mismo lugar, y por eso no se puede deshacer.
+\end{tip}
+\begin{memo}{2S 2018 · COLUMNAS DEPENDIENTES}
+$A$ de $4\times3$ con $C_3=2C_1+C_2$: \ $\rg(A)\le2$ (la tercera columna no aporta) \textbf{V}. \ Si $\{F_1,F_2\}$ no son proporcionales, $\rg A=2$ \textbf{V}. \ Por $\rg(A)=\rg(A^t)\le2$, cualquier tercera fila es combinación de dos, pero no necesariamente de $F_1$ y $F_2$ (si esas dos son proporcionales falla): la afirmación II es falsa. Respuesta: (I) y (III).
+\end{memo}
+\begin{metodo}{RANGO CON PARÁMETRO}
+1) Escalerizá sin dividir por expresiones con el parámetro (igual que en sistemas).\\
+2) Los pivotes con parámetro dan los valores críticos. Si $A$ es cuadrada, son las raíces de $\det A$.\\
+3) Fuera de los críticos: rango máximo.\\
+4) En cada crítico: \textbf{sustituí} y terminá de escalerizar. El rango puede bajar uno o más.\\
+5) Leé bien la pregunta: «existen exactamente dos valores\dots», «para todo $b$\dots».
+\end{metodo}
+
+\section{El teorema de la matriz invertible}
+\begin{sello}{PARA $A\in\Mat_{n\times n}$, SON EQUIVALENTES}
+(a) $A$ es invertible. \\
+(b) $\rg(A)=n$.\\
+(c) La escalonada reducida de $A$ es $I_n$.\\
+(d) $AX=0$ tiene solo la solución trivial (es SCD).\\
+(e) $AX=b$ es SCD para \textbf{todo} $b$.\\
+(f) $A$ es producto de matrices elementales.\\
+(g) $\det A\neq0$ (capítulo 5).\\
+(h) Ninguna columna (ni fila) de $A$ es combinación lineal de las demás.
+\end{sello}
+\begin{tip}{CÓMO SE USA}
+Es una \textbf{caja de herramientas}: probás la que te resulte más fácil y te llevás todas las demás gratis. Por ejemplo, 1S 2017 V/F: «si $AX=0$ es SCD, entonces $A$ es invertible y $A^{-1}b$ resuelve $AX=b$ para todo $b$». Verdadero: (d)$\Rightarrow$(a).
+\end{tip}
