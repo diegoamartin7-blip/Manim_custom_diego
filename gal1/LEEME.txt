@@ -1,0 +1,59 @@
+GAL 1 - PRIMER PARCIAL (IMERL 2S2026) - VIDEOS
+2 videos Manim, 16:9, 4K 60fps, estilo 3Blue1Brown (fondo negro), subtitulos karaoke (sin audio).
+RITMO DINAMICO: se lee rapido y fluido; solo frena en los momentos criticos.
+Si algo te traba, pausa con el reproductor y volve atras.
+
+  Video 1  GAL1_V1_Teoria_Visual        11 escenas  complejos (girar y estirar, polar, raices),
+                                                    sistemas (rectas que se cruzan, escalerizar,
+                                                    Rouche-Frobenius), matrices como maquinas que
+                                                    mueven el plano, inversa, rango, determinante
+  Video 2  GAL1_V2_Ejercicios_Parcial   11 escenas  un ejercicio REAL de parcial por tipo:
+                                                    sistema con parametro, dos parametros, rango,
+                                                    inversa, det por propiedades, det de expresiones,
+                                                    inversa desde una ecuacion, complejos,
+                                                    V/F relampago, sushi + checklist
+
+LO VISUAL
+  - Complejos: multiplicar por i gira 90; perillas de arg w y |w| que giran y estiran zw;
+    espiral de De Moivre; poligono de raices con n que sube de 3 a 8.
+  - Sistemas: perillas a y b que hacen rotar una recta hasta quedar paralela (SI) y
+    coincidente (SCI).
+  - Matrices: la grilla del plano se deforma en vivo; columnas = adonde van i y j;
+    SR distinto de RS; la nilpotente que aplasta el plano dos veces.
+  - Rango: una perilla alinea las columnas hasta que el plano colapsa en una recta.
+  - Determinante: el cuadradito unitario se vuelve paralelogramo con el area en vivo;
+    se aplasta en det = 0 y se da vuelta (rojo) cuando es negativo.
+
+INSTALAR UNA SOLA VEZ (Windows, en PowerShell) - si ya renderizaste Calculo 1, ya lo tenes
+  winget install Python.Python.3.12
+  winget install Gyan.FFmpeg
+  winget install MiKTeX.MiKTeX
+  pip install manim
+
+COMO CORRERLO
+  Doble clic en render_4k.bat y dejalo. Corre las 22 escenas en paralelo (una por hilo),
+  con prioridad baja. Al final salen:
+       GAL1_V1_Teoria_Visual_4k.mp4
+       GAL1_V2_Ejercicios_Parcial_4k.mp4
+
+OPCIONES (desde PowerShell en la carpeta)
+  Un solo video:        powershell -File render_all.ps1 -Mode 4k -Video 2
+  Repetir las que fallaron (y re-unir):
+                        powershell -File render_all.ps1 -Mode 4k -Only V1_05_Matrices,V2_03_Rango
+  Mas lento:            set G1_PACE=1.2    (todo un 20% mas lento)
+  Lectura mas lenta:    set G1_WPS=3.8     (default 4.4 palabras por segundo)
+
+SIMBOLOS (anti-cuadraditos)
+  El texto usa IBM Plex. Antes de dibujar, gal_base.py revisa cada caracter contra la fuente
+  (glyphs_plex.py). Si falta un glifo, corta con un error claro en vez de dibujar un tofu.
+  Toda la matematica va por LaTeX.
+
+SI ALGO FALLA
+  Mira logs\<escena>.err.txt y mandame las ultimas lineas.
+
+ARCHIVOS
+  gal_base.py      estilo, subtitulos karaoke, cajas, Slider, matrices animadas (rowop)
+  glyphs_plex.py   que glifos tiene cada fuente IBM Plex
+  v1_teoria.py     video 1
+  v2_parcial.py    video 2
+  Las cuentas estan verificadas en ..\gal1_teoria\verify.py (sympy).
