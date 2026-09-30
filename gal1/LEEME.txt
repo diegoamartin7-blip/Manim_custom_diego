@@ -3,10 +3,12 @@ GAL 1 - PRIMER PARCIAL (IMERL 2S2026) - VIDEOS
 RITMO DINAMICO: se lee rapido y fluido; solo frena en los momentos criticos.
 Si algo te traba, pausa con el reproductor y volve atras.
 
-  Video 1  GAL1_V1_Teoria_Visual        11 escenas  complejos (girar y estirar, polar, raices),
-                                                    sistemas (rectas que se cruzan, escalerizar,
-                                                    Rouche-Frobenius), matrices como maquinas que
-                                                    mueven el plano, inversa, rango, determinante
+  Video 1  GAL1_V1_Teoria_Aplicada      11 escenas  teoria compacta del 90% de los parciales:
+                                                    las 5 preguntas sobre una matriz (que son una),
+                                                    complejos, sistemas, parametros, matrices como
+                                                    maquinas, producto/traza, inversa, rango,
+                                                    determinante. CADA bloque con su ejercicio
+                                                    APLICADO de practico o parcial (caja verde).
   Video 2  GAL1_V2_Ejercicios_Parcial   11 escenas  un ejercicio REAL de parcial por tipo:
                                                     sistema con parametro, dos parametros, rango,
                                                     inversa, det por propiedades, det de expresiones,
@@ -31,9 +33,10 @@ INSTALAR UNA SOLA VEZ (Windows, en PowerShell) - si ya renderizaste Calculo 1, y
   pip install manim
 
 COMO CORRERLO
+  Solo la teoria (si ya tenes el de ejercicios): doble clic en render_teoria_4k.bat
   Doble clic en render_4k.bat y dejalo. Corre las 22 escenas en paralelo (una por hilo),
   con prioridad baja. Al final salen:
-       GAL1_V1_Teoria_Visual_4k.mp4
+       GAL1_V1_Teoria_Aplicada_4k.mp4
        GAL1_V2_Ejercicios_Parcial_4k.mp4
 
 OPCIONES (desde PowerShell en la carpeta)
@@ -49,6 +52,7 @@ SIMBOLOS (anti-cuadraditos)
   Toda la matematica va por LaTeX.
 
 SI ALGO FALLA
+  Si una escena tarda mas de 4 horas se corta sola ("CORTADA ...") y el resto sigue.
   Mira logs\<escena>.err.txt y mandame las ultimas lineas.
 
 ARCHIVOS

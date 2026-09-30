@@ -8,5 +8,5 @@ REM ============================================================
 cd /d "%~dp0"
 powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0render_all.ps1" -Mode 4k
 echo.
-echo  Videos: GAL1_V1_Teoria_Visual_4k.mp4 y GAL1_V2_Ejercicios_Parcial_4k.mp4
+echo  Videos: GAL1_V1_Teoria_Aplicada_4k.mp4 y GAL1_V2_Ejercicios_Parcial_4k.mp4
 pause

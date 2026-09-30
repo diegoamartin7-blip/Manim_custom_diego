@@ -5,7 +5,7 @@
 #
 #  Uso:   render_4k.bat   /   render_preview.bat
 #         powershell -File render_all.ps1 -Mode 4k|1080|preview
-#                    [-Video all|1|2] [-MaxParallel N] [-Only V1_05_Matrices,V2_03_Rango]
+#                    [-Video all|1|2] [-MaxParallel N] [-Only V1_05_Matrices,V2_03_Rango] [-TimeoutMin 240]
 #
 #  - La lista de escenas se lee del SCENE_ORDER de cada archivo .py.
 #  - Todas las escenas corren EN PARALELO, cada una con su carpeta media_<escena>.
@@ -17,7 +17,8 @@ param(
     [ValidateSet("4k", "1080", "preview")][string]$Mode = "4k",
     [ValidateSet("all", "1", "2")][string]$Video = "all",
     [int]$MaxParallel = 0,
-    [string[]]$Only = @()
+    [string[]]$Only = @(),
+    [int]$TimeoutMin = 0
 )
 Set-Location $PSScriptRoot
 $ErrorActionPreference = "Continue"
@@ -25,6 +26,8 @@ $ErrorActionPreference = "Continue"
 # Manim usa ~1 nucleo por escena, asi que esto aprovecha toda la CPU; en 4K cada escena
 # ocupa ~1.5-3 GB de RAM (22 escenas entran de sobra en 96 GB).
 if ($MaxParallel -le 0) { $MaxParallel = [Environment]::ProcessorCount }
+# Vigilante: una escena que pasa este limite se corta (y se avisa), asi el resto no queda esperando toda la noche.
+if ($TimeoutMin -le 0) { $TimeoutMin = if ($Mode -eq "4k") { 240 } elseif ($Mode -eq "1080") { 90 } else { 30 } }
 # Con "powershell -File", "-Only A,B" llega como un solo texto: lo separo a mano.
 $Only = @($Only | ForEach-Object { $_ -split ',' } | ForEach-Object { $_.Trim() } | Where-Object { $_ })
 
@@ -36,7 +39,7 @@ function Get-SceneOrder($file) {
 }
 
 $videos = [ordered]@{
-    "1" = @{ file = "v1_teoria";  out = "GAL1_V1_Teoria_Visual" }
+    "1" = @{ file = "v1_teoria";  out = "GAL1_V1_Teoria_Aplicada" }
     "2" = @{ file = "v2_parcial"; out = "GAL1_V2_Ejercicios_Parcial" }
 }
 foreach ($k in @($videos.Keys)) { $videos[$k].scenes = Get-SceneOrder $videos[$k].file }
@@ -113,12 +116,23 @@ foreach ($j in $jobs) {
     Write-Host "  lanzada  $s" -ForegroundColor DarkGray
 }
 
-# ---------- 5) Esperar con progreso ----------
+# ---------- 5) Esperar con progreso (y cortar escenas colgadas) ----------
+$killed = @()
 while ((@($procs.Values | Where-Object { -not $_.HasExited })).Count -gt 0) {
     foreach ($k in @($procs.Keys)) { if ($procs[$k].HasExited -and -not $cleaned[$k]) { Clean-Partials $k; $cleaned[$k] = $true } }
+    foreach ($k in @($procs.Keys)) {
+        $p = $procs[$k]
+        if (-not $p.HasExited -and ((Get-Date) - $p.StartTime).TotalMinutes -gt $TimeoutMin) {
+            Write-Host "  CORTADA $k (mas de $TimeoutMin min). Mandame logs\$k.err.txt" -ForegroundColor Red
+            & taskkill /T /F /PID $p.Id *> $null
+            $killed += $k
+        }
+    }
     $done = (@($procs.Values | Where-Object { $_.HasExited })).Count
     $min = [int]((Get-Date) - $start).TotalMinutes
-    Write-Host ("  {0}/{1} escenas listas  ({2} min)" -f $done, $jobs.Count, $min)
+    $running = @($procs.Keys | Where-Object { -not $procs[$_].HasExited })
+    $show = if ($running.Count -le 6) { "  corriendo: " + ($running -join ", ") } else { "" }
+    Write-Host ("  {0}/{1} escenas listas  ({2} min){3}" -f $done, $jobs.Count, $min, $show)
     Start-Sleep -Seconds 20
 }
 foreach ($k in @($procs.Keys)) { if (-not $cleaned[$k]) { Clean-Partials $k } }
