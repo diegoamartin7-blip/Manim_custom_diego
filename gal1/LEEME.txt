@@ -34,8 +34,9 @@ INSTALAR UNA SOLA VEZ (Windows, en PowerShell) - si ya renderizaste Calculo 1, y
 
 COMO CORRERLO
   Solo la teoria (si ya tenes el de ejercicios): doble clic en render_teoria_4k.bat
-  Doble clic en render_4k.bat y dejalo. Corre las 22 escenas en paralelo (una por hilo),
-  con prioridad baja. Al final salen:
+  Doble clic en render_4k.bat y dejalo. Corre las escenas en paralelo con prioridad baja;
+  cuantas a la vez lo decide solo segun la RAM libre (en 4K ~6 GB por escena). Si alguna
+  falla (casi siempre por memoria), la reintenta sola de a 3. Al final salen:
        GAL1_V1_Teoria_Aplicada_4k.mp4
        GAL1_V2_Ejercicios_Parcial_4k.mp4
 
@@ -53,6 +54,8 @@ SIMBOLOS (anti-cuadraditos)
 
 SI ALGO FALLA
   Si una escena tarda mas de 4 horas se corta sola ("CORTADA ...") y el resto sigue.
+  "MemoryError" o "archivo de paginacion demasiado pequeno" = muchas escenas a la vez:
+  repeti con  -MaxParallel 3.
   Mira logs\<escena>.err.txt y mandame las ultimas lineas.
 
 ARCHIVOS

@@ -22,10 +22,16 @@ param(
 )
 Set-Location $PSScriptRoot
 $ErrorActionPreference = "Continue"
-# MaxParallel 0 = automatico: una escena por hilo logico (5950X = 32, las 22 escenas a la vez).
-# Manim usa ~1 nucleo por escena, asi que esto aprovecha toda la CPU; en 4K cada escena
-# ocupa ~1.5-3 GB de RAM (22 escenas entran de sobra en 96 GB).
-if ($MaxParallel -le 0) { $MaxParallel = [Environment]::ProcessorCount }
+# MaxParallel 0 = automatico, limitado por CPU Y por RAM libre: en 4K cada escena puede
+# llegar a ~6 GB (Cairo + ffmpeg + LaTeX). Con 22 escenas a la vez Windows se quedo sin
+# memoria virtual ("archivo de paginacion demasiado pequeno"), asi que ahora se regula solo.
+$perSceneGB = if ($Mode -eq "4k") { 6 } elseif ($Mode -eq "1080") { 2.5 } else { 1 }
+$freeRamGB = 16
+try { $freeRamGB = [math]::Floor((Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory / 1MB) } catch { }
+if ($MaxParallel -le 0) {
+    $byRam = [math]::Max(2, [math]::Floor(($freeRamGB - 6) / $perSceneGB))
+    $MaxParallel = [math]::Min([Environment]::ProcessorCount, $byRam)
+}
 # Vigilante: una escena que pasa este limite se corta (y se avisa), asi el resto no queda esperando toda la noche.
 if ($TimeoutMin -le 0) { $TimeoutMin = if ($Mode -eq "4k") { 240 } elseif ($Mode -eq "1080") { 90 } else { 30 } }
 # Con "powershell -File", "-Only A,B" llega como un solo texto: lo separo a mano.
@@ -80,13 +86,11 @@ foreach ($v in $sel) {
         if ($Only.Count -eq 0 -or $Only -contains $s) { $jobs += @{ v = $v; s = $s; f = $videos[$v].file } }
     }
 }
-Write-Host "Manim: $exe $($pre -join ' ')  |  Modo: $Mode ($tag)  |  Escenas: $($jobs.Count)  |  Paralelo: $MaxParallel  |  Disco libre: $freeGB GB" -ForegroundColor Cyan
+Write-Host "Manim: $exe $($pre -join ' ')  |  Modo: $Mode ($tag)  |  Escenas: $($jobs.Count)  |  Paralelo: $MaxParallel (RAM libre: $freeRamGB GB)  |  Disco libre: $freeGB GB" -ForegroundColor Cyan
 
 $logDir = Join-Path $PSScriptRoot "logs"
 New-Item -ItemType Directory -Force -Path $logDir | Out-Null
 $start = Get-Date
-$procs = @{}
-$cleaned = @{}
 
 function Clean-Partials($s) {
     $pm = Join-Path $PSScriptRoot "media_$s\videos"
@@ -96,58 +100,69 @@ function Clean-Partials($s) {
     }
 }
 
-# ---------- 4) Lanzar en paralelo ----------
-foreach ($j in $jobs) {
-    while ((@($procs.Values | Where-Object { -not $_.HasExited })).Count -ge $MaxParallel) {
-        foreach ($k in @($procs.Keys)) { if ($procs[$k].HasExited -and -not $cleaned[$k]) { Clean-Partials $k; $cleaned[$k] = $true } }
-        Start-Sleep -Seconds 2
+# ---------- 4) Lanzar en paralelo y esperar (cortando escenas colgadas) ----------
+function Run-Batch($list, $par) {
+    $script:procs = @{}
+    $script:cleaned = @{}
+    foreach ($j in $list) {
+        while ((@($script:procs.Values | Where-Object { -not $_.HasExited })).Count -ge $par) {
+            foreach ($k in @($script:procs.Keys)) { if ($script:procs[$k].HasExited -and -not $script:cleaned[$k]) { Clean-Partials $k; $script:cleaned[$k] = $true } }
+            Start-Sleep -Seconds 2
+        }
+        $s = $j.s
+        $md = Join-Path $PSScriptRoot "media_$s"
+        if (Test-Path $md) { Remove-Item $md -Recurse -Force -ErrorAction SilentlyContinue }
+        $margs = $pre + @("render", $q, "--disable_caching", "--media_dir", "media_$s", "$($j.f).py", $s)
+        $p = Start-Process -FilePath $exe -ArgumentList $margs -WindowStyle Hidden -PassThru `
+             -RedirectStandardOutput (Join-Path $logDir "$s.out.txt") `
+             -RedirectStandardError  (Join-Path $logDir "$s.err.txt")
+        $null = $p.Handle
+        # Prioridad baja: la PC sigue usable mientras renderiza.
+        try { $p.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::BelowNormal } catch { }
+        $script:procs[$s] = $p
+        Write-Host "  lanzada  $s" -ForegroundColor DarkGray
     }
-    $s = $j.s
-    $md = Join-Path $PSScriptRoot "media_$s"
-    if (Test-Path $md) { Remove-Item $md -Recurse -Force -ErrorAction SilentlyContinue }
-    $margs = $pre + @("render", $q, "--disable_caching", "--media_dir", "media_$s", "$($j.f).py", $s)
-    $p = Start-Process -FilePath $exe -ArgumentList $margs -WindowStyle Hidden -PassThru `
-         -RedirectStandardOutput (Join-Path $logDir "$s.out.txt") `
-         -RedirectStandardError  (Join-Path $logDir "$s.err.txt")
-    $null = $p.Handle
-    # Prioridad baja: la PC sigue usable mientras renderiza toda la noche.
-    try { $p.PriorityClass = [System.Diagnostics.ProcessPriorityClass]::BelowNormal } catch { }
-    $procs[$s] = $p
-    Write-Host "  lanzada  $s" -ForegroundColor DarkGray
+    while ((@($script:procs.Values | Where-Object { -not $_.HasExited })).Count -gt 0) {
+        foreach ($k in @($script:procs.Keys)) { if ($script:procs[$k].HasExited -and -not $script:cleaned[$k]) { Clean-Partials $k; $script:cleaned[$k] = $true } }
+        foreach ($k in @($script:procs.Keys)) {
+            $p = $script:procs[$k]
+            if (-not $p.HasExited -and ((Get-Date) - $p.StartTime).TotalMinutes -gt $TimeoutMin) {
+                Write-Host "  CORTADA $k (mas de $TimeoutMin min). Mandame logs\$k.err.txt" -ForegroundColor Red
+                & taskkill /T /F /PID $p.Id *> $null
+            }
+        }
+        $done = (@($script:procs.Values | Where-Object { $_.HasExited })).Count
+        $min = [int]((Get-Date) - $start).TotalMinutes
+        $running = @($script:procs.Keys | Where-Object { -not $script:procs[$_].HasExited })
+        $show = if ($running.Count -le 6) { "  corriendo: " + ($running -join ", ") } else { "" }
+        Write-Host ("  {0}/{1} escenas listas  ({2} min){3}" -f $done, $list.Count, $min, $show)
+        Start-Sleep -Seconds 20
+    }
+    foreach ($k in @($script:procs.Keys)) { if (-not $script:cleaned[$k]) { Clean-Partials $k } }
+    $failed = @()
+    foreach ($j in $list) {
+        $mp4 = Join-Path $PSScriptRoot "media_$($j.s)\videos\$($j.f)\$tag\$($j.s).mp4"
+        if (-not ((Test-Path $mp4) -and ($script:procs[$j.s].ExitCode -eq 0))) { $failed += $j }
+    }
+    return ,$failed
 }
 
-# ---------- 5) Esperar con progreso (y cortar escenas colgadas) ----------
-$killed = @()
-while ((@($procs.Values | Where-Object { -not $_.HasExited })).Count -gt 0) {
-    foreach ($k in @($procs.Keys)) { if ($procs[$k].HasExited -and -not $cleaned[$k]) { Clean-Partials $k; $cleaned[$k] = $true } }
-    foreach ($k in @($procs.Keys)) {
-        $p = $procs[$k]
-        if (-not $p.HasExited -and ((Get-Date) - $p.StartTime).TotalMinutes -gt $TimeoutMin) {
-            Write-Host "  CORTADA $k (mas de $TimeoutMin min). Mandame logs\$k.err.txt" -ForegroundColor Red
-            & taskkill /T /F /PID $p.Id *> $null
-            $killed += $k
-        }
-    }
-    $done = (@($procs.Values | Where-Object { $_.HasExited })).Count
-    $min = [int]((Get-Date) - $start).TotalMinutes
-    $running = @($procs.Keys | Where-Object { -not $procs[$_].HasExited })
-    $show = if ($running.Count -le 6) { "  corriendo: " + ($running -join ", ") } else { "" }
-    Write-Host ("  {0}/{1} escenas listas  ({2} min){3}" -f $done, $jobs.Count, $min, $show)
-    Start-Sleep -Seconds 20
+$failed = Run-Batch $jobs $MaxParallel
+# Reintento automatico (casi siempre fue falta de memoria): de a pocas escenas.
+if ($failed.Count -gt 0) {
+    $retryPar = [math]::Min(3, $MaxParallel)
+    Write-Host ""
+    Write-Host "Reintentando $($failed.Count) escena(s) de a $retryPar : $(($failed | ForEach-Object { $_.s }) -join ', ')" -ForegroundColor Yellow
+    $failed = Run-Batch $failed $retryPar
 }
-foreach ($k in @($procs.Keys)) { if (-not $cleaned[$k]) { Clean-Partials $k } }
 
 # ---------- 6) Verificar y unir cada video ----------
-$bad = @()
-foreach ($j in $jobs) {
-    $mp4 = Join-Path $PSScriptRoot "media_$($j.s)\videos\$($j.f)\$tag\$($j.s).mp4"
-    if (-not ((Test-Path $mp4) -and ($procs[$j.s].ExitCode -eq 0))) { $bad += $j.s }
-}
+$bad = @($failed | ForEach-Object { $_.s })
 if ($bad.Count -gt 0) {
     Write-Host ""
-    Write-Host "Fallaron: $($bad -join ', ')" -ForegroundColor Red
+    Write-Host "Fallaron (tambien en el reintento): $($bad -join ', ')" -ForegroundColor Red
     Write-Host "Mira logs\<escena>.err.txt (copiame el final y lo arreglo)." -ForegroundColor Red
-    Write-Host "Para repetir solo esas:  powershell -File render_all.ps1 -Mode $Mode -Only $($bad -join ',')" -ForegroundColor Yellow
+    Write-Host "Para repetir solo esas:  powershell -File render_all.ps1 -Mode $Mode -Only $($bad -join ',') -MaxParallel 2" -ForegroundColor Yellow
 }
 
 foreach ($v in $sel) {
